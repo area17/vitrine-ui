@@ -1,0 +1,3 @@
+<{{ $element }} {{ $attributes }}>
+    {{ $slot }}
+</{{ $element }}>
