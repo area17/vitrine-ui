@@ -2,10 +2,10 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\View\Component;
+use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
-class Heading extends Component
+class Heading extends VitrineComponent
 {
     /** @var int */
     public $level;

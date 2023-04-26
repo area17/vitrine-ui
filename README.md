@@ -116,6 +116,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 ```
 
+## Publish Components
+
+You can publish the components using the `vitrine-ui:publish` command. You can specify components by adding their names as arguments. If you don't specify any components and don't pass the `--all` option, it will prompt to select components to publish.
+
+### Supported options:
+
+- `--all` : publish all vitrine-ui components
+- `--view` : Publish only the view of the component
+- `--class` : Publish only the class of the component
+- `--force` : Overwrite existing files
+
 ## Todo
 
 - Add ability to publish components to application

@@ -2,10 +2,10 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\View\Component;
+use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
-class Modal extends Component
+class Modal extends VitrineComponent
 {
     /** @var string */
     public $id;
@@ -21,6 +21,8 @@ class Modal extends Component
 
     /** @var string */
     public $classes;
+
+    protected static $assets = ['@area17/a17-behaviors', 'body-scroll-lock', 'focus-trap'];
 
     public function __construct(
         $id = null,

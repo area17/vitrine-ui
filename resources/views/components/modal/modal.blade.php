@@ -17,7 +17,7 @@
         @if (isset($closeButton) && !$closeButton->isEmpty())
             {{ $closeButton }}
         @elseif($showClose)
-            <x-atoms.button.icon
+            <x-vitrine-ui::button.icon
                 icon="close-32"
                 size="medium"
                 class="o-modal-close"

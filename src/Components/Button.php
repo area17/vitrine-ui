@@ -2,10 +2,10 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\View\Component;
+use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
-class Button extends Component
+class Button extends VitrineComponent
 {
     /** @var bool */
     public $static;
@@ -50,13 +50,13 @@ class Button extends Component
 
     public function render(): View
     {
-        return view('vitrine-ui::components.button.button');
+        return view('vitrine-ui::components.button._base');
     }
 
-    public function theIcon(): View
-    {
-        return view('components.atoms.icon.index', ['name' => $this->icon, 'class' => 'mx-auto']);
-    }
+    // public function theIcon(): View
+    // {
+    //     return view('components.atoms.icon.index', ['name' => $this->icon, 'class' => 'mx-auto']);
+    // }
 
     public function element(): string
     {
