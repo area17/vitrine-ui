@@ -27,9 +27,9 @@ class Icon extends VitrineComponent
         return view('vitrine-ui::components.icon.index');
     }
 
-    protected function getIconPath($name = false)
+    public function getIconPath()
     {
-        $iconPath = 'components.icon._icons.'. $name;
+        $iconPath = 'icon._icons.'. $this->name;
 
         return view()->exists($iconPath) ? $iconPath : 'vitrine-ui::'.$iconPath;
     }

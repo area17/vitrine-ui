@@ -53,11 +53,6 @@ class Button extends VitrineComponent
         return view('vitrine-ui::components.button._base');
     }
 
-    // public function theIcon(): View
-    // {
-    //     return view('components.atoms.icon.index', ['name' => $this->icon, 'class' => 'mx-auto']);
-    // }
-
     public function element(): string
     {
         if ($this->static) {

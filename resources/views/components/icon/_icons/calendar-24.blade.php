@@ -6,4 +6,8 @@
 
 @endpush
 
-@include('components.atoms.icon._output', ['size' => 24])
+<x-vui-icon-output
+    :size="24"
+    :name="$name"
+    :aria-label="$ariaLabel ?? null"
+/>

@@ -6,4 +6,4 @@
 
 @endPushOnce
 
-@include('components.atoms.icon._output', ['size' => 56])
+<x-vui-icon-output :size="56" />

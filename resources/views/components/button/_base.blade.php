@@ -13,7 +13,7 @@ $classes = [
     @if($target) target="{{ $target }}" @endif
 >
     @if ($iconBefore())
-        {{-- {!! $theIcon() !!} --}}
+        <x-vui-icon :name="$icon" />
     @endif
 
     @if (!$slot->isEmpty())
@@ -21,6 +21,6 @@ $classes = [
     @endisset
 
     @if ($iconAfter())
-        {{-- {!! $theIcon() !!} --}}
+        <x-vui-icon :name="$icon" />
     @endif
 </{{ $element() }}>

@@ -11,4 +11,8 @@
 
 @endPushOnce
 
-@include('components.atoms.icon._output', ['size' => [103, 21]])
+<x-vui-icon-output
+    :size="[103, 21]"
+    :name="$name"
+    :aria-label="$ariaLabel ?? null"
+/>

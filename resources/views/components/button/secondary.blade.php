@@ -27,7 +27,7 @@
     ];
 @endphp
 
-<x-atoms.button
+<x-vui-button
     :href="$href ?? null"
     :icon="$icon ?? null"
     :icon-position="$iconPosition ?? null"
@@ -37,4 +37,4 @@
     {{ $attributes->class($classes) }}
 >
     {{ $slot }}
-</x-atoms.button>
+</x-vui-button>

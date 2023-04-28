@@ -1,3 +1,9 @@
+@props([
+    'size' => 16,
+    'ariaLabel' => null,
+    'name' => null,
+])
+
 @php
     if(is_array($size)){
         $width = $size[0];
