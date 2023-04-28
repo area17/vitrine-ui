@@ -22,7 +22,11 @@ class Modal extends VitrineComponent
     /** @var string */
     public $classes;
 
-    protected static $assets = ['@area17/a17-behaviors', 'body-scroll-lock', 'focus-trap'];
+    protected static $assets = [
+        'npm' => ['@area17/a17-behaviors', 'body-scroll-lock', 'focus-trap'],
+        'behaviors' => 'modal.js',
+        'css' => 'modal.css',
+    ];
 
     public function __construct(
         $id = null,

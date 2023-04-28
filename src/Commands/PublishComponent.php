@@ -2,9 +2,10 @@
 
 namespace A17\VitrineUI\Commands;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class PublishComponent extends Command
 {
@@ -28,12 +29,18 @@ class PublishComponent extends Command
      */
     protected $vitrineUIComponents;
 
+    /**
+     * @var array
+     */
+    protected $assets;
+
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
 
         $this->filesystem = $filesystem;
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
+        $this->assets = [];
     }
 
     public function handle(): int
@@ -83,6 +90,7 @@ class PublishComponent extends Command
         }
 
         // Get assets array from each component and flag in console
+        $this->notifyAssets();
 
         $this->comment('All done. ');
 
@@ -101,6 +109,8 @@ class PublishComponent extends Command
         $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
         $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
 
+        $this->collectAssets($component);
+
         if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
             $this->publishView($component, $name, $class);
         }
@@ -111,6 +121,55 @@ class PublishComponent extends Command
 
         if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
             $this->publishStories($name);
+        }
+
+        return 0;
+    }
+
+    protected function notifyAssets()
+    {
+        if(empty($this->assets)){
+            return 0;
+        }
+
+        $this->info("\n--------\n");
+
+        if(Arr::has($this->assets, 'npm')) {
+            $this->info("The published components require the following npm packages:\n");
+
+            $this->info(join("\n", $this->assets['npm']));
+
+            $this->info("\n--------\n");
+        }
+
+        if(Arr::has($this->assets, 'behaviors')) {
+            $this->info("The published components require the following behaviors (can be found in their component directory):\n");
+
+            $this->info(join("\n", $this->assets['behaviors']));
+            $this->info("\n--------\n");
+        }
+
+        if(Arr::has($this->assets, 'css')) {
+            $this->info("The published components require the following css (can be found in their component directory):\n");
+
+            $this->info(join("\n", $this->assets['css']));
+
+            $this->info("\n--------\n");
+        }
+    }
+
+    protected function collectAssets($component = null)
+        {
+        $assets = $component::assets();
+
+        foreach($assets as $type => $asset){
+            $asset = is_array($asset) ? $asset : [ $asset ];
+
+            if(Arr::has($this->assets, $type)){
+                $this->assets[$type] = array_unique(array_merge($this->assets[$type], $asset));
+            }else{
+                $this->assets[$type] = $asset;
+            }
         }
 
         return 0;
@@ -190,6 +249,12 @@ class PublishComponent extends Command
 
     protected function publishStories($name = false)
     {
+        if(!$name){
+            $this->error('Missing params');
+
+            return 1;
+        }
+
         $originalStory = __DIR__.'/../../resources/views/stories/'.$name;
         $publishedStory = resource_path('views/stories/'.$name);
         $path = Str::beforeLast($publishedStory, '/');
