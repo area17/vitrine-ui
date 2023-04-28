@@ -34,6 +34,11 @@ class PublishComponent extends Command
      */
     protected $assets;
 
+    /**
+     * @var bool
+     */
+    protected $canCopyStoryData;
+
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
@@ -41,6 +46,7 @@ class PublishComponent extends Command
         $this->filesystem = $filesystem;
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->assets = [];
+        $this->canCopyStoryData = null;
     }
 
     public function handle(): int
@@ -84,6 +90,13 @@ class PublishComponent extends Command
             }
         }
 
+        // Copy story preset data
+        if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
+            if($this->confirm("Do you want to copy story preset data files?", false)) {
+                $this->copyStoryData();
+            }
+        }
+
         // publish selected components to vendor directory
         foreach($components as $value){
             $this->publishComponent($this->vitrineUIComponents[$value]);
@@ -112,14 +125,17 @@ class PublishComponent extends Command
         $this->collectAssets($component);
 
         if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
+            $this->newLine();
             $this->publishView($component, $name, $class);
         }
 
         if ($this->option('class') || (! $this->option('view') && ! $this->option('stories'))) {
+            $this->newLine();
             $this->publishClass($component, $name, $class);
         }
 
         if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
+            $this->newLine();
             $this->publishStories($name);
         }
 
@@ -134,8 +150,10 @@ class PublishComponent extends Command
 
         $this->info("\n--------\n");
 
+        $this->info("The published components require the following:\n");
+
         if(Arr::has($this->assets, 'npm')) {
-            $this->info("The published components require the following npm packages:\n");
+            $this->info("npm packages\n");
 
             $this->info(join("\n", $this->assets['npm']));
 
@@ -143,14 +161,14 @@ class PublishComponent extends Command
         }
 
         if(Arr::has($this->assets, 'behaviors')) {
-            $this->info("The published components require the following behaviors (can be found in their component directory):\n");
+            $this->info("JS behaviors (can be found in their component directory)\n");
 
             $this->info(join("\n", $this->assets['behaviors']));
             $this->info("\n--------\n");
         }
 
         if(Arr::has($this->assets, 'css')) {
-            $this->info("The published components require the following css (can be found in their component directory):\n");
+            $this->info("CSS (can be found in their component directory)\n");
 
             $this->info(join("\n", $this->assets['css']));
 
@@ -258,11 +276,6 @@ class PublishComponent extends Command
         $originalStory = __DIR__.'/../../resources/views/stories/'.$name;
         $publishedStory = resource_path('views/stories/'.$name);
         $path = Str::beforeLast($publishedStory, '/');
-
-        if($this->confirm("Do you want to copy story preset data files?", false)){
-            $this->copyStoryData();
-        }
-
 
         if (! $this->option('force') && $this->filesystem->exists($publishedStory)) {
             $this->error("The story at [$publishedStory] already exists.");
