@@ -1,15 +1,15 @@
-{{-- @storybook([
+@storybook([
     'status' => 'readyForQA',
-    'preset' => 'button.base'
+    'name' => 'With Icon',
+    'preset' => 'button.icon',
 ])
 
-<x-atoms.button.primary
+<x-vui-button-icon
     :href="$href ?? null"
     :icon="$icon ?? null"
-    :icon-position="$iconPosition ?? null"
     :static="$static ?? null"
+    :inverse="$inverse ?? null"
     :disabled="$disabled ?? null"
     :active="$active ?? null"
->
-    {{ $label ?? null }}
-</x-atoms.button.primary> --}}
+    :size="$size ?? null"
+/>

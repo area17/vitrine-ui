@@ -13,6 +13,7 @@ class PublishComponent extends Command
                             {--all : publish all vitrine-ui components to project}
                             {--view : Publish only the view of the component}
                             {--class : Publish only the class of the component}
+                            {--stories : Publish only the stories for the component}
                             {--force : Overwrite existing files}';
 
     public $description = 'Publish a component';
@@ -44,7 +45,6 @@ class PublishComponent extends Command
             $components = array_keys($this->vitrineUIComponents);
         }else{
             if(empty($components)){
-                // TODO: Simplify this to include only unpublished components
                 $publishable = array_filter($this->vitrineUIComponents, function($item){
                     return Str::startsWith($item, 'A17\VitrineUI\Components\\');
                 });
@@ -99,29 +99,33 @@ class PublishComponent extends Command
 
 
         $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
-        $view = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
+        $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
 
-        if ($this->option('view') || ! $this->option('class')) {
-            $this->publishView($component, $class, $view);
+        if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
+            $this->publishView($component, $name, $class);
         }
 
-        if ($this->option('class') || ! $this->option('view')) {
-            $this->publishClass($component, $class, $view);
+        if ($this->option('class') || (! $this->option('view') && ! $this->option('stories'))) {
+            $this->publishClass($component, $name, $class);
+        }
+
+        if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
+            $this->publishStories($name);
         }
 
         return 0;
     }
 
-    protected function publishView($component = false, $view = false, $class = false)
+    protected function publishView($component = false, $name = false, $class = false)
     {
-        if(!$component || !$view || !$class){
+        if(!$component || !$name || !$class){
             $this->error('Missing params');
 
             return 1;
         }
 
-        $originalView = __DIR__.'/../../resources/views/components/'.$view;
-        $publishedView = resource_path('views/vendor/vitrine-ui/components/'.$view);
+        $originalView = __DIR__.'/../../resources/views/components/'.$name;
+        $publishedView = resource_path('views/vendor/vitrine-ui/components/'.$name);
         $path = Str::beforeLast($publishedView, '/');
 
         if (! $this->option('force') && $this->filesystem->exists($publishedView)) {
@@ -137,9 +141,9 @@ class PublishComponent extends Command
         $this->info("Published view [$publishedView]");
     }
 
-    protected function publishClass($component = false, $view = false, $class = false)
+    protected function publishClass($component = false, $name = false, $class = false)
     {
-        if(!$component || !$view || !$class){
+        if(!$component || !$name || !$class){
             $this->error('Missing params');
 
             return 1;
@@ -182,5 +186,58 @@ class PublishComponent extends Command
         $modifiedConfig = str_replace($component, 'App\\View\\Components\\VitrineUI\\'.$class, $originalConfig);
 
         $this->filesystem->put($config, $modifiedConfig);
+    }
+
+    protected function publishStories($name = false)
+    {
+        $originalStory = __DIR__.'/../../resources/views/stories/'.$name;
+        $publishedStory = resource_path('views/stories/'.$name);
+        $path = Str::beforeLast($publishedStory, '/');
+
+        if($this->confirm("Do you want to copy story preset data files?", false)){
+            $this->copyStoryData();
+        }
+
+
+        if (! $this->option('force') && $this->filesystem->exists($publishedStory)) {
+            $this->error("The story at [$publishedStory] already exists.");
+
+            return 1;
+        }
+
+        $this->filesystem->ensureDirectoryExists($path);
+
+        $this->filesystem->copyDirectory($originalStory, $publishedStory);
+
+        $this->info("Published stories [$publishedStory");
+    }
+
+    protected function copyStoryData()
+    {
+        $originalPath = __DIR__.'/../../resources/views/stories/data';
+        $publishedPath = resource_path('views/stories/data');
+        $files = $this->filesystem->allFiles($originalPath);
+        $copyFile = true;
+
+        $this->filesystem->ensureDirectoryExists($publishedPath);
+
+        foreach($files as $file){
+            $filepath = $file->getPath();
+            $filename = $file->getFilename();
+
+            // ? This copies all the files in the directory so it's not a good idea to use the --force option. Asking each time may not be best either. Who knows?
+
+            if($this->filesystem->exists($filepath)){
+                $copyFile = $this->confirm("[$publishedPath/$filename] already exists. Overwrite? This cannot be undone.", false);
+            }
+
+            if($copyFile){
+                $this->filesystem->copy($filepath . '/'. $filename, $publishedPath . '/'. $filename);
+
+                $this->info("Published story data [$filename]");
+            }else{
+                $this->error("Skipping story data [$filename]");
+            }
+        }
     }
 }
