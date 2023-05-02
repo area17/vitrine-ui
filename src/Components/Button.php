@@ -28,11 +28,6 @@ class Button extends VitrineComponent
     /** @var string|bool */
     public $target;
 
-    protected static $assets = [
-        'npm' => ['something', 'somethingElse', 'focus-trap'],
-        'behaviors' => 'button.js',
-    ];
-
     public function __construct(
         $href = null,
         $icon = null,

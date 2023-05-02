@@ -157,6 +157,8 @@ class PublishComponent extends Command
 
             $this->info(join("\n", $this->assets['npm']));
 
+            $this->info("\nnpm i ". join(' ', $this->assets['npm']));
+
             $this->info("\n--------\n");
         }
 
@@ -305,7 +307,7 @@ class PublishComponent extends Command
 
             // ? This copies all the files in the directory so it's not a good idea to use the --force option. Asking each time may not be best either. Who knows?
 
-            if($this->filesystem->exists($filepath)){
+            if($this->filesystem->exists("$publishedPath/$filename")){
                 $copyFile = $this->confirm("[$publishedPath/$filename] already exists. Overwrite? This cannot be undone.", false);
             }
 

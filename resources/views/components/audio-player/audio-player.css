@@ -1,0 +1,170 @@
+.o-audio__range::before {
+    @apply absolute top-1/2 left-0 right-0 z-[-1] h-4 -translate-y-1/2 transform border border-primary content-[''];
+}
+
+.o-audio__range input[type="range"] {
+    width: calc(100% + 16px);
+    height: 24px;
+    margin: 0 -8px;
+    background: none;
+    -webkit-appearance: none;
+    --backgroundVal: calc(1% * var(--value) + 1px + 0.5%);
+}
+
+.o-audio__range input[type="range"]:focus {
+    @apply outline-none;
+}
+
+.o-audio__range input[type="range"]::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+    margin-top: -12.2px;
+    border: none;
+    border-radius: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+        transparent center center no-repeat;
+    box-shadow: none;
+    -webkit-appearance: none;
+}
+
+.o-audio__range
+    input[type="range"]:not([data-focus-method="mouse"]):focus::-webkit-slider-thumb {
+    outline: 2px solid black;
+    transition: 300ms cubic-bezier(0.4, 0, 0.2, 1) all;
+}
+
+.o-audio__range input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border: none;
+    border-radius: 0;
+    background: linear-gradient(
+        to right,
+        black 0%,
+        black var(--backgroundVal),
+        transparent var(--backgroundVal),
+        transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: calc(100% - 16px);
+    box-shadow: none;
+}
+
+.o-audio__range input[type="range"]::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+        transparent center center no-repeat;
+    box-shadow: none;
+}
+
+.o-audio__range
+    input[type="range"]:not([data-focus-method="mouse"]):focus::-moz-range-thumb {
+    border: 2px solid black;
+}
+
+.o-audio__range input[type="range"]::-moz-range-track {
+    height: max(calc(6px - 1px - 1px), 0px);
+    border: none;
+    border-radius: 0;
+    background: linear-gradient(
+        to right,
+        black 0%,
+        black var(--backgroundVal),
+        transparent var(--backgroundVal),
+        transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: calc(100% - 16px);
+    box-shadow: none;
+}
+
+.o-audio__range input[type="range"]::-ms-fill-upper {
+    @apply border-transparent bg-transparent;
+}
+
+.o-audio__range input[type="range"]::-ms-fill-lower {
+    height: max(calc(4px - 1px - 1px), 0px);
+    margin: -1px 0 -1px -1px;
+    border: none;
+    border-right-width: 0;
+    border-radius: 0px 0 0 0px;
+    background: black;
+}
+
+.o-audio__range input[type="range"]::-ms-thumb {
+    width: 28px;
+    height: 28px;
+    margin-top: 0;
+    border: none;
+    border-radius: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+        transparent center center no-repeat;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.o-audio__range
+    input[type="range"]:not([data-focus-method="mouse"]):focus::-ms-thumb {
+    border: 2px solid black;
+}
+
+.o-audio__range input[type="range"]::-ms-track {
+    height: 4px;
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.o-audio__range input[type="range"]:hover ~ .o-audio__tooltip {
+    @apply visible opacity-100;
+}
+
+.o-audio__volume::before {
+    @apply absolute -bottom-8 left-0 h-[140px] w-full content-[''];
+}
+
+.o-audio__volume .o-audio__range {
+    @apply absolute bottom-[calc(100%_+_8px)] left-1/2 h-full w-48 opacity-0 transition-opacity before:top-1/2 before:-translate-x-1/2 before:rotate-[270deg] before:transform;
+}
+
+.o-audio__volume:focus-within .o-audio__range,
+.o-audio__volume:hover .o-audio__range {
+    @apply opacity-100;
+}
+
+.o-audio__volume .o-audio__range input[type="range"] {
+    @apply m-0 h-full w-[calc(48px_+_16px)] origin-left cursor-pointer;
+    transform: rotate(270deg) translateX(-50%);
+}
+
+.o-audio__volume:hover .a-gui-audio__range,
+.o-audio__volume:focus-within .a-gui-audio__range {
+    @apply visible opacity-100;
+}
+
+.o-audio__rate--active .o-audio__rate-btn {
+    @apply bg-secondary text-inverse;
+}
+
+.o-audio__rate--active .o-audio__rate-btn svg {
+    @apply rotate-0;
+}
+
+.o-audio__rate--active ul {
+    @apply visible opacity-100;
+}
+
+.o-audio__speed[data-focus-method="key"] {
+    @apply z-10 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-dark;
+}
+
+.o-audio__speed.selected::after {
+    @apply absolute top-6 left-12 h-16 w-16 content-[''];
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 12.0605L1.46973 7.53027L2.53027 6.46973L6 9.93945L13.4697 2.46973L14.5303 3.53027L6 12.0605Z' fill='black'/%3E%3C/svg%3E%0A");
+}

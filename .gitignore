@@ -1,0 +1,14 @@
+# IDE Specific files
+/.idea
+/.vscode
+
+# Dependencies
+/node_modules
+/vendor
+
+#File System
+.DS_Store
+
+# Log files
+npm-debug.log
+yarn-error.log

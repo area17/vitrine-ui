@@ -1,0 +1,87 @@
+.wysiwyg {
+    @apply f-body-1;
+}
+
+.wysiwyg ~ .wysiwyg {
+    margin-top: 1em;
+}
+
+.wysiwyg h2 {
+    @apply mt-space-8 f-subhead-3;
+}
+
+.wysiwyg h3,
+.wysiwyg h4,
+.wysiwyg h5,
+.wysiwyg h6 {
+    @apply mt-space-7 f-subhead-2;
+}
+
+.wysiwyg h2 + *,
+.wysiwyg h3 + *,
+.wysiwyg h4 + *,
+.wysiwyg h5 + *,
+.wysiwyg h6 + * {
+    @apply mt-space-5;
+}
+
+.wysiwyg p,
+.wysiwyg ul,
+.wysiwyg ol {
+    @apply mt-space-6;
+    font-variant-numeric: lining-nums;
+}
+
+.wysiwyg blockquote + p,
+.wysiwyg ul + p,
+.wysiwyg ol + p {
+    @apply mt-space-7;
+}
+
+.wysiwyg strong {
+    font-weight: 500;
+}
+
+.wysiwyg > *:first-child,
+.wysiwyg.wysiwyg--small > *:first-child,
+.wysiwyg.wysiwyg--secondary > *:first-child {
+    margin-top: 0;
+}
+
+.wysiwyg p a {
+    @apply underline underline-offset-4 hover:underline-transparent;
+}
+
+.wysiwyg ul,
+.wysiwyg ol {
+    padding-left: 1.5em;
+}
+
+.wysiwyg ul {
+    list-style: outside disc;
+}
+
+.wysiwyg ol {
+    list-style: outside decimal;
+}
+
+.wysiwyg li {
+    @apply mt-space-4;
+}
+
+.wysiwyg blockquote {
+    @apply mt-48 border-l-2 border-primary pl-24 italic;
+}
+
+.wysiwyg blockquote cite {
+    @apply block not-italic;
+}
+
+.wysiwyg p a,
+.wysiwyg li a {
+    @apply underline transition-all underline-thickness-1 underline-inherit;
+}
+
+.wysiwyg figcaption {
+    @apply f-ui-1 mt-20 text-primary lg:mt-24;
+}

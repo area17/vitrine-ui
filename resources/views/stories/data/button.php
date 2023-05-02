@@ -24,7 +24,7 @@ return [
                 'control' => 'select',
                 'options' => [false, 'close-24', 'arrow-left-24', 'arrow-right-24'],
                 'description' =>
-                    'The name of the icon file to use in the button. Can be positioned with the iconPosition prop (see below). Rendered using the `x-atoms.icon` component.',
+                    'The name of the icon file to use in the button. Can be positioned with the iconPosition prop (see below). Rendered using the `x-vui-icon` component.',
                 'defaultValue' => ['summary' => false],
             ],
             'iconPosition' => [
