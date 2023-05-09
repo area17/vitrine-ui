@@ -1,4 +1,5 @@
 @import '../views/components/audio-player/audio-player.css';
+@import '../views/components/datepicker/datepicker.css';
 @import '../views/components/map-mapbox/map-mapbox.css';
 @import '../views/components/modal/modal.css';
 @import '../views/components/wysiwyg/wysiwyg.css';

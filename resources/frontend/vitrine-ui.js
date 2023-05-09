@@ -1,5 +1,6 @@
 export { default as Accordion } from '../views/components/accordion/accordion'
 export { default as AudioPlayer } from '../views/components/audio-player/audio-player'
+export { default as DatePicker } from '../views/components/datepicker/datepicker'
 export { default as ImageZoom } from '../views/components/image-zoom/image-zoom'
 export { default as MapGoogle } from '../views/components/map-google/map-google'
 export { default as MapMapBox } from '../views/components/map-mapbox/map-mapbox'
