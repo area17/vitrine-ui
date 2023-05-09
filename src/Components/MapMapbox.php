@@ -26,6 +26,6 @@ class MapMapBox extends VitrineComponent
 
     public function render(): View
     {
-        return view('vitrine-ui::components.map-mapbox.mapbox');
+        return view('vitrine-ui::components.map-mapbox.map-mapbox');
     }
 }

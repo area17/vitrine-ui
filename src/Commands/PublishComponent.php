@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use App\View\Components\VitrineUI\Modal;
 
 class PublishComponent extends Command
 {
@@ -39,6 +40,16 @@ class PublishComponent extends Command
      */
     protected $canCopyStoryData;
 
+    /**
+     * @var string
+     */
+    protected $vendorViewsPath;
+
+    /**
+     * @var string
+     */
+    protected $publishedViewsPath;
+
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
@@ -47,6 +58,8 @@ class PublishComponent extends Command
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->assets = [];
         $this->canCopyStoryData = null;
+        $this->vendorViewsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_views_path', ''));
+        $this->publishedViewsPath = $this->removeTrailingSlash(config('vitrine-ui.published_views_path', ''));
     }
 
     public function handle(): int
@@ -103,7 +116,12 @@ class PublishComponent extends Command
         }
 
         // Get assets array from each component and flag in console
-        $this->notifyAssets();
+        if (
+            (!$this->option('stories') && !$this->option('view') && !$this->option('class')) ||
+            $this->option('view') || $this->option('class')
+        ) {
+            $this->notifyAssets();
+        }
 
         $this->comment('All done. ');
 
@@ -118,11 +136,11 @@ class PublishComponent extends Command
             return 1;
         }
 
-
         $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
         $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
 
-        $this->collectAssets($component);
+        $this->updateAssets($component, $name);
+        // $this->collectAssets($component);
 
         if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
             $this->newLine();
@@ -148,12 +166,12 @@ class PublishComponent extends Command
             return 0;
         }
 
-        $this->info("\n--------\n");
-
-        $this->info("The published components require the following:\n");
-
         if(Arr::has($this->assets, 'npm')) {
-            $this->info("npm packages\n");
+            $this->info("\n--------\n");
+
+            $this->info("The published components require the following npm packages");
+
+            $this->newLine();
 
             $this->info(join("\n", $this->assets['npm']));
 
@@ -162,25 +180,27 @@ class PublishComponent extends Command
             $this->info("\n--------\n");
         }
 
-        if(Arr::has($this->assets, 'behaviors')) {
-            $this->info("JS behaviors (can be found in their component directory)\n");
+        // if(Arr::has($this->assets, 'behaviors')) {
+        //     $this->info("JS behaviors (can be found in their component directory)\n");
 
-            $this->info(join("\n", $this->assets['behaviors']));
-            $this->info("\n--------\n");
-        }
+        //     $this->info(join("\n", $this->assets['behaviors']));
+        //     $this->info("\n--------\n");
+        // }
 
-        if(Arr::has($this->assets, 'css')) {
-            $this->info("CSS (can be found in their component directory)\n");
+        // if(Arr::has($this->assets, 'css')) {
+        //     $this->info("CSS (can be found in their component directory)\n");
 
-            $this->info(join("\n", $this->assets['css']));
+        //     $this->info(join("\n", $this->assets['css']));
 
-            $this->info("\n--------\n");
-        }
+        //     $this->info("\n--------\n");
+        // }
     }
 
     protected function collectAssets($component = null)
-        {
-        $assets = $component::assets();
+    {
+        // revert to original class to get assets
+        $class = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
+        $assets = $class::assets();
 
         foreach($assets as $type => $asset){
             $asset = is_array($asset) ? $asset : [ $asset ];
@@ -191,6 +211,115 @@ class PublishComponent extends Command
                 $this->assets[$type] = $asset;
             }
         }
+
+        return 0;
+    }
+
+    protected function updateAssets($component = null, $name = null)
+    {
+        if(!$component || !$name){
+            $this->error('Missing params');
+
+            return 1;
+        }
+
+        // revert to original class to get assets
+        $class = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
+        $assets = $class::assets();
+
+        // CSS
+        if(Arr::has($assets, 'css')) {
+            $this->handleCssAssets($component, $name, $assets['css']);
+        }
+
+        // Behaviors
+        if(Arr::has($assets, 'behaviors')) {
+            $this->handleBehaviorAssets($component, $name, $assets['behaviors']);
+        }
+        // check if vitrine-ui.js exists
+        // if not, copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
+        // find import for component js and update path to project path
+    }
+
+    protected function handleBehaviorAssets($component = null, $name = null, $assets = null)
+    {
+        if(!$component || !$name || !$assets){
+            $this->error('Missing params');
+
+            return 1;
+        }
+
+        $jsPublishPath = config('vitrine-ui.js_path');
+        $originalJs = __DIR__ .'/../../resources/frontend/vitrine-ui.js';
+        $publishedJs = $jsPublishPath .'/vitrine-ui.js';
+
+        $cssAssets = is_array($assets) ? $assets : [ $assets ];
+
+        // if vitrine-ui.js does not exist copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
+        if(!$this->filesystem->exists($publishedJs)){
+            $this->filesystem->copy($originalJs, $publishedJs);
+            $this->info("Published [vitrine-ui.js]. Add [import * as VitrineBehaviors from 'vendor/vitrine-ui'] to your app's js file.");
+        }
+
+        // find import for component css and update path to project path
+        $publishedJsContent = $this->filesystem->get($publishedJs);
+
+        // TODO: Look into supporting aliases
+        $oldPath = "from '../views/components";
+        $newPath = "from '$this->vendorViewsPath";
+        $modifiedJsContent = Str::replace($oldPath, $newPath, $publishedJsContent);
+
+        foreach($cssAssets as $asset){
+            $oldAssetPath = $newPath .'/'. $name .'/'. $asset;
+            $oldAssetPathArr = [$oldAssetPath, Str::beforeLast($oldAssetPath, '.js')];
+            $newAssetPath = "from '$this->publishedViewsPath/$name/". Str::beforeLast($asset, '.js');
+            $modifiedJsContent = Str::replace($oldAssetPathArr, $newAssetPath, $modifiedJsContent);
+        }
+
+        $this->filesystem->put($publishedJs, $modifiedJsContent);
+
+        $this->info("Updated path for [$name] in [$jsPublishPath/vitrine-ui.js]");
+
+        return 0;
+    }
+
+    protected function handleCssAssets($component = null, $name = null, $assets = null)
+    {
+        if(!$component || !$name || !$assets){
+            $this->error('Missing params');
+
+            return 1;
+        }
+
+        $cssPublishPath = config('vitrine-ui.css_path');
+        $originalCss = __DIR__ .'/../../resources/frontend/vitrine-ui.css';
+        $publishedCss = $cssPublishPath .'/vitrine-ui.css';
+
+        $cssAssets = is_array($assets) ? $assets : [ $assets ];
+
+        // if vitrine-ui.css does not exist copy vitrine-ui.css to resources/frontend/styles/vendor/vitrine-ui.css
+        if(!$this->filesystem->exists($publishedCss)){
+            $this->filesystem->copy($originalCss, $publishedCss);
+            $this->info("Published [vitrine-ui.css]. Add [@import \"vendor/vitrine-ui.css\"] to your app's css file.");
+        }
+
+        // find import for component css and update path to project path
+        $publishedCssContent = $this->filesystem->get($publishedCss);
+
+        // TODO: Look into supporting aliases
+        $oldPath = "@import '../views/components";
+        $newPath = "@import '$this->vendorViewsPath";
+        $modifiedCssContent = Str::replace($oldPath, $newPath, $publishedCssContent);
+
+        foreach($cssAssets as $asset){
+            $oldAssetPath = $newPath .'/'. $name .'/'. $asset;
+            $newAssetPath = "@import '$this->publishedViewsPath/$name/$asset";
+            $modifiedCssContent = Str::replace($oldAssetPath, $newAssetPath, $modifiedCssContent);
+        }
+
+        $this->filesystem->put($publishedCss, $modifiedCssContent);
+
+        $this->info("Updated path for [$name] in [$cssPublishPath/vitrine-ui.css]");
 
         return 0;
     }
@@ -245,9 +374,11 @@ class PublishComponent extends Command
         $name = Str::afterLast($class, '\\');
         $alias = 'Original'.$name;
 
+        $parent = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
+
         $stub = str_replace(
             ['{{ namespace }}', '{{ name }}', '{{ parent }}', '{{ alias }}'],
-            [$namespace, $name, $component, $alias],
+            [$namespace, $name, $parent, $alias],
             $stub,
         );
 
@@ -319,5 +450,14 @@ class PublishComponent extends Command
                 $this->error("Skipping story data [$filename]");
             }
         }
+    }
+
+    protected function removeTrailingSlash($string = '')
+    {
+        if(Str::endsWith($string, '/')){
+            $string = Str::replaceLast('/', '', $string);
+        }
+
+        return $string;
     }
 }

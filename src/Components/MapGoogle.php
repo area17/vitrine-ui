@@ -24,6 +24,6 @@ class MapGoogle extends VitrineComponent
 
     public function render(): View
     {
-        return view('vitrine-ui::components.map-google.google');
+        return view('vitrine-ui::components.map-google.map-google');
     }
 }
