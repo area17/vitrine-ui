@@ -15,4 +15,5 @@
     :size="[103, 21]"
     :name="$name"
     :aria-label="$ariaLabel ?? null"
+    {{ $attributes }}
 />
