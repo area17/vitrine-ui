@@ -35,8 +35,8 @@ final class VitrineUIServiceProvider extends ServiceProvider
     private function bootBladeComponents(): void
     {
         $prefix = 'vui';
-        $assets = config('vitrine-ui.assets', []);
         $variations = [
+            'vitrine-ui::components.accordion.item' => 'accordion-item',
             'vitrine-ui::components.button.primary' => 'button-primary',
             'vitrine-ui::components.button.secondary' => 'button-secondary',
             'vitrine-ui::components.button.icon' => 'button-icon',
@@ -49,8 +49,6 @@ final class VitrineUIServiceProvider extends ServiceProvider
         /** @var BladeComponent $component */
         foreach (config('vitrine-ui.components', []) as $alias => $component) {
             Blade::component($component, $alias, $prefix);
-
-            // $this->registerAssets($component, $assets);
         }
 
         Blade::components($variations, $prefix);

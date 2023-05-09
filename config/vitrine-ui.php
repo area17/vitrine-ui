@@ -13,6 +13,7 @@ return [
     'vendor_views_path' => '../../../../vendor/area17/vitrine-ui/resources/views/components',
 
     'components' => [
+        'accordion' => A17\VitrineUI\Components\Accordion::class,
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
         'button' => A17\VitrineUI\Components\Button::class,
         'heading' => A17\VitrineUI\Components\Heading::class,
