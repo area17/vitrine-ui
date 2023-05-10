@@ -12,7 +12,7 @@
             @if ($slot->isNotEmpty())
                 {!! $slot !!}
             @else
-                {{-- @foreach ($items as $item)
+                @foreach ($items as $item)
                     <li
                         class="{{ $itemClasses($loop->index) }}"
                         {!! isset($id) ? 'id="List'. $id .'Item'. $loop->index .'"' : '' !!}
@@ -21,7 +21,7 @@
                     >
                         @switch($cardType)
                             @case('inline')
-                                <x-molecules.card.inline
+                                <x-vui-card-inline
                                     :title="$item['title'] ?? null"
                                     :description="$item['description'] ?? null"
                                     :intro="$item['intro'] ?? null"
@@ -33,7 +33,7 @@
                             @break
 
                             @case('primary')
-                                <x-molecules.card.primary
+                                <x-vui-card-primary
                                     :title="$item['title'] ?? null"
                                     :description="$item['description'] ?? null"
                                     :media="$item['media'] ?? null"
@@ -47,7 +47,7 @@
                                 <!-- No CardType Set -->
                         @endswitch
                     </li>
-                @endforeach --}}
+                @endforeach
             @endif
         </ul>
     </div>
