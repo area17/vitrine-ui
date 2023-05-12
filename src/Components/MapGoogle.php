@@ -13,6 +13,12 @@ class MapGoogle extends VitrineComponent
     /** @var string */
     public $lng;
 
+    protected static $assets = [
+        'js' => [
+            'behaviors/GoogleMaps.js'
+        ]
+    ];
+
     public function __construct(
         $lat = null,
         $lng = null,

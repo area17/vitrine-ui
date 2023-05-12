@@ -21,7 +21,7 @@
                 icon="close-32"
                 size="medium"
                 class="o-modal-close"
-                aria-label="{{ __('fe.close_modal') }}"
+                aria-label="{{ __('vitrine-ui::fe.close_modal') }}"
                 data-Modal-close-trigger
             />
         @endif

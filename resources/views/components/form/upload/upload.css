@@ -1,0 +1,17 @@
+.m-form-upload.s-readonly .m-form-upload__wrapper {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.m-form-upload-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.m-form-upload.s-error .m-form-upload__info {
+    @apply text-error;
+}

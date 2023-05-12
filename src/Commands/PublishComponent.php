@@ -43,12 +43,12 @@ class PublishComponent extends Command
     /**
      * @var string
      */
-    protected $vendorViewsPath;
+    protected $vendorAssetsPath;
 
     /**
      * @var string
      */
-    protected $publishedViewsPath;
+    protected $publishedAssetsPath;
 
     public function __construct(Filesystem $filesystem)
     {
@@ -58,8 +58,8 @@ class PublishComponent extends Command
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->assets = [];
         $this->canCopyStoryData = null;
-        $this->vendorViewsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_views_path', ''));
-        $this->publishedViewsPath = $this->removeTrailingSlash(config('vitrine-ui.published_views_path', ''));
+        $this->vendorAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
+        $this->publishedAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
     }
 
     public function handle(): int
@@ -105,9 +105,9 @@ class PublishComponent extends Command
 
         // Copy story preset data
         if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
-            if($this->confirm("Do you want to copy story preset data files?", false)) {
+            // if($this->confirm("Do you want to copy story preset data files?", false)) {
                 $this->copyStoryData();
-            }
+            // }
         }
 
         // publish selected components to vendor directory
@@ -232,16 +232,16 @@ class PublishComponent extends Command
             $this->handleCssAssets($component, $name, $assets['css']);
         }
 
-        // Behaviors
-        if(Arr::has($assets, 'behaviors')) {
-            $this->handleBehaviorAssets($component, $name, $assets['behaviors']);
+        // JS
+        if(Arr::has($assets, 'js')) {
+            $this->handleJsAssets($component, $name, $assets['js']);
         }
         // check if vitrine-ui.js exists
         // if not, copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
         // find import for component js and update path to project path
     }
 
-    protected function handleBehaviorAssets($component = null, $name = null, $assets = null)
+    protected function handleJsAssets($component = null, $name = null, $assets = null)
     {
         if(!$component || !$name || !$assets){
             $this->error('Missing params');
@@ -250,10 +250,11 @@ class PublishComponent extends Command
         }
 
         $jsPublishPath = config('vitrine-ui.js_path');
-        $originalJs = __DIR__ .'/../../resources/frontend/vitrine-ui.js';
+        $originalAssetPath = $originalJs = __DIR__ .'/../../resources/frontend';
+        $originalJs = $originalAssetPath .'/vitrine-ui.js';
         $publishedJs = $jsPublishPath .'/vitrine-ui.js';
 
-        $cssAssets = is_array($assets) ? $assets : [ $assets ];
+        $jsAssets = is_array($assets) ? $assets : [ $assets ];
 
         // if vitrine-ui.js does not exist copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
         if(!$this->filesystem->exists($publishedJs)){
@@ -264,16 +265,38 @@ class PublishComponent extends Command
         // find import for component css and update path to project path
         $publishedJsContent = $this->filesystem->get($publishedJs);
 
-        // TODO: Look into supporting aliases
-        $oldPath = "from '../views/components";
-        $newPath = "from '$this->vendorViewsPath";
+        $oldPath = "'./scripts";
+        $newPath = "'$this->vendorAssetsPath/scripts";
         $modifiedJsContent = Str::replace($oldPath, $newPath, $publishedJsContent);
 
-        foreach($cssAssets as $asset){
-            $oldAssetPath = $newPath .'/'. $name .'/'. $asset;
+        // replace './js/[behaviors/Input]' with './vendor/vitrine-ui/[behaviors/Input]
+        foreach($jsAssets as $asset){
+            // get new path (full path before filename)
+            $originalAsset = $originalAssetPath .'/scripts/'. $asset;
+            $publishedAsset = $jsPublishPath .'/vitrine-ui/'. $asset;
+
+            // ensure it exists
+            if(!$this->filesystem->exists($publishedAsset)){
+                $this->filesystem->ensureDirectoryExists(Str::beforeLast($publishedAsset, '/'));
+
+                // copy asset to new path
+                $this->filesystem->copy($originalAsset, $publishedAsset);
+            }
+
+            // update vitrine-ui.js
+            $oldAssetPath = $newPath .'/'. $asset;
             $oldAssetPathArr = [$oldAssetPath, Str::beforeLast($oldAssetPath, '.js')];
-            $newAssetPath = "from '$this->publishedViewsPath/$name/". Str::beforeLast($asset, '.js');
-            $modifiedJsContent = Str::replace($oldAssetPathArr, $newAssetPath, $modifiedJsContent);
+            $assetNoExtension = Str::beforeLast($asset, '.js');
+            $newFilepath = "'./vitrine-ui/". $assetNoExtension;
+
+            if(!Str::contains($modifiedJsContent, $assetNoExtension)){
+                $this->info("Can't find $asset in your vitrine-ui.js. Adding it now.");
+
+                $behaviorName = Str::of($asset)->afterLast('/')->beforeLast('.js')->replace('/', '-')->studly();
+                $modifiedJsContent .= "export { default as $behaviorName } from '$newFilepath'\n";
+            }else{
+                $modifiedJsContent = Str::replace($oldAssetPathArr, $newFilepath, $modifiedJsContent);
+            }
         }
 
         $this->filesystem->put($publishedJs, $modifiedJsContent);
@@ -306,15 +329,22 @@ class PublishComponent extends Command
         // find import for component css and update path to project path
         $publishedCssContent = $this->filesystem->get($publishedCss);
 
-        // TODO: Look into supporting aliases
         $oldPath = "@import '../views/components";
-        $newPath = "@import '$this->vendorViewsPath";
+        $newPath = "@import '$this->vendorAssetsPath";
         $modifiedCssContent = Str::replace($oldPath, $newPath, $publishedCssContent);
 
         foreach($cssAssets as $asset){
             $oldAssetPath = $newPath .'/'. $name .'/'. $asset;
-            $newAssetPath = "@import '$this->publishedViewsPath/$name/$asset";
-            $modifiedCssContent = Str::replace($oldAssetPath, $newAssetPath, $modifiedCssContent);
+            $newAssetPath = "@import '$this->publishedAssetsPath/$name/$asset";
+
+            if(!Str::contains($modifiedCssContent, "$this->publishedAssetsPath/$name/$asset")){
+                $this->info("Can't find $this->publishedAssetsPath/$name/$asset in your vitrine-ui.css. Adding it now.");
+
+                $modifiedCssContent .= "@import '$this->publishedAssetsPath/$name/$asset';\n";
+            }else{
+                $modifiedCssContent = Str::replace($oldAssetPath, $newAssetPath, $modifiedCssContent);
+            }
+            // dd($newAssetPath);
         }
 
         $this->filesystem->put($publishedCss, $modifiedCssContent);
@@ -439,7 +469,12 @@ class PublishComponent extends Command
             // ? This copies all the files in the directory so it's not a good idea to use the --force option. Asking each time may not be best either. Who knows?
 
             if($this->filesystem->exists("$publishedPath/$filename")){
-                $copyFile = $this->confirm("[$publishedPath/$filename] already exists. Overwrite? This cannot be undone.", false);
+                $copyFile = false;
+                $this->error("The story data at [$publishedPath/$filename] already exists.");
+
+                return 1;
+
+                // $copyFile = $this->confirm("[$publishedPath/$filename] already exists. Overwrite? This cannot be undone.", false);
             }
 
             if($copyFile){

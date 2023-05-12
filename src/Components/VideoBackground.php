@@ -16,6 +16,10 @@ class VideoBackground extends VitrineComponent
     /** @var bool */
     public $controlMute;
 
+    protected static $assets = [
+        'js' => ['behaviors/video-background.js']
+    ];
+
     public function __construct(
         $sources = null,
         $aspectRatio = '16/9',

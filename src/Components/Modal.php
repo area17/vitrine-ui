@@ -24,7 +24,7 @@ class Modal extends VitrineComponent
 
     protected static $assets = [
         'npm' => ['body-scroll-lock', 'focus-trap'],
-        'behaviors' => 'modal.js',
+        'js' => 'behaviors/Modal.js',
         'css' => 'modal.css',
     ];
 

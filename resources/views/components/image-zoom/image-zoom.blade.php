@@ -11,14 +11,14 @@
                     id="{{ $id . '-image-zoom-zoom-in'}}"
                     icon="plus-32"
                     size="medium"
-                    aria-label="{{ __('fe.zoom_in') }}"
+                    aria-label="{{ __('vitrine-ui::fe.zoom_in') }}"
                 />
                 <x-vui-button-icon
                     id="{{ $id . '-image-zoom-zoom-out'}}"
                     icon="minus-32"
                     size="medium"
                     class="mt-4"
-                    aria-label="{{ __('fe.zoom_out') }}"
+                    aria-label="{{ __('vitrine-ui::fe.zoom_out') }}"
                 />
 
                 @if(count($sources) > 1)
@@ -27,14 +27,14 @@
                         icon="arrow-right-32"
                         size="medium"
                         class="mt-4 transform rotate-180"
-                        aria-label="{{ __('fe.previous') }}"
+                        aria-label="{{ __('vitrine-ui::fe.previous') }}"
                     />
                     <x-vui-button-icon
                         id="{{ $id . '-image-zoom-nav-next'}}"
                         icon="arrow-right-32"
                         size="medium"
                         class="mt-4"
-                        aria-label="{{ __('fe.next') }}"
+                        aria-label="{{ __('vitrine-ui::fe.next') }}"
                     />
                 @endif
             </div>

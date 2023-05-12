@@ -7,10 +7,10 @@ return [
     'css_path' => resource_path('frontend/styles/vendor'),
 
     // The path of the published components. This is only used to generate the import paths in your published css and js files, it doesnt change the publish location. This can be replaced with an alias defined in your vite.config.json
-    'published_views_path' => '../../../views/vendor/vitrine-ui/components',
+    'published_assets_path' => '../../../views/vendor/vitrine-ui/components',
 
     // the path to the components views within the vitrine-ui package. Used to generate the import paths in your published css and js files. This can be replaced with an alias defined in your vite.config.js
-    'vendor_views_path' => '../../../../vendor/area17/vitrine-ui/resources/views/components',
+    'vendor_assets_path' => '../../../../vendor/area17/vitrine-ui/resources/frontend',
 
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
@@ -21,6 +21,20 @@ return [
         'card-primary' => A17\VitrineUI\Components\Card\Primary::class,
         'datepicker' => A17\VitrineUI\Components\Datepicker::class,
         'dropdown' => A17\VitrineUI\Components\Dropdown::class,
+        'form-checkbox' => A17\VitrineUI\Components\Form\Checkbox::class,
+        'form-checkbox-group' => A17\VitrineUI\Components\Form\CheckboxGroup::class,
+        'form-label' => A17\VitrineUI\Components\Form\Label::class,
+        'form-date' => A17\VitrineUI\Components\Form\Date::class,
+        'form-date-range' => A17\VitrineUI\Components\Form\DateRange::class,
+        'form-date-trio' => A17\VitrineUI\Components\Form\DateTrio::class,
+        'form-input' => A17\VitrineUI\Components\Form\Input::class,
+        'form-password' => A17\VitrineUI\Components\Form\Password::class,
+        'form-radio' => A17\VitrineUI\Components\Form\Radio::class,
+        'form-radio-group' => A17\VitrineUI\Components\Form\RadioGroup::class,
+        'form-range' => A17\VitrineUI\Components\Form\Range::class,
+        'form-select' => A17\VitrineUI\Components\Form\Select::class,
+        'form-textarea' => A17\VitrineUI\Components\Form\Textarea::class,
+        'form-upload' => A17\VitrineUI\Components\Form\Upload::class,
         'heading' => A17\VitrineUI\Components\Heading::class,
         'icon' => A17\VitrineUI\Components\Icon::class,
         'image-zoom' => A17\VitrineUI\Components\ImageZoom::class,

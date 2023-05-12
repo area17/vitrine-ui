@@ -19,6 +19,12 @@ class ImageZoom extends VitrineComponent
     /** @var array */
     public $autoInit; // set to false to listen for `image-zoom:init` event to init behavior
 
+    protected static $assets = [
+        'js' => [
+            'behaviors/ImageZoom.js'
+        ]
+    ];
+
     public function __construct(
         $id = null,
         $sources = [],

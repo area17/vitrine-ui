@@ -25,11 +25,18 @@ final class VitrineUIServiceProvider extends ServiceProvider
         $this->bootResources();
         $this->bootBladeComponents();
         $this->bootPublishing();
+        $this->bootTranslations();
     }
 
     private function bootResources(): void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'vitrine-ui');
+    }
+
+    private function bootTranslations(): void
+    {
+
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'vitrine-ui');
     }
 
     private function bootBladeComponents(): void

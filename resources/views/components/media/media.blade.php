@@ -54,7 +54,7 @@
                     icon="play-96"
                     size="large"
                     class="absolute z-10 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"
-                    aria-label="{{ __('fe.play_video') }}"
+                    aria-label="{{ __('vitrine-ui::fe.play_video') }}"
                 />
 
                 <div class="hidden absolute inset-0 z-30 w-full h-full" data-ShowVideo-player></div>

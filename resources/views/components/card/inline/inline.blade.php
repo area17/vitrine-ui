@@ -33,7 +33,7 @@
                     <x-vui-link-secondary
                         :static="true"
                     >
-                        {{ __('fe.read_more') }}
+                        {{ __('vitrine-ui::fe.read_more') }}
                     </x-vui-link-secondary>
                 </div>
             </div>

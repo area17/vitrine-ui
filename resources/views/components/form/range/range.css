@@ -1,0 +1,31 @@
+/* stylelint-disable */
+.m-range .range-slider {
+    @apply bg-quaternary;
+}
+
+.range-slider .range-slider__thumb {
+    @apply bg-secondary;
+}
+
+.range-slider .range-slider__thumb:focus-visible {
+    box-shadow: none;
+}
+
+.range-slider .range-slider__thumb:focus[data-focus-method="key"] {
+    outline: initial;
+    @apply !outline !outline-offset-4 !outline-highlight;
+}
+
+.range-slider .range-slider__range {
+    @apply bg-secondary;
+}
+
+/* single prop styles  (hiding the data-lower thumb) */
+.m-range--hideLower .range-slider .range-slider__thumb[data-lower] {
+    width: 0;
+}
+
+.m-range--hideLower .range-slider .range-slider__range {
+    border-radius: 6px;
+}
+/* stylelint-enable */

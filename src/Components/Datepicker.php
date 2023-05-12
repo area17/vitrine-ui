@@ -25,11 +25,11 @@ class Datepicker extends VitrineComponent
     /** @var bool */
     public $showLabel;
 
-    // protected static $assets = [
-    //     'npm' => ['body-scroll-lock', 'focus-trap'],
-    //     'behaviors' => 'modal.js',
-    //     'css' => 'modal.css',
-    // ];
+    protected static $assets = [
+        // 'npm' => ['body-scroll-lock', 'focus-trap'],
+        'js' => 'behaviors/Modal.js',
+        'css' => 'modal.css',
+    ];
 
     public function __construct(
         $target = '',

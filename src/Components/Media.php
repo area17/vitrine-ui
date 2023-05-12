@@ -45,6 +45,12 @@ class Media extends VitrineComponent
     /** @var array */
     public $classes;
 
+    protected static $assets = [
+        'js' => [
+            'behaviors/ShowVideo.js'
+        ]
+    ];
+
     public function __construct(
         $caption = null,
         $image = null,

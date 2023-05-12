@@ -13,7 +13,11 @@ class MapMapBox extends VitrineComponent
     /** @var string */
     public $lng;
 
-
+    protected static $assets = [
+        'js' => [
+            'behaviors/MapboxMaps.js'
+        ]
+    ];
 
     public function __construct(
         $lat = null,

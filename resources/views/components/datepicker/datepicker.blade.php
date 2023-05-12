@@ -3,7 +3,7 @@
     window.A17.translations = window.A17.translations || {};
     window.A17.translations.form = window.A17.translations.form || {};
     if (!window.A17.translations.form.datepicker) {
-        window.A17.translations.form.datepicker = @json(__('fe.form.datepicker'));
+        window.A17.translations.form.datepicker = @json(__('vitrine-ui::fe.form.datepicker'));
     }
 </script>
 
@@ -25,12 +25,12 @@
             name="calendar-24"
             aria-hidden="true" />
         @if($showLabel)
-            <span class="f-ui-2">{{ __('fe.form.datepicker.open_date_picker') }}</span>
-            <span class="sr-only">{{ __('fe.form.datepicker.open_date_picker_a11y') }}</span>
+            <span class="f-ui-2">{{ __('vitrine-ui::fe.form.datepicker.open_date_picker') }}</span>
+            <span class="sr-only">{{ __('vitrine-ui::fe.form.datepicker.open_date_picker_a11y') }}</span>
         @else
             <span class="sr-only">
-                {{ __('fe.form.datepicker.open_date_picker') }},
-                {{ __('fe.form.datepicker.open_date_picker_a11y') }}
+                {{ __('vitrine-ui::fe.form.datepicker.open_date_picker') }},
+                {{ __('vitrine-ui::fe.form.datepicker.open_date_picker_a11y') }}
             </span>
         @endif
     </button>
@@ -49,7 +49,7 @@
                 icon="close-16"
                 size="small"
                 class="absolute right-12 top-12"
-                aria-label="{{ __('fe.form.datepicker.close_date_picker') }}"
+                aria-label="{{ __('vitrine-ui::fe.form.datepicker.close_date_picker') }}"
                 data-DatePicker-close
             />
         </div>

@@ -26,7 +26,7 @@
             id="{{ $listlabelId }}"
             class="sr-only"
         >
-            {{ __('fe.dropdown_items') }}
+            {{ __('vitrine-ui::fe.dropdown_items') }}
         </x-vui-heading>
 
         <ul aria-labelledby="{{ $listlabelId }}">

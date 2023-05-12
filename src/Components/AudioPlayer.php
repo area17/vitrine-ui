@@ -23,8 +23,7 @@ class AudioPlayer extends VitrineComponent
     public $sources;
 
     protected static $assets = [
-        // ? do we need to make these relative to the resources dir rather than the component dir?
-        'behaviors' => 'audio-player.js',
+        'js' => 'behaviors/AudioPlayer.js',
         'css' => 'audio-player.css',
     ];
 

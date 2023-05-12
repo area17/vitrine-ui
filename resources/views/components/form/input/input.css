@@ -1,0 +1,22 @@
+.m-input__wrapper {
+    @apply relative mt-4 border;
+}
+
+.m-input.s-disabled,
+.m-input[inert] {
+    @apply opacity-25;
+    pointer-events: none;
+}
+
+.m-input.s-error .m-input__wrapper {
+    @apply border-error;
+}
+
+.m-input.s-readonly .m-input__wrapper {
+    @apply border-quaternary bg-quaternary;
+}
+
+.m-input.s-readonly input,
+.m-input.s-readonly textarea {
+    @apply bg-transparent;
+}

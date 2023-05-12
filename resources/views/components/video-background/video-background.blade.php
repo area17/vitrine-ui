@@ -11,16 +11,16 @@
         <div
             class="relative w-full h-full"
             data-behavior="VideoBackground"
-            data-VideoBackground-text-pause="{{ __('fe.pause') }}"
-            data-VideoBackground-text-play="{{ __('fe.play') }}"
-            data-VideoBackground-text-mute="{{ __('fe.mute') }}"
-            data-VideoBackground-text-unmute="{{ __('fe.unmute') }}"
+            data-VideoBackground-text-pause="{{ __('vitrine-ui::fe.pause') }}"
+            data-VideoBackground-text-play="{{ __('vitrine-ui::fe.play') }}"
+            data-VideoBackground-text-mute="{{ __('vitrine-ui::fe.mute') }}"
+            data-VideoBackground-text-unmute="{{ __('vitrine-ui::fe.unmute') }}"
         >
             <div class="absolute z-10 bottom-12 right-12 flex">
                 @if($controlMute)
                     <x-vui-button-icon
                         class="flex"
-                        aria-label="{{ __('fe.unmute') }}"
+                        aria-label="{{ __('vitrine-ui::fe.unmute') }}"
                         data-VideoBackground-mute=""
                     >
                         <x-vui-icon name="speaker-24" class="hidden" data-VideoBackground-icon-mute="" />
@@ -30,7 +30,7 @@
 
                 <x-vui-button-icon
                     class="flex ml-8"
-                    aria-label="{{ __('fe.pause') }}"
+                    aria-label="{{ __('vitrine-ui::fe.pause') }}"
                     data-VideoBackground-pause=""
                 >
                     <x-vui-icon name="play-24" class="hidden" data-VideoBackground-icon-play />
