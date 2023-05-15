@@ -81,6 +81,9 @@ class Date extends VitrineComponent
             'behaviors/DateInput.js',
             'behaviors/DateInputFuzzy.js'
         ],
+        'css' => [
+            'components/form/input.css',
+        ]
     ];
 
     public function __construct(

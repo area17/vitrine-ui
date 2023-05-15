@@ -61,7 +61,10 @@ class Radio extends VitrineComponent
 
     protected static $assets = [
         'js' => ['behaviors/Input.js'],
-        'css' => ['radio.css']
+        'css' => [
+            'components/form/radio.css',
+            'components/form/input.css',
+        ]
     ];
 
     public function __construct(

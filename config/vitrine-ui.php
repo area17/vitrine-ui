@@ -6,8 +6,13 @@ return [
 
     'css_path' => resource_path('frontend/styles/vendor'),
 
-    // The path of the published components. This is only used to generate the import paths in your published css and js files, it doesnt change the publish location. This can be replaced with an alias defined in your vite.config.json
-    'published_assets_path' => '../../../views/vendor/vitrine-ui/components',
+    // The path of the published js assets. Used to generate the import paths in your published js files. This can be replaced with an alias defined in your vite.config.json
+    // 'published_js_path' => './scripts/vendor/vitrine-ui',
+
+    // // The path of the published css assets. Used to generate the import paths in your published css files. This can be replaced with an alias defined in your vite.config.json
+    // 'published_css_path' => './css/vendor/vitrine-ui',
+
+    // 'published_assets_path' => '../../../views/vendor/vitrine-ui/components',
 
     // the path to the components views within the vitrine-ui package. Used to generate the import paths in your published css and js files. This can be replaced with an alias defined in your vite.config.js
     'vendor_assets_path' => '../../../../vendor/area17/vitrine-ui/resources/frontend',

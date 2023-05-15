@@ -45,7 +45,11 @@ class RadioGroup extends VitrineComponent
     public $rand;
 
     protected static $assets = [
-        'js' => ['behaviors/RadioGroup.js']
+        'js' => ['behaviors/RadioGroup.js'],
+        'css' => [
+            'components/form/radio.css',
+            'components/form/input.css',
+        ]
     ];
 
     public function __construct(

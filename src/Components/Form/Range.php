@@ -34,7 +34,7 @@ class Range extends VitrineComponent
 
     protected static $assets = [
         'js' => ['behaviors/RangeInput.js'],
-        'css' => ['range.css']
+        'css' => ['components/form/range.css']
     ];
 
     public function __construct(

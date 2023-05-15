@@ -97,7 +97,7 @@ class Input extends VitrineComponent
             'behaviors/Input.js'
         ],
         'css' => [
-            'input.css'
+            'components/form/input.css'
         ],
     ];
 

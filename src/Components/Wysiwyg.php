@@ -11,7 +11,7 @@ class Wysiwyg extends VitrineComponent
     public $variation;
 
     protected static $assets = [
-        'css' => 'wysiwyg.css',
+        'css' => 'components/wysiwyg.css',
     ];
 
     public function __construct(

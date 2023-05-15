@@ -16,6 +16,9 @@ class MapMapBox extends VitrineComponent
     protected static $assets = [
         'js' => [
             'behaviors/MapboxMaps.js'
+        ],
+        'css' => [
+            'components/map-mapbox.css'
         ]
     ];
 

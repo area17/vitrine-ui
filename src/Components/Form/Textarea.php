@@ -75,7 +75,12 @@ class Textarea extends VitrineComponent
     public $rand;
 
     protected static $assets = [
-        'js' => ['behaviors/Input.js']
+        'js' => [
+            'behaviors/Input.js'
+        ],
+        'css' => [
+            'components/form/input.css',
+        ]
     ];
 
     public function __construct(

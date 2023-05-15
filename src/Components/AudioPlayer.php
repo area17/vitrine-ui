@@ -24,7 +24,7 @@ class AudioPlayer extends VitrineComponent
 
     protected static $assets = [
         'js' => 'behaviors/AudioPlayer.js',
-        'css' => 'audio-player.css',
+        'css' => 'components/audio-player.css',
     ];
 
     public function __construct(

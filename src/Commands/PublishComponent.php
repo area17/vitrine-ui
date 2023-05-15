@@ -250,9 +250,9 @@ class PublishComponent extends Command
         }
 
         $jsPublishPath = config('vitrine-ui.js_path');
-        $originalAssetPath = $originalJs = __DIR__ .'/../../resources/frontend';
-        $originalJs = $originalAssetPath .'/vitrine-ui.js';
-        $publishedJs = $jsPublishPath .'/vitrine-ui.js';
+        $originalAssetPath = __DIR__ .'/../../resources/frontend';
+        $originalJs = "$originalAssetPath/vitrine-ui.js";
+        $publishedJs = "$jsPublishPath/vitrine-ui.js";
 
         $jsAssets = is_array($assets) ? $assets : [ $assets ];
 
@@ -315,8 +315,9 @@ class PublishComponent extends Command
         }
 
         $cssPublishPath = config('vitrine-ui.css_path');
-        $originalCss = __DIR__ .'/../../resources/frontend/vitrine-ui.css';
-        $publishedCss = $cssPublishPath .'/vitrine-ui.css';
+        $originalAssetPath = __DIR__ .'/../../resources/frontend';
+        $originalCss = "$originalAssetPath/vitrine-ui.css";
+        $publishedCss = "$cssPublishPath/vitrine-ui.css";
 
         $cssAssets = is_array($assets) ? $assets : [ $assets ];
 
@@ -329,22 +330,34 @@ class PublishComponent extends Command
         // find import for component css and update path to project path
         $publishedCssContent = $this->filesystem->get($publishedCss);
 
-        $oldPath = "@import '../views/components";
-        $newPath = "@import '$this->vendorAssetsPath";
+        $oldPath = "'./css";
+        $newPath = "'$this->vendorAssetsPath/css";
         $modifiedCssContent = Str::replace($oldPath, $newPath, $publishedCssContent);
 
+        // replace './css/[components/input.css] with './vendor/vitrine-ui/[components/input.css]
         foreach($cssAssets as $asset){
-            $oldAssetPath = $newPath .'/'. $name .'/'. $asset;
-            $newAssetPath = "@import '$this->publishedAssetsPath/$name/$asset";
+            // get new path (full path before filename)
+            $originalAsset = $originalAssetPath .'/css/'. $asset;
+            $publishedAsset = $cssPublishPath .'/vitrine-ui/'. $asset;
 
-            if(!Str::contains($modifiedCssContent, "$this->publishedAssetsPath/$name/$asset")){
-                $this->info("Can't find $this->publishedAssetsPath/$name/$asset in your vitrine-ui.css. Adding it now.");
+            // ensure it exists
+            if(!$this->filesystem->exists($publishedAsset)){
+                $this->filesystem->ensureDirectoryExists(Str::beforeLast($publishedAsset, '/'));
 
-                $modifiedCssContent .= "@import '$this->publishedAssetsPath/$name/$asset';\n";
+                // copy asset to new path
+                $this->filesystem->copy($originalAsset, $publishedAsset);
+            }
+
+            $oldAssetPath = "$newPath/$asset";
+            $newAssetPath = "'./vitrine-ui/$asset";
+
+            if(!Str::contains($modifiedCssContent, $oldAssetPath)){
+                $this->info("Can't find $asset in your vitrine-ui.css. Adding it now.");
+
+                $modifiedCssContent .= "@import $newAssetPath';\n";
             }else{
                 $modifiedCssContent = Str::replace($oldAssetPath, $newAssetPath, $modifiedCssContent);
             }
-            // dd($newAssetPath);
         }
 
         $this->filesystem->put($publishedCss, $modifiedCssContent);

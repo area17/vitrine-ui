@@ -66,6 +66,9 @@ class Password extends VitrineComponent
         'js' => [
             'behaviors/PasswordInput.js',
             'behaviors/Input.js'
+        ],
+        'css' => [
+            'components/form/input.css',
         ]
     ];
 

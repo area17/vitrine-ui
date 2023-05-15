@@ -64,7 +64,7 @@ class Upload extends VitrineComponent
 
     protected static $assets = [
         'js' => ['behaviors/FileUpload.js', 'behaviors/Input.js'],
-        'css' => ['upload.css'],
+        'css' => ['components/form/upload.css'],
     ];
 
     public function __construct(

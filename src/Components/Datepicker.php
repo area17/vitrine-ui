@@ -26,9 +26,9 @@ class Datepicker extends VitrineComponent
     public $showLabel;
 
     protected static $assets = [
-        // 'npm' => ['body-scroll-lock', 'focus-trap'],
-        'js' => 'behaviors/Modal.js',
-        'css' => 'modal.css',
+        'npm' => ['wc-datepicker', 'focus-trap'],
+        'js' => 'behaviors/Datepicker.js',
+        'css' => 'components/date-picker.css',
     ];
 
     public function __construct(
