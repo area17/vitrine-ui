@@ -14,6 +14,9 @@ class MapMapBox extends VitrineComponent
     public $lng;
 
     protected static $assets = [
+        'npm' => [
+            'mapbox-gl'
+        ],
         'js' => [
             'behaviors/MapboxMaps.js'
         ],

@@ -75,6 +75,7 @@ class Date extends VitrineComponent
     public $pickerID;
 
     protected static $assets = [
+        'npm' => ['@area17/parse-numeric-date'],
         'js' => [
             'utils/formatDate.js',
             'behaviors/Input.js',

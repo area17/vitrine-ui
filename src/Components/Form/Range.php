@@ -33,6 +33,7 @@ class Range extends VitrineComponent
     public $options;
 
     protected static $assets = [
+        'npm' => ['range-slider-input'],
         'js' => ['behaviors/RangeInput.js'],
         'css' => ['components/form/range.css']
     ];

@@ -20,6 +20,9 @@ class ImageZoom extends VitrineComponent
     public $autoInit; // set to false to listen for `image-zoom:init` event to init behavior
 
     protected static $assets = [
+        'npm' => [
+            'openseadragon'
+        ],
         'js' => [
             'behaviors/ImageZoom.js'
         ]

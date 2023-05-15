@@ -33,7 +33,7 @@ class PublishComponent extends Command
     /**
      * @var array
      */
-    protected $assets;
+    protected $npmPackages;
 
     /**
      * @var bool
@@ -56,7 +56,7 @@ class PublishComponent extends Command
 
         $this->filesystem = $filesystem;
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
-        $this->assets = [];
+        $this->npmPackages = [];
         $this->canCopyStoryData = null;
         $this->vendorAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
         $this->publishedAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
@@ -120,7 +120,7 @@ class PublishComponent extends Command
             (!$this->option('stories') && !$this->option('view') && !$this->option('class')) ||
             $this->option('view') || $this->option('class')
         ) {
-            $this->notifyAssets();
+            $this->notifyNpmPackages();
         }
 
         $this->comment('All done. ');
@@ -140,7 +140,6 @@ class PublishComponent extends Command
         $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
 
         $this->updateAssets($component, $name);
-        // $this->collectAssets($component);
 
         if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
             $this->newLine();
@@ -160,40 +159,23 @@ class PublishComponent extends Command
         return 0;
     }
 
-    protected function notifyAssets()
+    protected function notifyNpmPackages()
     {
-        if(empty($this->assets)){
+        if(empty($this->npmPackages)){
             return 0;
         }
 
-        if(Arr::has($this->assets, 'npm')) {
-            $this->info("\n--------\n");
+        $this->info("\n--------\n");
 
-            $this->info("The published components require the following npm packages");
+        $this->info("The published components require the following npm packages");
 
-            $this->newLine();
+        $this->newLine();
 
-            $this->info(join("\n", $this->assets['npm']));
+        $this->info(join("\n", $this->npmPackages));
 
-            $this->info("\nnpm i ". join(' ', $this->assets['npm']));
+        $this->info("\nnpm i ". join(' ', $this->npmPackages));
 
-            $this->info("\n--------\n");
-        }
-
-        // if(Arr::has($this->assets, 'behaviors')) {
-        //     $this->info("JS behaviors (can be found in their component directory)\n");
-
-        //     $this->info(join("\n", $this->assets['behaviors']));
-        //     $this->info("\n--------\n");
-        // }
-
-        // if(Arr::has($this->assets, 'css')) {
-        //     $this->info("CSS (can be found in their component directory)\n");
-
-        //     $this->info(join("\n", $this->assets['css']));
-
-        //     $this->info("\n--------\n");
-        // }
+        $this->info("\n--------\n");
     }
 
     protected function collectAssets($component = null)
@@ -236,9 +218,11 @@ class PublishComponent extends Command
         if(Arr::has($assets, 'js')) {
             $this->handleJsAssets($component, $name, $assets['js']);
         }
-        // check if vitrine-ui.js exists
-        // if not, copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
-        // find import for component js and update path to project path
+
+        // NPM
+        if(Arr::has($assets, 'npm')) {
+            $this->npmPackages = array_merge($this->npmPackages, $assets['npm']);
+        }
     }
 
     protected function handleJsAssets($component = null, $name = null, $assets = null)

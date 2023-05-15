@@ -14,6 +14,9 @@ class MapGoogle extends VitrineComponent
     public $lng;
 
     protected static $assets = [
+        'npm' => [
+            '@googlemaps/js-api-loader'
+        ],
         'js' => [
             'behaviors/GoogleMaps.js'
         ]
