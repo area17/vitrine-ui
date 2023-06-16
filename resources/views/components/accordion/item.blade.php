@@ -8,7 +8,7 @@
 ])
 
 @php
-    $id = Str::random(9);
+    $id = $id ?? Str::uuid();
     $item_id = 'AccordionItem'. $id. $index;
     $label_id = 'AccordionLabel'. $id. $index;
 

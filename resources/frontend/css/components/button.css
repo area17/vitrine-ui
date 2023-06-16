@@ -1,0 +1,25 @@
+@layer components {
+    .btn {
+        @apply group inline-flex items-center disabled:cursor-default;
+    }
+
+    .btn-label {
+        @apply text-inherit;
+    }
+
+    /** Variants **/
+    .btn--primary {
+        @apply bg-primary;
+    }
+    .btn--secondary {
+        @apply bg-secondary;
+    }
+
+    /** Sizes **/
+    .btn--small {
+        @apply p-4;
+    }
+    .btn--large {
+        @apply p-5;
+    }
+}

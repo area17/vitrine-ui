@@ -11,6 +11,7 @@ const formatDate = (d, type = 'iso') => {
             .toString()
             .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
     }
+
     if (type === 'display') {
         if (today === date.getTime()) {
             return labels.today
@@ -24,6 +25,7 @@ const formatDate = (d, type = 'iso') => {
             })}`
         }
     }
+
     if (type === 'human') {
         let dateStr = new Intl.DateTimeFormat(lang, {
             dateStyle: 'full'

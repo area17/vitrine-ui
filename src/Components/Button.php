@@ -7,8 +7,6 @@ use Illuminate\Contracts\View\View;
 
 class Button extends VitrineComponent
 {
-    /** @var bool */
-    public $static;
 
     /** @var string */
     public $href;
@@ -16,41 +14,53 @@ class Button extends VitrineComponent
     /** @var string */
     public $icon;
 
+    /** @var bool */
+    public $iconOnly;
+
     /** @var string */
     public $iconPosition;
 
     /** @var int */
     public $iconSpacing;
 
-    /** @var int */
-    public $labelClasses;
+    /** @var null|string */
+    public $size;
+
+    /** @var bool */
+    public $static;
 
     /** @var string|bool */
     public $target;
+
+    /** @var null|string */
+    public $variant;
 
     public function __construct(
         $href = null,
         $icon = null,
         $iconPosition = 'after',
         $static = false,
-        $iconSpacing = 4,
-        $labelClasses = '',
         $target = null,
-    ) {
+        $size = null,
+        $variant = null,
+        $iconOnly = false
+    )
+    {
         $this->href = $href;
         $this->icon = $icon;
         $this->iconPosition = $iconPosition;
-        $this->iconSpacing = $iconSpacing;
+        $this->iconOnly = $iconOnly;
         $this->static = $static;
-        $this->labelClasses = $labelClasses;
+        $this->size = $size;
+        $this->variant = $variant;
 
-        $isExternalUrl = \App\Helpers\isExternalUrl($this->href);
+        $isExternalUrl = $this->isExternalUrl($href);
         $this->target = $target ?? $isExternalUrl ? '_blank' : false;
     }
 
     public function render(): View
     {
-        return view('vitrine-ui::components.button._base');
+        return view('vitrine-ui::components.button.default');
     }
 
     public function element(): string
@@ -77,19 +87,6 @@ class Button extends VitrineComponent
     public function iconAfter(): bool
     {
         return filled($this->icon) && $this->icon && $this->iconPosition === 'after';
-    }
-
-    public function labelClasses(): string
-    {
-        $iconPosition = $this->getIconPosition();
-
-        if (!$iconPosition) {
-            return (string) $this->labelClasses;
-        }
-
-        $prefix = $iconPosition === 'before' ? 'ml-' : 'mr-';
-
-        return $this->labelClasses . ' ' . $prefix . $this->iconSpacing;
     }
 
     protected function getIconPosition()

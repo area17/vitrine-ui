@@ -3,13 +3,14 @@
     'preset' => 'button.base'
 ])
 
-<x-vui-button-secondary
+<x-vui-button
     :href="$href ?? null"
     :icon="$icon ?? null"
     :icon-position="$iconPosition ?? null"
     :static="$static ?? null"
     :disabled="$disabled ?? null"
     :active="$active ?? null"
+    variant="secondary"
 >
     {{ $label ?? null }}
-</x-vui-button-secondary>
+</x-vui-button>

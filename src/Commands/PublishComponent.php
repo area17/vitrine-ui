@@ -6,7 +6,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use App\View\Components\VitrineUI\Modal;
 
 class PublishComponent extends Command
 {
