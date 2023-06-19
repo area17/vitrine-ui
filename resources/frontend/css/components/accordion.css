@@ -1,0 +1,15 @@
+@layer components {
+    .accordion {}
+
+    .accordion-list {}
+
+    .accordion-item {}
+    .accordion-item-trigger {}
+    .accordion-item-title {}
+    .accordion-item-icons {}
+    .accordion-item-icon--open {}
+    .accordion-item-icon--close {}
+
+    .accordion-content {}
+    .accordion-content-inner {}
+}

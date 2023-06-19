@@ -28,8 +28,10 @@ class Link extends Button
             $size,
             $variant,
             $iconOnly,
-            $tag = null,
+            $tag,
         );
+
+        $this->tag = $tag ?? $this->element();
     }
 
     public function element(): string
