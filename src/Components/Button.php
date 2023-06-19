@@ -32,8 +32,15 @@ class Button extends VitrineComponent
     /** @var string|bool */
     public $target;
 
+    /** @var string */
+    public $tag;
+
     /** @var null|string */
     public $variant;
+
+    protected static $assets = [
+        'css' => 'components/button.css'
+    ];
 
     public function __construct(
         $href = null,
@@ -43,6 +50,7 @@ class Button extends VitrineComponent
         $target = null,
         $size = null,
         $variant = null,
+        $tag = null,
         $iconOnly = false
     )
     {
@@ -53,6 +61,7 @@ class Button extends VitrineComponent
         $this->static = $static;
         $this->size = $size;
         $this->variant = $variant;
+        $this->tag = $tag ?? $this->element();
 
         $isExternalUrl = $this->isExternalUrl($href);
         $this->target = $target ?? $isExternalUrl ? '_blank' : false;
@@ -67,16 +76,18 @@ class Button extends VitrineComponent
     {
         if ($this->static) {
             return 'span';
-        } elseif ($this->isLink()) {
-            return 'a';
-        } else {
-            return 'button';
         }
+
+        if ($this->isLink()) {
+            return 'a';
+        }
+
+        return 'button';
     }
 
     public function isLink(): bool
     {
-        return $this->href && !empty($this->href);
+        return !empty($this->href);
     }
 
     public function iconBefore(): bool

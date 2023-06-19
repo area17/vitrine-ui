@@ -17,6 +17,9 @@ return [
     // the path to the components views within the vitrine-ui package. Used to generate the import paths in your published css and js files. This can be replaced with an alias defined in your vite.config.js
     'vendor_assets_path' => '../../../../vendor/area17/vitrine-ui/resources/frontend',
 
+    /* Used to override default class prefix */
+    'css_class_prefix' => '',
+
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
@@ -44,6 +47,7 @@ return [
         'icon' => A17\VitrineUI\Components\Icon::class,
         'image-zoom' => A17\VitrineUI\Components\ImageZoom::class,
         'listing' => A17\VitrineUI\Components\Listing::class,
+        'link' => A17\VitrineUI\Components\Link::class,
         'map-google' => A17\VitrineUI\Components\MapGoogle::class,
         'map-mapbox' => A17\VitrineUI\Components\MapMapBox::class,
         'media' => A17\VitrineUI\Components\Media::class,

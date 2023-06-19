@@ -5,7 +5,7 @@ namespace A17\VitrineUI;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use A17\VitrineUI\Commands\PublishComponent;
-
+use Illuminate\View\Compilers\BladeCompiler;
 
 final class VitrineUIServiceProvider extends ServiceProvider
 {
@@ -41,24 +41,27 @@ final class VitrineUIServiceProvider extends ServiceProvider
 
     private function bootBladeComponents(): void
     {
-        $prefix = 'vui';
-        $variations = [
-            'vitrine-ui::components.accordion.item' => 'accordion-item',
-            'vitrine-ui::components.button.primary' => 'button-primary',
-            'vitrine-ui::components.button.secondary' => 'button-secondary',
-            'vitrine-ui::components.button.icon' => 'button-icon',
-            'vitrine-ui::components.link.primary' => 'link-primary',
-            'vitrine-ui::components.link.secondary' => 'link-secondary',
-            'vitrine-ui::components.icon._output' => 'icon-output',
-            'vitrine-ui::components.icon.sprite' => 'icon-sprite',
-        ];
 
-        /** @var BladeComponent $component */
-        foreach (config('vitrine-ui.components', []) as $alias => $component) {
-            Blade::component($component, $alias, $prefix);
-        }
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $variations = [
+                'vitrine-ui::components.accordion.item' => 'accordion-item',
+                'vitrine-ui::components.button.primary' => 'button-primary',
+                'vitrine-ui::components.button.secondary' => 'button-secondary',
+                'vitrine-ui::components.button.icon' => 'button-icon',
+                'vitrine-ui::components.link.primary' => 'link-primary',
+                'vitrine-ui::components.link.secondary' => 'link-secondary',
+                'vitrine-ui::components.icon._output' => 'icon-output',
+                'vitrine-ui::components.icon.sprite' => 'icon-sprite',
+            ];
 
-        Blade::components($variations, $prefix);
+            $prefix = 'vui';
+
+            foreach (config('vitrine-ui.components', []) as $alias => $component) {
+                $blade->component($component, $alias, $prefix);
+            }
+
+            $blade->components($variations, $prefix);
+        });
     }
 
     private function bootPublishing(): void
