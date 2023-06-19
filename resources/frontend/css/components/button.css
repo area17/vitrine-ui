@@ -1,16 +1,17 @@
 @layer components {
     .btn {
-        @apply group inline-flex items-center disabled:cursor-default;
+        @apply inline-flex items-center disabled:cursor-default;
     }
 
     .btn-label {
-        @apply text-inherit;
+        @apply text-primary;
     }
 
     /** Variants **/
     .btn--primary {
         @apply bg-primary;
     }
+
     .btn--secondary {
         @apply bg-secondary;
     }

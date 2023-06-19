@@ -8,17 +8,17 @@ use A17\VitrineUI\Components\VitrineComponent;
 class Wysiwyg extends VitrineComponent
 {
     /** @var string */
-    public $variation;
+    public $variant;
 
     protected static $assets = [
         'css' => 'components/wysiwyg.css',
     ];
 
     public function __construct(
-        $variation = null,
+        $variant = null,
     )
     {
-        $this->variation = $variation;
+        $this->variant = $variant;
     }
 
     public function render(): View
