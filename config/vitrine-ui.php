@@ -20,6 +20,9 @@ return [
     /* Used to override default class prefix */
     'css_class_prefix' => '',
 
+    /* Used to publish stories */
+    'stories_subfolder' => 'vitrine',
+
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,

@@ -14,6 +14,7 @@ class PublishComponent extends Command
                             {--all : publish all vitrine-ui components to project}
                             {--view : Publish only the view of the component}
                             {--class : Publish only the class of the component}
+                            {--assets : Publish only the assets of the component}
                             {--stories : Publish only the stories for the component}
                             {--force : Overwrite existing files}';
 
@@ -49,22 +50,37 @@ class PublishComponent extends Command
      */
     protected $publishedAssetsPath;
 
+    /**
+     * @var bool
+     */
+    protected $publishedEverything;
+
+    /**
+     * @var string
+     */
+    protected $storiesSubfolder;
+
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
 
         $this->filesystem = $filesystem;
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
+        $this->storiesSubfolder = config('vitrine-ui.stories_subfolder', 'null');
         $this->npmPackages = [];
         $this->canCopyStoryData = null;
         $this->vendorAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
         $this->publishedAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
+        $this->publishedEverything = true;
     }
 
     public function handle(): int
     {
         $all = $this->option('all');
         $components = $this->argument('components');
+
+        // Detect if unique options are used otherwise publish everything
+        $this->publishedEverything = count(array_filter(array_filter($this->options(), fn ($item) => in_array($item, ['view', 'stories', 'assets', 'class']), ARRAY_FILTER_USE_KEY))) === 0;
 
         if($all){
             $components = array_keys($this->vitrineUIComponents);
@@ -138,19 +154,24 @@ class PublishComponent extends Command
         $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
         $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
 
-        $this->updateAssets($component, $name);
 
-        if ($this->option('view') || (! $this->option('class') && ! $this->option('stories'))) {
+        if ($this->option('assets') || $this->publishedEverything) {
+            $this->newLine();
+            $this->updateAssets($component, $name);
+        }
+
+
+        if ($this->option('view') || $this->publishedEverything) {
             $this->newLine();
             $this->publishView($component, $name, $class);
         }
 
-        if ($this->option('class') || (! $this->option('view') && ! $this->option('stories'))) {
+        if ($this->option('class') || $this->publishedEverything) {
             $this->newLine();
             $this->publishClass($component, $name, $class);
         }
 
-        if ($this->option('stories') || (! $this->option('view') && ! $this->option('class'))) {
+        if ($this->option('stories') || $this->publishedEverything) {
             $this->newLine();
             $this->publishStories($name);
         }
@@ -235,12 +256,13 @@ class PublishComponent extends Command
         $jsPublishPath = config('vitrine-ui.js_path');
         $originalAssetPath = __DIR__ .'/../../resources/frontend';
         $originalJs = "$originalAssetPath/vitrine-ui.js";
-        $publishedJs = "$jsPublishPath/vitrine-ui.js";
+        $publishedJs = "$jsPublishPath/vitrine-ui/vitrine-ui.js";
 
         $jsAssets = is_array($assets) ? $assets : [ $assets ];
 
         // if vitrine-ui.js does not exist copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
         if(!$this->filesystem->exists($publishedJs)){
+            $this->filesystem->ensureDirectoryExists($jsPublishPath.'/vitrine-ui');
             $this->filesystem->copy($originalJs, $publishedJs);
             $this->info("Published [vitrine-ui.js]. Add [import * as VitrineBehaviors from 'vendor/vitrine-ui'] to your app's js file.");
         }
@@ -300,12 +322,13 @@ class PublishComponent extends Command
         $cssPublishPath = config('vitrine-ui.css_path');
         $originalAssetPath = __DIR__ .'/../../resources/frontend';
         $originalCss = "$originalAssetPath/vitrine-ui.css";
-        $publishedCss = "$cssPublishPath/vitrine-ui.css";
+        $publishedCss = "$cssPublishPath/vitrine-ui/vitrine-ui.css";
 
         $cssAssets = is_array($assets) ? $assets : [ $assets ];
 
-        // if vitrine-ui.css does not exist copy vitrine-ui.css to resources/frontend/styles/vendor/vitrine-ui.css
+        // if vitrine-ui.css does not exist copy vitrine-ui.css to resources/frontend/styles/vendor/vitrine-ui/vitrine-ui.css
         if(!$this->filesystem->exists($publishedCss)){
+            $this->filesystem->ensureDirectoryExists($cssPublishPath.'/vitrine-ui');
             $this->filesystem->copy($originalCss, $publishedCss);
             $this->info("Published [vitrine-ui.css]. Add [@import \"vendor/vitrine-ui.css\"] to your app's css file.");
         }
@@ -433,7 +456,8 @@ class PublishComponent extends Command
         }
 
         $originalStory = __DIR__.'/../../resources/views/stories/'.$name;
-        $publishedStory = resource_path('views/stories/'.$name);
+        $destination = empty($this->storiesSubfolder) ? $name : $this->storiesSubfolder.'/'.$name;
+        $publishedStory = resource_path('views/stories/'.$destination);
         $path = Str::beforeLast($publishedStory, '/');
 
         if (! $this->option('force') && $this->filesystem->exists($publishedStory)) {
