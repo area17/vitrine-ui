@@ -130,6 +130,10 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 ## Todo
 
 - Add ability to publish components to application
+- Integration / autocompletion with IDE
+- Contributions rules
+- Add tests
+- --
 
 ## Testing
 

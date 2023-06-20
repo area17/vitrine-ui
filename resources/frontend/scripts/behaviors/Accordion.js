@@ -10,12 +10,7 @@ const Accordion = createBehavior(
 
             if (this._data.activeIndexes.includes(index)) {
                 this.close(index)
-
-                this._data.activeIndexes = this._data.activeIndexes.filter(
-                    (item) => {
-                        return item !== index
-                    }
-                )
+                this._data.activeIndexes = this._data.activeIndexes.filter((item) => item !== index)
             } else {
                 this.open(index)
                 this._data.activeIndexes.push(index)
@@ -24,8 +19,8 @@ const Accordion = createBehavior(
 
         close(index) {
             const activeTrigger = this.$triggers[index]
-
             const activeContent = this.$contents[index]
+
             const contentHeight = activeContent.offsetHeight
 
             activeContent.style.height = `${contentHeight}px`
@@ -35,7 +30,9 @@ const Accordion = createBehavior(
             }, 16)
 
             activeTrigger.setAttribute('aria-expanded', 'false')
+            activeTrigger.setAttribute(`data-${this.name}-open`, 'false')
             activeContent.setAttribute('aria-hidden', 'true')
+            activeContent.setAttribute(`data-${this.name}-open`, 'false')
         },
 
         open(index) {
@@ -51,7 +48,9 @@ const Accordion = createBehavior(
                 activeContent.style.height = `${contentHeight}px`
 
                 activeTrigger.setAttribute('aria-expanded', 'true')
+                activeTrigger.setAttribute(`data-${this.name}-open`, 'true')
                 activeContent.setAttribute('aria-hidden', 'false')
+                activeContent.setAttribute(`data-${this.name}-open`, 'true')
             }, 16)
         },
 
@@ -84,6 +83,8 @@ const Accordion = createBehavior(
             this.$triggers = this.getChildren('trigger')
             this.$contents = this.getChildren('content')
             this.$contentInners = this.getChildren('content-inner')
+
+            // tbd: add behavior options to close others accordion item when one is open
         },
         enabled() {
             if (this.scrollOnOpen) {

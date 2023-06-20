@@ -3,8 +3,11 @@ const variableComponents = [
     'wysiwyg'
 ]
 
-export const safeListPattern = (prefix = '') => {
-    return variableComponents.map((component) => ({
-        pattern: prefix ? new RegExp(`^${prefix}-${component}--.+`) : new RegExp(`^${component}--.+`)
-    }))
+
+module.exports = {
+    safeListPattern(prefix = '') {
+        return variableComponents.map((component) => ({
+            pattern: prefix ? new RegExp(`^${prefix}-${component}--.+`) : new RegExp(`^${component}--.+`)
+        }))
+    }
 }
