@@ -3,6 +3,7 @@
 namespace A17\VitrineUI;
 
 use Exception;
+use Illuminate\Support\Arr;
 
 class VitrineUI
 {
@@ -12,10 +13,10 @@ class VitrineUI
     public static function setPrefixedClass($classes = []): string
     {
         if(!is_array($classes) && !is_string($classes)) {
-            throw new Exception('setPrefixedClass() expects an array or string');
+            throw new Exception('setPrefixedClass() expects an array of string or a string');
         }
 
-        $classes = is_string($classes) ? [$classes] : $classes;
+        $classes = Arr::wrap($classes);
 
         $prefix = config('vitrine-ui.css_class_prefix', '');
         $prefix = $prefix ? "{$prefix}-" : '';

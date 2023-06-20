@@ -17,8 +17,9 @@
         @if (isset($closeButton) && !$closeButton->isEmpty())
             {{ $closeButton }}
         @elseif($showClose)
-            <x-vitrine-ui::button.icon
+            <x-vui-button
                 icon="close-32"
+                icon-only
                 size="medium"
                 class="o-modal-close"
                 aria-label="{{ __('vitrine-ui::fe.close_modal') }}"

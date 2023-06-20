@@ -31,9 +31,6 @@ class Inline extends VitrineComponent
     /** @var string */
     public $date;
 
-    /** @var bool */
-    public $isExternalUrl;
-
     public function __construct(
         $headingLevel = 3,
         $href = null,
@@ -53,8 +50,6 @@ class Inline extends VitrineComponent
         $this->imagePreset = $imagePreset;
         $this->intro = $intro;
         $this->date = $date;
-        $this->isExternalUrl = \App\Helpers\isExternalUrl($this->href);
-
     }
 
     public function render(): View

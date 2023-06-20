@@ -1,12 +1,12 @@
 {{--
     No Icon name set.
 
-    See /app/View/Components/functional/icon.php
+    @see /src/Components/functional/icon.php
 --}}
 
-@if(filled($name))
+@if(filled($name) && $iconComponent)
     <x-dynamic-component
-        :component="$getIconPath()"
+        :component="$iconComponent"
         :name="$name"
         :aria-label="$ariaLabel ?? false"
         {{ $attributes }}

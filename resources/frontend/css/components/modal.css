@@ -1,5 +1,6 @@
 .o-modal {
-    @apply trans-show-hide fixed inset-0 z-50 bg-primary text-primary;
+    /*@apply trans-show-hide fixed inset-0 z-50 bg-primary text-primary;*/
+    @apply fixed inset-0 z-50 bg-primary text-primary;
 }
 
 .o-modal-wrapper {
@@ -11,7 +12,7 @@
 }
 
 .o-modal-active {
-    @apply trans-show-hide--active;
+    /*@apply trans-show-hide--active;*/
 }
 
 .o-modal-panel {

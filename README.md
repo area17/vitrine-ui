@@ -133,7 +133,21 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 - Integration / autocompletion with IDE
 - Contributions rules
 - Add tests
-- --
+- Theme options and extends possibilities (with css classes, specific tailwind components plugin -> tbd, extends basic theme through css / tailwind css preset)... 
+
+- Components refactoring
+- [x] Accordion
+- [ ] Audio player
+- [x] Breadcrumbs
+- [x] Button
+- [ ] Card Inline
+- [ ] Card Primary
+- [ ] Datepicker
+- [ ] Dropdown
+- [ ] Form
+- [ ] Inputs
+- [x] Heading
+- [x] Icon
 
 ## Testing
 

@@ -5,55 +5,49 @@
 ])
 
 @isset($sources)
-    <div
-        {{ $attributes->class(['relative', 'overflow-hidden', 'w-full', 'h-full', 'aspect-'. $aspectRatio]) }}
-    >
-        <div
-            class="relative w-full h-full"
-            data-behavior="VideoBackground"
-            data-VideoBackground-text-pause="{{ __('vitrine-ui::fe.pause') }}"
-            data-VideoBackground-text-play="{{ __('vitrine-ui::fe.play') }}"
-            data-VideoBackground-text-mute="{{ __('vitrine-ui::fe.mute') }}"
-            data-VideoBackground-text-unmute="{{ __('vitrine-ui::fe.unmute') }}"
-        >
-            <div class="absolute z-10 bottom-12 right-12 flex">
-                @if($controlMute)
-                    <x-vui-button-icon
-                        class="flex"
-                        aria-label="{{ __('vitrine-ui::fe.unmute') }}"
-                        data-VideoBackground-mute=""
-                    >
-                        <x-vui-icon name="speaker-24" class="hidden" data-VideoBackground-icon-mute="" />
-                        <x-vui-icon name="speaker-off-24" data-VideoBackground-icon-unmute="" />
-                    </x-vui-button-icon>
+    <div {{ $attributes->class(['relative', 'overflow-hidden', 'w-full', 'h-full', 'aspect-' . $aspectRatio]) }}>
+        <div class="relative h-full w-full"
+             data-behavior="VideoBackground"
+             data-VideoBackground-text-pause="{{ __('vitrine-ui::fe.pause') }}"
+             data-VideoBackground-text-play="{{ __('vitrine-ui::fe.play') }}"
+             data-VideoBackground-text-mute="{{ __('vitrine-ui::fe.mute') }}"
+             data-VideoBackground-text-unmute="{{ __('vitrine-ui::fe.unmute') }}">
+            <div class="absolute bottom-12 right-12 z-10 flex">
+                @if ($controlMute)
+                    <x-vui-button class="flex"
+                                  data-VideoBackground-mute=""
+                                  aria-label="{{ __('vitrine-ui::fe.unmute') }}"
+                                  icon-only>
+                        <x-vui-icon class="hidden"
+                                    name="speaker-24"
+                                    data-VideoBackground-icon-mute="" />
+                        <x-vui-icon name="speaker-off-24"
+                                    data-VideoBackground-icon-unmute="" />
+                    </x-vui-button>
                 @endif
 
-                <x-vui-button-icon
-                    class="flex ml-8"
-                    aria-label="{{ __('vitrine-ui::fe.pause') }}"
-                    data-VideoBackground-pause=""
-                >
-                    <x-vui-icon name="play-24" class="hidden" data-VideoBackground-icon-play />
-                    <x-vui-icon name="pause-24" data-VideoBackground-icon-pause />
-                </x-vui-button-icon>
+                <x-vui-button class="ml-8 flex"
+                                   icon-only
+                                   data-VideoBackground-pause=""
+                                   aria-label="{{ __('vitrine-ui::fe.pause') }}">
+                    <x-vui-icon class="hidden"
+                                name="play-24"
+                                data-VideoBackground-icon-play />
+                    <x-vui-icon name="pause-24"
+                                data-VideoBackground-icon-pause />
+                </x-vui-button>
             </div>
 
-            <div
-                class="relative w-full h-full"
-            >
-                <video
-                    playsinline
-                    autoplay
-                    loop
-                    muted
-                    class="absolute inset-0 w-full h-full object-cover video-js"
-                    data-VideoBackground-player=""
-                >
+            <div class="relative h-full w-full">
+                <video class="video-js absolute inset-0 h-full w-full object-cover"
+                       data-VideoBackground-player=""
+                       playsinline
+                       autoplay
+                       loop
+                       muted>
                     @foreach ($sources as $source)
-                        <source
-                            type="{{ $source['type'] }}"
-                            src="{{ $source['src'] }}"
-                        />
+                        <source src="{{ $source['src'] }}"
+                                type="{{ $source['type'] }}" />
                     @endforeach
                 </video>
             </div>

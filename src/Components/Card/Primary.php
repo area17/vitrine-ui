@@ -28,9 +28,6 @@ class Primary extends VitrineComponent
     /** @var string */
     public $contentType;
 
-    /** @var bool */
-    public $isExternalUrl;
-
     public function __construct(
         $headingLevel = 3,
         $href = null,
@@ -48,8 +45,6 @@ class Primary extends VitrineComponent
         $this->media = $media;
         $this->imagePreset = $imagePreset;
         $this->contentType = $contentType;
-        $this->isExternalUrl = \App\Helpers\isExternalUrl($this->href);
-
     }
 
     public function render(): View

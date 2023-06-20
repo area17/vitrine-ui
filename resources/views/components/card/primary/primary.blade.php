@@ -2,7 +2,7 @@
     @isset($href)
         <a
             href="{{ $href }}"
-            target="{{ $isExternalUrl ? '_blank' : '' }}"
+            target="{{ $isExternalUrl($href) ? '_blank' : '' }}"
             class="block"
         >
     @endisset

@@ -20,7 +20,6 @@
                     <div class=" justify-center items-center">
                         <x-vui-icon :name="$icon" />
                     </div>
-
                     <code class="block mt-24">{{ $icon }}</code>
                 </li>
             @endforeach

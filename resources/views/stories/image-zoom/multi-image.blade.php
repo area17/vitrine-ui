@@ -3,24 +3,7 @@
     'layout' => 'fullscreen',
     'status' => 'readyForQA',
     'args' => [
-        'sources' => [
-            [
-                'image' => [
-                    '_static' => [
-                        'file' => '/static/work-nike.jpg',
-                        'alt' => 'Dummy Alt Text'
-                    ],
-                ],
-            ],
-            [
-                'image' => [
-                    '_static' => [
-                        'file' => '/static/work-oxman.jpg',
-                        'alt' => 'Dummy Alt Text'
-                    ],
-                ],
-            ],
-        ]
+        'sources' => []
     ],
     'argTypes' => [
         'sources' => [

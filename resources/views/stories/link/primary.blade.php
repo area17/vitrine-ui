@@ -3,7 +3,7 @@
     'preset' => 'link.base'
 ])
 
-<x-vui-link-primary
+<x-vui-link
     :href="$href ?? null"
     :icon="$icon ?? null"
     :icon-position="$iconPosition ?? null"
@@ -11,6 +11,7 @@
     :inverse="$inverse ?? null"
     :disabled="$disabled ?? null"
     :active="$active ?? null"
+    variant="primary"
 >
     {{ $label ?? 'Link' }}
-</x-vui-link-primary>
+</x-vui-link>

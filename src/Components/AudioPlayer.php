@@ -19,7 +19,10 @@ class AudioPlayer extends VitrineComponent
     /** @var string */
     public $title;
 
-    /** @var Array */
+    /** @var string|null */
+    public $variant;
+
+    /** @var array */
     public $sources;
 
     protected static $assets = [
@@ -32,6 +35,7 @@ class AudioPlayer extends VitrineComponent
         $playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3],
         $subtitle = null,
         $title = null,
+        $variant = null,
         $sources = [],
     )
     {
@@ -40,6 +44,7 @@ class AudioPlayer extends VitrineComponent
         $this->subtitle = $subtitle;
         $this->title = $title;
         $this->sources = $sources;
+        $this->variant = $variant;
     }
 
     public function render(): View

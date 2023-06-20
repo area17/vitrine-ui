@@ -18,7 +18,7 @@
     </button>
 
     <div
-        class="dropdown-list trans-show-hide absolute z-1 w-full top-full min-w-200 max-h-252 mt-12 p-12 border border-primary bg-primary overflow-auto"
+        class="dropdown-list absolute z-1 w-full top-full min-w-200 max-h-252 mt-12 p-12 border border-primary bg-primary overflow-auto"
         data-dropdown-list
     >
         <x-vui-heading

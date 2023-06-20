@@ -45,8 +45,9 @@
     >
         <div class="relative z-20 pt-56 pb-12 px-12 border bg-primary">
             <wc-datepicker show-clear-button show-today-button></wc-datepicker>
-            <x-vui-button-icon
+            <x-vui-button
                 icon="close-16"
+                icon-only
                 size="small"
                 class="absolute right-12 top-12"
                 aria-label="{{ __('vitrine-ui::fe.form.datepicker.close_date_picker') }}"

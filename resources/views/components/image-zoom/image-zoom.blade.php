@@ -7,14 +7,16 @@
             data-ImageZoom-sources="{{ json_encode($sources) }}"
         >
             <div id="{{ $id . 'image-zoom-toolbar' }}" class="absolute bottom-16 lg:bottom-32 right-16 lg:right-32 z-10 flex flex-col">
-                <x-vui-button-icon
+                <x-vui-button
                     id="{{ $id . '-image-zoom-zoom-in'}}"
+                    icon-only
                     icon="plus-32"
                     size="medium"
                     aria-label="{{ __('vitrine-ui::fe.zoom_in') }}"
                 />
-                <x-vui-button-icon
+                <x-vui-button
                     id="{{ $id . '-image-zoom-zoom-out'}}"
+                    icon-only
                     icon="minus-32"
                     size="medium"
                     class="mt-4"
@@ -22,17 +24,19 @@
                 />
 
                 @if(count($sources) > 1)
-                    <x-vui-button-icon
+                    <x-vui-button
                         id="{{ $id . '-image-zoom-nav-prev'}}"
                         icon="arrow-right-32"
+                        icon-only
                         size="medium"
                         class="mt-4 transform rotate-180"
                         aria-label="{{ __('vitrine-ui::fe.previous') }}"
                     />
-                    <x-vui-button-icon
+                    <x-vui-button
                         id="{{ $id . '-image-zoom-nav-next'}}"
                         icon="arrow-right-32"
                         size="medium"
+                        icon
                         class="mt-4"
                         aria-label="{{ __('vitrine-ui::fe.next') }}"
                     />

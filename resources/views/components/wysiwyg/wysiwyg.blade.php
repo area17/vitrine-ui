@@ -1,7 +1,7 @@
 
 <div {{ $attributes->class(VitrineUI::setPrefixedClass([
     'wysiwyg',
-    'wysiwyg--'. $variation => $variation,
+    'wysiwyg--'. $variant => $variant,
     ]))
  }}>
     {!! $slot !!}
