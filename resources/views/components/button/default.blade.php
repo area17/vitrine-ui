@@ -1,9 +1,16 @@
+{{--<{{ $tag }} {{ $attributes->class(--}}
+{{--    VitrineUI::setPrefixedClass([--}}
+{{--        'btn',--}}
+{{--        'btn--' . $size => $size,--}}
+{{--        'btn--' . $variant => $variant,--}}
+{{--        'btn--icon' => $iconOnly,--}}
+{{--    ]),--}}
+{{--) }}--}}
 <{{ $tag }} {{ $attributes->class(
-    VitrineUI::setPrefixedClass([
-        'btn',
-        'btn--' . $size => $size,
-        'btn--' . $variant => $variant,
-        'btn--icon' => $iconOnly,
+    VitrineUI::ui('button', 'base', [
+        'size' => $size,
+        'variant' => $variant,
+        'icon_only' => $iconOnly,
     ]),
 ) }}
     @if ($href) href="{{ $href }}" @endif
@@ -11,12 +18,11 @@
 
     @if ($iconBefore())
         <x-vui-icon class="{{ VitrineUI::setPrefixedClass('btn-icon') }}"
-                    @class()
                     :name="$icon" />
     @endif
 
     @if (!$slot->isEmpty())
-        <span class="{{ VitrineUI::setPrefixedClass('btn-label') }}">{{ $slot }}</span>
+        <span class="{{ VitrineUI::ui('button', 'label') }}">{{ $slot }}</span>
     @endif
 
     @if ($iconAfter())
