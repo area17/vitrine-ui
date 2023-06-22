@@ -5,7 +5,6 @@ return [
     'js_path' => resource_path('frontend/scripts/vendor'),
 
     'css_path' => resource_path('frontend/styles/vendor'),
-
     // The path of the published js assets. Used to generate the import paths in your published js files. This can be replaced with an alias defined in your vite.config.json
     // 'published_js_path' => './scripts/vendor/vitrine-ui',
 
@@ -19,6 +18,10 @@ return [
 
     /* Used to override default class prefix */
     'css_class_prefix' => '',
+
+    'vitrine_path' => resource_path('frontend/vitrine-ui'),
+
+    'theme_file' => 'vitrine-ui.json',
 
     /* Used to publish stories */
     'stories_subfolder' => 'vitrine',

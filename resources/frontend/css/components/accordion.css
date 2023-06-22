@@ -4,12 +4,14 @@
     .accordion-list {}
 
     .accordion-item {}
+
     .accordion-item-trigger {
         @apply relative flex justify-start items-center  w-full py-12
         lg:py-32 f-subhead-3 text-left
         underline-thickness-1 underline-transparent underline-offset-4 hover:underline-text-primary
         transition-all;
     }
+
     .accordion-item-title {}
     .accordion-item-icons {
         @apply relative bg-quaternary ml-16 flex-none w-24 h-24 lg:w-32 lg:h-32 pointer-events-none;

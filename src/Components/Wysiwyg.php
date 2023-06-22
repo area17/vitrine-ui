@@ -10,7 +10,7 @@ class Wysiwyg extends VitrineComponent
     /** @var string */
     public $variant;
 
-    protected static $assets = [
+    protected static array $assets = [
         'css' => 'components/wysiwyg.css',
     ];
 

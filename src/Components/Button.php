@@ -38,7 +38,7 @@ class Button extends VitrineComponent
     /** @var null|string */
     public $variant;
 
-    protected static $assets = [
+    protected static array $assets = [
         'css' => 'components/button.css'
     ];
 

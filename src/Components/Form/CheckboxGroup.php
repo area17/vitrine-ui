@@ -32,7 +32,7 @@ class CheckboxGroup extends VitrineComponent
     /** @var string */
     public $note;
 
-    protected static $assets = [
+    protected static array $assets = [
         'css' => [
             'components/form/checkbox.css',
             'components/form/input.css',

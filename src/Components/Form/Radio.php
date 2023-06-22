@@ -59,7 +59,7 @@ class Radio extends VitrineComponent
     /** @var string */
     public $rand;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => ['behaviors/Input.js'],
         'css' => [
             'components/form/radio.css',

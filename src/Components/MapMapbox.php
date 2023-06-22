@@ -13,7 +13,7 @@ class MapMapBox extends VitrineComponent
     /** @var string */
     public $lng;
 
-    protected static $assets = [
+    protected static array $assets = [
         'npm' => [
             'mapbox-gl'
         ],

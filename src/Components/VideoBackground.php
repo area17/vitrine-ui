@@ -16,7 +16,7 @@ class VideoBackground extends VitrineComponent
     /** @var bool */
     public $controlMute;
 
-    protected static $assets = [
+    protected static array $assets = [
         'npm' => ['video.js'],
         'js' => ['behaviors/VideoBackground.js']
     ];

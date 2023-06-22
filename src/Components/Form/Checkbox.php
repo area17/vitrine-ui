@@ -56,7 +56,7 @@ class Checkbox extends VitrineComponent
     /** @var string */
     public $ariaDescribedBy;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => ['behaviors/Input.js'],
         'css' => [
             'components/form/checkbox.css',

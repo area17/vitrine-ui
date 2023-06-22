@@ -5,36 +5,66 @@ namespace A17\VitrineUI;
 use Exception;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Support\Str;
 
 class VitrineUI
 {
-    public static function ui($component, $key = null, $options = []): string
+    public static function ui($component, $keys = 'base', $options = [], $customUI = null): string
     {
+        if (!isset($component)) {
+            throw new Exception('Component name is required');
+        }
+
         // fixme: $ui array should be already build and cached
         $baseUIPath = __DIR__ . '/../resources/frontend/vitrine-ui.json';
 
         $ui = [];
-
         $classes = [];
 
         if (file_exists($baseUIPath)) {
-            // todo: add merge with outside config file
             $ui = json_decode(file_get_contents($baseUIPath), true);
+        }
+
+        // load global custom theme
+        $vitrine_path = self::removeTrailingSlash(config('vitrine-ui.vitrine_path', ''));
+        $theme_path = $vitrine_path . '/' . config('vitrine-ui.theme_file');
+
+        if (file_exists($theme_path)) {
+            $theme = json_decode(file_get_contents($theme_path), true);
+            $ui = array_replace_recursive($ui, $theme);
+        }
+
+        // load specific custom component preset file
+        if ($component && ($ui[$component] ?? false)) {
+            $custom_component_path = $vitrine_path . '/' . $component . '.json';
+            if (file_exists($custom_component_path)) {
+                $component_theme = json_decode(file_get_contents($custom_component_path), true);
+                $ui[$component] = array_replace_recursive($ui[$component], $component_theme);
+            }
+        }
+
+        // add local component preset passed by props
+        if (is_array($customUI)) {
+            $ui = array_replace_recursive($ui, $customUI);
         }
 
         $uiComponent = $ui[$component] ?? false;
 
         if ($uiComponent) {
-            // Set base / key
-            if ($key && ($uiComponent[$key] ?? false)) {
-                $classes[] = $uiComponent[$key];
+            // Set classes from keys
+            $keys = Arr::wrap($keys);
+            foreach ($keys as $key) {
+                if ($key && ($uiComponent[$key] ?? false)) {
+                    $classes[] = $uiComponent[$key];
+                }
             }
 
             foreach ($options as $option => $value) {
-                if ($value && $uiComponent[$option][$value] ?? false) {
+                // set classes from options
+                if ($value && ($uiComponent[$option][$value] ?? false)) {
                     $classes[] = $uiComponent[$option][$value];
                 } else {
+                    // fallback to default value if exists
                     $defaultValue = $uiComponent['default'][$option] ?? false;
                     if ($defaultValue && ($uiComponent[$option][$defaultValue] ?? false)) {
                         $classes[] = $uiComponent[$option][$defaultValue];
@@ -71,5 +101,14 @@ class VitrineUI
         }
 
         return trim($class);
+    }
+
+    public static function removeTrailingSlash($string = '')
+    {
+        if (Str::endsWith($string, '/')) {
+            $string = Str::replaceLast('/', '', $string);
+        }
+
+        return $string;
     }
 }

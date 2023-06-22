@@ -9,7 +9,7 @@
         <span class="{{VitrineUI::setPrefixedClass('audio-player-subtitle')}}">{{ $subtitle }}</span>
     @endif
 
-    <div aria-label="{{ 'Audio Player - ' . $title }}" class="o-audio mt-24" role="region">
+    <div aria-label="{{ 'Audio Player - ' . $title }}" class="{{ $ui('button', 'base') }} o-audio mt-24" role="region">
         <div class="o-audio__controls w-full flex flex-col md:flex-row md:flex-wrap">
             <div class="flex flex-row flex-wrap items-center -mx-8">
                 <button aria-label="Rewind"

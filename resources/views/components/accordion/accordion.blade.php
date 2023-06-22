@@ -5,14 +5,14 @@
         $accordion_id = 'accordion' . $id;
     @endphp
 
-    <div {{ $attributes->class(VitrineUI::setPrefixedClass('accordion')) }}>
+    <div {{ $attributes->class($ui('accordion')) }}>
         <x-vui-heading class="sr-only"
                        id="{{ $headingId }}"
                        :level="$headingLevel">
             {{ $a11yLabel }}
         </x-vui-heading>
 
-        <ul class="{{ VitrineUI::setPrefixedClass('accordion-list') }}"
+        <ul class="{{ $ui('accordion','list') }}"
             data-behavior="Accordion"
             aria-labelledby="{{ $headingId }}"
             {{ $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' }}>

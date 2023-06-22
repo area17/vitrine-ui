@@ -62,7 +62,7 @@ class Password extends VitrineComponent
     /** @var string */
     public $rand;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => [
             'behaviors/PasswordInput.js',
             'behaviors/Input.js'

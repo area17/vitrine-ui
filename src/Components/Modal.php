@@ -22,7 +22,7 @@ class Modal extends VitrineComponent
     /** @var string */
     public $classes;
 
-    protected static $assets = [
+    protected static array $assets = [
         'npm' => ['body-scroll-lock', 'focus-trap'],
         'js' => 'behaviors/Modal.js',
         'css' => 'components/modal.css',
