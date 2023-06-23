@@ -10,13 +10,13 @@ use Illuminate\Support\Str;
 class VitrineUI
 {
     /**
-     * Get current Vitrine theme from local configuration and external config file
+     * Get global Vitrine theme from local configuration and external config file
      * @return array
      */
     public static function getBaseVitrineTheme(): array
     {
         return once(function () {
-            $baseUIPath = __DIR__ . '/../resources/frontend/vitrine-ui.json';
+            $baseUIPath = __DIR__ . '/../resources/frontend/theme/vitrine-ui.json';
 
             $ui = [];
 
@@ -40,25 +40,38 @@ class VitrineUI
     }
 
     /**
-     * Get and merge specific custom component theme from external config file
+     * Get and merge specific custom component preset from local and custom config file
      * @param array $ui
      * @param string $component
      * @return array
+     * @throws Exception
      */
-    private static function getCustomComponentTheme(array $ui, string $component): array
+    private static function getComponentPreset(array $ui, string $component): array
     {
         return once(function () use ($ui, $component) {
-            $vitrine_path = self::removeTrailingSlash(config('vitrine-ui.vitrine_path', ''));
+            // load local component
+            if (!$component) {
+                throw new Exception('Component name is required');
+            }
+
+            $baseComponentPath = __DIR__ . '/../resources/frontend/theme/components/' . $component . '.json';
+            if (file_exists($baseComponentPath)) {
+                $baseComponent = json_decode(file_get_contents($baseComponentPath), true);
+                if (is_array($baseComponent)) {
+                    $ui[$component] = $baseComponent;
+                }
+            }
+
 
             // load specific custom component preset file
-            if ($component && ($ui[$component] ?? false)) {
-                $custom_component_path = $vitrine_path . '/' . $component . '.json';
-                if (file_exists($custom_component_path)) {
-                    $component_theme = json_decode(file_get_contents($custom_component_path), true);
+            $vitrine_path = self::removeTrailingSlash(config('vitrine-ui.vitrine_path', ''));
+            $custom_component_path = $vitrine_path . '/' . $component . '.json';
 
-                    if (is_array($component_theme)) {
-                        $ui[$component] = array_replace_recursive($ui[$component], $component_theme);
-                    }
+            if (file_exists($custom_component_path)) {
+                $component_theme = json_decode(file_get_contents($custom_component_path), true);
+
+                if (is_array($component_theme)) {
+                    $ui[$component] = array_replace_recursive($ui[$component] ?? [], $component_theme);
                 }
             }
 
@@ -83,8 +96,8 @@ class VitrineUI
 
         $ui = self::getBaseVitrineTheme();
 
-        // TBD: Should we do that per component or should we preload all custom components?
-        $ui = self::getCustomComponentTheme($ui, $component);
+        // TBD: Should we do that per component or should we preload all custom and local components?
+        $ui = self::getComponentPreset($ui, $component);
 
         // add local component preset passed by props
         if (is_array($customUI)) {
@@ -184,7 +197,7 @@ class VitrineUI
     private static function applyCustomUiProps(array $ui, array $customUI)
     {
         return once(function () use ($ui, $customUI) {
-           return array_replace_recursive($ui, $customUI);
+            return array_replace_recursive($ui, $customUI);
         });
     }
 }

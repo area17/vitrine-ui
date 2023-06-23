@@ -3,7 +3,6 @@ const variableComponents = [
     'wysiwyg'
 ]
 
-
 module.exports = {
     safeListPattern(prefix = '') {
         return variableComponents.map((component) => ({
