@@ -22,10 +22,13 @@ class Breadcrumbs extends VitrineComponent
     public function __construct(
         $tag = 'nav',
         $items = null,
+        $ui = []
     )
     {
         $this->tag = $tag;
         $this->items = $items;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

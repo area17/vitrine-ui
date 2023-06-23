@@ -1,17 +1,17 @@
 @if(filled($items))
-    <{{ $tag ?? 'nav' }} aria-label="breadcrumbs" {{ $attributes->class(VitrineUI::setPrefixedClass('breadcrumbs')) }}>
+    <{{ $tag ?? 'nav' }} aria-label="breadcrumbs" {{ $attributes->class($ui('breadcrumbs')) }}>
         @foreach ($items as $item)
             @if ($item['href'] ?? null)
-                <x-vui-link
-                    class="{{ VitrineUI::setPrefixedClass('breadcrumbs-item') }}"
-                    :href="$item['href']"
-                    :aria-current="$loop->last ? 'page' : 'false'"
+                <a
+                    class="{{ $ui('breadcrumbs', ['item', 'link']) }}"
+                    href="{{$item['href']}}"
+                    @if($loop->last)  aria-current="page"  @endif
                 >
                     {{ $item['text'] ?? '' }}
-                </x-vui-link>
+                </a>
             @else
-                <span class="{{ VitrineUI::setPrefixedClass('breadcrumbs-item') }}"
-                      aria-current="{{$loop->last ? 'page' : 'false'}}"
+                <span class="{{ $ui('breadcrumbs', 'item') }}"
+                      @if($loop->last)  aria-current="page"  @endif
                 >
                     {{ $item['text'] ?? '' }}
                 </span>
