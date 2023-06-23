@@ -2,6 +2,7 @@
 
 namespace A17\VitrineUI\Commands;
 
+use A17\VitrineUI\VitrineUI;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
@@ -69,8 +70,8 @@ class PublishComponent extends Command
         $this->storiesSubfolder = config('vitrine-ui.stories_subfolder', 'null');
         $this->npmPackages = [];
         $this->canCopyStoryData = null;
-        $this->vendorAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
-        $this->publishedAssetsPath = $this->removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
+        $this->vendorAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
+        $this->publishedAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
         $this->publishedEverything = true;
     }
 
@@ -505,14 +506,5 @@ class PublishComponent extends Command
                 $this->error("Skipping story data [$filename]");
             }
         }
-    }
-
-    protected function removeTrailingSlash($string = '')
-    {
-        if(Str::endsWith($string, '/')){
-            $string = Str::replaceLast('/', '', $string);
-        }
-
-        return $string;
     }
 }

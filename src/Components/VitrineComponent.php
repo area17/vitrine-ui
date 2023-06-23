@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use A17\VitrineUI\VitrineUI;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 abstract class VitrineComponent extends Component
@@ -19,32 +18,23 @@ abstract class VitrineComponent extends Component
     /** @var array */
     protected array $ui = [];
 
-    /** @var string|null */
-    protected $uiComponentName;
+    public function __construct($ui = [])
+    {
+        $this->ui = $ui;
+    }
 
     public function isExternalUrl($url): bool
     {
-        $url = (string)$url;
-
-        if (blank($url)) {
-            return false;
-        }
-
-        if (Str::startsWith($url, ['#', '/'])) {
-            return false;
-        }
-
-        $home = url('/');
-
-        if (Str::startsWith($url, $home)) {
-            return false;
-        }
-
-        return true;
+        return VitrineUI::isExternalUrl($url);
     }
 
     public function ui($component, $key = 'base', $options = [], ): string
     {
-        return VitrineUI::ui($component, $key, $options, $this->ui);
+        try {
+            return VitrineUI::ui($component, $key, $options, $this->ui);
+        } catch (\Exception $e) {
+            report($e);
+            return '';
+        }
     }
 }
