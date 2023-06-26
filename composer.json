@@ -16,6 +16,7 @@
     ],
     "require": {
         "php": "^8.1",
+        "area17/twill-image": "^1.0",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
         "spatie/once": "^3.1"

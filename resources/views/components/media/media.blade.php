@@ -1,4 +1,5 @@
-<{{ $element() }} {{ $attributes->class($classes) }}
+<{{ $element() }}
+    {{ $attributes->class($classes) }}
                      @if (app()->environment(['local', 'development'])) data-preset="{{ $imagePreset }}" @endif
                      @if (isset($video) && $video) data-behavior="ShowVideo"
         data-ShowVideo-videoid="{{ $video['id'] }}"
@@ -25,8 +26,7 @@
         @if ($image instanceof A17\Twill\Image\Models\Image)
             {!! $image->preset($imagePreset)->render($imageOptions) !!}
         @elseif (Arr::has($image, '_static'))
-            {{--            Fixme: class is not defined --}}
-            {{--            {!! TwillStaticImage::make($staticSettings)->render($imageOptions) !!} --}}
+        {!!  A17\Twill\Image\Models\StaticImage::makeFromSrc($staticSettings)->render($imageOptions) !!}
         @elseif (is_array($image) && array_key_exists('src', $image))
             {{--            tbd: add lazyload and srcset support --}}
             <img class="{{ Arr::has($imageOptions, 'class') ? $imageOptions['class'] : '' }}"

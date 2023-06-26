@@ -2,11 +2,11 @@
 
 namespace A17\VitrineUI\Components;
 
+use A17\Twill\Image\Models\Image;
+use A17\Twill\Image\TwillStaticImage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
-use A17\Twill\Image\TwillStaticImage;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class ImageZoom extends VitrineComponent
 {
@@ -17,7 +17,8 @@ class ImageZoom extends VitrineComponent
     public $sources;
 
     /** @var array */
-    public $autoInit; // set to false to listen for `image-zoom:init` event to init behavior
+    // set false to listen for `image-zoom:init` event to init behavior
+    public $autoInit;
 
     protected static array $assets = [
         'npm' => [
@@ -32,11 +33,14 @@ class ImageZoom extends VitrineComponent
         $id = null,
         $sources = [],
         $autoInit = true,
+        $ui = []
     )
     {
         $this->id = $id ?? 'ImageZoom'. Str::random(3);
         $this->sources = $this->parseSources($sources);
         $this->autoInit = $autoInit;
+
+        parent::__construct($ui);
     }
 
     public function render(): View
@@ -44,7 +48,7 @@ class ImageZoom extends VitrineComponent
         return view('vitrine-ui::components.image-zoom.image-zoom');
     }
 
-    protected function parseSources($sources = [])
+    protected function parseSources($sources = []): array
     {
         $parsedSources = [];
 
@@ -55,7 +59,7 @@ class ImageZoom extends VitrineComponent
         foreach ($sources as $source) {
             $image = $source['image'] ?? null;
 
-            if ($image instanceof \A17\Twill\Image\Models\Image){
+            if ($image instanceof Image){
                 $parsedSources[] = $image->preset('image_zoom')->toArray()['image']['src'];
             }elseif (Arr::has($image, '_static')){
                 $presetData = config('twill-image.presets.image_zoom');

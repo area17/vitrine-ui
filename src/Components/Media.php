@@ -4,7 +4,6 @@ namespace A17\VitrineUI\Components;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
 class Media extends VitrineComponent
@@ -60,6 +59,7 @@ class Media extends VitrineComponent
         $video = null,
         $backgroundVideo = null,
         $cover = false,
+        $ui = []
     ) {
         $this->caption = $caption;
         $this->image = $image;
@@ -74,6 +74,8 @@ class Media extends VitrineComponent
         $this->staticSettings = $this->getStaticSettings();
         $this->imageOptions = $this->parseImageOptions($imageOptions);
         $this->classes = ['h-full' => $this->cover];
+
+        parent::__construct($ui);
     }
 
     public function render(): View
