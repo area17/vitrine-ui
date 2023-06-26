@@ -27,9 +27,9 @@
 >
     @foreach ($items as $item)
         <li>
-            <x-vui-link-secondary :href="$item['href']">
+            <x-vui-link variant="secondary" :href="$item['href']">
                 {{ $item['text'] }}
-            </x-vui-link-secondary>
+            </x-vui-link>
         </li>
     @endforeach
 </x-vui-dropdown>

@@ -37,6 +37,7 @@ class AudioPlayer extends VitrineComponent
         $title = null,
         $variant = null,
         $sources = [],
+        $ui = []
     )
     {
         $this->downloadUrl = $downloadUrl;
@@ -45,6 +46,8 @@ class AudioPlayer extends VitrineComponent
         $this->title = $title;
         $this->sources = $sources;
         $this->variant = $variant;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

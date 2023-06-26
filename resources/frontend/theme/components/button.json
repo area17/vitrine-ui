@@ -9,6 +9,14 @@
     "secondary": "bg-secondary text-inverse",
     "outline": ""
   },
+  "icon_only": {
+    "true": "",
+    "false": ""
+  },
+  "icon_position": {
+    "before": "",
+    "after": ""
+  },
   "default": {
     "size": "sm",
     "variant": "primary"

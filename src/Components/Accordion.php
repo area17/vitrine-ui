@@ -25,11 +25,14 @@ class Accordion extends VitrineComponent
         $a11yLabel = null,
         $headingLevel = 3,
         $scrollOnOpen = false,
+        $ui = []
     )
     {
         $this->a11yLabel = $a11yLabel;
         $this->headingLevel = $headingLevel;
         $this->scrollOnOpen = $scrollOnOpen;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

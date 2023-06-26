@@ -30,11 +30,11 @@
                 @endisset
 
                 <div class="mt-auto pt-space-3">
-                    <x-vui-link-secondary
+                    <x-vui-link variant="secondary"
                         :static="true"
                     >
                         {{ __('vitrine-ui::fe.read_more') }}
-                    </x-vui-link-secondary>
+                    </x-vui-link>
                 </div>
             </div>
 

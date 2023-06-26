@@ -20,9 +20,6 @@ class Button extends VitrineComponent
     /** @var string */
     public $iconPosition;
 
-    /** @var int */
-    public $iconSpacing;
-
     /** @var null|string */
     public $size;
 
@@ -103,7 +100,7 @@ class Button extends VitrineComponent
         return filled($this->icon) && $this->icon && $this->iconPosition === 'after';
     }
 
-    protected function getIconPosition()
+    public function getIconPosition(): bool|string
     {
         if ($this->iconBefore()) {
             return 'before';

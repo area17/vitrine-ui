@@ -111,6 +111,7 @@ class VitrineUI
             // Set classes from keys
             $keys = Arr::wrap($keys);
             foreach ($keys as $key) {
+                $key = (string) $key;
                 if ($key && ($uiComponent[$key] ?? false)) {
                     $classes[] = $uiComponent[$key];
                 }
@@ -118,6 +119,10 @@ class VitrineUI
 
             foreach ($options as $option => $value) {
                 // set classes from options
+                if($value ?? null) {
+                    $value = (string)$value;
+                }
+
                 if ($value && ($uiComponent[$option][$value] ?? false)) {
                     $classes[] = $uiComponent[$option][$value];
                 } else {

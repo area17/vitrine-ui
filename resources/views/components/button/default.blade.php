@@ -2,7 +2,8 @@
     $ui('button', 'base', [
         'size' => $size,
         'variant' => $variant,
-        'icon_only' => $iconOnly,
+        'icon_only' => $iconOnly ? 'true' : 'false',
+        'icon_position' => $getIconPosition(),
     ]),
 ) }}
     @if ($href) href="{{ $href }}" @endif
