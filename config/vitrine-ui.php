@@ -16,8 +16,7 @@ return [
     // the path to the components views within the vitrine-ui package. Used to generate the import paths in your published css and js files. This can be replaced with an alias defined in your vite.config.js
     'vendor_assets_path' => '../../../../vendor/area17/vitrine-ui/resources/frontend',
 
-    /* Used to override default class prefix */
-    'css_class_prefix' => '',
+    'icons_view_path' => 'icon._icons',
 
     'vitrine_path' => resource_path('frontend/vitrine-ui'),
 
@@ -25,6 +24,12 @@ return [
 
     /* Used to publish stories */
     'stories_subfolder' => 'vitrine',
+
+    // The prefix for the vitrine-ui components
+    'prefix' => 'vui',
+
+    // Required to define ide.json autocomplete rules
+    'namespace' => '',
 
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,

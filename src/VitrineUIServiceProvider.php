@@ -42,19 +42,15 @@ final class VitrineUIServiceProvider extends ServiceProvider
     private function bootBladeComponents(): void
     {
 
+
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $prefix = config('vitrine-ui.prefix', 'vui');
+
             $variations = [
                 'vitrine-ui::components.accordion.item' => 'accordion-item',
-                'vitrine-ui::components.button.primary' => 'button-primary',
-                'vitrine-ui::components.button.secondary' => 'button-secondary',
-                'vitrine-ui::components.button.icon' => 'button-icon',
-                'vitrine-ui::components.link.primary' => 'link-primary',
-                'vitrine-ui::components.link.secondary' => 'link-secondary',
                 'vitrine-ui::components.icon._output' => 'icon-output',
                 'vitrine-ui::components.icon.sprite' => 'icon-sprite',
             ];
-
-            $prefix = 'vui';
 
             foreach (config('vitrine-ui.components', []) as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
