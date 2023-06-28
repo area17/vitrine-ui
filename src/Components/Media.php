@@ -120,9 +120,7 @@ class Media extends VitrineComponent
         $breakpointRatios = Arr::get($this->presetData, 'breakpointRatios');
         $classes = [];
 
-        if ($this->cover) {
-            $classes = ['w-full', 'h-full', 'object-cover'];
-        } elseif ($breakpointRatios) {
+        if ($breakpointRatios) {
             $ratioClasses = [];
 
             foreach ($breakpointRatios as $key => $value) {
