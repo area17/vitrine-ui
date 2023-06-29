@@ -37,4 +37,9 @@ abstract class VitrineComponent extends Component
             return '';
         }
     }
+
+    public function setAttributes($attributes): string
+    {
+        return VitrineUI::setAttributes($attributes);
+    }
 }

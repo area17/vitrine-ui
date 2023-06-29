@@ -26,20 +26,26 @@
             @else
                 <div class="{{ $ui('media', 'image-wrapper') }}">
                     @endif
-
-                    @if ($image instanceof A17\Twill\Image\Models\Image)
-                        {!! $image->preset($imagePreset)->render($imageOptions) !!}
-                    @elseif (Arr::has($image, '_static'))
-                        {!!  A17\Twill\Image\Models\StaticImage::makeFromSrc($staticSettings)->render($imageOptions) !!}
-                    @elseif (is_array($image) && array_key_exists('src', $image))
-                        {{--            tbd: add lazyload and srcset support --}}
-                        <img class="{{ Arr::has($imageOptions, 'class') ? $imageOptions['class'] : '' }}"
-                             src="{{ $image['src'] }}"
-                             alt="{{ $image['alt'] }}"/>
-                    @elseif($usePlaceholder)
-                        <div {{ $attributes->class([$ui('media', 'image-placeholder'), $imageOptions['class'] ?? null]) }}>
-                        </div>
-                    @endif
+                    @switch($imageType)
+                        @case('twill-image')
+                            {!! $image->preset($imagePreset)->render($imageOptions) !!}
+                        @break
+                        @case('twill-image-static')
+                            {!!  A17\Twill\Image\Models\StaticImage::makeFromSrc($staticSettings)->render($imageOptions) !!}
+                        @break
+                        @case('static')
+                            <img class="{{ Arr::has($imageOptions, 'class') ? $imageOptions['class'] : '' }}"
+                                 @if(Arr::has($imageOptions, 'loading')) loading="{{ $imageOptions['loading'] }}" @endif
+                                 @if(Arr::has($imageOptions, 'sizes')) sizes="{{ $imageOptions['sizes'] }}" @endif
+                                 @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {{ $setAttributes($imageOptions['attributes']) }} @endif
+                                 @if(Arr::has($image, 'srcset')) srcset="{{ $image['srcset'] }}" @endif
+                                 src="{{ $image['src'] }}"
+                                 alt="{{ $image['alt'] }}"/>
+                        @break
+                        @case('placeholder')
+                            <div {{ $attributes->class([$ui('media', 'image-placeholder'), $imageOptions['class'] ?? null]) }}></div>
+                        @break
+                    @endswitch
 
                     {{ $slot ?? null }}
 
@@ -47,7 +53,7 @@
                         <x-vui-button class="{{ $ui('media', 'video-play-button') }}"
                                       aria-label="{{ __('vitrine-ui::fe.play_video') }}"
                                       :icon-only="true"
-                                      {{--                          fixme: add missing play-96 icon--}}
+                                      {{-- fixme: add missing play-96 icon--}}
                                       :icon="$videoPlayIcon ?? 'play-96'"
                                       size="large"/>
 

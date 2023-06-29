@@ -41,6 +41,9 @@ class Media extends VitrineComponent
     /** @var bool */
     public $cover;
 
+    /** @var string|null */
+    public $videoPlayIcon;
+
     /** @var array */
     public $classes;
 
@@ -57,6 +60,7 @@ class Media extends VitrineComponent
         $imagePreset = 'generic',
         $usePlaceholder = false,
         $video = null,
+        $videoPlayIcon = null,
         $backgroundVideo = null,
         $cover = false,
         $ui = []
@@ -66,6 +70,7 @@ class Media extends VitrineComponent
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
         $this->video = $video;
+        $this->videoPlayIcon = $videoPlayIcon;
         $this->backgroundVideo = $this->parseBackgroundVideo($backgroundVideo);
         $this->cover = $cover;
 

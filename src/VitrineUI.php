@@ -199,10 +199,25 @@ class VitrineUI
         });
     }
 
+    public static function setAttributes(array $attributes): string {
+        return implode(', ', array_map(
+            function ($v, $k) {
+                if(is_array($v)){
+                    return $k.'[]='.implode('&'.$k.'[]=', $v);
+                }else{
+                    return $k.'='.$v;
+                }
+            },
+            $attributes,
+            array_keys($attributes)
+        ));
+    }
+
     private static function applyCustomUiProps(array $ui, array $customUI)
     {
         return once(function () use ($ui, $customUI) {
             return array_replace_recursive($ui, $customUI);
         });
     }
+
 }
