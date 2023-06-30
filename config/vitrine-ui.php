@@ -63,6 +63,7 @@ return [
         'map-mapbox' => A17\VitrineUI\Components\MapMapBox::class,
         'media' => A17\VitrineUI\Components\Media::class,
         'modal' => A17\VitrineUI\Components\Modal::class,
+        'pagination' => A17\VitrineUI\Components\Pagination::class,
         'tag' => A17\VitrineUI\Components\Tag::class,
         'video-background' => A17\VitrineUI\Components\VideoBackground::class,
         'wysiwyg' => A17\VitrineUI\Components\Wysiwyg::class,
