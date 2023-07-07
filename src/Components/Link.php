@@ -7,6 +7,8 @@ use Illuminate\Contracts\View\View;
 
 class Link extends Button
 {
+    public $uiKeyComponent = 'link';
+
     public function __construct(
         $href = null,
         $icon = null,

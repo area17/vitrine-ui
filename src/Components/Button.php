@@ -35,9 +35,7 @@ class Button extends VitrineComponent
     /** @var null|string */
     public $variant;
 
-    protected static array $assets = [
-        'css' => 'components/button.css'
-    ];
+    public $uiKeyComponent = 'button';
 
     public function __construct(
         $href = null,

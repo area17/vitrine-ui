@@ -1,5 +1,5 @@
 <{{ $tag }} {{ $attributes->class(
-    $ui('button', 'base', [
+    $ui($uiKeyComponent, 'base', [
         'size' => $size,
         'variant' => $variant,
         'icon_only' => $iconOnly ? 'true' : 'false',
@@ -10,16 +10,16 @@
     @if ($target) target="{{ $target }}" @endif>
 
     @if ($iconBefore())
-        <x-vui-icon class="{{ $ui('button', 'icon') }}"
+        <x-vui-icon class="{{ $ui($uiKeyComponent, 'icon') }}"
                     :name="$icon" />
     @endif
 
     @if (!$slot->isEmpty())
-        <span class="{{ $ui('button', 'label') }}">{{ $slot }}</span>
+        <span class="{{ $ui($uiKeyComponent, 'label') }}">{{ $slot }}</span>
     @endif
 
     @if ($iconAfter())
-        <x-vui-icon class="{{ $ui('button', 'icon') }}"
+        <x-vui-icon class="{{ $ui($uiKeyComponent, 'icon') }}"
                     :name="$icon" />
     @endif
     </{{ $tag }}>
