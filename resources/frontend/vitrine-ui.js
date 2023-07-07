@@ -9,7 +9,7 @@ export { default as AudioPlayer } from './scripts/behaviors/AudioPlayer'
 // export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
 // export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
 //
-// export { default as Input } from './scripts/behaviors/Input'
+export { default as Input } from './scripts/behaviors/Input'
 // export { default as PasswordInput } from './scripts/behaviors/PasswordInput'
 // export { default as RadioGroup } from './scripts/behaviors/RadioGroup'
 // export { default as RangeInput } from './scripts/behaviors/RangeInput'

@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use TailwindMerge\Laravel\Facades\TailwindMerge;
+
 
 class VitrineUI
 {
@@ -62,7 +64,6 @@ class VitrineUI
                 }
             }
 
-
             // load specific custom component preset file
             $vitrine_path = self::removeTrailingSlash(config('vitrine-ui.vitrine_path', ''));
             $custom_component_path = $vitrine_path . '/' . $component . '.json';
@@ -71,7 +72,27 @@ class VitrineUI
                 $component_theme = json_decode(file_get_contents($custom_component_path), true);
 
                 if (is_array($component_theme)) {
-                    $ui[$component] = array_replace_recursive($ui[$component] ?? [], $component_theme);
+                    if ($component_theme['rules']['merge'] ?? false) {
+                        foreach ($component_theme as $key => $value) {
+                            if ($key !== 'rules') {
+                                if (in_array($key, $component_theme['rules']['merge'] ?? [])) {
+                                    // merge
+                                        $val = is_array($value) ? join(' ', $value) : $value;
+                                        $existingVal = is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
+                                    if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
+                                        $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
+                                    } else {
+                                        $ui[$component][$key] = $existingVal . ' ' . $val;
+                                    }
+                                } else {
+                                    // replace value
+                                    $ui[$component][$key] = $value;
+                                }
+                            }
+                        }
+                    } else {
+                        $ui[$component] = array_replace_recursive($ui[$component] ?? [], $component_theme);
+                    }
                 }
             }
 
@@ -111,7 +132,7 @@ class VitrineUI
             // Set classes from keys
             $keys = Arr::wrap($keys);
             foreach ($keys as $key) {
-                $key = (string) $key;
+                $key = (string)$key;
                 if ($key && ($uiComponent[$key] ?? false)) {
                     $classes[] = $uiComponent[$key];
                 }
@@ -119,17 +140,25 @@ class VitrineUI
 
             foreach ($options as $option => $value) {
                 // set classes from options
-                if($value ?? null) {
+                if ($value ?? null) {
                     $value = (string)$value;
                 }
 
                 if ($value && ($uiComponent[$option][$value] ?? false)) {
-                    $classes[] = $uiComponent[$option][$value];
+                    if (is_array($uiComponent[$option][$value])) {
+                        $classes[] = join(' ', $uiComponent[$option][$value]);
+                    } else {
+                        $classes[] = $uiComponent[$option][$value];
+                    }
                 } else {
                     // fallback to default value if exists
                     $defaultValue = $uiComponent['default'][$option] ?? false;
                     if ($defaultValue && ($uiComponent[$option][$defaultValue] ?? false)) {
-                        $classes[] = $uiComponent[$option][$defaultValue];
+                        if (is_array($uiComponent[$option][$defaultValue])) {
+                            $classes[] = join(' ', $uiComponent[$option][$defaultValue]);
+                        } else {
+                            $classes[] = $uiComponent[$option][$defaultValue];
+                        }
                     }
                 }
             }
@@ -199,13 +228,14 @@ class VitrineUI
         });
     }
 
-    public static function setAttributes(array $attributes): string {
+    public static function setAttributes(array $attributes): string
+    {
         return implode(', ', array_map(
             function ($v, $k) {
-                if(is_array($v)){
-                    return $k.'[]='.implode('&'.$k.'[]=', $v);
-                }else{
-                    return $k.'='.$v;
+                if (is_array($v)) {
+                    return $k . '[]=' . implode('&' . $k . '[]=', $v);
+                } else {
+                    return $k . '=' . $v;
                 }
             },
             $attributes,

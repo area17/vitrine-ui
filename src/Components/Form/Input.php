@@ -126,6 +126,7 @@ class Input extends VitrineComponent
         $multiple = false,
         $readonly = false,
         $step = '',
+        $ui = []
     )
     {
         $this->label = $label;
@@ -158,12 +159,15 @@ class Input extends VitrineComponent
         $this->errorID = 'errorID'.$this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = '#'.$this->errorID;
+
         if($hint) {
             $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
         }
         if($note) {
             $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

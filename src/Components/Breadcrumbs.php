@@ -13,12 +13,6 @@ class Breadcrumbs extends VitrineComponent
     /** @var string */
     public $tag;
 
-    protected static array $assets = [
-        'css' => [
-            'components/breadcrumbs.css',
-        ]
-    ];
-
     public function __construct(
         $tag = 'nav',
         $items = null,

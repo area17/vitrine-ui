@@ -28,7 +28,7 @@ abstract class VitrineComponent extends Component
         return VitrineUI::isExternalUrl($url);
     }
 
-    public function ui($component, $key = 'base', $options = [], ): string
+    public function ui($component, $key = 'base', $options = []): string
     {
         try {
             return VitrineUI::ui($component, $key, $options, $this->ui);

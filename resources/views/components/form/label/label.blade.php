@@ -6,7 +6,7 @@
 ])
 
 <{{$tag}}
-    class="block f-body-1 font-medium"
+    {{$attributes->class(VitrineUI::ui('form', 'label'))}}
     @if($name) for="{{$name}}" @endif
 >
     @if ($slot && !$slot->isEmpty())

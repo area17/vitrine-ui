@@ -5,6 +5,7 @@ return [
     'js_path' => resource_path('frontend/scripts/vendor'),
 
     'css_path' => resource_path('frontend/styles/vendor'),
+
     // The path of the published js assets. Used to generate the import paths in your published js files. This can be replaced with an alias defined in your vite.config.json
     // 'published_js_path' => './scripts/vendor/vitrine-ui',
 
@@ -30,6 +31,9 @@ return [
 
     // Required to define ide.json autocomplete rules
     'namespace' => '',
+
+    // CSS Preset
+    "css_preset" => "tailwindcss",
 
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
