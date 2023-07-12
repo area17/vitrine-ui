@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d62a75352af5de747c38bdd05a60d63",
+    "content-hash": "cd2d821dc22de1e1707415db18b2db21",
     "packages": [
         {
             "name": "area17/twill",
@@ -8376,6 +8376,74 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "yieldstudio/tailwind-merge-php",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/YieldStudio/tailwind-merge-php.git",
+                "reference": "e7d6e7f1986b50aff8ec884543f4af278f68865a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/YieldStudio/tailwind-merge-php/zipball/e7d6e7f1986b50aff8ec884543f4af278f68865a",
+                "reference": "e7d6e7f1986b50aff8ec884543f4af278f68865a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "laravel/framework": "^9|^10",
+                "laravel/pint": "^1.10",
+                "orchestra/testbench": "7.*|8.*",
+                "pestphp/pest": "^v1|^v2.2.3",
+                "phpstan/phpstan": "^1.10"
+            },
+            "suggest": {
+                "laravel/framework": "Want to use Tailwind Merge PHP with Laravel ?"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "YieldStudio\\TailwindMerge\\Laravel\\TailwindMergeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "YieldStudio\\TailwindMerge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Hemery",
+                    "email": "james@yieldstudio.fr"
+                }
+            ],
+            "description": "Merge Tailwind CSS classes without style conflicts",
+            "keywords": [
+                "classlist",
+                "conflict",
+                "css",
+                "laravel",
+                "merge",
+                "override",
+                "php",
+                "tailwind",
+                "tailwindcss"
+            ],
+            "support": {
+                "issues": "https://github.com/YieldStudio/tailwind-merge-php/issues",
+                "source": "https://github.com/YieldStudio/tailwind-merge-php/tree/0.0.2"
+            },
+            "time": "2023-06-20T01:57:30+00:00"
         }
     ],
     "packages-dev": [

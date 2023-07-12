@@ -1,5 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock-upgrade'
 import * as focusTrap from 'focus-trap'
 
 const Modal = createBehavior(
@@ -18,7 +18,7 @@ const Modal = createBehavior(
 
         close() {
             if (this._data.isActive) {
-                this.$node.classList.remove(...this._data.activeClasses)
+                this.$node.removeAttribute('data-active')
                 this._data.focusTrap.deactivate()
                 this._data.isActive = false
 
@@ -40,12 +40,12 @@ const Modal = createBehavior(
                 reserveScrollBarGap: true
             })
 
-            this.$node.classList.add(...this._data.activeClasses)
+            this.$node.setAttribute('data-active', 'true')
             this._data.isActive = true
 
             setTimeout(() => {
                 this._data.focusTrap.activate()
-            }, 300)
+            }, 500)
         },
 
         handleEsc(e) {
@@ -82,7 +82,6 @@ const Modal = createBehavior(
             })
 
             this._data.isActive = false
-            this._data.activeClasses = ['o-modal-active']
 
             if (this.$closeButtons) {
                 this.$closeButtons.forEach((closeButton) => {
@@ -93,11 +92,13 @@ const Modal = createBehavior(
             this.$node.addEventListener('Modal:toggle', this.toggle, false)
             this.$node.addEventListener('Modal:open', this.open, false)
             this.$node.addEventListener('Modal:close', this.close, false)
+
             document.addEventListener('Modal:closeAll', this.close, false)
             document.addEventListener('keyup', this.handleEsc, false)
 
             // add listener to modal toggle buttons
             const modalId = this.$node.getAttribute('id')
+
             this.$triggers = document.querySelectorAll(
                 `[data-modal-target="#${modalId}"]`
             )
@@ -124,12 +125,6 @@ const Modal = createBehavior(
                 )
             }
         },
-        enabled() {},
-        resized() {},
-        mediaQueryUpdated() {
-            // current media query is: A17.currentMediaQuery
-        },
-        disabled() {},
         destroy() {
             this.close()
 
@@ -143,8 +138,8 @@ const Modal = createBehavior(
             this.$node.removeEventListener('Modal:open', this.open)
             this.$node.removeEventListener('Modal:close', this.close)
             this.$node.removeEventListener('click', this.handleClickOutside)
-            document.removeEventListener('Modal:closeAll', this.close)
 
+            document.removeEventListener('Modal:closeAll', this.close)
             document.removeEventListener('keyup', this.handleEsc)
 
             this.$triggers.forEach((trigger) => {

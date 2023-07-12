@@ -130,6 +130,7 @@ class VitrineUI
 
         if ($uiComponent) {
             // Set classes from keys
+            // Set classes from keys
             $keys = Arr::wrap($keys);
             foreach ($keys as $key) {
                 $key = (string)$key;

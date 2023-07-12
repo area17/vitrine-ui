@@ -20,7 +20,8 @@
         "gehrisandro/tailwind-merge-laravel": "^0.1.0",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0",
-        "spatie/once": "^3.1"
+        "spatie/once": "^3.1",
+        "yieldstudio/tailwind-merge-php": "^0.0.2"
     },
     "require-dev": {
         "laravel/dusk": "^7.7",

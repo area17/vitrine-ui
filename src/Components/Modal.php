@@ -20,12 +20,11 @@ class Modal extends VitrineComponent
     public $panel;
 
     /** @var string */
-    public $classes;
+    public $variant;
 
     protected static array $assets = [
-        'npm' => ['body-scroll-lock', 'focus-trap'],
-        'js' => 'behaviors/Modal.js',
-        'css' => 'components/modal.css',
+        'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
+        'js' => 'behaviors/Modal.js'
     ];
 
     public function __construct(
@@ -33,15 +32,17 @@ class Modal extends VitrineComponent
         $showClose = true,
         $title = true,
         $panel = false,
+        $variant = null,
+        $ui = []
     ) {
+
         $this->id = $id;
         $this->showClose = $showClose;
         $this->title = $title;
         $this->panel = $panel;
-        $this->classes = [
-            'o-modal',
-            'o-modal-panel' => $panel
-        ];
+        $this->variant = $variant ?? $this->panel ? 'panel' : 'default';
+
+        parent::__construct($ui);
     }
 
     public function render(): View

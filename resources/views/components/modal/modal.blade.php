@@ -7,10 +7,10 @@
     aria-modal="true"
     data-behavior="Modal"
     {!! $panel ? 'data-Modal-panel="true"' : '' !!}
-    {{ $attributes->class($classes) }}
+    {{ $attributes->class($ui('modal', ['base'])) }}
 >
     <div
-        class="{{ Arr::toCssClasses(['o-modal-wrapper', '3xl:!w-panel-max' => $panel]) }}"
+        class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"
         data-Modal-focus-trap
         tabindex="-1"
     >
@@ -20,8 +20,7 @@
             <x-vui-button
                 icon="close-32"
                 icon-only
-                size="medium"
-                class="o-modal-close"
+                class="{{ $ui('modal', 'close') }}"
                 aria-label="{{ __('vitrine-ui::fe.close_modal') }}"
                 data-Modal-close-trigger
             />
@@ -31,7 +30,7 @@
             <x-vui-heading
                 :level="1"
                 id="{{ $id }}_title"
-                class="sr-only"
+                class="{{ $ui('modal', 'title') }}"
                 tabindex="-1"
                 data-Modal-initial-focus
             >

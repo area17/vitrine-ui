@@ -16,7 +16,7 @@ abstract class VitrineComponent extends Component
     }
 
     /** @var array */
-    protected array $ui = [];
+    public array $ui = [];
 
     public function __construct($ui = [])
     {

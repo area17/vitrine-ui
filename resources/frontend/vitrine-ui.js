@@ -5,7 +5,7 @@ export { default as AudioPlayer } from './scripts/behaviors/AudioPlayer'
 // export { default as ImageZoom } from './scripts/behaviors/ImageZoom'
 // export { default as MapGoogle } from './scripts/behaviors/GoogleMaps'
 // export { default as MapMapBox } from './scripts/behaviors/MapBoxMaps'
-// export { default as Modal } from './scripts/behaviors/Modal'
+export { default as Modal } from './scripts/behaviors/Modal'
 // export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
 // export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
 //
