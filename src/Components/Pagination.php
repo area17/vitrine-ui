@@ -65,7 +65,7 @@ class Pagination extends VitrineComponent
         $items = [];
 
         foreach ($this->pages as $key => $page) {
-            $i = $key + 1;
+            $i = $key;
             $items[] = [
                 'value' => $page['url'],
                 'label' => __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage]),

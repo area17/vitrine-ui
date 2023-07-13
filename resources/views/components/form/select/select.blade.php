@@ -13,7 +13,7 @@
         @endif
     </div>
 
-    <div class="m-input__wrapper">
+    <div class="m-input__wrapper relative">
         <select
             class="p-12 pr-36 w-full f-body-1 appearance-none"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
