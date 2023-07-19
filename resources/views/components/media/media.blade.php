@@ -35,9 +35,11 @@
                         @break
                         @case('static')
                             <img class="{{ Arr::has($imageOptions, 'class') ? $imageOptions['class'] : '' }}"
+                                 @if(Arr::has($imageOptions, 'width')) width="{{ $imageOptions['width'] }}" @endif
+                                 @if(Arr::has($imageOptions, 'height')) height="{{ $imageOptions['height'] }}" @endif
                                  @if(Arr::has($imageOptions, 'loading')) loading="{{ $imageOptions['loading'] }}" @endif
                                  @if(Arr::has($imageOptions, 'sizes')) sizes="{{ $imageOptions['sizes'] }}" @endif
-                                 @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {{ $setAttributes($imageOptions['attributes']) }} @endif
+                                 @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {!! $setAttributes($imageOptions['attributes'])!!} @endif
                                  @if(Arr::has($image, 'srcset')) srcset="{{ $image['srcset'] }}" @endif
                                  src="{{ $image['src'] }}"
                                  alt="{{ $image['alt'] }}"/>

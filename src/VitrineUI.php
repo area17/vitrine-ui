@@ -231,12 +231,13 @@ class VitrineUI
 
     public static function setAttributes(array $attributes): string
     {
-        return implode(', ', array_map(
+
+        return implode(' ', array_map(
             function ($v, $k) {
                 if (is_array($v)) {
                     return $k . '[]=' . implode('&' . $k . '[]=', $v);
                 } else {
-                    return $k . '=' . $v;
+                    return $k .'=' .'"'.$v.'"';
                 }
             },
             $attributes,
