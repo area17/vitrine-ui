@@ -1,24 +1,24 @@
 <div
-    {{ $attributes->class('dropdown relative') }}
+    {{ $attributes->class($ui('dropdown', 'base')) }}
     data-behavior="Dropdown"
 >
     <button
-        class="flex text-primary border p-12 w-full f-body-1 justify-between"
+        class="{{ $ui('dropdown', 'trigger') }}"
         type="button"
-        aria-label="filter by {{ $label }}"
+        aria-label="{{ $ariaLabel }}"
         data-dropdown-btn
     >
         {{ $label }}
 
         <x-vui-icon
-            class="transform-gpu transition"
+            class="{{ $ui('dropdown', 'icon') }}"
             :name="'chevron-down-24'"
             data-dropdown-chevron
         />
     </button>
 
     <div
-        class="dropdown-list absolute z-1 w-full top-full min-w-200 max-h-252 mt-12 p-12 border border-primary bg-primary overflow-auto"
+        class="{{ $ui('dropdown', 'list') }}"
         data-dropdown-list
     >
         <x-vui-heading
@@ -29,7 +29,7 @@
             {{ __('vitrine-ui::fe.dropdown_items') }}
         </x-vui-heading>
 
-        <ul aria-labelledby="{{ $listlabelId }}">
+        <ul aria-labelledby="{{ $listlabelId }}" class="{{ $ui('dropdown', 'content')}}">
             {!! $slot !!}
         </ul>
     </div>

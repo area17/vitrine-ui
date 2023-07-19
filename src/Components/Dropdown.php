@@ -12,19 +12,30 @@ class Dropdown extends VitrineComponent
     public $headingLevel;
 
     /** @var string */
+    public $ariaLabel;
+
+    /** @var string */
     public $label;
 
     /** @var string */
     public $listlabelId;
 
+    protected static array $assets = [
+        'js' => 'behaviors/Dropdown.js',
+    ];
+
     public function __construct(
         $headingLevel = 3,
+        $ariaLabel = null,
         $label = null,
+        $ui = []
     )
     {
         $this->headingLevel = $headingLevel;
         $this->label = $label ?? __('fe.select_an_option');
+        $this->ariaLabel = $ariaLabel ?? $label;
         $this->listlabelId = 'DropdownLabel'. Str::random(5);
+        parent::__construct($ui);
     }
 
     public function render(): View

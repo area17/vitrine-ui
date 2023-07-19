@@ -18,7 +18,6 @@ class Accordion extends VitrineComponent
 
     protected static array $assets = [
         'js' => 'behaviors/Accordion.js',
-        'css' => 'components/accordion.css',
     ];
 
     public function __construct(
