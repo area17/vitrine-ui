@@ -70,7 +70,6 @@ class VitrineUI
 
             if (file_exists($custom_component_path)) {
                 $component_theme = json_decode(file_get_contents($custom_component_path), true);
-
                 if (is_array($component_theme)) {
                     if ($component_theme['rules']['merge'] ?? false) {
                         foreach ($component_theme as $key => $value) {
@@ -86,7 +85,8 @@ class VitrineUI
                                     }
                                 } else {
                                     // replace value
-                                    $ui[$component][$key] = $value;
+                                    $val = is_array($value) ? join(' ', $value) : $value;
+                                    $ui[$component][$key] = $val;
                                 }
                             }
                         }
@@ -135,7 +135,7 @@ class VitrineUI
             foreach ($keys as $key) {
                 $key = (string)$key;
                 if ($key && ($uiComponent[$key] ?? false)) {
-                    $classes[] = $uiComponent[$key];
+                    $classes[] = is_array($uiComponent[$key]) ? join(' ', $uiComponent[$key]) : $uiComponent[$key];
                 }
             }
 
