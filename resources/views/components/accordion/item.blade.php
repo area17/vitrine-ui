@@ -15,7 +15,7 @@
 @endphp
 
 <li {{ $attributes->class(VitrineUI::ui('accordion-item')) }} data-accordion-item>
-    <x-vui-heading :level="$headingLevel">
+    <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading') }}" :level="$headingLevel">
         <button
                 id="{{ $label_id }}"
                 class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
