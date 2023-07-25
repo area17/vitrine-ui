@@ -71,28 +71,7 @@ class VitrineUI
             if (file_exists($custom_component_path)) {
                 $component_theme = json_decode(file_get_contents($custom_component_path), true);
                 if (is_array($component_theme)) {
-                    if ($component_theme['rules']['merge'] ?? false) {
-                        foreach ($component_theme as $key => $value) {
-                            if ($key !== 'rules') {
-                                if (in_array($key, $component_theme['rules']['merge'] ?? [])) {
-                                    // merge
-                                        $val = is_array($value) ? join(' ', $value) : $value;
-                                        $existingVal = is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
-                                    if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
-                                        $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
-                                    } else {
-                                        $ui[$component][$key] = $existingVal . ' ' . $val;
-                                    }
-                                } else {
-                                    // replace value
-                                    $val = is_array($value) ? join(' ', $value) : $value;
-                                    $ui[$component][$key] = $val;
-                                }
-                            }
-                        }
-                    } else {
-                        $ui[$component] = array_replace_recursive($ui[$component] ?? [], $component_theme);
-                    }
+                    $ui = self::mergeOrReplaceComponentPreset($ui, $component, $component_theme);
                 }
             }
 
@@ -248,8 +227,41 @@ class VitrineUI
     private static function applyCustomUiProps(array $ui, array $customUI)
     {
         return once(function () use ($ui, $customUI) {
-            return array_replace_recursive($ui, $customUI);
+            if(is_array($customUI)) {
+                foreach ($customUI as $key => $theme) {
+                    $ui = self::mergeOrReplaceComponentPreset($ui, $key, $theme);
+                }
+            }
+            return $ui;
         });
+    }
+
+    private static function mergeOrReplaceComponentPreset($ui, $component, $component_theme): array
+    {
+        if ($component_theme['rules']['merge'] ?? false) {
+            foreach ($component_theme as $key => $value) {
+                if ($key !== 'rules') {
+                    if (in_array($key, $component_theme['rules']['merge'] ?? [])) {
+                        // merge
+                        $val = is_array($value) ? join(' ', $value) : $value;
+                        $existingVal = is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
+                        if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
+                            $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
+                        } else {
+                            $ui[$component][$key] = $existingVal . ' ' . $val;
+                        }
+                    } else {
+                        // replace value
+                        $val = is_array($value) ? join(' ', $value) : $value;
+                        $ui[$component][$key] = $val;
+                    }
+                }
+            }
+        } else {
+            $ui[$component] = array_replace_recursive($ui[$component] ?? [], $component_theme);
+        }
+
+        return $ui;
     }
 
 }
