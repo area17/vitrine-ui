@@ -19,6 +19,9 @@ class Modal extends VitrineComponent
     /** @var bool */
     public $panel;
 
+    /** @var bool */
+    public $clickOutsideToClose;
+
     /** @var string */
     public $variant;
 
@@ -33,6 +36,7 @@ class Modal extends VitrineComponent
         $title = true,
         $panel = false,
         $variant = null,
+        $clickOutsideToClose = false,
         $ui = []
     ) {
 
@@ -40,6 +44,7 @@ class Modal extends VitrineComponent
         $this->showClose = $showClose;
         $this->title = $title;
         $this->panel = $panel;
+        $this->clickOutsideToClose = $clickOutsideToClose;
         $this->variant = $variant ?? $this->panel ? 'panel' : 'default';
 
         parent::__construct($ui);

@@ -69,6 +69,7 @@ const Modal = createBehavior(
             this.$focusTrap = this.getChild('focus-trap')
             this.$closeButtons = this.getChildren('close-trigger')
             this.$initialFocus = this.getChild('initial-focus')
+            this.$clickOutside = this.options['panel'] || this.options['clickoutside']
 
             if (!this.$initialFocus) {
                 console.warn(
@@ -78,7 +79,7 @@ const Modal = createBehavior(
 
             this._data.focusTrap = focusTrap.createFocusTrap(this.$focusTrap, {
                 initialFocus: this.$initialFocus,
-                clickOutsideDeactivates: this.options['panel']
+                clickOutsideDeactivates: this.$clickOutside
             })
 
             this._data.isActive = false
@@ -107,7 +108,7 @@ const Modal = createBehavior(
                 trigger.addEventListener('click', this.toggle, false)
             })
 
-            if (this.options['panel']) {
+            if (this.$clickOutside) {
                 this.$focusTrap.addEventListener(
                     'click',
                     this.handleCloseInside,

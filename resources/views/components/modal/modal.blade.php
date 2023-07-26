@@ -7,6 +7,7 @@
     aria-modal="true"
     data-behavior="Modal"
     {!! $panel ? 'data-Modal-panel="true"' : '' !!}
+    {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}
     {{ $attributes->class($ui('modal', ['base'])) }}
 >
     <div
