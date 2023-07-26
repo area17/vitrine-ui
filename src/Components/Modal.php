@@ -50,7 +50,8 @@ class Modal extends VitrineComponent
         $this->panel = $panel;
         $this->clickOutsideToClose = $clickOutsideToClose;
         $this->setInitialFocus = $setInitialFocus;
-        $this->variant = $variant ?? $this->panel ? 'panel' : 'default';
+        $defaultVariant = $this->panel ? 'panel' : 'default';
+        $this->variant = $variant ?? $defaultVariant;
 
         parent::__construct($ui);
     }
