@@ -149,8 +149,6 @@ const Modal = createBehavior(
                 `[data-modal-target="#${this.$modalId}"]`
             )
 
-            console.log('this.$triggers', this.$triggers)
-
             this.$triggers?.forEach((trigger) => {
                 trigger.addEventListener('click', this.toggle)
             })
