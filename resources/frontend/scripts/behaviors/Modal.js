@@ -10,13 +10,14 @@ const Modal = createBehavior(
             e.stopPropagation()
 
             if (this._data.isActive) {
-                this.close()
+                this.close(e)
             } else {
-                this.open()
+                this.open(e)
             }
         },
-
-        close() {
+        close(e) {
+            e?.preventDefault()
+            e?.stopPropagation()
             if (this._data.isActive) {
                 this.$node.removeAttribute('data-active')
                 this._data.focusTrap.deactivate()
@@ -52,23 +53,18 @@ const Modal = createBehavior(
 
             this.registerOpenEvents()
 
-            setTimeout(() => {
-                this._data.focusTrap.activate()
-            }, 600)
+            this._data.focusTrap.activate()
         },
-
         handleEsc(e) {
             if (e.key === 'Escape') {
                 this.close()
             }
         },
-
         handleClickOutside(e) {
             if (this._data.isActive) {
                 this.close(e)
             }
         },
-
         handleCloseInside(e) {
             e.stopPropagation()
         },
@@ -153,8 +149,10 @@ const Modal = createBehavior(
                 `[data-modal-target="#${this.$modalId}"]`
             )
 
+            console.log('this.$triggers', this.$triggers)
+
             this.$triggers?.forEach((trigger) => {
-                trigger.addEventListener('click', this.toggle, false)
+                trigger.addEventListener('click', this.toggle)
             })
 
         },
