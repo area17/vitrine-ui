@@ -22,6 +22,9 @@ class Modal extends VitrineComponent
     /** @var bool */
     public $clickOutsideToClose;
 
+    /** @var bool */
+    public $setInitialFocus;
+
     /** @var string */
     public $variant;
 
@@ -33,9 +36,10 @@ class Modal extends VitrineComponent
     public function __construct(
         $id = null,
         $showClose = true,
-        $title = true,
+        $title = null,
         $panel = false,
         $variant = null,
+        $setInitialFocus = true,
         $clickOutsideToClose = false,
         $ui = []
     ) {
@@ -45,6 +49,7 @@ class Modal extends VitrineComponent
         $this->title = $title;
         $this->panel = $panel;
         $this->clickOutsideToClose = $clickOutsideToClose;
+        $this->setInitialFocus = $setInitialFocus;
         $this->variant = $variant ?? $this->panel ? 'panel' : 'default';
 
         parent::__construct($ui);
