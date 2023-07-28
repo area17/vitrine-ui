@@ -35,13 +35,4 @@ class Link extends Button
 
         $this->tag = $tag ?? $this->element();
     }
-
-    public function element(): string
-    {
-        if ($this->isLink()) {
-            return 'a';
-        }
-
-        return 'span';
-    }
 }
