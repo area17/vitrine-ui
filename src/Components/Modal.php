@@ -28,6 +28,9 @@ class Modal extends VitrineComponent
     /** @var string */
     public $variant;
 
+    /** @var string */
+    public $modalsStack;
+
     protected static array $assets = [
         'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
         'js' => 'behaviors/Modal.js'
@@ -41,7 +44,8 @@ class Modal extends VitrineComponent
         $variant = null,
         $setInitialFocus = true,
         $clickOutsideToClose = false,
-        $ui = []
+        $ui = [],
+        $modalsStack = 'modals',
     ) {
 
         $this->id = $id;
@@ -52,6 +56,7 @@ class Modal extends VitrineComponent
         $this->setInitialFocus = $setInitialFocus;
         $defaultVariant = $this->panel ? 'panel' : 'default';
         $this->variant = $variant ?? $defaultVariant;
+        $this->modalsStack = $modalsStack;
 
         parent::__construct($ui);
     }

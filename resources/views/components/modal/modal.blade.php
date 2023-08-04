@@ -1,4 +1,4 @@
-@push('modals')
+@push($modalsStack)
 
     <div
             id="{{ $id }}"
