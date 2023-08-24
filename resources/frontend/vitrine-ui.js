@@ -7,7 +7,7 @@ export { default as Dropdown } from './scripts/behaviors/Dropdown'
 // export { default as MapGoogle } from './scripts/behaviors/GoogleMaps'
 // export { default as MapMapBox } from './scripts/behaviors/MapBoxMaps'
 export { default as Modal } from './scripts/behaviors/Modal'
-// export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
+export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
 // export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
 //
 export { default as Input } from './scripts/behaviors/Input'
