@@ -90,6 +90,7 @@ class Select extends VitrineComponent
         $autofocus = false,
         $multiple = false,
         $readonly = false,
+        $ui = []
     )
     {
         $this->label = $label;
@@ -119,6 +120,8 @@ class Select extends VitrineComponent
         if($note) {
             $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View
