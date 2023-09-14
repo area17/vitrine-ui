@@ -9,5 +9,6 @@
   "hint": "f-ui-2 text-secondary",
   "note": "f-ui-2 text-secondary mt-4",
   "link": "",
-  "error": "mt-4 f-body-1 text-error flex items-center gap-4"
+  "error": "mt-4 f-body-1 text-error flex items-center gap-4",
+  "error-icon-name": "warning"
 }

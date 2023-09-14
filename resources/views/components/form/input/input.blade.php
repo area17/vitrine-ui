@@ -8,7 +8,7 @@
             {{$label}}
         </x-vui-form-label>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="{{  $ui('input', 'hint') }}">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{ $ui('input', 'hint') }}">{{ $hint }}</span>
         @endif
     </div>
 
@@ -43,6 +43,6 @@
         <p id="{{$ariaID}}Note" class="{{ $ui('input', 'note') }}">{{ $note }}</p>
     @endif
 
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-Input-error><x-vui-icon name="warning-20"/>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-Input-error><x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/>{{$error ?? ''}}</p>
 
 </div>
