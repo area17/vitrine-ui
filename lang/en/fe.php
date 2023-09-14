@@ -92,7 +92,7 @@ return [
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
     'pagination' => [
-        'showing' => 'Showing :current of :last items',
+        'showing' => 'Showing :count of :total items',
         'page_of' => 'Page :current of :last',
         'previous' => 'Previous page',
         'next' => 'Next page',

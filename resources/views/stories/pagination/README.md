@@ -1,7 +1,11 @@
 ## Usage
 
 ```php
-<x-vui-pagionation
+<x-vui-pagination
     :pages="$pages"
+    :currentPage="$currentPage"
+    :currentPageCount="$currentPageCount"
+    :lastPage="$lastPage"
+    :total="$total"
 />
 ```

@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Pagination extends VitrineComponent
@@ -15,6 +14,12 @@ class Pagination extends VitrineComponent
 
     /** @var int */
     public $lastPage;
+
+    /** @var int */
+    public $total;
+
+    /** @var int */
+    public $currentPageCount;
 
     /** @var array */
     public $dropdownItems;
@@ -35,6 +40,8 @@ class Pagination extends VitrineComponent
     public function __construct(
         $pages = [],
         $currentPage = 1,
+        $currentPageCount = null,
+        $total = null,
         $lastPage = 1,
         $btnVariant = 'secondary',
         $ui = []
@@ -43,6 +50,8 @@ class Pagination extends VitrineComponent
         $this->btnVariant = $btnVariant;
         $this->pages = $pages;
         $this->currentPage = $currentPage;
+        $this->currentPageCount = $currentPageCount;
+        $this->total = $total;
         $this->lastPage = $lastPage;
         $this->onFirstPage = $this->currentPage === 1;
         $this->onLastPage = $this->currentPage === $this->lastPage;
@@ -79,12 +88,14 @@ class Pagination extends VitrineComponent
     public function nextPageUrl(): ?string
     {
         $nextPage = $this->pages[$this->currentPage + 1] ?? null;
+
         return $nextPage['url'] ?? null;
     }
 
     public function prevPageUrl(): ?string
     {
         $prevPage = $this->pages[$this->currentPage - 1] ?? null;
+
         return $prevPage['url'] ?? null;
     }
 }

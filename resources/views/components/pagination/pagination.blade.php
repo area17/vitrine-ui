@@ -29,7 +29,7 @@
             />
         </div>
         <span class="{{ $ui('pagination', 'show-message') }}">
-                        {{ __('vitrine-ui::fe.pagination.showing', ['current' => $currentPage, 'last' => $lastPage]) }}
+                        {{ __('vitrine-ui::fe.pagination.showing', ['count' => $currentPageCount, 'total' => $total]) }}
             </span>
         <div class="{{$ui('pagination', 'dropdown-wrapper')}}">
             <x-vui-form-select
