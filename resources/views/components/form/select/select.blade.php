@@ -15,7 +15,6 @@
 
     <div class="{{ $ui('select', 'wrapper') }}">
         <select
-            class="p-12 pr-36 w-full f-body-1 appearance-none"
             class="{{ $ui('select', 'select') }}"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
             @if($name) name="{{$name}}" @endif
