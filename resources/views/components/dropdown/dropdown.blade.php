@@ -12,7 +12,7 @@
 
         <x-vui-icon
             class="{{ $ui('dropdown', 'icon') }}"
-            :name="{{ $ui('dropdown', 'icon-name') }}"
+            name="{{ $ui('dropdown', 'icon-name') }}"
             data-dropdown-chevron
         />
     </button>
