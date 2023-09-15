@@ -146,6 +146,7 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 - [ ] Dropdown
 - [ ] Form
 - [ ] Inputs
+- [x] Form Select
 - [x] Heading
 - [x] Icon
 
