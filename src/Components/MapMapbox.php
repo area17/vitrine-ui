@@ -5,7 +5,7 @@ namespace A17\VitrineUI\Components;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
-class MapMapBox extends VitrineComponent
+class MapMapbox extends VitrineComponent
 {
     /** @var string */
     public $lat;

@@ -64,7 +64,7 @@ return [
         'listing' => A17\VitrineUI\Components\Listing::class,
         'link' => A17\VitrineUI\Components\Link::class,
         'map-google' => A17\VitrineUI\Components\MapGoogle::class,
-        'map-mapbox' => A17\VitrineUI\Components\MapMapBox::class,
+        'map-mapbox' => A17\VitrineUI\Components\MapMapbox::class,
         'media' => A17\VitrineUI\Components\Media::class,
         'modal' => A17\VitrineUI\Components\Modal::class,
         'pagination' => A17\VitrineUI\Components\Pagination::class,
