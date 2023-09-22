@@ -8,8 +8,8 @@ export { default as Dropdown } from './scripts/behaviors/Dropdown'
 // export { default as MapMapBox } from './scripts/behaviors/MapBoxMaps'
 export { default as Modal } from './scripts/behaviors/Modal'
 export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
-export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
-//
+// export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
+
 export { default as Input } from './scripts/behaviors/Input'
 export { default as Pagination } from './scripts/behaviors/Pagination'
 // export { default as PasswordInput } from './scripts/behaviors/PasswordInput'
