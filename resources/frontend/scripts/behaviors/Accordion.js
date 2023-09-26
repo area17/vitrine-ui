@@ -112,9 +112,10 @@ const Accordion = createBehavior(
                 trigger.removeEventListener('click', this.toggle)
             })
 
-            // reset height style attribute
+            // Content - reset height style attribute
             this.$contents.forEach((content) => {
                 content.style.height = ''
+                content.classList.remove('hidden')
             })
         }
     }
