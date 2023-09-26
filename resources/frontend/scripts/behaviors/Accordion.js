@@ -1,19 +1,30 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
+const TIMEOUT = 16;
+
 const Accordion = createBehavior(
     'Accordion',
     {
+        getTriggerIndex(trigger) {
+            return trigger.getAttribute('data-Accordion-index')
+        },
+        triggerClose(index) {
+            this.close(index)
+            this._data.activeIndexes = this._data.activeIndexes.filter((item) => item !== index)
+        },
+        triggerOpen(index) {
+            this.open(index)
+            this._data.activeIndexes.push(index)
+        },
         toggle(e) {
             e.preventDefault()
 
-            const index = e.currentTarget.getAttribute('data-Accordion-index')
+            const index = this.getTriggerIndex(e.currentTarget)
 
             if (this._data.activeIndexes.includes(index)) {
-                this.close(index)
-                this._data.activeIndexes = this._data.activeIndexes.filter((item) => item !== index)
+                this.triggerClose(index)
             } else {
-                this.open(index)
-                this._data.activeIndexes.push(index)
+                this.triggerOpen(index)
             }
         },
 
@@ -27,7 +38,7 @@ const Accordion = createBehavior(
 
             setTimeout(() => {
                 activeContent.style.height = '0px'
-            }, 16)
+            }, TIMEOUT)
 
             activeTrigger.setAttribute('aria-expanded', 'false')
             activeTrigger.setAttribute(`data-${this.name}-open`, 'false')
@@ -51,7 +62,7 @@ const Accordion = createBehavior(
                 activeTrigger.setAttribute(`data-${this.name}-open`, 'true')
                 activeContent.setAttribute('aria-hidden', 'false')
                 activeContent.setAttribute(`data-${this.name}-open`, 'true')
-            }, 16)
+            }, TIMEOUT)
         },
 
         handleTransitionEnd(e) {
@@ -92,7 +103,15 @@ const Accordion = createBehavior(
             }
 
             this.$triggers.forEach((trigger) => {
+                const index = this.getTriggerIndex(trigger)
+
                 trigger.addEventListener('click', this.toggle, false)
+
+                // closed opened accordion items
+                // to make sure content is not re-opened when resizing the window
+                if (this._data.activeIndexes.includes(index)) {
+                    this.triggerClose(index)
+                }
             })
 
             this.$contents.forEach((content) => {
@@ -109,14 +128,23 @@ const Accordion = createBehavior(
         },
         disabled() {
             this.$triggers.forEach((trigger) => {
+                const index = this.getTriggerIndex(trigger)
+
                 trigger.removeEventListener('click', this.toggle)
+
+                // Reopen closed accordion items :
+                // to make sure content is not hidden in certain breakpoints
+                if (!this._data.activeIndexes.includes(index)) {
+                    this.triggerOpen(index)
+                }
             })
 
-            // Content - reset height style attribute
-            this.$contents.forEach((content) => {
-                content.style.height = ''
-                content.classList.remove('hidden')
-            })
+            // reset height to auto for opened contents
+            setTimeout(() => {
+                this.$contents.forEach((content) => {
+                    content.style.height = ''
+                })
+            }, TIMEOUT + 1)
         }
     }
 )
