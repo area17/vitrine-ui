@@ -59,7 +59,7 @@
                                       :icon="$videoPlayIcon ?? 'play-96'"
                                       size="large"/>
 
-                        <div class="{{ $ui('media', 'video-player') }} }}"
+                        <div class="{{ $ui('media', 'video-player') }}"
                              data-ShowVideo-player></div>
                     @endif
                 </div>
