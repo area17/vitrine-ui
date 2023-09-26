@@ -111,6 +111,11 @@ const Accordion = createBehavior(
             this.$triggers.forEach((trigger) => {
                 trigger.removeEventListener('click', this.toggle)
             })
+
+            // reset height style attribute
+            this.$contents.forEach((content) => {
+                content.style.height = ''
+            })
         }
     }
 )
