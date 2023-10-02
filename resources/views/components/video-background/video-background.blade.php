@@ -51,6 +51,8 @@
                     @endforeach
                 </video>
             </div>
+
+            {{ $slot ?? null }}
         </div>
     </div>
 @endisset
