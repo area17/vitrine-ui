@@ -141,6 +141,7 @@ const Accordion = createBehavior(
 
             // reset height to auto for opened contents
             setTimeout(() => {
+                if(!this.$contents) return
                 this.$contents.forEach((content) => {
                     content.style.height = ''
                 })
