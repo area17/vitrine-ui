@@ -40,8 +40,6 @@ return [
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
         'breadcrumbs' => A17\VitrineUI\Components\Breadcrumbs::class,
         'button' => A17\VitrineUI\Components\Button::class,
-        'card-inline' => A17\VitrineUI\Components\Card\Inline::class,
-        'card-primary' => A17\VitrineUI\Components\Card\Primary::class,
         'datepicker' => A17\VitrineUI\Components\Datepicker::class,
         'dropdown' => A17\VitrineUI\Components\Dropdown::class,
         'form-checkbox' => A17\VitrineUI\Components\Form\Checkbox::class,
