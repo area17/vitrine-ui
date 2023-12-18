@@ -24,7 +24,7 @@ return [
         'subject' => 'Subject',
         'submit' => 'Submit',
         'reset' => 'Reset',
-        'required' => 'required',
+        'required' => '(required)',
         'toggle_password_visibility' => 'Toggle password visibility',
         'datepicker' => [
             'date_format' => 'Date format',

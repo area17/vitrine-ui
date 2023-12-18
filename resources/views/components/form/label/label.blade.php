@@ -12,8 +12,7 @@
     @if ($slot && !$slot->isEmpty())
         {{$slot}}
     @endif
-
     @if ($required)
-        ({{ __('vitrine-ui::fe.form.required') }})
+        {{ __('vitrine-ui::fe.form.required') }}
     @endif
 </{{$tag}}>
