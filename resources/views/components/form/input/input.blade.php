@@ -4,11 +4,11 @@
     {{ $disabled ? 'inert' : '' }}
 >
     <div class="{{  $ui('input', 'header') }}">
-        @isset($label)
+        @if(!empty($label))
         <x-vui-form-label :name="$name" :required="$required">
             {{$label}}
         </x-vui-form-label>
-        @endisset
+        @endif
         @if ($hint)
             <span id="{{$ariaID}}Hint" class="{{ $ui('input', 'hint') }}">{{ $hint }}</span>
         @endif
