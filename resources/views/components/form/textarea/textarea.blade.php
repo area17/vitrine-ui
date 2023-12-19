@@ -21,13 +21,12 @@
             @if($autocomplete) autocomplete="{{$autocomplete}}" @endif
             @if($form) form="{{$form}}" @endif
             aria-describedby="{{implode(',', $ariaDescribedBy)}}"
-            data-Input-input
+            data-Input-input=""
             {{ $autofocus ? ' autofocus' : '' }}
             {{ $disabled ? ' disabled' : '' }}
             {{ $readonly ? ' readonly' : '' }}
-            {{ $required ? ' required' : '' }}>
-            {{$value ?? ''}}
-        </textarea>
+            {{ $required ? ' required' : '' }}>{{  $value ?? ''}}</textarea>
+        {{ $slot }}
     </div>
 
     @if ($note)
