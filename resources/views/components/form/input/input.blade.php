@@ -15,7 +15,7 @@
     </div>
 
     <div class="{{ $ui('input', 'wrapper') }}">
-        <input type="{{$type||'text'}}"
+        <input type="{{$type ?? 'text'}}"
             class="{{ $ui('input', 'input') }}"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
             @if($name) name="{{$name}}" @endif
