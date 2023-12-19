@@ -102,6 +102,7 @@ class Textarea extends VitrineComponent
         $readonly = false,
         $spellcheck = '',
         $wrap = '',
+        $ui = []
     )
     {
         $this->label = $label;
@@ -134,6 +135,8 @@ class Textarea extends VitrineComponent
         if($note) {
             $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View
