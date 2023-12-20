@@ -59,7 +59,6 @@ return [
         'heading' => A17\VitrineUI\Components\Heading::class,
         'icon' => A17\VitrineUI\Components\Icon::class,
         'image-zoom' => A17\VitrineUI\Components\ImageZoom::class,
-        'listing' => A17\VitrineUI\Components\Listing::class,
         'link' => A17\VitrineUI\Components\Link::class,
         'map-google' => A17\VitrineUI\Components\MapGoogle::class,
         'map-mapbox' => A17\VitrineUI\Components\MapMapbox::class,
