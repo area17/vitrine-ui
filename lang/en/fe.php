@@ -94,6 +94,7 @@ return [
     'pagination' => [
         'showing' => 'Showing :count of :total items',
         'page_of' => 'Page :current of :last',
+        'num_of_total' => 'of :last pages',
         'previous' => 'Previous page',
         'next' => 'Next page',
     ],

@@ -7,7 +7,7 @@
             <x-vui-button
                     :href="$prevPageUrl()"
                     :variant="$btnVariant ?? 'secondary'"
-                    icon="arrow-left-24"
+                    :icon="$iconLeft ?? 'arrow-left-24'"
                     :static="$onFirstPage"
                     :disabled="$onFirstPage"
                     class="{{ Arr::toCssClasses([
@@ -18,14 +18,14 @@
 
             <x-vui-button
                     :href="$nextPageUrl()"
-                    icon="arrow-right-24"
+                    :icon="$iconRight ?? 'arrow-right-24'"
                     :variant="$btnVariant ?? 'secondary'"
                     :static="$onLastPage"
                     :disabled="$onLastPage"
                     class="{{ Arr::toCssClasses([
                         $ui('pagination', 'action-disabled') => $onLastPage
                     ]) }}"
-                    aria-label="{{ __('pagination.next') }}"
+                    aria-label="{{ __('vitrine-ui::fe.pagination.next') }}"
             />
         </div>
         <span class="{{ $ui('pagination', 'show-message') }}">
@@ -38,6 +38,9 @@
                     :required="false"
                     data-pagination-paging-dropdown
             />
+            @if(!$labelInsideDropdown)
+                <p class="{{ $ui('pagination', 'dropdown-message') }}">{{ __('vitrine-ui::fe.pagination.num_of_total', ['last' => $lastPage]) }}</p>
+            @endif
         </div>
     </div>
 </div>

@@ -33,6 +33,12 @@ class Pagination extends VitrineComponent
     /** @var string */
     public $btnVariant;
 
+    public $iconLeft = 'arrow-left-24';
+
+    public $iconRight = 'arrow-right-24';
+
+    public $labelInsideDropdown = true;
+
     protected static array $assets = [
         'js' => 'behaviors/Pagination.js',
     ];
@@ -44,6 +50,9 @@ class Pagination extends VitrineComponent
         $total = null,
         $lastPage = 1,
         $btnVariant = 'secondary',
+        $iconLeft = 'arrow-left-24',
+        $iconRight = 'arrow-right-24',
+        $labelInsideDropdown = true,
         $ui = []
     )
     {
@@ -56,6 +65,10 @@ class Pagination extends VitrineComponent
         $this->onFirstPage = $this->currentPage === 1;
         $this->onLastPage = $this->currentPage === $this->lastPage;
         $this->dropdownItems = $this->buildDropdownItems();
+        $this->iconLeft = $iconLeft;
+        $this->iconRight = $iconRight;
+        $this->labelInsideDropdown = $labelInsideDropdown;
+
         Parent::__construct($ui);
     }
 
@@ -77,7 +90,7 @@ class Pagination extends VitrineComponent
             $i = $key;
             $items[] = [
                 'value' => $page['url'],
-                'label' => __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage]),
+                'label' => $this->labelInsideDropdown ? __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage]) : $i,
                 'selected' => $i === $this->currentPage,
             ];
         }
