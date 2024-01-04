@@ -64,10 +64,10 @@ class Pagination extends VitrineComponent
         $this->lastPage = $lastPage;
         $this->onFirstPage = $this->currentPage === 1;
         $this->onLastPage = $this->currentPage === $this->lastPage;
+        $this->labelInsideDropdown = $labelInsideDropdown;
         $this->dropdownItems = $this->buildDropdownItems();
         $this->iconLeft = $iconLeft;
         $this->iconRight = $iconRight;
-        $this->labelInsideDropdown = $labelInsideDropdown;
 
         Parent::__construct($ui);
     }
