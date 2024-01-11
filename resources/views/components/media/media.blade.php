@@ -18,7 +18,9 @@
 @if (isset($backgroundVideo) && !empty($backgroundVideo))
     <x-vui-video-background :aspect-ratio="$backgroundVideo['aspectRatio'] ?? null"
                             :sources="$backgroundVideo['sources'] ?? null"
-                            :control-mute="$backgroundVideo['controlMute'] ?? null"/>
+                            :control-mute="$backgroundVideo['controlMute'] ?? null">
+        {{ $slot ?? null }}
+    </x-vui-video-background>
 @else
     @if (isset($video) && $video)
         <div class="{{ $ui('media', 'video-wrapper') }}"
