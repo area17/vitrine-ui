@@ -13,8 +13,8 @@ const ShowVideo = createBehavior(
         },
 
         _playVideo() {
-            const type = this.options.videotype
-            const id = this.options.videoid
+            const type = this.options.type
+            const id = this.options.id
             this._data.params = this._handleParams(type)
 
             if (type === 'youtube') {
