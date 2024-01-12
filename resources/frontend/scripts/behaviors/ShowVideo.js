@@ -9,10 +9,12 @@ const ShowVideo = createBehavior(
             event.stopPropagation()
 
             this.$videoPlayer.classList.remove('hidden')
-            this._playVideo(this.options.videotype, this.options.videoid)
+            this._playVideo()
         },
 
-        _playVideo(type, id) {
+        _playVideo() {
+            const type = this.options.videotype
+            const id = this.options.videoid
             this._data.params = this._handleParams(type)
 
             if (type === 'youtube') {
@@ -41,12 +43,7 @@ const ShowVideo = createBehavior(
 
             this.$videoPlayer.classList.remove('hidden')
 
-            this._playVideo(
-                this.options.videotype,
-                this.options.videoid,
-                false,
-                false
-            )
+            this._playVideo()
         },
 
         _removeIframe() {
@@ -65,11 +62,7 @@ const ShowVideo = createBehavior(
                 window.location.search.indexOf('playvideo') > -1
             ) {
                 this.$node.classList.add('is-active')
-                this._playVideo(
-                    this.options.videotype,
-                    this.options.videoid,
-                    true
-                )
+                this._playVideo()
             }
         },
 
