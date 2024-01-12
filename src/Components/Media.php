@@ -29,9 +29,6 @@ class Media extends VitrineComponent
     public $backgroundVideo;
 
     /** @var array */
-    protected $presetData;
-
-    /** @var array */
     public $imageType;
 
     /** @var array */
@@ -73,8 +70,7 @@ class Media extends VitrineComponent
         $this->backgroundVideo = $this->parseBackgroundVideo($backgroundVideo);
         $this->cover = $cover;
 
-        $this->presetData = config('twill-image.presets.' . $this->imagePreset);
-        $this->imageOptions = $this->parseImageOptions($imageOptions);
+        $this->imageOptions = $imageOptions;
         $this->classes = ['h-full' => $this->cover];
 
         parent::__construct($ui);
