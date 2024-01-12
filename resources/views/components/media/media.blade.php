@@ -46,7 +46,7 @@
             :use-placeholder="$usePlaceholder"
             :image="$image"
             :image-preset="$imagePreset"
-            :image-preset="$imageOptions"/>
+            :image-options="$imageOptions"/>
             {{ $slot ?? null }}
         </div>
     @endif
