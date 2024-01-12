@@ -1,6 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
-export const VideoBackground = createBehavior('VideoBackground',
+export const VideoBackground = createBehavior(
+    'VideoBackground',
     {
         togglePlay(e) {
             e.preventDefault()
