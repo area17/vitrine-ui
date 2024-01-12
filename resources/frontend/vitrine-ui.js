@@ -9,6 +9,7 @@ export { default as Dropdown } from './scripts/behaviors/Dropdown'
 export { default as Modal } from './scripts/behaviors/Modal'
 export { default as ShowVideo } from './scripts/behaviors/ShowVideo'
 // export { default as VideoBackground } from './scripts/behaviors/VideoBackground'
+// export { default as VideoBackgroundVideoJs } from './scripts/behaviors/VideoBackgroundVideoJs'
 
 export { default as Input } from './scripts/behaviors/Input'
 export { default as Pagination } from './scripts/behaviors/Pagination'

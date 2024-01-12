@@ -2,16 +2,22 @@
     'sources' => null,
     'aspectRatio' => '16/9',
     'controlMute' => false,
+    'native' => true, // HTML 5 Video or VideoJS
 ])
+
+@php
+    $behaviorName = $native ? 'VideoBackground' : 'VideoBackgroundVideoJs';
+@endphp
 
 @isset($sources)
     <div {{ $attributes->class(['relative', 'overflow-hidden', 'w-full', 'h-full', 'aspect-' . $aspectRatio]) }}>
         <div class="relative h-full w-full"
-             data-behavior="VideoBackground"
-             data-VideoBackground-text-pause="{{ __('vitrine-ui::fe.pause') }}"
-             data-VideoBackground-text-play="{{ __('vitrine-ui::fe.play') }}"
-             data-VideoBackground-text-mute="{{ __('vitrine-ui::fe.mute') }}"
-             data-VideoBackground-text-unmute="{{ __('vitrine-ui::fe.unmute') }}">
+             data-behavior="{{ $behaviorName }}"
+             {!! 'data-'.$behaviorName.'-text-pause="'.__('vitrine-ui::fe.pause').'"
+             data-'.$behaviorName.'-text-play="'.__('vitrine-ui::fe.play').'"
+             data-'.$behaviorName.'-text-mute="'.__('vitrine-ui::fe.mute').'"
+             data-'.$behaviorName.'-text-unmute="'.__('vitrine-ui::fe.unmute').'"' !!}
+             >
             <div class="absolute bottom-12 right-12 z-10 flex">
                 @if ($controlMute)
                     <x-vui-button class="flex"
@@ -39,7 +45,7 @@
             </div>
 
             <div class="relative h-full w-full">
-                <video class="video-js absolute inset-0 h-full w-full object-cover"
+                <video class="{{ $native ? '' : 'video-js' }} absolute inset-0 h-full w-full object-cover"
                        data-VideoBackground-player=""
                        playsinline
                        autoplay
