@@ -1,6 +1,9 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { queryStringHandler } from '@area17/a17-helpers'
 
+// Default player params
+
+// https://developers.google.com/youtube/player_parameters
 const PARAM_YOUTUBE = {
     rel: 0,
     fs: 1,
@@ -9,8 +12,10 @@ const PARAM_YOUTUBE = {
     showinfo: 0,
     enablejsapi: 1,
     autoplay: 1,
+    origin: window.location.origin,
 }
 
+// https://help.vimeo.com/hc/en-us/articles/12426260232977-Player-parameters-overview
 const PARAM_VIMEO = {
     color: '05d192',
     title: 0,
@@ -18,37 +23,38 @@ const PARAM_VIMEO = {
     portrait: 0
 }
 
+// Show Youtuve/Vimeo video player
 const ShowVideo = createBehavior(
     'ShowVideo',
     {
-        _handleClicks(event) {
+        handleClick(event) {
             event.preventDefault()
             event.stopPropagation()
 
             this.$videoPlayer.classList.remove('hidden')
-            this._playVideo()
+            this.playVideo()
         },
 
-        _playVideo() {
-            if (this._data.videoInitialized) {
-                return
-            }
-
+        playVideo() {
             const type = this.options.type
             const id = this.options.id
-            this._data.params = this._handleParams(type)
 
+            if (this.videoInitialized) return
+            if(!type || !id) return console.warn('ShowVideo: missing type or id')
+
+            const params = this.handleParams(type)
+
+            let src = ''
             if (type === 'youtube') {
-                this._data.source = `https://www.youtube.com/embed/${id}${this._data.params}`
+                src = `https://www.youtube.com/embed/${id}${params}`
             } else if (type === 'vimeo') {
-                this._data.source = `https://player.vimeo.com/video/${id}${this._data.params}`
+                src = `https://player.vimeo.com/video/${id}${params}`
             }
 
             this.$videoPlayer.classList.remove('hidden')
-            this._data.videoiFrame = `<iframe data-video-player title="Video Player" src="${this._data.source}" mozallowfullscreen webkitallowfullscreen allowfullscreen allow="autoplay" class="w-full h-full"></iframe>`
-            this.$videoPlayer.innerHTML = this._data.videoiFrame
+            this.$videoPlayer.innerHTML = `<iframe data-video-player title="Video Player" src="${src}" mozallowfullscreen webkitallowfullscreen allowfullscreen allow="autoplay" class="w-full h-full"></iframe>`
             this.$node.classList.add('is-active')
-            this._data.videoInitialized = true
+            this.videoInitialized = true
 
             const iframe = this.$videoPlayer.querySelector('iframe')
 
@@ -59,78 +65,66 @@ const ShowVideo = createBehavior(
             }
         },
 
-        _showIframe() {
-            this._playVideo()
-        },
-
-        _removeIframe() {
-            if (!this._data.videoInitialized) {
-                return
-            }
+        destroyVideo() {
+            if (!this.videoInitialized) return
 
             this.$videoPlayer.classList.add('hidden')
             this.$videoPlayer.innerHTML = ''
         },
 
-        _checkParams() {
-            // Autoplay video if playvideo query string in the current url
-            if (
-                this._autoplay &&
-                window.location.search.indexOf('playvideo') > -1
-            ) {
-                this._playVideo()
+        checkParams() {
+            if (window.location.search.indexOf('playvideo') > -1) {
+                this.playVideo()
             }
         },
 
-        _handleParams(embed_service) {
+        handleParams(embed_service) {
             let videoparams = {}
 
             if (embed_service == 'youtube') videoparams = PARAM_YOUTUBE
             if (embed_service == 'vimeo') videoparams = PARAM_VIMEO
 
             // force autoplay
-            videoparams.autoplay = this._autoplay ? 1 : 0
+            videoparams.autoplay = this.autoplay ? 1 : 0
 
             let queryString = queryStringHandler.fromObject(videoparams)
             return queryString
         },
+    },
+    {
+        init() {
+            // State
+            this.videoInitialized = false
+            this.autoplay = Boolean(this.options.autoplay && this.options.autoplay !== '0')
 
-        _init() {
-            this._autoplay = Boolean(this.options.autoplay && this.options.autoplay !== '0')
+            // Elements
             this.$videoPlayer = this.getChild('player')
             this.$trigger = this.getChild('media-container')
-            this._data.source
-            this._data.params
-            this._data.videoiFrame
-            this._data.videoInitialized = false
 
-            this.$trigger.addEventListener('click', this._handleClicks, false)
+            // Events
+            this.$trigger.addEventListener('click', this.handleClick, false)
             this.$videoPlayer.innerHTML = ''
-
             this.$videoPlayer.addEventListener(
                 'video:destroy',
-                this._removeIframe,
+                this.destroyVideo,
                 false
             )
 
             // TODO IF RELIABLE : detect autoplay is forbidden on Youtube/Vimeo embed (ie : iOS/Android) to launch player on init
             // to avoid double clicks to launch videos
-        }
-    },
-    {
-        init() {
-            this._init()
-            this._checkParams()
+
+            // Launch video player if playvideo query string in the current url
+            this.checkParams()
         },
         enabled() {},
         resized() {},
         mediaQueryUpdated() {},
         disabled() {},
         destroy() {
-            this.$trigger.removeEventListener('click', this._handleClicks)
+            this.$trigger.removeEventListener('click', this.handleClick)
             this.$videoPlayer.removeEventListener(
                 'video:destroy',
-                this._removeIframe
+                this.destroyVideo
             )
         }
     }
