@@ -58,6 +58,7 @@ return [
         'form-upload' => A17\VitrineUI\Components\Form\Upload::class,
         'heading' => A17\VitrineUI\Components\Heading::class,
         'icon' => A17\VitrineUI\Components\Icon::class,
+        'image' => A17\VitrineUI\Components\Image::class,
         'image-zoom' => A17\VitrineUI\Components\ImageZoom::class,
         'link' => A17\VitrineUI\Components\Link::class,
         'map-google' => A17\VitrineUI\Components\MapGoogle::class,
