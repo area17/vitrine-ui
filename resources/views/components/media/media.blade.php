@@ -8,12 +8,7 @@
     data-behavior="ShowVideo"
     data-ShowVideo-id="{{ $video['id'] }}"
     data-ShowVideo-type="{{ $video['type'] }}"
-    data-ShowVideo-autoplay="{{ $video['autoplay'] ?? 0 }}"
-    @if (isset($video['params']))
-        @foreach ($video['params'] as $key => $value)
-            data-ShowVideo-param-{{ $key }}="{{ $value }}"
-        @endforeach
-    @endif
+    data-ShowVideo-autoplay="{{ $video['autoplay'] ?? 1 }}"
 @endif>
 
 {{-- BackgroundVideo, Video or Image --}}
