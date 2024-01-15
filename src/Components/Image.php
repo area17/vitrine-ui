@@ -63,6 +63,8 @@ class Image extends VitrineComponent
             return 'twill-image';
         } elseif (Arr::has($this->image, '_static')) {
             return 'twill-image-static';
+        } elseif (Arr::has($this->image, 'src') && Arr::has($this->image, 'srcSet')) {
+            return 'twill-image-array';
         } elseif (is_array($this->image) && array_key_exists('src', $this->image)) {
             return 'static';
         } elseif ($this->usePlaceholder) {
