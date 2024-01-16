@@ -13,9 +13,9 @@
                 @if(Arr::has($imageOptions, 'sizes')) sizes="{{ $imageOptions['sizes'] }}" @endif
                 @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {!! $setAttributes($imageOptions['attributes'])!!} @endif
                 @if(Arr::has($image, 'srcset')) srcset="{{ $image['srcset'] }}" @endif
+                @if (Arr::has($image, 'srcSet')) srcset="{{ $image['srcSet'] }}" @endif
                 src="{{ $image['src'] }}"
-                alt="{{ $image['alt'] ?? '' }}"
-                @if (Arr::has($image, 'srcSet')) srcset="{{ $image['srcSet'] }}" @endif />
+                alt="{{ $image['alt'] ?? '' }}" />
     @break
     @case('placeholder')
         <div {{ $attributes->class([$ui('media', 'image-placeholder'), $imageOptions['class'] ?? null]) }}></div>
