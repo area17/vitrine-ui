@@ -9,9 +9,6 @@ use A17\VitrineUI\Components\VitrineComponent;
 class Textarea extends VitrineComponent
 {
     /** @var string */
-    public $label;
-
-    /** @var string */
     public $name;
 
     /** @var string */
@@ -56,9 +53,6 @@ class Textarea extends VitrineComponent
     /** @var string */
     public $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
-
     protected static array $assets = [
         'js' => [
             'behaviors/Input.js'
@@ -69,7 +63,6 @@ class Textarea extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
         $name = null,
         $id = null,
         $value = '',
@@ -87,7 +80,6 @@ class Textarea extends VitrineComponent
         $ui = []
     )
     {
-        $this->label = $label;
         $this->name = $name;
         $this->id = $id;
         $this->value = $value;
