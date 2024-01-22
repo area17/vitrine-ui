@@ -1,19 +1,21 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
+const ERROR_CSS = 's-error'
+
 const Input = createBehavior(
     'Input',
     {
         resetErrorState() {
             this.$error.textContent = ''
             this.$error.style.display = 'none'
-            this.$node.classList.remove('s-error')
+            this.$node.classList.remove(ERROR_CSS)
         },
         showErrorState(msg) {
             if (msg) {
                 this.$error.textContent = msg
             }
             this.$error.style.display = ''
-            this.$node.classList.add('s-error')
+            this.$node.classList.add(ERROR_CSS)
         },
         validated(event) {
             let validityMsg = event?.detail

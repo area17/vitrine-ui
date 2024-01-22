@@ -48,6 +48,7 @@ return [
         'form-date' => A17\VitrineUI\Components\Form\Date::class,
         'form-date-range' => A17\VitrineUI\Components\Form\DateRange::class,
         'form-date-trio' => A17\VitrineUI\Components\Form\DateTrio::class,
+        'form-field' => A17\VitrineUI\Components\Form\Field::class,
         'form-input' => A17\VitrineUI\Components\Form\Input::class,
         'form-password' => A17\VitrineUI\Components\Form\Password::class,
         'form-radio' => A17\VitrineUI\Components\Form\Radio::class,
