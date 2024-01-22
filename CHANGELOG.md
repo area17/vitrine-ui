@@ -1,5 +1,14 @@
 # Changelog
 
+
+## [2.1.0] - 2024-22-01
+
+## Added
+- New FormField component : New component to handle markup around Input / Textarea
+
+### Changed
+- Update Input and Textarea
+
 ## [2.0.0] - 2024-16-01
 
 ## Added
