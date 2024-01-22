@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0] - 2024-16-01
+## [2.0.0] - 2024-16-01
 
 ## Added
 - New Image component : Split Media component into Image component so we have a way to add an image without extra markup around
