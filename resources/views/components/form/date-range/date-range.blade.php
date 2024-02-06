@@ -5,7 +5,7 @@
     @if($maxDate)data-DateRange-maxDate="{{ $maxDate }}"@endif
     @if($picker)data-DatePicker-el="{{ $pickerID }}"@endif
     class="{{ $disabled ? 'opacity-50 ' : '' }}"
-    aria-labelledby="{{implode(',', $ariaDescribedBy)}}"
+    aria-labelledby="{{implode(' ', $ariaDescribedBy)}}"
     {{ $disabled ? 'inert' : '' }}
 >
     <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">

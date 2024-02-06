@@ -19,12 +19,12 @@
     $ariaID = 'ariaID'.$rand;
     $errorID = 'errorID'.$rand;
     $ariaDescribedBy = [];
-    $ariaDescribedBy[] = '#'.$errorID;
+    $ariaDescribedBy[] = $errorID;
     if($hint) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Hint';
+        $ariaDescribedBy[] = $ariaID.'Hint';
     }
     if($note) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Note';
+        $ariaDescribedBy[] = $ariaID.'Note';
     }
 @endphp
 
@@ -40,7 +40,7 @@
             @if($name) name="{{$name}}" @endif
             @if($value) value="{{$value}}" @endif
             data-Input-input
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
             {{ $inputAttr ? ' '.$inputAttr : '' }}
             {{ $autofocus ? ' autofocus' : '' }}
             {{ $disabled ? ' disabled' : '' }}

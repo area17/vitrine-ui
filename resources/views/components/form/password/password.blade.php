@@ -37,7 +37,7 @@
             @if($placeholder) placeholder="{{$placeholder}}" @endif
             @if($autocomplete) autocomplete="{{$autocomplete}}" @endif
             @if($form) form="{{$form}}" @endif
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
             data-Input-input
             data-PasswordInput-input
             {{ $autofocus ? ' autofocus' : '' }}

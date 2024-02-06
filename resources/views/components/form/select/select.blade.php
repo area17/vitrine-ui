@@ -19,7 +19,7 @@
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
             @if($name) name="{{$name}}" @endif
             @if($autocomplete) autocomplete="{{$autocomplete}}" @endif
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
             data-Input-input
             {{ $autofocus ? ' autofocus' : '' }}
             {{ $disabled ? ' disabled' : '' }}

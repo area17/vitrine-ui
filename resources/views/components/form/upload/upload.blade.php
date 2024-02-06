@@ -21,7 +21,7 @@
                 @if($name) name="{{$name}}" @endif
                 @if($fileSize) size="{{ $fileSize * 1024 * 1024 }}" @endif
                 @if($allowed) accept="{{$allowed}}" @endif
-                aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+                aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
                 data-Input-input
                 data-fileupload-input
                 {{ $autofocus ? ' autofocus' : '' }}
