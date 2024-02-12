@@ -55,7 +55,7 @@
             @if($maxDate) max="{{$maxDate}}" @endif
             @if($form) form="{{$form}}" @endif
             pattern="\d{4}-\d{1,2}-\d{1,2}"
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
             data-DateInput-input
             data-Input-input
             {{ $autofocus ? ' autofocus' : '' }}

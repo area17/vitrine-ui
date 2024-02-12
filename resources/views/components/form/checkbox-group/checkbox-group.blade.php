@@ -14,10 +14,10 @@
     $ariaID = 'ariaID'.$rand;
     $ariaDescribedBy = [];
     if($hint) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Hint';
+        $ariaDescribedBy[] = $ariaID.'Hint';
     }
     if($note) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Note';
+        $ariaDescribedBy[] = $ariaID.'Note';
     }
 @endphp
 

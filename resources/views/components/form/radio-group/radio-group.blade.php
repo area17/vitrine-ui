@@ -1,7 +1,7 @@
 <fieldset
     data-behavior="RadioGroup"
     {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error]) }}
-    aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
     {{ $disabled ? 'inert' : '' }}>
 
     <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">

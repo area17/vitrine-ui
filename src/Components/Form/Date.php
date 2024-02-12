@@ -136,25 +136,25 @@ class Date extends VitrineComponent
         }
 
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->ariaID.'Format';
+        $this->ariaDescribedBy[] = $this->ariaID.'Format';
 
         if($this->minDate) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'MinDate';
+            $this->ariaDescribedBy[] = $this->ariaID.'MinDate';
         }
 
         if($this->maxDate) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'MaxDate';
+            $this->ariaDescribedBy[] = $this->ariaID.'MaxDate';
         }
 
         if($this->hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
+            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
         }
 
         if($this->note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
+            $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
 
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
+        $this->ariaDescribedBy[] = $this->errorID;
     }
 
     public function render(): View

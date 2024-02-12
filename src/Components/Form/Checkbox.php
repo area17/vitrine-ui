@@ -99,13 +99,13 @@ class Checkbox extends VitrineComponent
         $this->ariaID = 'ariaID'. $rand;
         $this->errorID = 'errorID'. $rand;
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
+        $this->ariaDescribedBy[] = $this->errorID;
 
         if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
+            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
         }
         if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
+            $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
     }
 

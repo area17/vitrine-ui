@@ -35,7 +35,7 @@
                     :multiple="$multiple ?? false"
                     :readonly="$readonly ?? false"
                     :required="$required ?? false"
-                    aria-describedby="{{implode(',', $ariaDescribedBy)}}"/>
+                    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"/>
             @break
             @default
                 <x-vui-form-input
@@ -59,7 +59,7 @@
                     :multiple="$multiple ?? false"
                     :readonly="$readonly ?? false"
                     :required="$required ?? false"
-                    aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+                    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
                 />
             @break
         @endswitch

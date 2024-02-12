@@ -168,13 +168,13 @@ class Field extends VitrineComponent
         $this->ariaID = 'ariaID'.$this->rand;
         $this->errorID = 'errorID'.$this->rand;
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
+        $this->ariaDescribedBy[] = $this->errorID;
 
         if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
+            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
         }
         if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
+            $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
 
         parent::__construct($ui);
