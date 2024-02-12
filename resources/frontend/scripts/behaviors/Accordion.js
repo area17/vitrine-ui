@@ -107,10 +107,17 @@ const Accordion = createBehavior(
 
                 trigger.addEventListener('click', this.toggle, false)
 
+
                 // closed opened accordion items
                 // to make sure content is not re-opened when resizing the window
                 if (this._data.activeIndexes.includes(index)) {
                     this.triggerClose(index)
+                }
+
+                // check if the accordion item should be opened by default
+                const isOpen = trigger.getAttribute(`data-${this.name}-open`) === 'true'
+                if (isOpen) {
+                    this.triggerOpen(index)
                 }
             })
 

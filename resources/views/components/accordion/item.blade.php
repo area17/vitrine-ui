@@ -5,6 +5,7 @@
     'setFixedHeight' => true,
     'iconClosed' => 'plus-32',
     'iconOpen' => 'minus-32',
+    'open' => false,
 ])
 
 @php
