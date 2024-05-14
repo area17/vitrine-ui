@@ -113,17 +113,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/area17/twill-image.git",
-                "reference": "2b106a25043e844f26788016ad5329c94db698ad"
+                "reference": "6223897eb2b0c5754c6a62b92059a3841f8e0665"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/area17/twill-image/zipball/2b106a25043e844f26788016ad5329c94db698ad",
-                "reference": "2b106a25043e844f26788016ad5329c94db698ad",
+                "url": "https://api.github.com/repos/area17/twill-image/zipball/6223897eb2b0c5754c6a62b92059a3841f8e0665",
+                "reference": "6223897eb2b0c5754c6a62b92059a3841f8e0665",
                 "shasum": ""
             },
             "require": {
                 "area17/twill": "2.*|3.*",
-                "laravel/framework": "~5.6|~5.7|~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "laravel/framework": "~5.6|~5.7|~5.8|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
                 "php": ">=7.2.5",
                 "spatie/laravel-view-models": "^1.3"
             },
@@ -161,7 +161,7 @@
                 "issues": "https://github.com/area17/twill-image/issues",
                 "source": "https://github.com/area17/twill-image/tree/2.x"
             },
-            "time": "2024-02-28T19:02:58+00:00"
+            "time": "2024-05-14T16:50:46+00:00"
         },
         {
             "name": "astrotomic/laravel-translatable",
