@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "area17/twill-image": "^1.0",
+        "area17/twill-image": "^2.0",
         "gehrisandro/tailwind-merge-laravel": "^0.1|^1.0",
         "illuminate/contracts": "^10.0|^11.0",
         "spatie/laravel-package-tools": "^1.14.0",
