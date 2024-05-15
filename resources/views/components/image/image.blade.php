@@ -6,7 +6,7 @@
         {!!  A17\Twill\Image\Models\StaticImage::makeFromSrc($staticSettings)->render($imageOptions) !!}
     @break
     @case('static' || 'twill-image-array')
-        <img {{ $attributes->class([$ui('media', 'image'), $imageOptions['imageClass'] ? $imageOptions['imageClass'] : $imageOptions['class'] ?? null]) }}
+        <img {{ $attributes->class([$ui('media', 'image'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}
                 @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {!! $setAttributes($imageOptions['attributes'])!!} @endif
                 @if(Arr::has($imageOptions, 'width')) width="{{ $imageOptions['width'] }}" @endif
                 @if(Arr::has($imageOptions, 'height')) height="{{ $imageOptions['height'] }}" @endif
@@ -18,6 +18,6 @@
                 alt="{{ $image['alt'] ?? '' }}" />
     @break
     @case('placeholder')
-        <div {{ $attributes->class([$ui('media', 'image-placeholder'), $imageOptions['imageClass'] ? $imageOptions['imageClass'] : $imageOptions['class'] ?? null]) }}></div>
+        <div {{ $attributes->class([$ui('media', 'image-placeholder'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}></div>
     @break
 @endswitch
