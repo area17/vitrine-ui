@@ -16,6 +16,9 @@ class Accordion extends VitrineComponent
     /** @var bool */
     public $scrollOnOpen;
 
+    /** @var bool */
+    public $exclusive;
+
     protected static array $assets = [
         'js' => 'behaviors/Accordion.js',
     ];
