@@ -15,7 +15,8 @@
         <ul class="{{ $ui('accordion','list') }}"
             data-behavior="Accordion"
             aria-labelledby="{{ $headingId }}"
-            {{ $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' }}>
+            {!! $exclusive ? 'data-accordion-exclusive="true"' : '' !!}
+            {!! $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' !!}>
             {!! $slot !!}
         </ul>
     </div>
