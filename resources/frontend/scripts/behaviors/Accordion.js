@@ -15,6 +15,20 @@ const Accordion = createBehavior(
         triggerOpen(index) {
             this.open(index)
             this._data.activeIndexes.push(index)
+
+            // exclusive mode : close other opened accordion items
+            if(this.exclusive) {
+                setTimeout(() => {
+                    this.$triggers.forEach((trigger) => {
+                        const triggerIndex = this.getTriggerIndex(trigger)
+
+                        // closed opened accordion items
+                        if (this._data.activeIndexes.includes(triggerIndex) && triggerIndex !== index) {
+                            this.triggerClose(triggerIndex)
+                        }
+                    })
+                }, TIMEOUT + 1)
+            }
         },
         toggle(e) {
             e.preventDefault()
@@ -89,13 +103,12 @@ const Accordion = createBehavior(
         init() {
             this._data.activeIndexes = []
             this.scrollOnOpen = this.options['scroll-open'] === 'true'
+            this.exclusive = this.options['exclusive'] === 'true'
 
             this.$initOpen = this.getChildren('init-open')
             this.$triggers = this.getChildren('trigger')
             this.$contents = this.getChildren('content')
             this.$contentInners = this.getChildren('content-inner')
-
-            // tbd: add behavior options to close others accordion item when one is open
         },
         enabled() {
             if (this.scrollOnOpen) {
