@@ -1,10 +1,15 @@
 # Changelog
 
+## [2.3.0] - 2024-03-06
+
+## Added
+- Accordion : add "exclusive" mode to make sure only one item is opened at a time
+
 ## [2.2.0] - 2024-12-02
+
 ## Fixed
 - Aria-describedby for form elements – [MR-2](https://code.area17.com/a17/vitrine/vitrine-ui-blade/-/merge_requests/2)
 - Accordion behavior open state – [MR-3](https://code.area17.com/a17/vitrine/vitrine-ui-blade/-/merge_requests/3)
-
 
 ## [2.1.0] - 2024-22-01
 
