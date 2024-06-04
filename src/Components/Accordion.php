@@ -19,6 +19,9 @@ class Accordion extends VitrineComponent
     /** @var bool */
     public $exclusive;
 
+    /** @var int */
+    public $timing;
+
     protected static array $assets = [
         'js' => 'behaviors/Accordion.js',
     ];
@@ -28,6 +31,7 @@ class Accordion extends VitrineComponent
         $headingLevel = 3,
         $scrollOnOpen = false,
         $exclusive = false,
+        $timing = 300,
         $ui = []
     )
     {
@@ -35,6 +39,7 @@ class Accordion extends VitrineComponent
         $this->headingLevel = $headingLevel;
         $this->scrollOnOpen = $scrollOnOpen;
         $this->exclusive = $exclusive;
+        $this->timing = $timing;
 
         parent::__construct($ui);
     }

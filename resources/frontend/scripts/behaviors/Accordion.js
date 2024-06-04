@@ -1,6 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
 const TIMEOUT = 16;
+const ANIM_TIMEOUT = 301;
 
 const Accordion = createBehavior(
     'Accordion',
@@ -68,15 +69,19 @@ const Accordion = createBehavior(
 
             activeContent.classList.remove('hidden')
 
+            // Start Animation
             setTimeout(() => {
                 const contentHeight = activeContentInner.offsetHeight
                 activeContent.style.height = `${contentHeight}px`
-
                 activeTrigger.setAttribute('aria-expanded', 'true')
                 activeTrigger.setAttribute(`data-${this.name}-open`, 'true')
+            }, TIMEOUT)
+
+            // set overflow unset after animation to avoid content to overflow while animating
+            setTimeout(() => {
                 activeContent.setAttribute('aria-hidden', 'false')
                 activeContent.setAttribute(`data-${this.name}-open`, 'true')
-            }, TIMEOUT)
+            }, this.timing)
         },
 
         handleTransitionEnd(e) {
@@ -104,6 +109,7 @@ const Accordion = createBehavior(
             this._data.activeIndexes = []
             this.scrollOnOpen = this.options['scroll-open'] === 'true'
             this.exclusive = this.options['exclusive'] === 'true'
+            this.timing = this.options['timing'] || ANIM_TIMEOUT
 
             this.$initOpen = this.getChildren('init-open')
             this.$triggers = this.getChildren('trigger')

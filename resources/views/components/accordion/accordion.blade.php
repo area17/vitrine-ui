@@ -16,7 +16,8 @@
             data-behavior="Accordion"
             aria-labelledby="{{ $headingId }}"
             {!! $exclusive ? 'data-accordion-exclusive="true"' : '' !!}
-            {!! $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' !!}>
+            {!! $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' !!}
+            data-accordion-timing="{{ $timing ?? null }}">
             {!! $slot !!}
         </ul>
     </div>

@@ -1,10 +1,14 @@
 # Changelog
 
+## [2.5.0] - 2024-04-06
+
+## Fixed
+- Accordion : fix issue with content overflow when opening accordion item. Add option timing to set overflow timeout.
+
 ## [2.4.0] - 2024-04-06
 
 ## Updated
 - Laravel 11 Support
-
 
 ## [2.3.0] - 2024-03-06
 
