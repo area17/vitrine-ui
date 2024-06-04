@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.4.0] - 2024-04-06
+
+## Updated
+- Laravel 11 Support
+
+
 ## [2.3.0] - 2024-03-06
 
 ## Added
