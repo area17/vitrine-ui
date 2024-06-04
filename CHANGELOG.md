@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.5.1] - 2024-04-06
+
+## Updated
+- Accordion : fix issue with content overflow when opening accordion item : remove useless in favor of transitionend
+
 ## [2.5.0] - 2024-04-06
 
 ## Fixed
