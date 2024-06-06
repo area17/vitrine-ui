@@ -1,9 +1,14 @@
 # Changelog
 
+## [2.6.0] - 2024-06-06
+
+## Fixed
+- Forms : Checkboxes and radios : fix incorrect "for" attribute for the label. It should always be the same as the id attribute of the input.
+
 ## [2.5.1] - 2024-04-06
 
 ## Updated
-- Accordion : fix issue with content overflow when opening accordion item : remove useless in favor of transitionend
+- Accordion : fix issue with content overflow when opening accordion item : remove useless code in favor of using transitionend event
 
 ## [2.5.0] - 2024-04-06
 

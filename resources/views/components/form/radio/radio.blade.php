@@ -33,7 +33,7 @@
     {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error]) }}
     {{ $disabled ? 'inert' : '' }}
 >
-    <label class="m-form-radio block" for="{{$name.$rand}}">
+    <label class="m-form-radio block" @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
         <input
             type="radio"
             @if($id || $name) id="{{$id ? $id : $name.$rand}}" @endif

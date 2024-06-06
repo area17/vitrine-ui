@@ -33,10 +33,10 @@
     {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error]) }}
     {{ $disabled ? 'inert' : '' }}
 >
-    <label class="m-form-checkbox block" for="{{$name}}">
+    <label class="m-form-checkbox block" @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
         <input
             type="checkbox"
-            @if($id || $name) id="{{$id ? $id : $name}}" @endif
+            @if($id || $name) id="{{$id ? $id : $name.$rand}}" @endif
             @if($name) name="{{$name}}" @endif
             @if($value) value="{{$value}}" @endif
             data-Input-input
