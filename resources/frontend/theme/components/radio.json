@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "merge": ["input"]
+  },
+  "base":  [
+    "m-form-radio cursor-pointer"
+  ],
+  "wrapper": [
+    "m-form-radio-wrap",
+    "flex items-center space-x-8"
+  ],
+  "label": [
+    "m-form-radio-label",
+    "f-body-1 inline-flex relative"
+  ],
+  "check": [
+    "m-form-radio-check",
+    "peer",
+    "w-24 h-24 rounded-full relative",
+    "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
+    "before:absolute before:content-['']",
+    "before:w-12 before:h-12 before:top-6 before:left-6",
+    "before:rounded-full before:bg-[black]",
+    "before:transition-opacity before:duration-300 before:ease--out",
+    "before:opacity-0",
+    "peer-checked:before:opacity-100"
+  ],
+  "input": [
+    "absolute w-1 h-1",
+    "border-0 p-0 -m-1",
+    "overflow-hidden whitespace-nowrap",
+    "peer"
+  ],
+  "hint": [
+    "m-form-radio-hint",
+    "f-ui-2 text-secondary"
+  ]
+}
