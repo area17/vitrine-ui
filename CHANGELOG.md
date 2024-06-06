@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.6.1] - 2024-06-06
+
+## Update
+- Forms : Checkboxes - Add ability to customize the checkbox icon
+
 ## [2.6.0] - 2024-06-06
 
 ## Fixed

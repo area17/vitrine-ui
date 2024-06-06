@@ -12,6 +12,7 @@
     'inputAttr' => '',
     'autofocus' => false,
     'form' => '',
+    'icon' => 'checkmark-16',
 ])
 
 @php
@@ -49,7 +50,7 @@
         />
         <div class="m-form-checkbox-wrap">
             <span class="m-form-checkbox-check" aria-hidden="true">
-                <x-vui-icon name="checkmark-16" class="checkmark" />
+                <x-vui-icon :name="$icon" class="checkmark" />
             </span>
 
             <div class="m-form-checkbox-label">
