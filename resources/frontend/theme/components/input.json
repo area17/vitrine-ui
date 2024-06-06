@@ -2,7 +2,7 @@
   "rules": {
     "merge": ["input"]
   },
-  "base": "[inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
+  "base": "m-input [inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
   "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
   "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
   "input": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
