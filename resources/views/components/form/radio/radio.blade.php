@@ -33,7 +33,7 @@
         {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
         {{ $disabled ? 'inert' : '' }}
 >
-    <label class="{{$ui('radio', 'base') }}" @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
+    <label class="{{ $ui('radio', 'base') }}" @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
         <div class="{{ $ui('radio', 'wrapper') }}">
             <input
                     type="radio"
@@ -59,7 +59,7 @@
             @endif
         </div>
     </label>
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions" class="{{ $ui('input', 'error') }}"
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}"
        style="display: none;" data-Input-error>
         <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/> {{$error ?? ''}}
     </p>

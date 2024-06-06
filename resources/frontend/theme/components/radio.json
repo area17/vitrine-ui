@@ -3,7 +3,7 @@
     "merge": ["input"]
   },
   "base":  [
-    "m-form-radio cursor-pointer"
+    "m-form-radio cursor-pointer group"
   ],
   "wrapper": [
     "m-form-radio-wrap",
@@ -15,21 +15,23 @@
   ],
   "check": [
     "m-form-radio-check",
-    "peer",
     "w-24 h-24 rounded-full relative",
-    "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
     "before:absolute before:content-['']",
-    "before:w-12 before:h-12 before:top-6 before:left-6",
-    "before:rounded-full before:bg-[black]",
-    "before:transition-opacity before:duration-300 before:ease--out",
-    "before:opacity-0",
-    "peer-checked:before:opacity-100"
+    "before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2",
+    "before:rounded-full",
+    "before:transition-colors before:duration-300 before:ease--out",
+    "before:border-[1px] before:border-[#989EA3]",
+    "peer-checked:before:bg-[black] peer-checked:before:border-[black]",
+    "group-hover:before:border-[black]",
+    "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
   ],
   "input": [
     "absolute w-1 h-1",
     "border-0 p-0 -m-1",
     "overflow-hidden whitespace-nowrap",
-    "peer"
+    "peer",
+    "focus:outline-none",
+    "[clip:rect(0,0,0,0)]"
   ],
   "hint": [
     "m-form-radio-hint",
