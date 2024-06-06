@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.7.0] - 2024-06-06
+
+## Added
+- Inputs : JSON theming files for inputs checkbox and radio
+
 ## [2.6.1] - 2024-06-06
 
 ## Update
