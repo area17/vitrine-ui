@@ -78,6 +78,7 @@ class Checkbox extends VitrineComponent
         $inputAttr = '',
         $autofocus = false,
         $form = '',
+        $ui = []
     )
     {
         $this->label = $label;
@@ -107,6 +108,8 @@ class Checkbox extends VitrineComponent
         if($note) {
             $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View
