@@ -3,7 +3,7 @@
 ## [2.7.2] - 2024-12-06
 
 ## Added
-- Inputs : Radio and Checkox - Allow local overrides
+- Inputs : Radio and Checkbox - Allow local overrides
 
 ## [2.7.1] - 2024-11-06
 
