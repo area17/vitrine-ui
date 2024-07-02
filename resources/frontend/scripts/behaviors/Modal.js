@@ -24,7 +24,7 @@ const Modal = createBehavior(
                 this._data.isActive = false
 
                 setTimeout(() => {
-                    enableBodyScroll(this.$focusTrap)
+                    enableBodyScroll(this.$scroller)
                 }, 200)
 
                 this.$node.dispatchEvent(new CustomEvent('Modal:closed'))
@@ -44,7 +44,7 @@ const Modal = createBehavior(
             document.dispatchEvent(new CustomEvent('Modal:hasOpened'))
             this.$node.dispatchEvent(new CustomEvent('Modal:opened'))
 
-            disableBodyScroll(this.$focusTrap, {
+            disableBodyScroll(this.$scroller, {
                 reserveScrollBarGap: true
             })
 
@@ -110,6 +110,7 @@ const Modal = createBehavior(
     {
         init() {
             this.$focusTrap = this.getChild('focus-trap')
+            this.$scroller = this.getChild('scroller') ? this.getChild('scroller') : this.$focusTrap
             this.$closeButtons = this.getChildren('close-trigger')
             this.$initialFocus = this.getChild('initial-focus')
             this.$clickOutside = this.options['panel'] || this.options['clickoutside']
