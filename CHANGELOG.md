@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.7.3] - 2024-12-06
+## [2.7.3] - 2024-02-07
 
 ## Added
 - Modal : iOS – Body Scroll Lock : add a way to specify another scrollable div to target "data-modal-scroller". If not present it will fallback on the focus trap div. It is important that the scroller div is the one we would like to allow scroll on (NOT a parent of that element) as specified in the doc : https://github.com/rick-liruixin/body-scroll-lock-upgrade
