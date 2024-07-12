@@ -63,6 +63,14 @@ const ShowVideo = createBehavior(
                     iframe.classList.add('is-loaded')
                 }
             }
+
+            this.$node.dispatchEvent(new CustomEvent('video:played'))
+        },
+
+        resetVideo() {
+            this.destroyVideo()
+            this.$node.classList.remove('is-active')
+            this.videoInitialized = false
         },
 
         destroyVideo() {
@@ -104,6 +112,11 @@ const ShowVideo = createBehavior(
             // Events
             this.$trigger.addEventListener('click', this.handleClick, false)
             this.$videoPlayer.innerHTML = ''
+            this.$node.addEventListener(
+                'video:reset',
+                this.resetVideo,
+                false
+            )
             this.$videoPlayer.addEventListener(
                 'video:destroy',
                 this.destroyVideo,
@@ -122,6 +135,11 @@ const ShowVideo = createBehavior(
         disabled() {},
         destroy() {
             this.$trigger.removeEventListener('click', this.handleClick)
+            this.$node.removeEventListener(
+                'video:reset',
+                this.resetVideo,
+                false
+            )
             this.$videoPlayer.removeEventListener(
                 'video:destroy',
                 this.destroyVideo

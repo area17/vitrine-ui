@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.7.4] - 2024-12-07
+
+## Added
+- ShowVideo : Add events to control states of the component (ie : to reset the video if not visible anymore)
+
 ## [2.7.3] - 2024-02-07
 
 ## Added
