@@ -1,6 +1,6 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock-upgrade'
-import { CustomEvents } from '../constants/customEvents'
+import { customEvents } from '../constants/customEvents'
 import * as focusTrap from 'focus-trap'
 
 const Modal = createBehavior(

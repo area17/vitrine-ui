@@ -1,6 +1,6 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { queryStringHandler } from '@area17/a17-helpers'
-import { CustomEvents } from '../constants/customEvents'
+import { customEvents } from '../constants/customEvents'
 import { PARAM_YOUTUBE, PARAM_VIMEO } from '../constants/videoParam'
 
 // Show Youtuve/Vimeo video player
