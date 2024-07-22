@@ -116,6 +116,22 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 ```
 
+### Custom Events
+
+Custom Events are refrenced into a shared object so you can easily use these in behaviors created outside Vitrine UI.
+
+```js
+import { customEvents } from '@vitrineUI/resources/frontend/constants/customEvents'
+
+/* Trigger openModal() when a modal is opened */
+document.removeEventListener(
+    customEvents.MODAL_OPENED,
+    this.openModal,
+    false
+)
+```
+
+
 ## Publish Components
 
 You can publish the components using the `vitrine-ui:publish` command. You can specify components by adding their names as arguments. If you don't specify any components and don't pass the `--all` option, it will prompt to select components to publish.
