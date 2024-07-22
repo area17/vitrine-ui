@@ -116,21 +116,40 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 ```
 
+Or
+
+```js
+import { manageBehaviors } from '@area17/a17-behaviors'
+import * as Behaviors from './behaviors'
+import * as VitrineBehaviors from './behaviors/vitrine' /* import only the needed behaviors from VitrineUI */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // expose manageBehaviors
+    window.A17.behaviors = manageBehaviors
+    // init behaviors!
+    // TBD: We may switch to direct import instead of barrel file
+    window.A17.behaviors.init({
+        ...VitrineBehaviors,
+        ...Behaviors
+    })
+})
+```
+
+
 ### Custom Events
 
-Custom Events are refrenced into a shared object so you can easily use these in behaviors created outside Vitrine UI.
+Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine UI.
 
 ```js
 import { customEvents } from '@vitrineUI/resources/frontend/constants/customEvents'
 
-/* Trigger openModal() when a modal is opened */
+/* Trigger openModal() when a modal is opened into the document */
 document.removeEventListener(
     customEvents.MODAL_OPENED,
     this.openModal,
     false
 )
 ```
-
 
 ## Publish Components
 
