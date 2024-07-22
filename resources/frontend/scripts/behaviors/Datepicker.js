@@ -1,5 +1,6 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import * as focusTrap from 'focus-trap'
+import { customEvents } from '../constants/customEvents'
 import { WcDatepicker } from 'wc-datepicker/dist/components/wc-datepicker'
 
 const DatePicker = createBehavior(
@@ -38,7 +39,7 @@ const DatePicker = createBehavior(
         },
         pickerDateSelected(event) {
             this.$target.dispatchEvent(
-                new CustomEvent('DateInput:SelectDate', {
+                new CustomEvent(customEvents.DATE_INPUT_SELECT_DATE, {
                     detail: event.detail ? event.detail : ''
                 })
             )
@@ -97,7 +98,7 @@ const DatePicker = createBehavior(
                 this.picker &&
                 !this.picker.range &&
                 event.detail?.date &&
-                event.detail?.originalEventType !== 'DateInput:SelectDate'
+                event.detail?.originalEventType !== customEvents.DATE_INPUT_SELECT_DATE
             ) {
                 // make dates
                 let date = new Date(
@@ -243,17 +244,17 @@ const DatePicker = createBehavior(
             this.$pickerMask.addEventListener('click', this.closePicker, false)
             document.addEventListener('keyup', this.handleEsc, false)
             this.$target.addEventListener(
-                'DatePicker:Change',
+                customEvents.DATE_PICKER_CHANGE,
                 this.valueChange,
                 false
             )
             this.$target.addEventListener(
-                'DatePicker:MinMaxUpdate',
+                customEvents.DATE_PICKER_UPDATE,
                 this.minMaxUpdate,
                 false
             )
             this.$target.addEventListener(
-                'DatePicker:Change',
+                customEvents.DATE_PICKER_CHANGE,
                 this.rangeChange,
                 false
             )

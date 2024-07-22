@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+import { customEvents } from '../constants/customEvents'
 
 export const VideoBackground = createBehavior(
     'VideoBackground',
@@ -103,7 +104,7 @@ export const VideoBackground = createBehavior(
         muteAll() {
             // mute all players
             document.dispatchEvent(
-                new CustomEvent('VideoBackground:muteAll')
+                new CustomEvent(customEvents.VIDEO_BACKGROUND_MUTE_ALL)
             )
         },
 
@@ -171,7 +172,7 @@ export const VideoBackground = createBehavior(
         destroy() {
             this.$player.removeEventListener('play', this.handlePlay)
             this.$player.removeEventListener('pause', this.handlePause)
-            document.removeEventListener('VideoBackground:muteAll', this.mute)
+            document.removeEventListener(customEvents.VIDEO_BACKGROUND_MUTE_ALL, this.mute)
 
             if (this.$pauseButton) {
                 this.$pauseButton.removeEventListener('click', this.togglePlay)
