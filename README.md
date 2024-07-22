@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine UI.
 
 ```js
-import { customEvents } from '@vitrineUI/resources/frontend/constants/customEvents'
+import { customEvents } from '@vitrineUI/resources/frontend/scripts/constants/customEvents.js'
 
 /* Trigger openModal() when a modal is opened into the document */
 document.removeEventListener(
