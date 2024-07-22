@@ -12,6 +12,31 @@
             "name": "Tim Brook",
             "email": "tim@area17.com",
             "role": "Developer"
+        },
+        {
+            "name": "Mike Byrne",
+            "email": "mike@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antonin Caudron",
+            "email": "antonin@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antoine Doury",
+            "email": "antoine@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antonio Ribeiro",
+            "email": "antonio@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Florrie Sharp",
+            "email": "florrie@area17.com",
+            "role": "Developer"
         }
     ],
     "require": {
