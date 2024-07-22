@@ -44,7 +44,7 @@ const ShowVideo = createBehavior(
                 }
             }
 
-            this.$node.dispatchEvent(new CustomEvent(CustomEvents.VIDEO_PLAYED))
+            this.$node.dispatchEvent(new CustomEvent(customEvents.VIDEO_PLAYED))
         },
 
         resetVideo() {
@@ -93,12 +93,12 @@ const ShowVideo = createBehavior(
             this.$trigger.addEventListener('click', this.handleClick, false)
             this.$videoPlayer.innerHTML = ''
             this.$node.addEventListener(
-                CustomEvents.VIDEO_RESET,
+                customEvents.VIDEO_RESET,
                 this.resetVideo,
                 false
             )
             this.$videoPlayer.addEventListener(
-                CustomEvents.VIDEO_DESTROY,
+                customEvents.VIDEO_DESTROY,
                 this.destroyVideo,
                 false
             )
@@ -116,12 +116,12 @@ const ShowVideo = createBehavior(
         destroy() {
             this.$trigger.removeEventListener('click', this.handleClick)
             this.$node.removeEventListener(
-                CustomEvents.VIDEO_RESET,
+                customEvents.VIDEO_RESET,
                 this.resetVideo,
                 false
             )
             this.$videoPlayer.removeEventListener(
-                CustomEvents.VIDEO_DESTROY,
+                customEvents.VIDEO_DESTROY,
                 this.destroyVideo
             )
         }

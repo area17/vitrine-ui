@@ -28,8 +28,8 @@ const Modal = createBehavior(
                     enableBodyScroll(this.$scroller)
                 }, 200)
 
-                this.$node.dispatchEvent(new CustomEvent(CustomEvents.MODAL_NODE_CLOSED))
-                document.dispatchEvent(new CustomEvent(CustomEvents.MODAL_CLOSED))
+                this.$node.dispatchEvent(new CustomEvent(customEvents.MODAL_NODE_CLOSED))
+                document.dispatchEvent(new CustomEvent(customEvents.MODAL_CLOSED))
                 this.disposeOpenEvents()
             }
         },
@@ -41,9 +41,9 @@ const Modal = createBehavior(
             }
         },
         open() {
-            document.dispatchEvent(new CustomEvent(CustomEvents.MODAL_CLOSE_ALL))
-            document.dispatchEvent(new CustomEvent(CustomEvents.MODAL_OPENED))
-            this.$node.dispatchEvent(new CustomEvent(CustomEvents.MODAL_NODE_OPENED))
+            document.dispatchEvent(new CustomEvent(customEvents.MODAL_CLOSE_ALL))
+            document.dispatchEvent(new CustomEvent(customEvents.MODAL_OPENED))
+            this.$node.dispatchEvent(new CustomEvent(customEvents.MODAL_NODE_OPENED))
 
             disableBodyScroll(this.$scroller, {
                 reserveScrollBarGap: true
