@@ -144,7 +144,7 @@ Custom Events are referenced into a shared object so you can easily use these in
 import { customEvents } from '@vitrineUI/resources/frontend/scripts/constants/customEvents.js'
 
 /* Trigger openModal() when a modal is opened into the document */
-document.removeEventListener(
+document.addEventListener(
     customEvents.MODAL_OPENED,
     this.openModal,
     false
