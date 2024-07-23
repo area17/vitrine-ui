@@ -1,5 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
-
+import { customEvents } from '../constants/customEvents'
 import formatDate from '../utils/formatDate'
 
 const DateTrio = createBehavior(
@@ -102,7 +102,7 @@ const DateTrio = createBehavior(
                 window.requestAnimationFrame(() => {
                     // waiting a frame to allow Datepicker behavior time to init
                     this.$node.dispatchEvent(
-                        new CustomEvent('DatePicker:Change', {
+                        new CustomEvent(customEvents.DATE_PICKER_CHANGE, {
                             detail: {
                                 date: validDate
                                     ? formatDate(date, 'iso')
@@ -192,12 +192,12 @@ const DateTrio = createBehavior(
             this.$year.addEventListener('change', this.handleChange)
 
             this.$isoinput.addEventListener(
-                'Input:Validated',
+                customEvents.INPUT_VALIDATED,
                 this.validated,
                 false
             )
             this.$node.addEventListener(
-                'DateInput:SelectDate',
+                customEvents.DATE_INPUT_SELECT_DATE,
                 this.selectDate,
                 false
             )
@@ -219,11 +219,11 @@ const DateTrio = createBehavior(
             this.$year.removeEventListener('change', this.handleChange)
 
             this.$isoinput.removeEventListener(
-                'Input:Validated',
+                customEvents.INPUT_VALIDATED,
                 this.validated
             )
             this.$node.removeEventListener(
-                'DateInput:SelectDate',
+                customEvents.DATE_INPUT_SELECT_DATE,
                 this.selectDate
             )
 

@@ -1,27 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { queryStringHandler } from '@area17/a17-helpers'
-
-// Default player params
-
-// https://developers.google.com/youtube/player_parameters
-const PARAM_YOUTUBE = {
-    rel: 0,
-    fs: 1,
-    modestbranding: 1,
-    playsinline: 1,
-    showinfo: 0,
-    enablejsapi: 1,
-    autoplay: 1,
-    origin: window.location.origin,
-}
-
-// https://help.vimeo.com/hc/en-us/articles/12426260232977-Player-parameters-overview
-const PARAM_VIMEO = {
-    color: '05d192',
-    title: 0,
-    byline: 0,
-    portrait: 0
-}
+import { customEvents } from '../constants/customEvents'
+import { PARAM_YOUTUBE, PARAM_VIMEO } from '../constants/videoParam'
 
 // Show Youtuve/Vimeo video player
 const ShowVideo = createBehavior(
@@ -64,7 +44,7 @@ const ShowVideo = createBehavior(
                 }
             }
 
-            this.$node.dispatchEvent(new CustomEvent('video:played'))
+            this.$node.dispatchEvent(new CustomEvent(customEvents.VIDEO_PLAYED))
         },
 
         resetVideo() {
@@ -113,12 +93,12 @@ const ShowVideo = createBehavior(
             this.$trigger.addEventListener('click', this.handleClick, false)
             this.$videoPlayer.innerHTML = ''
             this.$node.addEventListener(
-                'video:reset',
+                customEvents.VIDEO_RESET,
                 this.resetVideo,
                 false
             )
             this.$videoPlayer.addEventListener(
-                'video:destroy',
+                customEvents.VIDEO_DESTROY,
                 this.destroyVideo,
                 false
             )
@@ -136,12 +116,12 @@ const ShowVideo = createBehavior(
         destroy() {
             this.$trigger.removeEventListener('click', this.handleClick)
             this.$node.removeEventListener(
-                'video:reset',
+                customEvents.VIDEO_RESET,
                 this.resetVideo,
                 false
             )
             this.$videoPlayer.removeEventListener(
-                'video:destroy',
+                customEvents.VIDEO_DESTROY,
                 this.destroyVideo
             )
         }

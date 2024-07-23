@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.8.0] - 2024-22-07
+
+## Updated
+- Custom Events : Custom Events are refrenced into a shared object so you can easily use these in behaviors created outside Vitrine UI. **Avoid Magic strings**
+
 ## [2.7.4] - 2024-12-07
 
 ## Added

@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+import { customEvents } from '../constants/customEvents'
 
 const ERROR_CSS = 's-error'
 
@@ -35,12 +36,12 @@ const Input = createBehavior(
             this.$error = this.getChild('error')
 
             this.$input.addEventListener(
-                'Input:Validated',
+                customEvents.INPUT_VALIDATED,
                 this.validated,
                 false
             )
             this.$input.addEventListener(
-                'Input:Reset',
+                customEvents.INPUT_RESET,
                 this.resetErrorState,
                 false
             )
@@ -50,8 +51,8 @@ const Input = createBehavior(
             }
         },
         destroy() {
-            this.$input.removeEventListener('Input:Validated', this.validated)
-            this.$input.removeEventListener('Input:Reset', this.resetErrorState)
+            this.$input.removeEventListener(customEvents.INPUT_VALIDATED, this.validated)
+            this.$input.removeEventListener(customEvents.INPUT_RESET, this.resetErrorState)
         }
     }
 )
