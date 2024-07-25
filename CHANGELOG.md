@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.8.1] - 2024-25-07
+
+## Updated
+- Update dependencies (Update Twill Image to fix calculation of sizes atributes)
+
 ## [2.8.0] - 2024-22-07
 
 ## Updated
