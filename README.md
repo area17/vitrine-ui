@@ -162,6 +162,59 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 - `--class` : Publish only the class of the component
 - `--force` : Overwrite existing files
 
+## Theming
+
+Each component has default classes that you can customize through its associated JSON file located in the 'resources/frontend/theme' folder.
+
+Example of a component JSON config :
+
+```json
+{
+    "base": "custom-class",
+    "wrapper": "custom-class"
+}
+```
+The base key will replace the base component classes, which is the root DOM element of the component.
+For some components, other properties are customizable. Refer to the component's stories to see which properties can be themed.
+
+The configuration will replace existing default vitrine-ui classes. You can change this behavior by specifying merge rules in your component's JSON config and specifying elements.
+
+```json
+{
+    "rules": {
+      "merge": "base"
+    },
+    "base": "custom-class",
+    "wrapper": "custom-class"
+}
+```
+
+You can also add variants by including a variant key in the component's JSON config.
+
+```json
+{
+    "base": "custom-class",
+    "wrapper": "custom-class",
+    "variant": {
+        "primary": "variant-primary-class",
+        "secondary": "variant-secondary-class"
+    }
+}
+```
+
+To use a variant, specify it in the component call:
+
+```html
+<x-vui-component variant="primary">
+```
+
+You can retrieve CSS classes from the JSON configuration file by calling the Vitrine UI helper using the following syntax:
+
+```php
+VitrineUI::ui('json_file_name', 'key_in_json_file', array_of_options)
+```
+array_of_options can be used for variant mapping.
+
 ## Todo
 
 - Add ability to publish components to application
