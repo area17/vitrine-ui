@@ -5,11 +5,11 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)
 
-AREA 17 Vitrine components to import into a laravel application
+AREA 17 Vitrine Blade components to import into a Laravel application. Individual Blade components are showcased in the dedicated demo website : https://vitrine.a17.dev/storybook
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via Composer:
 
 ```bash
 composer require area17/vitrine-ui
@@ -116,6 +116,41 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 ```
 
+Or
+
+```js
+import { manageBehaviors } from '@area17/a17-behaviors'
+import * as Behaviors from './behaviors'
+import * as VitrineBehaviors from './behaviors/vitrine' /* import only the needed behaviors from VitrineUI */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // expose manageBehaviors
+    window.A17.behaviors = manageBehaviors
+    // init behaviors!
+    // TBD: We may switch to direct import instead of barrel file
+    window.A17.behaviors.init({
+        ...VitrineBehaviors,
+        ...Behaviors
+    })
+})
+```
+
+
+### Custom Events
+
+Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine UI.
+
+```js
+import { customEvents } from '@vitrineUI/resources/frontend/scripts/constants/customEvents.js'
+
+/* Trigger openModal() when a modal is opened into the document */
+document.addEventListener(
+    customEvents.MODAL_OPENED,
+    this.openModal,
+    false
+)
+```
+
 ## Publish Components
 
 You can publish the components using the `vitrine-ui:publish` command. You can specify components by adding their names as arguments. If you don't specify any components and don't pass the `--all` option, it will prompt to select components to publish.
@@ -130,6 +165,25 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 ## Todo
 
 - Add ability to publish components to application
+- Integration / autocompletion with IDE
+- Contributions rules
+- Add tests
+- Theme options and extends possibilities (with css classes, specific tailwind components plugin -> tbd, extends basic theme through css / tailwind css preset)... 
+
+- Components refactoring
+- [x] Accordion
+- [ ] Audio player
+- [x] Breadcrumbs
+- [x] Button
+- [ ] Card Inline
+- [ ] Card Primary
+- [ ] Datepicker
+- [ ] Dropdown
+- [ ] Form
+- [ ] Inputs
+- [x] Form Select
+- [x] Heading
+- [x] Icon
 
 ## Testing
 

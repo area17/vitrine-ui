@@ -19,10 +19,13 @@ class AudioPlayer extends VitrineComponent
     /** @var string */
     public $title;
 
-    /** @var Array */
+    /** @var string|null */
+    public $variant;
+
+    /** @var array */
     public $sources;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => 'behaviors/AudioPlayer.js',
         'css' => 'components/audio-player.css',
     ];
@@ -32,7 +35,9 @@ class AudioPlayer extends VitrineComponent
         $playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3],
         $subtitle = null,
         $title = null,
+        $variant = null,
         $sources = [],
+        $ui = []
     )
     {
         $this->downloadUrl = $downloadUrl;
@@ -40,6 +45,9 @@ class AudioPlayer extends VitrineComponent
         $this->subtitle = $subtitle;
         $this->title = $title;
         $this->sources = $sources;
+        $this->variant = $variant;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

@@ -1,12 +1,15 @@
-<div class="w-full p-24 border border-primary" data-behavior="AudioPlayer">
+<div {{ $attributes->class(VitrineUI::setPrefixedClass(['audio-player', 'audio--'.$variant => $variant])) }} data-behavior="AudioPlayer">
+
     @if ($title)
-        <span class="text-lg font-bold">{{ $title }}<span class="sr-only">:&nbsp;</span></span>
-    @endif
-    @if ($subtitle)
-        <span class="block">{{ $subtitle }}</span>
+{{--     tbd: is sr-only class with :$nbsp; mandatory?--}}
+        <span class="{{VitrineUI::setPrefixedClass('audio-player-title')}}">{{ $title }}<span class="sr-only">:&nbsp;</span></span>
     @endif
 
-    <div aria-label="{{ 'Audio Player - ' . $title }}" class="o-audio mt-24" role="region">
+    @if ($subtitle)
+        <span class="{{VitrineUI::setPrefixedClass('audio-player-subtitle')}}">{{ $subtitle }}</span>
+    @endif
+
+    <div aria-label="{{ 'Audio Player - ' . $title }}" class="{{ $ui('button', 'base') }} o-audio mt-24" role="region">
         <div class="o-audio__controls w-full flex flex-col md:flex-row md:flex-wrap">
             <div class="flex flex-row flex-wrap items-center -mx-8">
                 <button aria-label="Rewind"

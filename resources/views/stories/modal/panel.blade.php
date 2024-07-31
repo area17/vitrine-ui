@@ -1,11 +1,12 @@
 @storybook([
 ])
 
-<x-vui-button-primary
+<x-vui-button
     data-modal-target="#modalDemo"
+    variant="primary"
 >
     Open Modal
-</x-vui-button-primary>
+</x-vui-button>
 
 <x-vui-modal
     id="modalDemo"

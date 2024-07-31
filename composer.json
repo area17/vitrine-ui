@@ -12,14 +12,44 @@
             "name": "Tim Brook",
             "email": "tim@area17.com",
             "role": "Developer"
+        },
+        {
+            "name": "Mike Byrne",
+            "email": "mike@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antonin Caudron",
+            "email": "antonin@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antoine Doury",
+            "email": "antoine@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Antonio Ribeiro",
+            "email": "antonio@area17.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Florrie Sharp",
+            "email": "florrie@area17.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
+        "area17/twill-image": "^2.0",
+        "gehrisandro/tailwind-merge-laravel": "^0.1|^1.0",
+        "illuminate/contracts": "^10.0|^11.0",
         "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "spatie/once": "^3.1",
+        "yieldstudio/tailwind-merge-php": "^0.0.2"
     },
     "require-dev": {
+        "laravel/dusk": "^7.7",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
         "nunomaduro/larastan": "^2.0.1",

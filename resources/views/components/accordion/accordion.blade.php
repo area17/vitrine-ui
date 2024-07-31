@@ -1,28 +1,23 @@
 @if (!$slot->isEmpty())
+    @php
+        $id = $id ?? Str::uuid();
+        $headingId = 'accordionLabel' . $id;
+        $accordion_id = 'accordion' . $id;
+    @endphp
 
-@php
-    $id = Str::random(9);
-    $headingId = 'accordionLabel'. $id;
-    $accordion_id = 'accordion'. $id;
-@endphp
+    <div {{ $attributes->class($ui('accordion')) }}>
+        <x-vui-heading class="sr-only"
+                       id="{{ $headingId }}"
+                       :level="$headingLevel">
+            {{ $a11yLabel }}
+        </x-vui-heading>
 
-<div {{ $attributes }}>
-    <x-vui-heading
-        id="{{ $headingId }}"
-        :level="$headingLevel"
-        class="sr-only"
-    >
-        {{ $a11yLabel }}
-    </x-vui-heading>
-
-    <ul
-        data-behavior="Accordion"
-        {{ $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' }}
-        aria-labelledby="{{ $headingId }}"
-    >
-
-        {!! $slot !!}
-
-    </ul>
-</div>
-@endisset
+        <ul class="{{ $ui('accordion','list') }}"
+            data-behavior="Accordion"
+            aria-labelledby="{{ $headingId }}"
+            {!! $exclusive ? 'data-accordion-exclusive="true"' : '' !!}
+            {!! $scrollOnOpen ? 'data-accordion-scroll-open="true"' : '' !!}>
+            {!! $slot !!}
+        </ul>
+    </div>
+@endif

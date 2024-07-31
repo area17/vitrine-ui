@@ -19,29 +19,46 @@ class Modal extends VitrineComponent
     /** @var bool */
     public $panel;
 
-    /** @var string */
-    public $classes;
+    /** @var bool */
+    public $clickOutsideToClose;
 
-    protected static $assets = [
-        'npm' => ['body-scroll-lock', 'focus-trap'],
-        'js' => 'behaviors/Modal.js',
-        'css' => 'components/modal.css',
+    /** @var bool */
+    public $setInitialFocus;
+
+    /** @var string */
+    public $variant;
+
+    /** @var string */
+    public $modalsStack;
+
+    protected static array $assets = [
+        'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
+        'js' => 'behaviors/Modal.js'
     ];
 
     public function __construct(
         $id = null,
         $showClose = true,
-        $title = true,
+        $title = null,
         $panel = false,
+        $variant = null,
+        $setInitialFocus = true,
+        $clickOutsideToClose = false,
+        $ui = [],
+        $modalsStack = 'modals',
     ) {
+
         $this->id = $id;
         $this->showClose = $showClose;
         $this->title = $title;
         $this->panel = $panel;
-        $this->classes = [
-            'o-modal',
-            'o-modal-panel' => $panel
-        ];
+        $this->clickOutsideToClose = $clickOutsideToClose;
+        $this->setInitialFocus = $setInitialFocus;
+        $defaultVariant = $this->panel ? 'panel' : 'default';
+        $this->variant = $variant ?? $defaultVariant;
+        $this->modalsStack = $modalsStack;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

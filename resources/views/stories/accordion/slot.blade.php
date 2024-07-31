@@ -45,12 +45,12 @@
                             {!! $item['wysiwyg'] !!}
                         </x-vui-wysiwyg>
 
-                        <x-vui-link-primary
+                        <x-vui-link
                             :href="$item['cta']['href']"
                             class="mt-space-5"
                         >
                             {{ $item['cta']['text'] ?? 'Learn more' }}
-                        </x-vui-link-primary>
+                        </x-vui-link>
                     </x-vui-accordion-item>
                 @endforeach
             </x-vui-accordion>

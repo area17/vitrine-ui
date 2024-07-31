@@ -7,8 +7,6 @@ use Illuminate\Contracts\View\View;
 
 class Button extends VitrineComponent
 {
-    /** @var bool */
-    public $static;
 
     /** @var string */
     public $href;
@@ -16,57 +14,78 @@ class Button extends VitrineComponent
     /** @var string */
     public $icon;
 
+    /** @var bool */
+    public $iconOnly;
+
     /** @var string */
     public $iconPosition;
 
-    /** @var int */
-    public $iconSpacing;
+    /** @var null|string */
+    public $size;
 
-    /** @var int */
-    public $labelClasses;
+    /** @var bool */
+    public $static;
 
     /** @var string|bool */
     public $target;
+
+    /** @var string */
+    public $tag;
+
+    /** @var null|string */
+    public $variant;
+
+    public $uiKeyComponent = 'button';
 
     public function __construct(
         $href = null,
         $icon = null,
         $iconPosition = 'after',
         $static = false,
-        $iconSpacing = 4,
-        $labelClasses = '',
         $target = null,
-    ) {
+        $size = null,
+        $variant = null,
+        $tag = null,
+        $iconOnly = false,
+        $ui = []
+    )
+    {
         $this->href = $href;
         $this->icon = $icon;
         $this->iconPosition = $iconPosition;
-        $this->iconSpacing = $iconSpacing;
+        $this->iconOnly = $iconOnly;
         $this->static = $static;
-        $this->labelClasses = $labelClasses;
+        $this->size = $size;
+        $this->variant = $variant;
+        $this->tag = $tag ?? $this->element();
 
-        $isExternalUrl = \App\Helpers\isExternalUrl($this->href);
+        $isExternalUrl = $this->isExternalUrl($href);
         $this->target = $target ?? $isExternalUrl ? '_blank' : false;
+
+        parent::__construct($ui);
     }
 
     public function render(): View
     {
-        return view('vitrine-ui::components.button._base');
+        return view('vitrine-ui::components.button.default');
     }
 
     public function element(): string
     {
         if ($this->static) {
             return 'span';
-        } elseif ($this->isLink()) {
-            return 'a';
-        } else {
-            return 'button';
         }
+
+        if ($this->isLink()) {
+            return 'a';
+        }
+
+        return 'button';
     }
 
     public function isLink(): bool
     {
-        return $this->href && !empty($this->href);
+        return !empty($this->href);
     }
 
     public function iconBefore(): bool
@@ -79,20 +98,7 @@ class Button extends VitrineComponent
         return filled($this->icon) && $this->icon && $this->iconPosition === 'after';
     }
 
-    public function labelClasses(): string
-    {
-        $iconPosition = $this->getIconPosition();
-
-        if (!$iconPosition) {
-            return (string) $this->labelClasses;
-        }
-
-        $prefix = $iconPosition === 'before' ? 'ml-' : 'mr-';
-
-        return $this->labelClasses . ' ' . $prefix . $this->iconSpacing;
-    }
-
-    protected function getIconPosition()
+    public function getIconPosition(): bool|string
     {
         if ($this->iconBefore()) {
             return 'before';

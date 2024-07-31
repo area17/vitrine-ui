@@ -8,8 +8,6 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Input extends VitrineComponent
 {
-    /** @var string */
-    public $label;
 
     /** @var string */
     public $name;
@@ -31,18 +29,6 @@ class Input extends VitrineComponent
 
     /** @var bool */
     public $required;
-
-    /** @var string */
-    public $error;
-
-    /** @var string */
-    public $hint;
-
-    /** @var string */
-    public $note;
-
-    /** @var string */
-    public $inputmode;
 
     /** @var string */
     public $pattern;
@@ -80,29 +66,19 @@ class Input extends VitrineComponent
     /** @var string */
     public $step;
 
-    /** @var string */
-    public $ariaID;
-
-    /** @var string */
-    public $errorID;
-
-    /** @var string */
+    /** @var array */
     public $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
-
-    protected static $assets = [
+    protected static array $assets = [
         'js' => [
             'behaviors/Input.js'
         ],
         'css' => [
-            'components/form/input.css'
-        ],
+            'components/form/input.css',
+        ]
     ];
 
     public function __construct(
-        $label = '',
         $name = null,
         $id = '',
         $type = 'text',
@@ -110,9 +86,6 @@ class Input extends VitrineComponent
         $placeholder = '',
         $disabled = false,
         $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
         $inputmode = '',
         $pattern = '',
         $autocomplete = '',
@@ -126,9 +99,10 @@ class Input extends VitrineComponent
         $multiple = false,
         $readonly = false,
         $step = '',
+        $ariaDescribedBy = [],
+        $ui = []
     )
     {
-        $this->label = $label;
         $this->name = $name;
         $this->id = $id;
         $this->type = $type;
@@ -136,10 +110,6 @@ class Input extends VitrineComponent
         $this->placeholder = $placeholder;
         $this->disabled = $disabled;
         $this->required = $required;
-        $this->error = $error;
-        $this->hint = $hint;
-        $this->note = $note;
-        $this->inputmode = $inputmode;
         $this->pattern = $pattern;
         $this->autocomplete = $autocomplete;
         $this->autofocus = $autofocus;
@@ -152,18 +122,9 @@ class Input extends VitrineComponent
         $this->multiple = $multiple;
         $this->readonly = $readonly;
         $this->step = $step;
+        $this->ariaDescribedBy = $ariaDescribedBy;
 
-        $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
-        $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
-        }
-        if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
-        }
+        parent::__construct($ui);
     }
 
     public function render(): View

@@ -65,7 +65,7 @@ class Select extends VitrineComponent
     /** @var string */
     public $rand;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => [
             'behaviors/Input.js'
         ],
@@ -90,6 +90,7 @@ class Select extends VitrineComponent
         $autofocus = false,
         $multiple = false,
         $readonly = false,
+        $ui = []
     )
     {
         $this->label = $label;
@@ -112,13 +113,15 @@ class Select extends VitrineComponent
         $this->ariaID = 'ariaID'.$this->rand;
         $this->errorID = 'errorID'.$this->rand;
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
+        $this->ariaDescribedBy[] = $this->errorID;
         if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
+            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
         }
         if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
+            $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

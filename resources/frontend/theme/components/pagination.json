@@ -1,0 +1,10 @@
+{
+  "base": "container mt-space-9 pt-space-4 border-t",
+  "wrapper": "flex w-full items-center gap-x-24",
+  "actions": "flex items-start justify-end gap-x-8",
+  "show-message": "hidden sm:block f-ui-1",
+  "action-disabled": "pointer-events-none opacity-30",
+  "dropdown-wrapper": "sm:hidden md:flex items-center ml-auto",
+  "dropdown-message": "ml-12 f-ui-1",
+  "dropdown": ""
+}

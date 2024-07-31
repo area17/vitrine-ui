@@ -13,7 +13,7 @@ class MapGoogle extends VitrineComponent
     /** @var string */
     public $lng;
 
-    protected static $assets = [
+    protected static array $assets = [
         'npm' => [
             '@googlemaps/js-api-loader'
         ],

@@ -1,50 +1,78 @@
-import { createBehavior } from '@area17/a17-behaviors'
-
-const ACTIVE_LIST_CLASS = 'trans-show-hide--active'
-const ACTIVE_NODE_CLASS = 'is-active'
-const ACTIVE_ROTATE_CLASS = 'rotate-180'
+import {createBehavior} from '@area17/a17-behaviors'
+import {getFocusableElements} from "@area17/a17-helpers";
 
 const Dropdown = createBehavior(
     'Dropdown',
     {
-        _toggleList() {
-            this.isOpen = !this.isOpen
+        toggleList() {
             if (this.isOpen) {
-                this.$node.classList.add(ACTIVE_NODE_CLASS)
-                this.$list.classList.add(ACTIVE_LIST_CLASS)
-                this.$chevron.classList.add(ACTIVE_ROTATE_CLASS)
-
-                this._initOutClick()
+                this.closeDropdown()
             } else {
-                this.$node.classList.remove(ACTIVE_NODE_CLASS)
-                this.$list.classList.remove(ACTIVE_LIST_CLASS)
-                this.$chevron.classList.remove(ACTIVE_ROTATE_CLASS)
-
-                this._disabledOutClick(this.$node)
+                this.openDropdown()
             }
         },
-
-        _initOutClick() {
-            document.addEventListener('click', this._clickOutside)
-            window.addEventListener('keydown', this._checkKey)
+        openDropdown() {
+            this.isOpen = true
+            this.$node.setAttribute('data-is-open', 'true')
+            this.$node.setAttribute('aria-expanded', 'true')
+            this.initOutClick()
+            this.timeout = window.setTimeout(() => {
+                this.$focusableItems = this.$list ? getFocusableElements(this.$list) : [];
+                this.$focusIndex = 0;
+                this.focusItem()
+            }, 500) // wait for potential reveal animations
         },
-
-        _disabledOutClick() {
-            document.removeEventListener('click', this._clickOutside)
-            window.removeEventListener('keydown', this._checkKey)
+        closeDropdown() {
+            this.isOpen = false
+            this.$node.removeAttribute('data-is-open')
+            this.$node.setAttribute('aria-expanded', 'false')
+            this.disabledOutClick(this.$node)
+            window.clearTimeout(this.timeout)
         },
-
-        _checkKey(e) {
-            if (e.keyCode == 27) {
-                this.$list.classList.remove(ACTIVE_LIST_CLASS)
-                this._disabledOutClick(this.$node)
+        initOutClick() {
+            document.addEventListener('click', this.clickOutside)
+            window.addEventListener('keydown', this.checkKey)
+        },
+        disabledOutClick() {
+            document.removeEventListener('click', this.clickOutside)
+            window.removeEventListener('keydown', this.checkKey)
+        },
+        focusItem() {
+            this.$focusableItems[this.$focusIndex]?.focus()
+        },
+        checkKey(e) {
+            const key = e.key
+            switch (key) {
+                case 'Tab':
+                case 'Escape':
+                    e.stopPropagation()
+                    this.$btn.focus()
+                    this.closeDropdown()
+                    break
+                case 'Up':
+                case 'ArrowUp':
+                    e.preventDefault()
+                    this.$focusIndex--;
+                    if (this.$focusIndex < 0) {
+                        this.$focusIndex = 0;
+                    }
+                    this.focusItem()
+                    break
+                case 'Down':
+                case 'ArrowDown':
+                    e.preventDefault()
+                    this.$focusIndex++;
+                    if (this.$focusIndex >= this.$focusableItems.length) {
+                        this.$focusIndex = this.$focusableItems.length - 1;
+                    }
+                    this.focusItem()
+                    break
             }
         },
-
-        _clickOutside(e) {
+        clickOutside(e) {
             const isClickInside = this.$node.contains(e.target)
             if (!isClickInside) {
-                this._toggleList()
+                this.toggleList()
             }
         }
     },
@@ -54,14 +82,16 @@ const Dropdown = createBehavior(
             this.isOpen = false
 
             // elems
-            this.$btn = this.getChild('btn')
-            this.$list = this.getChild('list')
-            this.$chevron = this.getChild('chevron')
-            this.$btn.addEventListener('click', this._toggleList)
+            this.$btn = this.getChild('btn');
+            this.$list = this.getChild('list');
+            this.$focusableItems = this.$list ? getFocusableElements(this.$list) : [];
+            this.timeout = null;
+            this.$focusIndex = 0;
+            this.$btn.addEventListener('click', this.toggleList);
         },
         destroy() {
-            this.$btn.addEventListener('remove', this._toggleList)
-            this._disabledOutClick()
+            this.$btn.removeEventListener('click', this.toggleList)
+            this.disabledOutClick()
         }
     }
 )

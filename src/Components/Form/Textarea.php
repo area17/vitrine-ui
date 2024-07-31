@@ -9,9 +9,6 @@ use A17\VitrineUI\Components\VitrineComponent;
 class Textarea extends VitrineComponent
 {
     /** @var string */
-    public $label;
-
-    /** @var string */
     public $name;
 
     /** @var string */
@@ -28,15 +25,6 @@ class Textarea extends VitrineComponent
 
     /** @var string */
     public $placeholder;
-
-    /** @var string */
-    public $error;
-
-    /** @var string */
-    public $hint;
-
-    /** @var string */
-    public $note;
 
     /** @var string */
     public $autocomplete;
@@ -63,18 +51,9 @@ class Textarea extends VitrineComponent
     public $wrap;
 
     /** @var string */
-    public $ariaID;
-
-    /** @var string */
-    public $errorID;
-
-    /** @var string */
     public $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
-
-    protected static $assets = [
+    protected static array $assets = [
         'js' => [
             'behaviors/Input.js'
         ],
@@ -84,16 +63,12 @@ class Textarea extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
         $name = null,
         $id = null,
         $value = '',
         $disabled = false,
         $required = false,
         $placeholder = '',
-        $error = '',
-        $hint = '',
-        $note = '',
         $autocomplete = '',
         $autofocus = false,
         $form = '',
@@ -102,18 +77,15 @@ class Textarea extends VitrineComponent
         $readonly = false,
         $spellcheck = '',
         $wrap = '',
+        $ui = []
     )
     {
-        $this->label = $label;
         $this->name = $name;
         $this->id = $id;
         $this->value = $value;
         $this->disabled = $disabled;
         $this->required = $required;
         $this->placeholder = $placeholder;
-        $this->error = $error;
-        $this->hint = $hint;
-        $this->note = $note;
         $this->autocomplete = $autocomplete;
         $this->autofocus = $autofocus;
         $this->form = $form;
@@ -123,17 +95,7 @@ class Textarea extends VitrineComponent
         $this->spellcheck = $spellcheck;
         $this->wrap = $wrap;
 
-        $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
-        $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
-        }
-        if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
-        }
+        parent::__construct($ui);
     }
 
     public function render(): View

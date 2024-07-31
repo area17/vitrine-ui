@@ -24,7 +24,7 @@ return [
         'subject' => 'Subject',
         'submit' => 'Submit',
         'reset' => 'Reset',
-        'required' => 'required',
+        'required' => '(required)',
         'toggle_password_visibility' => 'Toggle password visibility',
         'datepicker' => [
             'date_format' => 'Date format',
@@ -91,4 +91,11 @@ return [
     'submit' => 'Submit',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
+    'pagination' => [
+        'showing' => 'Showing :count of :total items',
+        'page_of' => 'Page :current of :last',
+        'num_of_total' => 'of :last pages',
+        'previous' => 'Previous page',
+        'next' => 'Next page',
+    ],
 ];

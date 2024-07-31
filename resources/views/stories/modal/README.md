@@ -1,4 +1,4 @@
-The modal component allows you to wrap any content in a centered overlay or side-revealing panel. When opening the modal the body scroll will be locked using [body-scroll-lock](https://www.npmjs.com/package/body-scroll-lock) and traps focus to the modal content using [focus-trap](https://www.npmjs.com/package/focus-trap).
+The modal component allows you to wrap any content in a centered overlay or side-revealing panel. When opening the modal the body scroll will be locked using [body-scroll-lock-upgrade](https://www.npmjs.com/package/body-scroll-lock-upgrade) and traps focus to the modal content using [focus-trap](https://www.npmjs.com/package/focus-trap).
 
 The only required props are the `id` and the `title` (unless the `title` is defined in the modal content and in which case the `title` prop is not required). This `id` is used to reference the modal when opening and closing and is also used for aria attributes within the modal.
 

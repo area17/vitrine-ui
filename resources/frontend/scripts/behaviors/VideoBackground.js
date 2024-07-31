@@ -1,19 +1,9 @@
 import { createBehavior } from '@area17/a17-behaviors'
-import videojs from 'video.js'
+import { customEvents } from '../constants/customEvents'
 
-const VideoBackground = createBehavior(
+export const VideoBackground = createBehavior(
     'VideoBackground',
     {
-        initPlayer() {
-            if (!this.$player) return
-
-            if (this.$player.player) {
-                this.$videojs = this.$player.player
-            } else {
-                this.$videojs = videojs(this.$player, this.playerOptions)
-            }
-        },
-
         togglePlay(e) {
             e.preventDefault()
 
@@ -37,54 +27,34 @@ const VideoBackground = createBehavior(
         },
 
         play() {
-            this.$videojs.play()
-            this.$pauseIcon.classList.remove('hidden')
-            this.$playIcon.classList.add('hidden')
-            this.$pauseButton.setAttribute('aria-label', this.buttonText.pause)
-            this.isPlaying = true
+            this.$player.play()
+            this.updatePlayButton(true)
         },
 
         pause() {
-            this.$videojs.pause()
-            this.$pauseIcon.classList.add('hidden')
-            this.$playIcon.classList.remove('hidden')
-            this.$pauseButton.setAttribute('aria-label', this.buttonText.play)
-            this.isPlaying = false
+            this.$player.pause()
+            this.updatePlayButton(false)
         },
 
         mute() {
             if (!this.isMuted) {
-                this.$videojs.muted(true)
-                this.isMuted = true
-                this.$muteIcon.classList.add('hidden')
-                this.$unmuteIcon.classList.remove('hidden')
-                this.$muteButton.setAttribute(
-                    'aria-label',
-                    this.buttonText.unmute
-                )
+                this.$player.muted = true
+                this.updateMuteButton(true)
             }
         },
 
         unmute() {
             if (this.isMuted) {
-                document.dispatchEvent(
-                    new CustomEvent('VideoBackground:muteAll')
-                )
-
-                this.$videojs.muted(false)
-                this.isMuted = false
-                this.$muteIcon.classList.remove('hidden')
-                this.$unmuteIcon.classList.add('hidden')
-                this.$muteButton.setAttribute(
-                    'aria-label',
-                    this.buttonText.mute
-                )
+                this.muteAll()
+                this.$player.muted = false
+                this.updateMuteButton(false)
             }
         },
 
         handlePlay() {
             this.isPlaying = true
         },
+
         handlePause() {
             this.isPlaying = false
         },
@@ -112,11 +82,33 @@ const VideoBackground = createBehavior(
                     }
                 }
             })
-        }
-    },
-    {
-        init() {
-            // state
+        },
+
+        updatePlayButton(playing) {
+            this.$pauseIcon.classList.toggle('hidden', !playing)
+            this.$playIcon.classList.toggle('hidden', playing)
+            this.$pauseButton.setAttribute('aria-label', playing ? this.buttonText.pause : this.buttonText.play)
+            this.isPlaying = playing
+        },
+
+        updateMuteButton(muted) {
+            this.isMuted = muted
+            this.$muteIcon.classList.toggle('hidden', muted)
+            this.$unmuteIcon.classList.toggle('hidden', !muted)
+            this.$muteButton.setAttribute(
+                'aria-label',
+                muted ? this.buttonText.unmute : this.buttonText.mute
+            )
+        },
+
+        muteAll() {
+            // mute all players
+            document.dispatchEvent(
+                new CustomEvent(customEvents.VIDEO_BACKGROUND_MUTE_ALL)
+            )
+        },
+
+        initState() {
             this.isPlaying = true
             this.isMuted = true
             this.buttonText = {
@@ -125,30 +117,9 @@ const VideoBackground = createBehavior(
                 mute: this.options['text-mute'],
                 unmute: this.options['text-unmute']
             }
+        },
 
-            // elems
-            this.$player = this.getChild('player')
-            this.$muteButton = this.getChild('mute')
-            this.$pauseButton = this.getChild('pause')
-            this.$muteIcon = this.getChild('icon-mute')
-            this.$unmuteIcon = this.getChild('icon-unmute')
-            this.$playIcon = this.getChild('icon-play')
-            this.$pauseIcon = this.getChild('icon-pause')
-            this.playerOptions = {
-                controls: false,
-                autoPlay: true,
-                html5: {
-                    vhs: {
-                        overrideNative: false
-                    }
-                }
-            }
-
-            this.initPlayer()
-
-            this.$player.addEventListener('play', this.handlePlay, false)
-            this.$player.addEventListener('pause', this.handlePause, false)
-
+        initEvents() {
             document.addEventListener(
                 'VideoBackground:muteAll',
                 this.mute,
@@ -176,6 +147,23 @@ const VideoBackground = createBehavior(
             } else {
                 this.startIntersectionObserver()
             }
+        }
+    },
+    {
+        init() {
+            // state
+            this.initState()
+
+            // elems
+            this.$player = this.getChild('player')
+            this.$muteButton = this.getChild('mute')
+            this.$pauseButton = this.getChild('pause')
+            this.$muteIcon = this.getChild('icon-mute')
+            this.$unmuteIcon = this.getChild('icon-unmute')
+            this.$playIcon = this.getChild('icon-play')
+            this.$pauseIcon = this.getChild('icon-pause')
+
+            this.initEvents()
         },
         enabled() {},
         resized() {},
@@ -184,7 +172,7 @@ const VideoBackground = createBehavior(
         destroy() {
             this.$player.removeEventListener('play', this.handlePlay)
             this.$player.removeEventListener('pause', this.handlePause)
-            document.removeEventListener('VideoBackground:muteAll', this.mute)
+            document.removeEventListener(customEvents.VIDEO_BACKGROUND_MUTE_ALL, this.mute)
 
             if (this.$pauseButton) {
                 this.$pauseButton.removeEventListener('click', this.togglePlay)

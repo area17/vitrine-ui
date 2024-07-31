@@ -5,7 +5,7 @@ namespace A17\VitrineUI\Components;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
-class MapMapBox extends VitrineComponent
+class MapMapbox extends VitrineComponent
 {
     /** @var string */
     public $lat;
@@ -13,7 +13,7 @@ class MapMapBox extends VitrineComponent
     /** @var string */
     public $lng;
 
-    protected static $assets = [
+    protected static array $assets = [
         'npm' => [
             'mapbox-gl'
         ],

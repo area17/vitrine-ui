@@ -19,49 +19,51 @@
     $ariaID = 'ariaID'.$rand;
     $errorID = 'errorID'.$rand;
     $ariaDescribedBy = [];
-    $ariaDescribedBy[] = '#'.$errorID;
+    $ariaDescribedBy[] = $errorID;
     if($hint) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Hint';
+        $ariaDescribedBy[] = $ariaID.'Hint';
     }
     if($note) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Note';
+        $ariaDescribedBy[] = $ariaID.'Note';
     }
 @endphp
 
 <div
-    data-behavior="Input"
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error]) }}
-    {{ $disabled ? 'inert' : '' }}
+        data-behavior="Input"
+        {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
+        {{ $disabled ? 'inert' : '' }}
 >
-    <label class="m-form-radio block" for="{{$name.$rand}}">
-        <input
-            type="radio"
-            @if($id || $name) id="{{$id ? $id : $name.$rand}}" @endif
-            @if($name) name="{{$name}}" @endif
-            @if($value) value="{{$value}}" @endif
-            data-Input-input
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
-            {{ $inputAttr ? ' '.$inputAttr : '' }}
-            {{ $autofocus ? ' autofocus' : '' }}
-            {{ $disabled ? ' disabled' : '' }}
-            {{ $required ? ' required' : '' }}
-            {{ $selected ? ' checked' : '' }}
-        />
-        <div class="m-form-radio-wrap">
-            <span class="m-form-radio-check" aria-hidden="true"></span>
+    <label class="{{ $ui('radio', 'base') }}" @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
+        <div class="{{ $ui('radio', 'wrapper') }}">
+            <input
+                    type="radio"
+                    class="{{ $ui('radio', 'input') }}"
+                    @if($id || $name) id="{{$id ? $id : $name.$rand}}" @endif
+                    @if($name) name="{{$name}}" @endif
+                    @if($value) value="{{$value}}" @endif
+                    data-Input-input
+                    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
+                    {{ $inputAttr ? ' '.$inputAttr : '' }}
+                    {{ $autofocus ? ' autofocus' : '' }}
+                    {{ $disabled ? ' disabled' : '' }}
+                    {{ $required ? ' required' : '' }}
+                    {{ $selected ? ' checked' : '' }}
+            />
+            <span class="{{ $ui('radio', 'check') }}" aria-hidden="true"></span>
 
-            <div class="m-form-radio-label">
-                <span>
-                    {{$label}}
-                </span>
-            </div>
+            <span class="{{ $ui('radio', 'label') }}">
+                {{$label}}
+            </span>
             @if ($hint)
-                <span id="{{$ariaID}}Hint" class="m-form-radio-hint">{{ $hint }}</span>
+                <span id="{{$ariaID}}Hint" class="{{ $ui('radio', 'hint') }}">{{ $hint }}</span>
             @endif
         </div>
     </label>
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="text-error" style="display: none;" data-Input-error>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}"
+       style="display: none;" data-Input-error>
+        <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/> {{$error ?? ''}}
+    </p>
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-4">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{ $ui('input', 'note') }}">{{ $note }}</p>
     @endif
 </div>

@@ -1,11 +1,8 @@
-@php
-    $classes = '';
 
-    if($variation){
-        $classes = 'wysiwyg--'. $variation;
-    }
-@endphp
-
-<div {{ $attributes->class(['wysiwyg', $classes]) }}>
+<div {{ $attributes->class(VitrineUI::setPrefixedClass([
+    'wysiwyg',
+    'wysiwyg--'. $variant => $variant,
+    ]))
+ }}>
     {!! $slot !!}
 </div>

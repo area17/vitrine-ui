@@ -41,12 +41,12 @@
 }
 
 .m-form-radio input[data-focus-method="key"] + .m-form-radio-wrap {
-    @apply outline outline-offset-4 outline-highlight;
+    @apply outline outline-offset-4;
 
     outline-width: 1px;
 }
 
-.m-form-radio input:checked + .m-form-radio-wrap .m-form-radio-check::before {
+.m-form-radio .m-form-radio-wrap input:checked + .m-form-radio-check::before {
     content: "";
     position: absolute;
     background: var(--black);
@@ -56,4 +56,5 @@
     width: 12px;
     height: 12px;
     border-radius: 100%;
+    opacity: 100;
 }

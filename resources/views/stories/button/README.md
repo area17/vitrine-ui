@@ -11,19 +11,21 @@ Buttons should always have an accessible name. For most buttons this will be the
 External links must open in a new window/tab and the element must have an `aria-label` with the link text + '. Opens in a new tab' as the value. eg:
 
 ```html
-<x-vui-button-primary
+<x-vui-button
+    variant="primary"
+    size="small"
     href="https://area17.com"
     target="_blank"
     aria-label="Site by AREA 17. Opens in a new tab."
 >
     Site by AREA 17
-</x-vui-button-primary>
+</x-vui-button>
 ```
 
 ## Usage
 
 ```html
-<x-vui-button-primary
+<x-vui-button
     href="https://example.url"
     icon="chevron-right"
     icon-position="after"
@@ -32,5 +34,5 @@ External links must open in a new window/tab and the element must have an `aria-
     :active="false"
 >
     Label Text
-</x-vui-button-primary>
+</x-vui-button>
 ```

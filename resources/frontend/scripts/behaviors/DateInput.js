@@ -1,5 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
-
+import { customEvents } from '../constants/customEvents'
 import formatDate from '../utils/formatDate'
 
 const DateInput = createBehavior(
@@ -144,7 +144,7 @@ const DateInput = createBehavior(
                 window.requestAnimationFrame(() => {
                     // waiting a frame to allow Datepicker behavior time to init
                     this.$node.dispatchEvent(
-                        new CustomEvent('DatePicker:Change', {
+                        new CustomEvent(customEvents.DATE_PICKER_CHANGE, {
                             detail: {
                                 date: validDate
                                     ? formatDate(date, 'iso')
@@ -182,7 +182,7 @@ const DateInput = createBehavior(
                 window.requestAnimationFrame(() => {
                     // waiting a frame to allow Datepicker behavior time to init
                     this.$node.dispatchEvent(
-                        new CustomEvent('DatePicker:MinMaxUpdate', {
+                        new CustomEvent(customEvents.DATE_PICKER_UPDATE, {
                             detail: {
                                 min: this.$input.min || undefined,
                                 max: this.$input.max || undefined
@@ -215,7 +215,7 @@ const DateInput = createBehavior(
             window.requestAnimationFrame(() => {
                 // waiting a frame to allow Datepicker behavior time to init
                 this.$node.dispatchEvent(
-                    new CustomEvent('DatePicker:MinMaxUpdate', {
+                    new CustomEvent(customEvents.DATE_PICKER_UPDATE, {
                         detail: {
                             min: event?.detail || this.minDate,
                             max: this.maxDate
@@ -229,7 +229,7 @@ const DateInput = createBehavior(
             window.requestAnimationFrame(() => {
                 // waiting a frame to allow Datepicker behavior time to init
                 this.$node.dispatchEvent(
-                    new CustomEvent('DatePicker:MinMaxUpdate', {
+                    new CustomEvent(customEvents.DATE_PICKER_UPDATE, {
                         detail: {
                             min: this.minDate,
                             max: event?.detail || this.maxDate
@@ -256,7 +256,7 @@ const DateInput = createBehavior(
         },
         validated(event) {
             this.$input.dispatchEvent(
-                new CustomEvent('Input:Validated', {
+                new CustomEvent(customEvents.INPUT_VALIDATED, {
                     detail: event.detail
                 })
             )
@@ -317,27 +317,27 @@ const DateInput = createBehavior(
 
             this.$input.addEventListener('change', this.handleChange, false)
             this.$isoinput.addEventListener(
-                'Input:Validated',
+                customEvents.INPUT_VALIDATED,
                 this.validated,
                 false
             )
             this.$node.addEventListener(
-                'DateInput:SelectDate',
+                customEvents.DATE_INPUT_SELECT_DATE,
                 this.selectDate,
                 false
             )
             this.$node.addEventListener(
-                'DateInput:PickerMinUpdate',
+                customEvents.DATE_PICKER_MIN_UPDATE,
                 this.pickerMinUpdate,
                 false
             )
             this.$node.addEventListener(
-                'DateInput:PickerMaxUpdate',
+                customEvents.DATE_PICKER_MAX_UPDATE,
                 this.pickerMaxUpdate,
                 false
             )
             this.$node.addEventListener(
-                'DateInput:RangeValidation',
+                customEvents.DATE_INPUT_RANGE_VALIDATION,
                 this.rangeValidation,
                 false
             )
@@ -347,11 +347,11 @@ const DateInput = createBehavior(
         destroy() {
             this.$input.removeEventListener('change', this.handleChange)
             this.$isoinput.removeEventListener(
-                'Input:Validated',
+                customEvents.INPUT_VALIDATED,
                 this.validated
             )
             this.$node.removeEventListener(
-                'DateInput:SelectDate',
+                customEvents.DATE_INPUT_SELECT_DATE,
                 this.selectDate
             )
 

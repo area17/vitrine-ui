@@ -13,10 +13,12 @@ class Heading extends VitrineComponent
     /** @var string */
     public $element;
 
-    public function __construct($level = null)
+    public function __construct($level = null, $ui = [])
     {
         $this->level = $level;
         $this->element = $this->getElement();
+
+        parent::__construct($ui);
     }
 
     public function render(): View

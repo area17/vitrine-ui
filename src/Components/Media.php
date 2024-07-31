@@ -3,8 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
 class Media extends VitrineComponent
@@ -31,9 +29,6 @@ class Media extends VitrineComponent
     public $backgroundVideo;
 
     /** @var array */
-    protected $presetData;
-
-    /** @var array */
     public $imageType;
 
     /** @var array */
@@ -42,10 +37,13 @@ class Media extends VitrineComponent
     /** @var bool */
     public $cover;
 
+    /** @var string|null */
+    public $videoPlayIcon;
+
     /** @var array */
     public $classes;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => [
             'behaviors/ShowVideo.js'
         ]
@@ -58,22 +56,24 @@ class Media extends VitrineComponent
         $imagePreset = 'generic',
         $usePlaceholder = false,
         $video = null,
+        $videoPlayIcon = null,
         $backgroundVideo = null,
         $cover = false,
+        $ui = []
     ) {
         $this->caption = $caption;
         $this->image = $image;
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
         $this->video = $video;
+        $this->videoPlayIcon = $videoPlayIcon;
         $this->backgroundVideo = $this->parseBackgroundVideo($backgroundVideo);
         $this->cover = $cover;
 
-        $this->presetData = config('twill-image.presets.' . $this->imagePreset);
-        $this->imageType = $this->getImageType();
-        $this->staticSettings = $this->getStaticSettings();
-        $this->imageOptions = $this->parseImageOptions($imageOptions);
+        $this->imageOptions = $imageOptions;
         $this->classes = ['h-full' => $this->cover];
+
+        parent::__construct($ui);
     }
 
     public function render(): View
@@ -84,61 +84,6 @@ class Media extends VitrineComponent
     public function element(): string
     {
         return (isset($this->mediaCaption) && !empty($this->mediaCaption)) || !empty($this->caption) ? 'figure' : 'div';
-    }
-
-    protected function getImageType()
-    {
-        /** @phpstan-ignore-next-line */
-        if ($this->image instanceof \A17\Twill\Image\Models\Image) {
-            return 'twill-image';
-        } elseif (Arr::has($this->image, '_static')) {
-            return 'twill-image-static';
-        } elseif (is_array($this->image) && array_key_exists('src', $this->image)) {
-            return 'static';
-        } elseif ($this->usePlaceholder) {
-            return 'placeholder';
-        }
-
-        return false;
-    }
-
-    protected function getStaticSettings()
-    {
-        if (!$this->image || !is_array($this->image) || !Arr::has($this->image, '_static')) {
-            return false;
-        }
-
-        $presetStatic = Arr::get($this->presetData, '_static') ?? [];
-
-        return array_merge($presetStatic, $this->image['_static']);
-    }
-
-    protected function parseImageOptions($imageOptions = [])
-    {
-        $breakpointRatios = Arr::get($this->presetData, 'breakpointRatios');
-        $classes = [];
-
-        if ($this->cover) {
-            $classes = ['w-full', 'h-full', 'object-cover'];
-        } elseif ($breakpointRatios) {
-            $ratioClasses = [];
-
-            foreach ($breakpointRatios as $key => $value) {
-                $prefix = $key === 'xs' ? '' : $key . ':';
-
-                $ratioClasses[] = $prefix . 'aspect-' . Str::remove(' ', $value);
-            }
-
-            $classes = array_merge($classes, $ratioClasses);
-        }
-
-        if (Arr::has($imageOptions, 'class')) {
-            $imageOptions['class'] .= ' ' . Arr::toCssClasses($classes);
-        } else {
-            $imageOptions['class'] = Arr::toCssClasses($classes);
-        }
-
-        return $imageOptions;
     }
 
     protected function parseBackgroundVideo($data)

@@ -56,7 +56,7 @@ class Checkbox extends VitrineComponent
     /** @var string */
     public $ariaDescribedBy;
 
-    protected static $assets = [
+    protected static array $assets = [
         'js' => ['behaviors/Input.js'],
         'css' => [
             'components/form/checkbox.css',
@@ -78,6 +78,7 @@ class Checkbox extends VitrineComponent
         $inputAttr = '',
         $autofocus = false,
         $form = '',
+        $ui = []
     )
     {
         $this->label = $label;
@@ -99,14 +100,16 @@ class Checkbox extends VitrineComponent
         $this->ariaID = 'ariaID'. $rand;
         $this->errorID = 'errorID'. $rand;
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = '#'.$this->errorID;
+        $this->ariaDescribedBy[] = $this->errorID;
 
         if($hint) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Hint';
+            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
         }
         if($note) {
-            $this->ariaDescribedBy[] = '#'.$this->ariaID.'Note';
+            $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

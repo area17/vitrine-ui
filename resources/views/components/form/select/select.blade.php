@@ -1,25 +1,25 @@
 <div
     data-behavior="Input"
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+    {{ $attributes->class([$ui('select', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $disabled ? 'inert' : '' }}
 >
 
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
+    <div class="{{  $ui('select', 'header') }}">
         <x-vui-form-label :name="$name" :required="$required">
             {{$label}}
         </x-vui-form-label>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{ $ui('select', 'hint') }}">{{ $hint }}</span>
         @endif
     </div>
 
-    <div class="m-input__wrapper">
+    <div class="{{ $ui('select', 'wrapper') }}">
         <select
-            class="p-12 pr-36 w-full f-body-1 appearance-none"
+            class="{{ $ui('select', 'select') }}"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
             @if($name) name="{{$name}}" @endif
             @if($autocomplete) autocomplete="{{$autocomplete}}" @endif
-            aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
             data-Input-input
             {{ $autofocus ? ' autofocus' : '' }}
             {{ $disabled ? ' disabled' : '' }}
@@ -41,13 +41,13 @@
             @endforeach
         </select>
 
-        <x-vui-icon name="chevron-down-24" class="absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none" />
+        <x-vui-icon name="{{ $ui('select', 'icon-name') }}" class="{{ $ui('select', 'icon') }}" />
     </div>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-4">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{ $ui('select', 'note') }}">{{ $note }}</p>
     @endif
 
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="mt-4 f-body-1 text-error" style="display: none;" data-Input-error>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('select', 'error') }}" style="display: none;" data-Input-error><x-vui-icon name="{{ $ui('select', 'error-icon-name') }}"/>{{$error ?? ''}}</p>
 
 </div>

@@ -1,0 +1,5 @@
+{
+  "base": "flex items-center f-ui-3 gap-x-24",
+  "item": "relative after:content-[''] after:absolute after:inset-y-0 after:w-px after:-right-12 after:rotate-12 after:border-r last:after:content-[none]",
+  "link": "underline underline-offset-4 hover:no-underline hover:underline-offset-0"
+}

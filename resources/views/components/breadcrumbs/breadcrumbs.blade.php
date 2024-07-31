@@ -1,23 +1,21 @@
 @if(filled($items))
-    <div class="flex items-center mb-8">
+    <{{ $tag ?? 'nav' }} aria-label="breadcrumbs" {{ $attributes->class($ui('breadcrumbs')) }}>
         @foreach ($items as $item)
-            @if ($item['href'] ?? null)
-                <x-vui-link-secondary
-                    :href="$item['href'] ?? null"
+            @if ($item['href'] ??  $item['url'] ?? null)
+                <a
+                    class="{{ $ui('breadcrumbs', ['item', 'link']) }}"
+                    href="{{$item['href'] ?? $item['url']}}"
+                    @if($loop->last)  aria-current="page"  @endif
                 >
-                    {{ $item['text'] ?? '' }}
-                </x-vui-link-secondary>
+                    {{ $item['text'] ?? $item['label'] ?? '' }}
+                </a>
             @else
-                <span class="f-ui-3 text-primary">
-                    {{ $item['text'] ?? '' }}
-                </span>
-            @endif
-
-            @if(!$loop->last)
-                <span class="f-ui-3 text-primary mx-6">
-                    /
+                <span class="{{ $ui('breadcrumbs', 'item') }}"
+                      @if($loop->last)  aria-current="page"  @endif
+                >
+                    {{ $item['text'] ?? $item['label'] ?? '' }}
                 </span>
             @endif
         @endforeach
-    </div>
+    </{{ $tag ?? 'nav' }}>
 @endif

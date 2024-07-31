@@ -1,25 +1,25 @@
 <fieldset
     data-behavior="RadioGroup"
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error]) }}
-    aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+    {{ $attributes->class([$ui('radio-group', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
+    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
     {{ $disabled ? 'inert' : '' }}>
 
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
+    <div class="{{$ui('radio-group', 'wrapper')}}">
         <x-vui-form-label :name="$name" :tag="'legend'" :required="$required">
             {{$legend}}
         </x-vui-form-label>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{$ui('radio-group', 'hint')}}">{{ $hint }}</span>
         @endif
     </div>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-12">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{$ui('radio-group', 'note')}}">{{ $note }}</p>
     @endif
 
-    <ol>
+    <ol class="{{$ui('radio-group', 'list')}}">
         @foreach($options as $option)
-            <li class="mt-24">
+            <li class="{{$ui('radio-group', 'list-item')}}">
                 <x-vui-form-radio
                     :label="$option['label'] ?? ''"
                     :name="$name ?? $option['name'] ?? ''"

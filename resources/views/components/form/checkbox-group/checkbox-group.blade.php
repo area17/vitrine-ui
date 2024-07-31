@@ -14,33 +14,33 @@
     $ariaID = 'ariaID'.$rand;
     $ariaDescribedBy = [];
     if($hint) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Hint';
+        $ariaDescribedBy[] = $ariaID.'Hint';
     }
     if($note) {
-        $ariaDescribedBy[] = '#'.$ariaID.'Note';
+        $ariaDescribedBy[] = $ariaID.'Note';
     }
 @endphp
 
 <fieldset
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled]) }}
+    {{ $attributes->class([$ui('checkbox-group', 'base'), 's-disabled' => $disabled]) }}
     {{ $disabled ? 'inert' : '' }}>
 
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
+    <div class="{{ $ui('checkbox-group', 'wrapper') }}">
         <x-vui-form-label :tag="'legend'" :required="$required">
             {{$legend}}
         </x-vui-form-label>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{$ui('checkbox-group', 'hint')}}">{{ $hint }}</span>
         @endif
     </div>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-12">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{$ui('checkbox-group', 'note')}}">{{ $note }}</p>
     @endif
 
-    <ol>
+    <ol class="{{$ui('checkbox-group', 'list') }}">
         @foreach($options as $option)
-            <li class="mt-24">
+            <li class="{{$ui('checkbox-group', 'list-item') }}">
                 <x-vui-form-checkbox
                     :label="$option['label'] ?? ''"
                     :name="$option['name'] ?? ''"

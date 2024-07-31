@@ -10,7 +10,7 @@
 <fieldset
     data-behavior="DateTrio"
     role="group"
-    aria-describedby="{{implode(',', $ariaDescribedBy)}}"
+    aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
     @if($picker)data-DatePicker-el="{{$pickerID}}"@endif
     {{ $attributes->class(['s-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $dataAttrs }}

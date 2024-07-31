@@ -8,7 +8,18 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@area17/a17-tailwind-plugins": "^3.8.1"
+  "devDependencies": {
+    "@area17/a17-tailwind-plugins": "^3.8.1",
+    "@area17/a17-helpers": "~3.2.3",
+    "focus-trap": "~7.5.2",
+    "body-scroll-lock-upgrade": "~1.0.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": "3.x",
+    "@area17/a17-tailwind-plugins": "3.x",
+    "@area17/a17-helpers": "3.x",
+    "@area17/a17-behaviors": ">=0.4",
+    "focus-trap": "7.x",
+    "body-scroll-lock-upgrade": "1.x"
   }
 }

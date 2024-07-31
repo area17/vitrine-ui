@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "merge": ["select"]
+  },
+  "base": "[inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
+  "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
+  "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
+  "select": "p-12 pr-36 w-full f-body-1 appearance-none [.s-readonly_&]:bg-transparent",
+  "icon": "absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none",
+  "icon-name": "chevron-down-24",
+  "hint": "f-ui-2 text-secondary",
+  "note": "f-ui-2 text-secondary mt-4",
+  "link": "",
+  "error": "mt-4 f-body-1 text-error flex items-center gap-4",
+  "error-icon-name": "warning"
+}
