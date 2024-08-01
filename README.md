@@ -164,7 +164,17 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 
 ## Theming
 
-Each component has default classes that you can customize through its associated JSON file located in the 'resources/frontend/theme' folder.
+Each component has default classes that you can customize through its associated JSON file located in the [components folder](resources/frontend/theme/components).
+You can override this config in your Laravel application by updating 'vitrine_path' key set in [vitrine-ui config](config/vitrine-ui.php)  
+
+### Configure tailwind for theming in your laravel application `tailwind.config.js`:
+```js
+module.exports = {
+    content: [
+        join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}"),
+    ],
+}
+```
 
 Example of a component JSON config :
 
@@ -175,7 +185,7 @@ Example of a component JSON config :
 }
 ```
 The base key will replace the base component classes, which is the root DOM element of the component.
-For some components, other properties are customizable. Refer to the component's stories to see which properties can be themed.
+For some components, other properties are customizable. Refer to the [component's stories](resources/views/stories) to see which properties can be themed.
 
 The configuration will replace existing default vitrine-ui classes. You can change this behavior by specifying merge rules in your component's JSON config and specifying elements.
 
@@ -189,7 +199,8 @@ The configuration will replace existing default vitrine-ui classes. You can chan
 }
 ```
 
-You can also add variants by including a variant key in the component's JSON config.
+###  Add variants
+For some components, you can also add variants by including a variant key in the component's JSON config.
 
 ```json
 {
@@ -208,6 +219,7 @@ To use a variant, specify it in the component call:
 <x-vui-component variant="primary">
 ```
 
+###  Retrieve config CSS classes
 You can retrieve CSS classes from the JSON configuration file by calling the Vitrine UI helper using the following syntax:
 
 ```php
