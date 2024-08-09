@@ -17,7 +17,7 @@ return [
     // the path to the components views within the vitrine-ui package. Used to generate the import paths in your published css and js files. This can be replaced with an alias defined in your vite.config.js
     'vendor_assets_path' => '../../../../vendor/area17/vitrine-ui/resources/frontend',
 
-    'icons_view_path' => 'icon._icons',
+    'icons_view_path' => 'icons.',
 
     'vitrine_path' => resource_path('frontend/vitrine-ui'),
 
