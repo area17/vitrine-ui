@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.8.2] - 2024-25-07
+
+## Updated
+- Update Vitrine-ui default icons_view_path
+
 ## [2.8.1] - 2024-25-07
 
 ## Updated
