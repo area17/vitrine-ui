@@ -27,10 +27,9 @@ return [
     'stories_subfolder' => 'vitrine',
 
     // The prefix for the vitrine-ui components
+    // Used to configure ide.json autocompletion
+    // Some internal components are prefixed with 'vui-' internally, so you should avoid change this prefix
     'prefix' => 'vui',
-
-    // Required to define ide.json autocomplete rules
-    'namespace' => '',
 
     // CSS Preset
     "css_preset" => "tailwindcss",
