@@ -1,5 +1,6 @@
-import { createBehavior } from '@area17/a17-behaviors'
-import { customEvents } from '../constants/customEvents'
+import {createBehavior} from '@area17/a17-behaviors'
+import {customEvents} from '../constants/customEvents'
+import {useMotionReduce} from "../utils/motion";
 
 export const VideoBackground = createBehavior(
     'VideoBackground',
@@ -118,10 +119,17 @@ export const VideoBackground = createBehavior(
                 unmute: this.options['text-unmute']
             }
         },
-
+        handleMotionReduceState(active) {
+            if (active) {
+                this.observer?.disconnect()
+                this.pause()
+            } else {
+                this.startIntersectionObserver()
+            }
+        },
         initEvents() {
             document.addEventListener(
-                'VideoBackground:muteAll',
+                customEvents.VIDEO_BACKGROUND_MUTE_ALL,
                 this.mute,
                 false
             )
@@ -141,12 +149,6 @@ export const VideoBackground = createBehavior(
                     false
                 )
             }
-
-            if (window.A17.reduceMotion) {
-                this.pause()
-            } else {
-                this.startIntersectionObserver()
-            }
         }
     },
     {
@@ -162,13 +164,13 @@ export const VideoBackground = createBehavior(
             this.$unmuteIcon = this.getChild('icon-unmute')
             this.$playIcon = this.getChild('icon-play')
             this.$pauseIcon = this.getChild('icon-pause')
+            const [initState, motionReduceDestroy] =
+                useMotionReduce(this.handleMotionReduceState)
+            this.handleMotionReduceState(initState)
+            this.motionReduceDestroy = motionReduceDestroy
 
             this.initEvents()
         },
-        enabled() {},
-        resized() {},
-        mediaQueryUpdated() {},
-        disabled() {},
         destroy() {
             this.$player.removeEventListener('play', this.handlePlay)
             this.$player.removeEventListener('pause', this.handlePause)
@@ -182,6 +184,7 @@ export const VideoBackground = createBehavior(
                 this.$muteButton.removeEventListener('click', this.toggleMute)
             }
 
+            this.motionReduceDestroy()
             this.observer.disconnect()
         }
     }
