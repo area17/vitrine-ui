@@ -1,13 +1,16 @@
+<?php
+use App\Constants\Medias;
+
+?>
+
 @storybook([
     'name' => 'Image',
     'status' => 'readyForQA',
     'args' => [
         'image' => [
-            '_static' => [
-                'file' => '/static/placeholder_16x9.jpg',
-                'alt' => 'Dummy Alt Text'
-            ],
-        ]
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
+        ],
     ],
     'argTypes' => [
         'image' => [
