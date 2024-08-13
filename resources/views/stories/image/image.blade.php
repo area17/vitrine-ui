@@ -1,8 +1,3 @@
-<?php
-use App\Constants\Medias;
-
-?>
-
 @storybook([
     'name' => 'Image',
     'status' => 'readyForQA',
