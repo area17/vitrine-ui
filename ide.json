@@ -5,7 +5,7 @@
       "fromConfig": [
         {
           "componentsKey": "components",
-          "prefixKey": "vui",
+          "prefixKey": "prefix",
           "configFileName": "vitrine-ui"
         }
       ],
