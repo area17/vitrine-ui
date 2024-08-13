@@ -24,16 +24,17 @@ class VideoBackground extends VitrineComponent
      */
     public $native = true;
 
-    /** @var string
+    /** @var string|null
      * Pass variant attribute to play/mute buttons
      */
     public string|null $buttonVariant = 'secondary';
 
-    /** @var string
-     * Add aspect ratio class (aspect-[value]) to the video container
-     * Default: 16/9
+    /** @var string|null
+     * Pass variant key to parent div.
+     * Used to style the video background with theme options
+     * Default: null
      */
-    public string $aspectRatio;
+    public string|null $variant;
 
     /** @var bool
      * Add button to control mute/unmute state
@@ -49,19 +50,19 @@ class VideoBackground extends VitrineComponent
 
     public function __construct(
         $sources = null,
-        $aspectRatio = '16/9',
         $controlMute = false,
         $buttonVariant = 'secondary',
         $src = null,
         $native = true,
+        $variant = null,
         $ui = []
     )
     {
-        $this->aspectRatio = $aspectRatio;
         $this->buttonVariant = $buttonVariant;
         $this->sources = $sources;
         $this->controlMute = $controlMute;
         $this->native = $native;
+        $this->variant = $variant;
         $this->src = $src;
 
         parent::__construct($ui);
