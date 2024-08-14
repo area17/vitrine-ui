@@ -78,20 +78,6 @@ export default ({ mode }) =>
     })
 ```
 
-### Add component css to `app.css`
-
-Import single component:
-
-```css
-@import "@vitrineUIComponent/modal/modal.css";
-```
-
-Import all components:
-
-```css
-@import "@vitrineUI/index.css";
-```
-
 ### Import behaviors
 
 Import single component behavior:
@@ -161,6 +147,7 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 - `--view` : Publish only the view of the component
 - `--class` : Publish only the class of the component
 - `--force` : Overwrite existing files
+- `--stories` : Publish only the stories for the component
 
 ## Theming
 
@@ -240,29 +227,6 @@ You can retrieve CSS classes from the JSON configuration file by calling the Vit
 VitrineUI::ui('json_file_name', 'key_in_json_file', array_of_options)
 ```
 array_of_options can be used for variant mapping.
-
-## Todo
-
-- Add ability to publish components to application
-- Integration / autocompletion with IDE
-- Contributions rules
-- Add tests
-- Theme options and extends possibilities (with css classes, specific tailwind components plugin -> tbd, extends basic theme through css / tailwind css preset)... 
-
-- Components refactoring
-- [x] Accordion
-- [ ] Audio player
-- [x] Breadcrumbs
-- [x] Button
-- [ ] Card Inline
-- [ ] Card Primary
-- [ ] Datepicker
-- [ ] Dropdown
-- [ ] Form
-- [ ] Inputs
-- [x] Form Select
-- [x] Heading
-- [x] Icon
 
 ## Testing
 
