@@ -89,7 +89,7 @@ class Image extends VitrineComponent
         $this->imageType = $this->getImageType();
         $this->staticSettings = $this->getStaticSettings();
         $this->imageOptions = $this->parseImageOptions($imageOptions);
-        $this->loading = $loading || $this->imageOptions['loading'] ?? 'lazy';
+        $this->loading = $loading ?? $this->imageOptions['loading'] ?? 'lazy';
 
 
         parent::__construct($ui);
