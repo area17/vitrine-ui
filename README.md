@@ -199,6 +199,19 @@ The configuration will replace existing default vitrine-ui classes. You can chan
 }
 ```
 
+You can also override the json configuration directly in the component call by passing 'ui' key :
+```html
+<x-vui-component :ui="[
+    'json-file-name' => [
+        'base' => [
+            'custom-class',
+        ],
+    ],
+]" >
+    ...
+</x-vui-component>
+```
+
 ###  Add variants
 For some components, you can also add variants by including a variant key in the component's JSON config.
 
@@ -214,9 +227,10 @@ For some components, you can also add variants by including a variant key in the
 ```
 
 To use a variant, specify it in the component call:
-
 ```html
 <x-vui-component variant="primary">
+    ...
+</x-vui-component>
 ```
 
 ###  Retrieve config CSS classes
