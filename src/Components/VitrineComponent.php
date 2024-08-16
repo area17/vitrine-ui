@@ -38,6 +38,16 @@ abstract class VitrineComponent extends Component
         }
     }
 
+    public function preset($component): array
+    {
+        try {
+            return VitrineUI::getComponentConfig($component);
+        } catch (\Exception $e) {
+            report($e);
+            return [];
+        }
+    }
+
     public function setAttributes($attributes): string
     {
         return VitrineUI::setAttributes($attributes);

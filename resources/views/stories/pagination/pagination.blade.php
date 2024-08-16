@@ -16,7 +16,7 @@
         'last_page' => 3,
         'current_page_count' => 10,
         'total' => 25,
-        'labelInsideDropdown' => false,
+        'labelInsideDropdown' => true,
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
         'btnVariant' => 'secondary'
@@ -70,7 +70,7 @@
     ]
 ])
 
-<x-helpers.story-decorator>
+<div class="container">
     <x-vui-pagination :btnVariant="$btnVariant" :pages="$pages ?? []" :iconLeft="$iconLeft" :iconRight="$iconRight" :currentPage="$current_page" :currentPageCount="$current_page_count" :lastPage="$last_page" :total="$total"
         btnVariant="secondary-icon" />
-</x-helpers.story-decorator>
+</div>

@@ -264,4 +264,23 @@ class VitrineUI
         return $ui;
     }
 
+    /**
+     * Return component preset from config file
+     * @param $component string required - Request component ui
+     * @return array
+     * @throws Exception
+     */
+    public static function getComponentConfig(string $component): array
+    {
+        if (!isset($component)) {
+            throw new Exception('Component name is required');
+        }
+
+        $ui = self::getBaseVitrineTheme();
+
+        $ui = self::getComponentPreset($ui, $component);
+
+        return $ui;
+    }
+
 }

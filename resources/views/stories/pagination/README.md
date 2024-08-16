@@ -25,7 +25,11 @@ Any additional attributes are merged with the component's existing attributes to
 "wrapper": "md:flex w-full items-center gap-x-24",
 "show-message": "hidden md:block f-ui-01",
 "dropdown-wrapper": "md:flex items-center ml-auto mt-10 md:mt-0",
-"dropdown": "pointer-events-none md:pointer-events-auto"
+"dropdown": "pointer-events-none md:pointer-events-auto",
+"select": {}
 }
 ```
+The pagination component uses the select Vitrine UI styles, defined in the [select.json](resources/frontend/theme/components/select.json) configuration.
+
+To customize these styles for pagination, you can provide a select object in the pagination’s configuration. Any keys you include (e.g., wrapper, base) will override the corresponding values in select.json. If a key is missing, the default value from select.json will be used instead.
 ### View
