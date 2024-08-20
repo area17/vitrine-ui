@@ -4,7 +4,7 @@ Any additional attributes are merged with the component's existing attributes to
 
 ## Usage
 
-```php
+```html
 <x-vui-pagination
     :pages="$pages"
     :currentPage="$currentPage"
