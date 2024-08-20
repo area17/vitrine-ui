@@ -16,9 +16,12 @@ Any additional attributes are merged with the component's existing attributes to
 
 ## Accessibility
 
+The "Previous" and "Next" buttons include aria-label attributes to describe their function, ensuring they are accessible to screen readers. When these buttons are disabled, they should also include aria-disabled="true" to indicate their inactive state.
+
 ## Theming
 
 ### Config
+
 ``` json
 {
 "base": "mb-140",
@@ -32,4 +35,3 @@ Any additional attributes are merged with the component's existing attributes to
 The pagination component uses the select Vitrine UI styles, defined in the [select.json](resources/frontend/theme/components/select.json) configuration.
 
 To customize these styles for pagination, you can provide a select object in the pagination’s configuration. Any keys you include (e.g., wrapper, base) will override the corresponding values in select.json. If a key is missing, the default value from select.json will be used instead.
-### View

@@ -6,7 +6,7 @@ The `accordion.item` renders text passed to the `title` prop, used in the button
 
 ## Usage
 
-```php
+```html
 <x-vui-accordion>
     @foreach ($items as $item)
         <x-vui-accordion-item
@@ -21,7 +21,7 @@ The `accordion.item` renders text passed to the `title` prop, used in the button
 ```
 
 
-### Accessibility
+## Accessibility
 
 If using a `ul` around the accordion items it must be labelled by a heading element and if there's only one item in the accordion, both the `ul` and `li` need `role="presentation"`
 
