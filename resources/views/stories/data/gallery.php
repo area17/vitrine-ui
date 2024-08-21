@@ -3,28 +3,22 @@
 $items = [
     [
         'image' => [
-            '_static' => [
-                'file' => '/static/work-oxman.jpg',
-                'alt' => 'Dummy Alt Text',
-            ],
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
         ],
         'caption' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         'credit' => 'Curabitur blandit tempus porttitor. Donec ullamcorper nulla non metus auctor fringilla.',
     ],
     [
         'image' => [
-            '_static' => [
-                'file' => '/static/work-nike.jpg',
-                'alt' => 'Dummy Alt Text',
-            ],
-        ],
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
+        ]
     ],
     [
         'image' => [
-            '_static' => [
-                'file' => '/static/work-motf.jpg',
-                'alt' => 'Dummy Alt Text',
-            ],
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
         ],
         'caption' => 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet.',
         'credit' =>
@@ -32,10 +26,8 @@ $items = [
     ],
     [
         'image' => [
-            '_static' => [
-                'file' => '/static/work-flv.jpg',
-                'alt' => 'Dummy Alt Text',
-            ],
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
         ],
     ],
 ];
@@ -45,10 +37,8 @@ return [
         'args' => [
             'media' => [
                 'image' => [
-                    '_static' => [
-                        'file' => '/static/work-oxman.jpg',
-                        'alt' => 'Dummy Alt Text',
-                    ],
+                    'src' => 'https://placehold.co/600x400.png',
+                    'alt' => 'Sample Alt Text',
                 ],
                 'caption' =>
                     'Proin id aliquet in praesent sit laoreet mauris dignissim id rhoncus fames vel ut feugiata.',
