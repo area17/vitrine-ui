@@ -17,9 +17,9 @@
                                   aria-label="{{ __('vitrine-ui::fe.unmute') }}"
                                   icon-only>
                         <x-vui-icon class="hidden"
-                                    name="speaker-24"
+                                    name="{{ $ui('video-background', 'unmute-icon-name') }}"
                                     data-VideoBackground-icon-mute=""/>
-                        <x-vui-icon name="speaker-off-24"
+                        <x-vui-icon name="{{ $ui('video-background', 'mute-icon-name') }}"
                                     data-VideoBackground-icon-unmute=""/>
                     </x-vui-button>
                 @endif
@@ -30,9 +30,9 @@
                               data-VideoBackground-pause=""
                               aria-label="{{ __('vitrine-ui::fe.pause') }}">
                     <x-vui-icon class="hidden"
-                                name="play-24"
+                                name="{{ $ui('video-background', 'play-icon-name') }}"
                                 data-VideoBackground-icon-play/>
-                    <x-vui-icon name="pause-24"
+                    <x-vui-icon name="{{ $ui('video-background', 'pause-icon-name') }}"
                                 data-VideoBackground-icon-pause/>
                 </x-vui-button>
             </div>
