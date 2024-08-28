@@ -9,7 +9,6 @@
                     "src" => "/static/demo-video.mp4"
                 ]
             ],
-            'aspectRatio' => '16/9'
         ],
         'caption' => 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
     ]
