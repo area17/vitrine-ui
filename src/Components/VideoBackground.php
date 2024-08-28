@@ -15,8 +15,9 @@ class VideoBackground extends VitrineComponent
 
     /** @var string
      * URL of the video
+     * Default: null
      */
-    public string $src;
+    public string|null $src;
 
     /** @var bool
      * Define if the video should use video.js or native video tag
