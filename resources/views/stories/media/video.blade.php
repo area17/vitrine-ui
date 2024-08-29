@@ -2,10 +2,8 @@
     'status' => 'readyForQA',
     'args' => [
         'image' => [
-            '_static' => [
-                'file' => '/static/work-oxman.jpg',
-                'alt' => 'Dummy Alt Text'
-            ],
+            'src' => 'https://placehold.co/600x400.png',
+            'alt' => 'Sample Alt Text',
         ],
         'video' => [
             'id' => 'CouF-tNHV3g',

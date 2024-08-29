@@ -6,10 +6,8 @@
         'sources' => [
             [
                 'image' => [
-                    '_static' => [
-                        'file' => '/static/work-nike.jpg',
-                        'alt' => 'Dummy Alt Text'
-                    ],
+                    'src' => 'https://placehold.co/600x400.png',
+                    'alt' => 'Sample Alt Text',
                 ],
             ],
         ]
