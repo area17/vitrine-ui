@@ -93,10 +93,6 @@ class Media extends VitrineComponent
             return false;
         }
 
-        if (!Arr::has($data, 'aspectRatio')) {
-            $data['aspectRatio'] = '16/9';
-        }
-
         return $data;
     }
 }

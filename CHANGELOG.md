@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.9.0] - 2024-29-08
+
+## Added
+- Add simple card-wrapper and card-link components to compose card components at application level
+
+## Updated
+- Prepare Twill-image depreciation for next major release with better support of images passed as an array
+- Refactor and add theming file for video-background : *Breaking-change : no more "aspect-ratio" prop in the component (this will be ignored)*, use class instead to define the aspect ratio of the video wrapper.
+- Inline heading component to remove spacings generated in rendered html
+
 ## [2.8.2] - 2024-25-07
 
 ## Updated
@@ -13,7 +23,7 @@
 ## [2.8.0] - 2024-22-07
 
 ## Updated
-- Custom Events : Custom Events are refrenced into a shared object so you can easily use these in behaviors created outside Vitrine UI. **Avoid Magic strings**
+- Custom Events : Custom Events are referenced into a shared object so you can easily use these in behaviors created outside Vitrine UI. **Avoid Magic strings**
 
 ## [2.7.4] - 2024-12-07
 

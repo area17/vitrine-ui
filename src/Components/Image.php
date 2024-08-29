@@ -12,41 +12,85 @@ class Image extends VitrineComponent
     /** @var array */
     public $image;
 
-    /** @var string */
+    /** @var string
+     * @deprecated
+     */
     public $imageOptions;
 
-    /** @var string */
+    /** @var string
+     * @deprecated
+     */
     public $imagePreset;
 
-    /** @var bool */
+    /** @var bool
+     * @deprecated
+     */
     public $usePlaceholder;
 
-    /** @var array */
+    /** @var array
+     * @deprecated
+     */
     protected $presetData;
 
-    /** @var array */
+    /** @var array
+     * @deprecated
+     */
     public $imageType;
 
-    /** @var array */
+    /**
+     * @var array
+     * @deprecated
+     */
     public $staticSettings;
+
+    /**
+     * @var bool
+     * Used to determine if the image is an array and should be rendered with future default rendering
+     */
+    public $nextRendering;
+
+    public $width;
+    public $height;
+    public $src;
+
+    /**
+     * @var string
+     * Define image loading strategy
+     * Default: lazy
+     */
+    public $loading;
+    public $sizes;
 
     public function __construct(
         $image = null,
         $imageOptions = null,
         $imagePreset = 'generic',
         $usePlaceholder = false,
-        $videoPlayIcon = null,
-        $backgroundVideo = null,
+        $nextRendering = false,
+        $loading = 'lazy',
+        $height = null,
+        $width = null,
+        $src = null,
+        $sizes = null,
         $ui = []
-    ) {
+    )
+    {
         $this->image = $image;
+        $this->height = $height;
+        $this->width = $width;
+        $this->src = $src;
+        $this->sizes = $sizes;
+
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
+        $this->nextRendering = $nextRendering ?? false;
 
         $this->presetData = config('twill-image.presets.' . $this->imagePreset);
         $this->imageType = $this->getImageType();
         $this->staticSettings = $this->getStaticSettings();
         $this->imageOptions = $this->parseImageOptions($imageOptions);
+        $this->loading = $loading ?? $this->imageOptions['loading'] ?? 'lazy';
+
 
         parent::__construct($ui);
     }
@@ -56,6 +100,9 @@ class Image extends VitrineComponent
         return view('vitrine-ui::components.image.image');
     }
 
+    /**
+     * @deprecated, in next major version, image type will be only an array. Define today with 'next-rendering'.
+     */
     protected function getImageType()
     {
         /** @phpstan-ignore-next-line */
@@ -63,6 +110,8 @@ class Image extends VitrineComponent
             return 'twill-image';
         } elseif (Arr::has($this->image, '_static')) {
             return 'twill-image-static';
+        } elseif (Arr::has($this->image, 'src') && $this->nextRendering) {
+            return 'next-rendering';
         } elseif (Arr::has($this->image, 'src') && Arr::has($this->image, 'srcSet')) {
             return 'twill-image-array';
         } elseif (is_array($this->image) && array_key_exists('src', $this->image)) {
@@ -74,6 +123,9 @@ class Image extends VitrineComponent
         return false;
     }
 
+    /**
+     * @deprecated
+     */
     protected function getStaticSettings()
     {
         if (!$this->image || !is_array($this->image) || !Arr::has($this->image, '_static')) {
@@ -85,6 +137,9 @@ class Image extends VitrineComponent
         return array_merge($presetStatic, $this->image['_static']);
     }
 
+    /**
+     * @deprecated
+     */
     protected function parseImageOptions($imageOptions = [])
     {
         $breakpointRatios = Arr::get($this->presetData, 'breakpointRatios');
