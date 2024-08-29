@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+import { customEvents } from '../constants/customEvents'
 
 /*
     Markup and JS taken from:
@@ -38,8 +39,10 @@ const Tabs = createBehavior(
             this.current.tab.setAttribute('aria-selected', 'false')
             this.current.tab.tabIndex = -1
             this.current.tabpanel.inert = true
-            this.current.tabpanel.dispatchEvent(new CustomEvent('Tab:hidden'))
-
+            this.current.tabpanel.dispatchEvent(new CustomEvent(customEvents.TABS_HIDDEN))
+            document.dispatchEvent(
+                new CustomEvent(customEvents.TABS_HIDDEN)
+            )
             if (!init && this.options.scrollonclick) {
                 this.$node.scrollIntoView(true)
             }
@@ -53,7 +56,10 @@ const Tabs = createBehavior(
                 window.requestAnimationFrame(() => {
                     nextCurrentTab.tabpanel.inert = false
                     nextCurrentTab.tabpanel.dispatchEvent(
-                        new CustomEvent('Tab:shown')
+                        new CustomEvent(customEvents.TABS_SHOWN)
+                    )
+                    document.dispatchEvent(
+                        new CustomEvent(customEvents.TABS_SHOWN, { detail: this.current })
                     )
                 })
 
@@ -61,7 +67,7 @@ const Tabs = createBehavior(
                 this.$node.dataset.tabsImmediate = false
                 if (!init) {
                     document.dispatchEvent(
-                        new CustomEvent('tabs:opened', { detail: this.current })
+                        new CustomEvent(customEvents.TABS_OPENED, { detail: this.current })
                     )
                 }
             }, this.transitionTime)

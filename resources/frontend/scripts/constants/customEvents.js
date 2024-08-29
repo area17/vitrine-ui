@@ -33,4 +33,8 @@ export const customEvents = {
 
     INPUT_VALIDATED: 'Input:Validated', /* node event */
     INPUT_RESET: 'Input:Reset', /* node event */
+
+    TABS_OPENED: 'Tabs:opened', /* node event */
+    TABS_SHOWN: 'Tabs:shown', /* node event */
+    TABS_HIDDEN: 'Tabs:hidden' /* node event */
 };
