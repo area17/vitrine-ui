@@ -1,0 +1,15 @@
+{
+  "base": [
+    "relative overflow-hidden w-full h-full"
+  ],
+  "variant": {
+  },
+  "controls": "absolute bottom-12 right-12 z-10 flex gap-8",
+  "button": "flex",
+  "video": "absolute inset-0 h-full w-full object-cover",
+  "wrapper": "relative h-full w-full",
+  "unmute-icon-name": "speaker-24",
+  "mute-icon-name": "speaker-off-24",
+  "play-icon-name": "play-24",
+  "pause-icon-name": "pause-24"
+}

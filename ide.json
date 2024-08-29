@@ -4,10 +4,9 @@
     "components": {
       "fromConfig": [
         {
-          "prefixKey": "prefix",
           "componentsKey": "components",
-          "configFileName": "vitrine-ui",
-          "namespaceKey": "namespace"
+          "prefixKey": "prefix",
+          "configFileName": "vitrine-ui"
         }
       ],
       "ignoreViewPaths": [

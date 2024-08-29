@@ -27,10 +27,9 @@ return [
     'stories_subfolder' => 'vitrine',
 
     // The prefix for the vitrine-ui components
+    // Used to configure ide.json autocompletion
+    // Some internal components are prefixed with 'vui-' internally, so you should avoid change this prefix
     'prefix' => 'vui',
-
-    // Required to define ide.json autocomplete rules
-    'namespace' => '',
 
     // CSS Preset
     "css_preset" => "tailwindcss",
@@ -40,6 +39,8 @@ return [
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
         'breadcrumbs' => A17\VitrineUI\Components\Breadcrumbs::class,
         'button' => A17\VitrineUI\Components\Button::class,
+        'card' => A17\VitrineUI\Components\Card::class,
+        'card-link' => A17\VitrineUI\Components\CardLink::class,
         'datepicker' => A17\VitrineUI\Components\Datepicker::class,
         'dropdown' => A17\VitrineUI\Components\Dropdown::class,
         'form-checkbox' => A17\VitrineUI\Components\Form\Checkbox::class,
