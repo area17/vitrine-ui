@@ -1,73 +1,79 @@
 # Changelog
 
-## [2.9.1] - 2024-31-08
+## [2.10.0] - 2024-30-08
 
-## Fixed
+### Updated
+- Stories and documentation for components
+- Update readme
+
+## [2.9.1] - 2024-30-08
+
+### Fixed
 - Fix typo in VideoBackground component
 
 ## [2.9.0] - 2024-29-08
 
-## Added
+### Added
 - Add simple card-wrapper and card-link components to compose card components at application level
 
-## Updated
+### Updated
 - Prepare Twill-image depreciation for next major release with better support of images passed as an array
 - Refactor and add theming file for video-background : *Breaking-change : no more "aspect-ratio" prop in the component (this will be ignored)*, use class instead to define the aspect ratio of the video wrapper.
 - Inline heading component to remove spacings generated in rendered html
 
 ## [2.8.2] - 2024-25-07
 
-## Updated
+### Updated
 - Update Vitrine-ui default icons_view_path
 
 ## [2.8.1] - 2024-25-07
 
-## Updated
+### Updated
 - Update dependencies (Update Twill Image to fix calculation of sizes atributes)
 
 ## [2.8.0] - 2024-22-07
 
-## Updated
+### Updated
 - Custom Events : Custom Events are referenced into a shared object so you can easily use these in behaviors created outside Vitrine UI. **Avoid Magic strings**
 
 ## [2.7.4] - 2024-12-07
 
-## Added
+### Added
 - ShowVideo : Add events to control states of the component (ie : to reset the video if not visible anymore)
 
 ## [2.7.3] - 2024-02-07
 
-## Added
+### Added
 - Modal : iOS – Body Scroll Lock : add a way to specify another scrollable div to target "data-modal-scroller". If not present it will fallback on the focus trap div. It is important that the scroller div is the one we would like to allow scroll on (NOT a parent of that element) as specified in the doc : https://github.com/rick-liruixin/body-scroll-lock-upgrade
 
 ## [2.7.2] - 2024-12-06
 
-## Added
+### Added
 - Inputs : Radio and Checkbox - Allow local overrides
 
 ## [2.7.1] - 2024-11-06
 
-## Added
+### Added
 - Inputs : JSON theming files for checkbox group and radio group
 
 ## [2.7.0] - 2024-06-06
 
-## Added
+### Added
 - Inputs : JSON theming files for inputs checkbox and radio
 
 ## [2.6.1] - 2024-06-06
 
-## Update
+### Update
 - Forms : Checkboxes - Add ability to customize the checkbox icon
 
 ## [2.6.0] - 2024-06-06
 
-## Fixed
+### Fixed
 - Forms : Checkboxes and radios : fix incorrect "for" attribute for the label. It should always be the same as the id attribute of the input.
 
 ## [2.5.1] - 2024-04-06
 
-## Updated
+### Updated
 - Accordion : fix issue with content overflow when opening accordion item : remove useless code in favor of using transitionend event
 
 ## [2.5.0] - 2024-04-06
@@ -77,12 +83,12 @@
 
 ## [2.4.0] - 2024-04-06
 
-## Updated
+### Updated
 - Laravel 11 Support
 
 ## [2.3.0] - 2024-03-06
 
-## Added
+### Added
 - Accordion : add "exclusive" mode to make sure only one item is opened at a time
 
 ## [2.2.0] - 2024-12-02
@@ -93,7 +99,7 @@
 
 ## [2.1.0] - 2024-22-01
 
-## Added
+### Added
 - New FormField component : New component to handle markup around Input / Textarea
 
 ### Changed
@@ -101,7 +107,7 @@
 
 ## [2.0.0] - 2024-16-01
 
-## Added
+### Added
 - New Image component : Split Media component into Image component so we have a way to add an image without extra markup around
 
 ### Fixed
@@ -118,7 +124,7 @@
 
 ## [1.0.0] - 2023-10-12
 
-## Added
+### Added
 - Theme options : add `ui` logic to set Taiwlind CSS classes that will override default vitrine styling
 
 ### Fixed

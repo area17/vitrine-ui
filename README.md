@@ -5,27 +5,36 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)
 
-AREA 17 Vitrine Blade components to import into a Laravel application. Individual Blade components are showcased in the dedicated demo website : https://vitrine.a17.dev/storybook
+AREA 17 Vitrine Blade components to import into a Laravel application.
+
+This library is under active development and name is subject to change in feature release.
 
 ## Installation
 
-You can install the package via Composer:
+This package is not yet available on Packagist. You can install it from GitHub:
+Add the repository to your composer.json file:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/area17/vitrine-ui.git"
+        }
+    ]
+}
+```
 
 ```bash
 composer require area17/vitrine-ui
 ```
 
+If you need specific configuration, you can publish the config file:
+
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="vitrine-ui-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
 ```
 
 ## Usage
@@ -80,7 +89,7 @@ export default ({ mode }) =>
 
 ### Import behaviors
 
-Import single component behavior:
+Import single component behavior (Recommend way):
 
 ```js
 import { manageBehaviors } from '@area17/a17-behaviors'
