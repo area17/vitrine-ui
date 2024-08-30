@@ -15,7 +15,7 @@
 @if (isset($backgroundVideo) && !empty($backgroundVideo))
     <x-vui-video-background :sources="$backgroundVideo['sources'] ?? null"
                             :control-mute="$backgroundVideo['controlMute'] ?? false"
-                            :native="$backgroundVideo['native'] ?? null">
+                            :native="$backgroundVideo['native'] ?? true">
         {{ $slot ?? null }}
     </x-vui-video-background>
 @else

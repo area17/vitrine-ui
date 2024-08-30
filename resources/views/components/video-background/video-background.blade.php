@@ -45,8 +45,8 @@
                muted>
             @if(count($sources ?? []) > 0)
                 @foreach ($sources as $source)
-                    <source src="{{ $source['src'] }}"
-                            @isset($source['type'])) @endiftype="{{ $source['type'] }}"@endisset />
+                    <source src="{{ $source['src'] }}" 
+                                @isset($source['type']) type="{{ $source['type'] }}"@endisset />
                 @endforeach
             @elseif(isset($src))
                 <source src="{{ $src }}">

@@ -6,7 +6,7 @@
             'sources' => [
                 [
                     "type" => "video/mp4",
-                    "src" => "/static/demo-video.mp4"
+                    "src" => "https://ia600106.us.archive.org/25/items/archive-video-files/test.mp4"
                 ]
             ],
         ],
@@ -15,6 +15,7 @@
 ])
 
 <x-vui-media
+    class="aspect-16/9"
     :background-video="$backgroundVideo ?? null"
     :caption="$caption ?? null"
 />
