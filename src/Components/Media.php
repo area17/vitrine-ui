@@ -88,7 +88,6 @@ class Media extends VitrineComponent
 
     protected function parseBackgroundVideo($data)
     {
-        // dd($data);
         if (!Arr::has($data, 'sources')) {
             return false;
         }
