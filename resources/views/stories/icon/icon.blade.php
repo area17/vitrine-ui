@@ -1,15 +1,11 @@
 @storybook([
-    'status' => 'stable',
-    'layout' => 'fullscreen',
-    'preset' => 'icons.all'
+'status' => 'stable',
+'layout' => 'fullscreen',
+'preset' => 'icons.all'
 ])
 
-<x-docs-page title="Icons" description="Examples of the icons used within the project.">
+<div class="container">
     <div class="wysiwyg">
-        <p>The icon component can be used to render an svg. The first time an icon is used it adds the icon to a sprite and then each usage renders the SVG reference inline.</p>
-
-        <p>The icons are hidden from screen readers by default as in the majority of use-cases icons are decorative. If the icon is not decorative setting the <code>aria-label</code> attribute will remove <code>aria-hidden</code> and add a label to the icon.</p>
-
         <p>Below are examples of all of the icons included in the project along with the names to use to render them:</p>
     </div>
 
@@ -27,4 +23,4 @@
     @else
         <p>No Icons defined.</p>
     @endif
-</x-docs-page>
+</div>

@@ -7,6 +7,39 @@
         'range' => true,
         'minDate' => '',
         'maxDate' => '',
+    ],
+    'argTypes' => [
+        'target' => [
+            'description' => 'A CSS selector for the input field or element that the datepicker should be attached to.',
+            'defaultValue' => ['summary' => ''],
+            'control' => 'text',
+        ],
+        'class' => [
+            'description' => 'Additional CSS classes for the datepicker wrapper.',
+            'defaultValue' => ['summary' => 'relative'],
+            'control' => 'text',
+        ],
+        'align' => [
+            'description' => 'Alignment of the datepicker popup relative to the target element. Options are `left` or `right`.',
+            'defaultValue' => ['summary' => 'right'],
+            'control' => 'select',
+            'options' => ['left', 'right'],
+        ],
+        'range' => [
+            'description' => 'If set to `true`, enables date range selection. If `false`, only single-date selection is enabled.',
+            'defaultValue' => ['summary' => false],
+            'control' => 'boolean',
+        ],
+        'minDate' => [
+            'description' => 'The earliest selectable date, in ISO format (YYYY-MM-DD).',
+            'defaultValue' => ['summary' => ''],
+            'control' => 'text',
+        ],
+        'maxDate' => [
+            'description' => 'The latest selectable date, in ISO format (YYYY-MM-DD).',
+            'defaultValue' => ['summary' => ''],
+            'control' => 'text',
+        ],
     ]
 ])
 

@@ -14,6 +14,7 @@
         'inputAttr' => '',
         'autofocus' => false,
         'form' => '',
+        'icon' => 'checkmark-16',
     ]
 
 ])
@@ -33,5 +34,6 @@
         :inputAttr="$inputAttr"
         :autofocus="$autofocus ?? ''"
         :form="$form ?? ''"
+        :icon="$icon ?? ''"
     />
 </div>

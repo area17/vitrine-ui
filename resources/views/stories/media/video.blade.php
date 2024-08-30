@@ -29,7 +29,8 @@
 ])
 
 <x-vui-media
-    :image="$image ?? null"
     :video="$video ?? null"
     :caption="$caption ?? null"
-/>
+>
+    <x-vui-image :image="$image" />
+</x-vui-media>

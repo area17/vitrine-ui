@@ -6,5 +6,6 @@
   "action-disabled": "pointer-events-none opacity-30",
   "dropdown-wrapper": "sm:hidden md:flex items-center ml-auto",
   "dropdown-message": "ml-12 f-ui-1",
-  "dropdown": ""
+  "dropdown": "",
+  "select": {}
 }

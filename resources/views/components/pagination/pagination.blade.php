@@ -1,3 +1,11 @@
+@php
+    use A17\VitrineUI\VitrineUI;
+
+    // Get select preset from pagination config file
+     $uiSelect = [
+     'select' => $preset('pagination')['pagination']['select']
+      ];
+@endphp
 <div
         {{ $attributes->class($ui('pagination', 'base')) }}
         data-behavior="Pagination"
@@ -33,11 +41,13 @@
             </span>
         <div class="{{$ui('pagination', 'dropdown-wrapper')}}">
             <x-vui-form-select
+                    :ui="$uiSelect"
                     :class="$ui('pagination', 'dropdown')"
                     :options="$dropdownItems"
                     :required="false"
                     data-pagination-paging-dropdown
             />
+
             @if(!$labelInsideDropdown)
                 <p class="{{ $ui('pagination', 'dropdown-message') }}">{{ __('vitrine-ui::fe.pagination.num_of_total', ['last' => $lastPage]) }}</p>
             @endif
