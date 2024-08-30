@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.9.1] - 2024-31-08
+
+## Fixed
+- Fix typo in VideoBackground component
+
 ## [2.9.0] - 2024-29-08
 
 ## Added
