@@ -71,17 +71,17 @@ External links must open in a new window/tab and the element must have an `aria-
 
 ```
 
-<b>size</b>:
+`size`:
 Defines the size variations of the button, typically adjusting the padding around the text or icon. The available options (sm, md, etc.) allow you to choose different levels of button compactness.
 
-<b>variant</b>:
+`variant`:
 Controls the visual style of the button, such as background colors, text colors, and borders. You can define multiple variants (primary, secondary, outline, etc.) to suit different use cases of the button in the interface.
 
-<b>icon_only</b>:
+`icon_only`:
 Indicates whether the button is used without text, only with an icon. This can alter how spacing around the icon is handled, allowing for a more compact appearance in icon-only buttons.
 
-<b>icon_position</b>:
+`icon_position`:
 Determines the position of the icon relative to the button’s text. The options (before, after) allow you to place the icon before or after the button label.
 
-<b>default</b>:
+`default`:
 Specifies default values for the size and variant properties when they are not explicitly set.

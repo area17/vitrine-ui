@@ -45,6 +45,7 @@ The CheckboxGroup component uses a `fieldset` with a `legend` to group and label
   "note": ["f-ui-2 text-secondary mt-12"]
 }
 ```
+
 `base`: 
 Applied to the main `fieldset` element of the checkbox group.
 

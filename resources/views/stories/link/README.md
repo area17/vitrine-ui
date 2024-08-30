@@ -61,14 +61,14 @@ External links must open in a new window/tab and the element must have an `aria-
 }
 ```
 
-<b>variant</b>:
+`variant`:
 Controls the visual style of the link. You can define multiple variants (primary, secondary, etc.) to suit different use cases of the link in the interface.
 
-<b>icon_only</b>:
+`icon_only`:
 Determines how the link behaves when it only contains an icon, ensuring proper spacing and alignment.
 
-<b>icon_position</b>:
+`icon_position`:
 Specifies where the icon should be placed relative to the link text. The options before and after allow for flexible positioning of the icon.
 
-<b>default</b>:
+`default`:
 Sets the default values for variant, ensuring that the link uses the primary variant if none is specified.
