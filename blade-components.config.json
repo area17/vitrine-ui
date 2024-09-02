@@ -1,0 +1,9 @@
+{
+    "classComponents": [
+        {
+            "prefix": "vui",
+            "delimiter": "-",
+            "path": "vendor/area17/vitrine-ui/src/Components"
+        }
+    ]
+}
