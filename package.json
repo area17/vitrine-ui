@@ -6,8 +6,39 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "authors": [
+    {
+      "name": "Tim Brook",
+      "email": "tim@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Mike Byrne",
+      "email": "mike@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antonin Caudron",
+      "email": "antonin@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antoine Doury",
+      "email": "antoine@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antonio Ribeiro",
+      "email": "antonio@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Florrie Sharp",
+      "email": "florrie@area17.com",
+      "role": "Developer"
+    }
+  ],
+  "license": "Apache-2.0",
   "devDependencies": {
     "@area17/a17-tailwind-plugins": "^3.8.1",
     "@area17/a17-helpers": "~3.2.3",
