@@ -237,6 +237,27 @@ VitrineUI::ui('json_file_name', 'key_in_json_file', array_of_options)
 ```
 array_of_options can be used for variant mapping.
 
+## IDE configuration
+
+Auto-completion for Vitrine UI components is supported on PhpStorm and VS Code. 
+
+### Phpstorm
+For Phpstorm, you need to have [Laravel idea plugin](https://plugins.jetbrains.com/plugin/13441-laravel-idea) installed. 
+
+Vitrine-UI contains an ide.json file that will be read by the plugin. 
+
+This file looks for the components key in the vitrine-ui config file. If your published Vitrine-UI config file in your project. You can lose auto-completion feature if you remove the components key inside the published file.  
+
+
+### VS Code
+VS Code autocompletion support is available from a fork of [blade-components](https://github.com/m4n1ok/blade-components/tree/improve-autocompletion) plugin.
+
+A packaged version of the plugin can be downloaded here: [blade-components-next-1.0.0.vsix](https://drive.google.com/file/d/1RccB7syGVgqH5h-Jw9bCeSlROzzRgQYT/view?usp=drive_link). 
+
+You can manually install the plugin by following instructions from [VS Code documentation](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix).
+
+Please note that this package is currently in development and may not work as expected.
+
 ## Testing
 
 ```bash
