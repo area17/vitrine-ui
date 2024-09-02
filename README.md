@@ -1,11 +1,14 @@
-# Vitrine UI blade components
+# Vitrine
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)
 
-AREA 17 Vitrine Blade components to import into a Laravel application.
+Vitrine is a library of components crafted by AREA 17 to use inside Laravel applications.
+
+Components follow the best practices around performance, accessibility, and maintainability.
+
 
 This library is under active development and name is subject to change in feature release.
 
@@ -133,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 ### Custom Events
 
-Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine UI.
+Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine.
 
 ```js
 import { customEvents } from '@vitrineUI/resources/frontend/scripts/constants/customEvents.js'
@@ -230,7 +233,7 @@ To use a variant, specify it in the component call:
 ```
 
 ###  Retrieve config CSS classes
-You can retrieve CSS classes from the JSON configuration file by calling the Vitrine UI helper using the following syntax:
+You can retrieve CSS classes from the JSON configuration file by calling the Vitrine's helper using the following syntax:
 
 ```php
 VitrineUI::ui('json_file_name', 'key_in_json_file', array_of_options)
@@ -239,14 +242,14 @@ array_of_options can be used for variant mapping.
 
 ## IDE configuration
 
-Auto-completion for Vitrine UI components is supported on PhpStorm and VS Code. 
+Auto-completion for Vitrine-ui components is supported on PhpStorm and VS Code. 
 
 ### Phpstorm
 For Phpstorm, you need to have [Laravel idea plugin](https://plugins.jetbrains.com/plugin/13441-laravel-idea) installed. 
 
-Vitrine-UI contains an ide.json file that will be read by the plugin. 
+Vitrine contains an ide.json file that will be read by the plugin. 
 
-This file looks for the components key in the vitrine-ui config file. If your published Vitrine-UI config file in your project. You can lose auto-completion feature if you remove the components key inside the published file.  
+This file looks for the components key inside the Vitrine's config file. If your published the config file in your project. You can lose auto-completion feature if you remove the components key inside the published file.  
 
 
 ### VS Code
@@ -267,3 +270,7 @@ composer test
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## License
+
+Vitrine library is licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).
