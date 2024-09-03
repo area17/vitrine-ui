@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.10.1] - 2024-03-09
+### Fixed
+- Picture rendering logic
+
 ## [2.10.0] - 2024-30-08
 
 ### Updated
