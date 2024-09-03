@@ -61,6 +61,8 @@ class Image extends VitrineComponent
     public $loading;
     public $sizes;
 
+    public ?array $sources;
+
     public function __construct(
         $image = null,
         $imageOptions = null,
@@ -72,6 +74,7 @@ class Image extends VitrineComponent
         $width = null,
         $src = null,
         $sizes = null,
+        $sources = null,
         $ui = []
     )
     {
@@ -80,6 +83,7 @@ class Image extends VitrineComponent
         $this->width = $width;
         $this->src = $src;
         $this->sizes = $sizes;
+        $this->sources = $sources ?? $image['sources'] ?? null;
 
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
@@ -110,7 +114,7 @@ class Image extends VitrineComponent
             return 'twill-image';
         } elseif (Arr::has($this->image, '_static')) {
             return 'twill-image-static';
-        } elseif (Arr::has($this->image, 'src') && $this->nextRendering) {
+        } elseif ((Arr::has($this->image, 'src') || count($this->sources ?? [])) && $this->nextRendering) {
             return 'next-rendering';
         } elseif (Arr::has($this->image, 'src') && Arr::has($this->image, 'srcSet')) {
             return 'twill-image-array';
@@ -121,6 +125,11 @@ class Image extends VitrineComponent
         }
 
         return false;
+    }
+
+    public function setPictureFallbackImg()
+    {
+        return Arr::has($this->image, 'src') ? $this->image : $this->image['fallbackImg'] ?? $this->image['image'] ?? $this->sources[0] ?? null;
     }
 
     /**

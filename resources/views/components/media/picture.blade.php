@@ -1,7 +1,6 @@
 @props([
     'sources' => [],
     'fallBackImg' => null,
-    'revealAnimation' => true,
     'loading' => 'lazy',
 ])
 <picture {{ $attributes }}>
@@ -18,7 +17,6 @@
     @endforeach
     @if (isset($fallBackImg))
         <x-vui-img :img="$fallBackImg"
-                   :loading="$loading"
-                   :reveal-animation="$revealAnimation" />
+                   :loading="$loading" />
     @endif
 </picture>
