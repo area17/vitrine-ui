@@ -9,9 +9,10 @@
         @break
         {{-- This will be the default in next major version--}}
     @case('next-rendering')
-            @if(count($sources ?? $image['sources'] ?? []))
-                <x-vui-picture {{ $attributes->class([$ui('media', 'image')]) }} :sources="$image['sources']"
-                               :fallback-img="$image['fallbackImg'] ?? $image['sources'][0] ?? null"
+            @if(count($sources ?? []))
+                <x-vui-picture {{ $attributes->class([$ui('media', 'image')]) }}
+                               :sources="$sources"
+                               :fallBackImg="$setPictureFallbackImg($image)"
                                :loading="$loading"/>
             @else
                 <x-vui-img {{ $attributes->class([$ui('media', 'image')]) }} :img="$image" :loading="$loading"
@@ -29,7 +30,7 @@
              @if(Arr::has($imageOptions, 'sizes') || isset($sizes)) sizes="{{ $imageOptions['sizes'] }}" @endif
              @if(Arr::has($image, 'srcset')) srcset="{{ $image['srcset'] }}" @endif
              @if(Arr::has($image, 'srcSet')) srcset="{{ $image['srcSet'] }}" @endif
-             src="{{ $image['src'] }}"
+             src="{{ $image['src'] ?? '' }}"
              alt="{{ $image['alt'] ?? '' }}"/>
         @break
         {{--@deprecated ?--}}
