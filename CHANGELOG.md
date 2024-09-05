@@ -1,6 +1,10 @@
 # Changelog
 
-## [2.10.1] - 2024-03-09
+## [2.10.2] - 2024-03-05
+### Fixed
+- Image sources definition
+
+## [2.10.1] - 2024-03-04
 ### Fixed
 - Picture rendering logic
 
