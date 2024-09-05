@@ -83,7 +83,7 @@ class Image extends VitrineComponent
         $this->width = $width;
         $this->src = $src;
         $this->sizes = $sizes;
-        $this->sources = $sources ?? $image['sources'] ?? null;
+        $this->sources = $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
 
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
