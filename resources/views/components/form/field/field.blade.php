@@ -1,5 +1,5 @@
-<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')]) }}
-     {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+<div
+    {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
      {{ $disabled ? 'inert' : '' }}>
     <div class="{{ $ui('input', 'header') }}">
         @if (!empty($label))

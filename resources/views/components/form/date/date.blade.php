@@ -9,7 +9,7 @@
 
 <div data-behavior="Input DateInput{{ $fuzzy ? 'Fuzzy' : '' }}"
      @if ($picker) data-DatePicker-el="{{ $pickerID }}" @endif
-     {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+     {{ $attributes->twMerge([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
      {{ $dataAttrs }}
      {{ $disabled ? 'inert' : '' }}>
 

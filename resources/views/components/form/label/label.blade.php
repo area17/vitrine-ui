@@ -5,7 +5,7 @@
     'required' => false,
 ])
 
-<{{ $tag }} {{ $attributes->class(VitrineUI::ui('form', 'label')) }}
+<{{ $tag }} {{ $attributes->twMerge(VitrineUI::ui('form', 'label')) }}
                      @if ($name) for="{{ $name }}" @endif>
     @if ($slot && !$slot->isEmpty())
         {{ $slot }}
