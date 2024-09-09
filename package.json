@@ -1,13 +1,44 @@
 {
-  "name": "vitrine-ui",
+  "name": "@area17/vitrine-ui",
   "version": "1.0.0",
   "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui) [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3Arun-tests+branch%3Amain) [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3A\"Fix+PHP+code+style+issues\"+branch%3Amain) [![Total Downloads](https://img.shields.io/packagist/dt/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)",
   "main": "tailwind.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "authors": [
+    {
+      "name": "Tim Brook",
+      "email": "tim@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Mike Byrne",
+      "email": "mike@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antonin Caudron",
+      "email": "antonin@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antoine Doury",
+      "email": "antoine@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Antonio Ribeiro",
+      "email": "antonio@area17.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Florrie Sharp",
+      "email": "florrie@area17.com",
+      "role": "Developer"
+    }
+  ],
+  "license": "Apache-2.0",
   "devDependencies": {
     "@area17/a17-tailwind-plugins": "^3.8.1",
     "@area17/a17-helpers": "~3.2.3",
