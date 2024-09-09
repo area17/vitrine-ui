@@ -1,4 +1,4 @@
-<div {{ $attributes->class(VitrineUI::setPrefixedClass(['audio-player', 'audio--'.$variant => $variant])) }} data-behavior="AudioPlayer">
+<div {{ $attributes->twMerge(VitrineUI::setPrefixedClass(['audio-player', 'audio--'.$variant => $variant])) }} data-behavior="AudioPlayer">
 
     @if ($title)
 {{--     tbd: is sr-only class with :$nbsp; mandatory?--}}

@@ -1,4 +1,4 @@
-<{{$tag}} {{ $attributes->class(
+<{{$tag}} {{ $attributes->twMerge(
         $ui('card-link', 'base'),
     ) }}
     @if ($href) href="{{ $href }}" @endif

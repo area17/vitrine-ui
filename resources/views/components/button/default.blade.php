@@ -1,4 +1,4 @@
-<{{ $tag }} {{ $attributes->class(
+<{{ $tag }} {{ $attributes->twMerge(
     $ui($uiKeyComponent, 'base', [
         'size' => $size,
         'variant' => $variant,

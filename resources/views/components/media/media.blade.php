@@ -1,6 +1,6 @@
 {{-- Image, Video Background, Video or Placeholder with media base and media container classes --}}
 <{{ $element() }}
-    {{ $attributes->class(array_merge([$ui('media', 'base', [
+    {{ $attributes->twMerge(array_merge([$ui('media', 'base', [
         "cover" => $cover ? 'true' : 'false',
     ])], $classes)) }}
     @if (app()->environment(['local', 'development'])) data-preset="{{ $imagePreset }}" @endif

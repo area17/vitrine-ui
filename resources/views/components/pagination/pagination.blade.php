@@ -7,7 +7,7 @@
       ];
 @endphp
 <div
-        {{ $attributes->class($ui('pagination', 'base')) }}
+        {{ $attributes->twMerge($ui('pagination', 'base')) }}
         data-behavior="Pagination"
 >
     <div class="{{ $ui('pagination', 'wrapper') }}">

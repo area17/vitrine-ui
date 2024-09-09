@@ -1,6 +1,6 @@
 <div
     data-behavior="Input"
-    {{ $attributes->class([$ui('select', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+    {{ $attributes->twMerge([$ui('select', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $disabled ? 'inert' : '' }}
 >
 

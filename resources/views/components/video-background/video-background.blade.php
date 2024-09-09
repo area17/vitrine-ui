@@ -1,5 +1,5 @@
 @if(isset($src) || isset($sources))
-    <div {{ $attributes->class([$ui('video-background', 'base', [
+    <div {{ $attributes->twMerge([$ui('video-background', 'base', [
             'variant' => $variant
         ])]) }}
          data-behavior="{{ $behaviorName }}"
@@ -45,7 +45,7 @@
                muted>
             @if(count($sources ?? []) > 0)
                 @foreach ($sources as $source)
-                <source src="{{ $source['src'] }}" 
+                <source src="{{ $source['src'] }}"
                             @isset($source['type']) type="{{ $source['type'] }}"@endisset />
                 @endforeach
             @elseif(isset($src))

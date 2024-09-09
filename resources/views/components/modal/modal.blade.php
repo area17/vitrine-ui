@@ -8,7 +8,7 @@
             data-behavior="Modal"
             {!! $panel ? 'data-Modal-panel="true"' : '' !!}
             {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}
-            {{ $attributes->class($ui('modal', ['base'])) }}
+            {{ $attributes->twMerge($ui('modal', ['base'])) }}
     >
         <div
                 class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"

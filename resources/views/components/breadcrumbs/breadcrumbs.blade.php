@@ -1,5 +1,5 @@
 @if(filled($items))
-    <{{ $tag ?? 'nav' }} aria-label="breadcrumbs" {{ $attributes->class($ui('breadcrumbs')) }}>
+    <{{ $tag ?? 'nav' }} aria-label="breadcrumbs" {{ $attributes->twMerge($ui('breadcrumbs')) }}>
         @foreach ($items as $item)
             @if ($item['href'] ??  $item['url'] ?? null)
                 <a

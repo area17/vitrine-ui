@@ -44,7 +44,7 @@
             </div>
 
             <div
-                {{ $attributes->class('w-full h-full') }}
+                {{ $attributes->twMerge('w-full h-full') }}
                 id="{{ $id }}"
                 class="w-full h-full"
                 data-ImageZoom-canvas

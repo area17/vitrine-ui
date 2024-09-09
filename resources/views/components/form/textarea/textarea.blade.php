@@ -1,5 +1,5 @@
 <textarea
-    {{ $attributes->class([$ui('input', 'textarea')]) }}
+    {{ $attributes->twMerge([$ui('input', 'textarea')]) }}
     @if($id || $name) id="{{$id ? $id : $name}}" @endif
     @if($name) name="{{$name}}" @endif
     @if($placeholder) placeholder="{{$placeholder}}" @endif

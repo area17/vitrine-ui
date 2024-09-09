@@ -1,6 +1,6 @@
 <fieldset
     data-behavior="RadioGroup"
-    {{ $attributes->class([$ui('radio-group', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
+    {{ $attributes->twMerge([$ui('radio-group', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
     aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
     {{ $disabled ? 'inert' : '' }}>
 

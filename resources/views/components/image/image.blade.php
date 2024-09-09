@@ -10,17 +10,17 @@
         {{-- This will be the default in next major version--}}
     @case('next-rendering')
             @if(count($sources ?? []))
-                <x-vui-picture {{ $attributes->class([$ui('media', 'image')]) }}
+                <x-vui-picture {{ $attributes->twMerge([$ui('media', 'image')]) }}
                                :sources="$sources"
                                :fallBackImg="$setPictureFallbackImg($image)"
                                :loading="$loading"/>
             @else
-                <x-vui-img {{ $attributes->class([$ui('media', 'image')]) }} :img="$image" :loading="$loading"
+                <x-vui-img {{ $attributes->twMerge([$ui('media', 'image')]) }} :img="$image" :loading="$loading"
                            :width="$width" :height="$height" :sizes="$sizes"/>
             @endif
         @break
     @case('static' || 'twill-image-array')
-        <img {{ $attributes->class([$ui('media', 'image'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}
+        <img {{ $attributes->twMerge([$ui('media', 'image'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}
              @if(Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes']))
                  {!! $setAttributes($imageOptions['attributes'])!!}
              @endif
@@ -35,6 +35,6 @@
         @break
         {{--@deprecated ?--}}
     @case('placeholder')
-        <div {{ $attributes->class([$ui('media', 'image-placeholder'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}></div>
+        <div {{ $attributes->twMerge([$ui('media', 'image-placeholder'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}></div>
         @break
 @endswitch
