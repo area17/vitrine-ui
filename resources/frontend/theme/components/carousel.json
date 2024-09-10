@@ -1,0 +1,9 @@
+{
+  "base": "container",
+  "wrapper": "flex flex-nowrap",
+  "item": "",
+  "pagination": "flex  mt-16 items-center gap-4",
+  "pagination-button": "flex items-center",
+  "pagination-icon-left": "arrow-left-24",
+  "pagination-icon-right": "arrow-right-24"
+}

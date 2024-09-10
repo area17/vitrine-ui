@@ -51,6 +51,7 @@
     "@area17/a17-helpers": "3.x",
     "@area17/a17-behaviors": ">=0.4",
     "focus-trap": "7.x",
+    "swiper": "11.x",
     "body-scroll-lock-upgrade": "1.x"
   }
 }

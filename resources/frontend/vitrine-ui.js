@@ -2,6 +2,7 @@ export { default as Accordion } from './scripts/behaviors/Accordion'
 export { default as AudioPlayer } from './scripts/behaviors/AudioPlayer'
 export { default as Dropdown } from './scripts/behaviors/Dropdown'
 
+export { default as Carousel } from './scripts/behaviors/Carousel'
 // export { default as DatePicker } from './scripts/behaviors/Datepicker'
 // export { default as ImageZoom } from './scripts/behaviors/ImageZoom'
 // export { default as MapGoogle } from './scripts/behaviors/GoogleMaps'
