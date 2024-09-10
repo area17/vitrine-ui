@@ -31,7 +31,7 @@
 
 <div
         data-behavior="Input"
-        {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
+        {{ $attributes->twMerge([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
         {{ $disabled ? 'inert' : '' }}
 >
     <label class="{{ $ui('checkbox', 'base') }}"

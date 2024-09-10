@@ -19,7 +19,7 @@
     height="{{ $height }}"
     fill="none"
     @if(isset($attributes))
-        {{ $attributes->class($class ?? null) }}
+        {{ $attributes->twMerge($class ?? null) }}
     @else
         class="{{ $class ?? null }}"
     @endif

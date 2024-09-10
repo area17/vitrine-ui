@@ -1,5 +1,5 @@
 
-<div {{ $attributes->class(VitrineUI::setPrefixedClass([
+<div {{ $attributes->twMerge(VitrineUI::setPrefixedClass([
     'wysiwyg',
     'wysiwyg--'. $variant => $variant,
     ]))

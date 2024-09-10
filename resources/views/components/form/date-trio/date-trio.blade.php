@@ -12,7 +12,7 @@
     role="group"
     aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
     @if($picker)data-DatePicker-el="{{$pickerID}}"@endif
-    {{ $attributes->class(['s-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+    {{ $attributes->twMerge(['s-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $dataAttrs }}
     {{ $disabled ? 'disabled' : '' }}
     {{ $disabled ? 'inert' : '' }}
@@ -47,7 +47,7 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->twMerge(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Day" :required="$required">
@@ -74,7 +74,7 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->twMerge(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Month" :required="$required">
@@ -100,7 +100,7 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->twMerge(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Year" :required="$required">

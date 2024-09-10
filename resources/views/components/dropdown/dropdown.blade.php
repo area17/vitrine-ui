@@ -1,5 +1,5 @@
 <div
-    {{ $attributes->class($ui('dropdown', 'base')) }}
+    {{ $attributes->twMerge($ui('dropdown', 'base')) }}
     data-behavior="Dropdown"
 >
     <button
