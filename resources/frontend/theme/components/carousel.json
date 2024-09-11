@@ -2,8 +2,10 @@
   "base": "container",
   "wrapper": "flex flex-nowrap",
   "item": "",
-  "pagination": "flex  mt-16 items-center gap-4",
-  "pagination-button": "flex items-center",
-  "pagination-icon-left": "arrow-left-24",
-  "pagination-icon-right": "arrow-right-24"
+  "controls": "flex items-center gap-4",
+  "controls-button": "flex items-center",
+  "controls-icon-left": "arrow-left-24",
+  "controls-icon-right": "arrow-right-24",
+  "footer": "flex justify-between items-center mt-16 relative",
+  "pagination": "ml-auto f-ui-01 relative"
 }

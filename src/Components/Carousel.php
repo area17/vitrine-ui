@@ -16,17 +16,21 @@ class Carousel extends VitrineComponent
 
     public ?string $component;
 
-    public ?string $paginationButtonVariant;
+    public ?string $controlsButtonVariant;
 
     public bool $asList = false;
+    public bool $withControls = true;
+    public bool $withPagination = true;
 
     public function __construct(
         $items = [],
         $itemClass = '',
         $component = null,
         $configuration = null,
-        $paginationButtonVariant = '',
+        $controlsButtonVariant = '',
         $asList = false,
+        $withControls = true,
+        $withPagination = true,
         $ui = []
     )
     {
@@ -35,7 +39,9 @@ class Carousel extends VitrineComponent
         $this->itemClass = $itemClass;
         $this->configuration = $configuration;
         $this->asList = $asList;
-        $this->paginationButtonVariant = $paginationButtonVariant;
+        $this->controlsButtonVariant = $controlsButtonVariant;
+        $this->withControls = $withControls;
+        $this->withPagination = $withPagination;
 
         parent::__construct($ui);
     }

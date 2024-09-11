@@ -1,6 +1,9 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
+import { customEvents } from '../constants/customEvents'
+
 import Swiper from 'swiper'
-import { A11y, EffectFade, Navigation } from 'swiper/modules'
+import { A11y, EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 const Carousel = createBehavior(
     'Carousel',
@@ -18,7 +21,7 @@ const Carousel = createBehavior(
     {
         init() {
             this.swiper = null
-            const modules = [Navigation, A11y]
+            const modules = [Navigation, A11y, Pagination]
             if (this.options.effect === 'fade') {
                 modules.push(EffectFade)
             }
@@ -35,7 +38,11 @@ const Carousel = createBehavior(
             }
 
             this.opts = {
-                loop: Boolean(this.options.loop) || true,
+                loop: 'loop' in this.options ? this.options.loop === 'true'  : true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    type: "fraction",
+                },
                 ...(this.options.effect === 'fade' && {
                     effect: 'fade',
                     fadeEffect: {
@@ -46,7 +53,7 @@ const Carousel = createBehavior(
                 on: {
                     slideChange: () => {
                         document.dispatchEvent(
-                            new CustomEvent('slider:slideChange', {
+                            new CustomEvent(customEvents.CAROUSEL_CHANGE, {
                                 detail: { sliderEl: this.$node }
                             })
                         )
@@ -60,7 +67,7 @@ const Carousel = createBehavior(
             }
         },
         enabled() {
-            this.initCarousel()
+            void this.initCarousel()
         },
         disabled() {
             this.swiper?.destroy()

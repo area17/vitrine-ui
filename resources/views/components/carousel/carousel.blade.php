@@ -15,21 +15,36 @@
             </{{ $sliderItemTag }}>
         @endforeach
     </{{ $sliderTag }}>
-    @if(!isset($pagination) || $pagination->isEmpty())
-    <div class="{{ $ui('carousel', 'pagination') }}">
-        <x-vui-button class="swiper-prev-btn {{ $ui('carousel', 'pagination-button') }}"
-                      aria-label="{{ __('Previous slide') }}"
-                      variant="{{ $paginationButtonVariant }}"
-                      :icon-only="true"
-                      icon="{{ $ui('carousel', 'pagination-icon-left') }}"/>
-        <x-vui-button class="swiper-next-btn {{ $ui('carousel', 'pagination-button') }}"
-                      aria-label="{{ __('Next slide') }}"
-                      :icon-only="true"
-                      variant="{{ $paginationButtonVariant }}"
-                      icon="{{ $ui('carousel', 'pagination-icon-right') }}"/>
-    </div>
-    @else
-        {{ $pagination }}
+    @if($withControls || $withPagination || $slot->isNotEmpty())
+        <div class="{{ $ui('carousel', 'footer') }}">
+            @if($withControls)
+                @if(!isset($controls) || $controls->isEmpty())
+
+                <div class="{{ $ui('carousel', 'controls') }}">
+                    <x-vui-button class="swiper-prev-btn {{ $ui('carousel', 'controls-button') }}"
+                                  aria-label="{{ __('Previous slide') }}"
+                                  variant="{{ $controlsButtonVariant }}"
+                                  :icon-only="true"
+                                  icon="{{ $ui('carousel', 'controls-icon-left') }}"/>
+                    <x-vui-button class="swiper-next-btn {{ $ui('carousel', 'controls-button') }}"
+                                  aria-label="{{ __('Next slide') }}"
+                                  :icon-only="true"
+                                  variant="{{ $controlsButtonVariant }}"
+                    @endif
+                                  icon="{{ $ui('carousel', 'controls-icon-right') }}"/>
+                </div>
+                @else
+                    {{ $controls }}
+                @endif
+            @endif
+                @if($withPagination)
+                    @if(!isset($pagination) || $pagination->isEmpty())
+                        <div class="swiper-pagination {{ $ui('carousel', 'pagination') }}"></div>
+                    @else
+                        {{ $pagination }}
+                    @endif
+                @endif
+            {{ $slot }}
+        </div>
     @endif
-    {{ $slot }}
 </div>

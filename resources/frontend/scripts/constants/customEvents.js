@@ -6,6 +6,8 @@
 /* - Avoid duplicated values */
 
 export const customEvents = {
+    CAROUSEL_CHANGE: 'Carousel:Change' /* node event */,
+
     MODAL_CLOSED: 'Modal:hasClosed' /* document event */,
     MODAL_OPENED: 'Modal:hasOpened' /* document event */,
     MODAL_CLOSE_ALL: 'Modal:closeAll' /* document event */,
