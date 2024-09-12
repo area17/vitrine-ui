@@ -1,10 +1,14 @@
 # Changelog
 
-## [2.10.2] - 2024-03-05
+## [2.10.3] - 2024-12-09
+### Fixed
+- VideoBackground logic to handle autoplay when they are in viewport
+
+## [2.10.2] - 2024-03-09
 ### Fixed
 - Image sources definition
 
-## [2.10.1] - 2024-03-04
+## [2.10.1] - 2024-03-09
 ### Fixed
 - Picture rendering logic
 
