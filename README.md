@@ -242,7 +242,7 @@ array_of_options can be used for variant mapping.
 
 ## IDE configuration
 
-Auto-completion for Vitrine-ui components is supported on PhpStorm and VS Code. 
+Auto-completion for Vitrine's components is supported on PhpStorm and VS Code. 
 
 ### Phpstorm
 For Phpstorm, you need to have [Laravel idea plugin](https://plugins.jetbrains.com/plugin/13441-laravel-idea) installed. 
