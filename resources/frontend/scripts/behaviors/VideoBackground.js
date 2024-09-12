@@ -10,6 +10,7 @@ export const VideoBackground = createBehavior(
 
             if (this.isPlaying) {
                 this.pause()
+                this.$player.setAttribute('data-paused-manual', 'true')
             } else {
                 this.play()
             }
@@ -30,6 +31,7 @@ export const VideoBackground = createBehavior(
         play() {
             this.$player.play()
             this.updatePlayButton(true)
+            this.$player.removeAttribute('data-paused-manual')
         },
 
         pause() {
@@ -75,7 +77,7 @@ export const VideoBackground = createBehavior(
 
         handleObserver(entries) {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !(this.$player.dataset.pausedManual === 'true')) {
                     this.play()
                 } else {
                     if (this.isPlaying && this.isMuted) {
