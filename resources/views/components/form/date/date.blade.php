@@ -33,7 +33,7 @@
         @if($maxDate)<span class="sr-only" id="{{$ariaID}}MaxDate" data-DateInput-maxDateA11yDisplay>{{ __('vitrine-ui::fe.form.datepicker.maximum_date') }}: {{ $maxDate }}</span>@endif
     @endunless
 
-    <div class="m-input__wrapper">
+    <div class="relative">
         @if($picker)
         {{-- Optional datepicker --}}
         <x-vui-datepicker
