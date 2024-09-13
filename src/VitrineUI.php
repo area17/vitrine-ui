@@ -244,7 +244,7 @@ class VitrineUI
                     if (in_array($key, $component_theme['rules']['merge'] ?? [])) {
                         // merge
                         $val = is_array($value) ? join(' ', $value) : $value;
-                        $existingVal = is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
+                        $existingVal = isset($ui[$component]) && is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
                         if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
                             $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
                         } else {
