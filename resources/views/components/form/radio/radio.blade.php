@@ -29,7 +29,7 @@
 @endphp
 
 <div data-behavior="Input"
-     {{ $attributes->twMerge([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
+     {{ $attributes->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error])) }}
      {{ $disabled ? 'inert' : '' }}>
     <label class="{{ $ui('radio', 'base') }}"
            @if ($id || $name) for="{{ $id ? $id : $name . $rand }}" @endif>
