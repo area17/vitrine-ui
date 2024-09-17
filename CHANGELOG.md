@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.10.4] - 2024-13-09
+### Fixed
+- UI Merge : test if component theme is existing
+
 ## [2.10.3] - 2024-12-09
 ### Fixed
 - VideoBackground logic to handle autoplay when they are in viewport
