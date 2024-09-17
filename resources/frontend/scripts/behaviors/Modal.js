@@ -62,7 +62,7 @@ const Modal = createBehavior(
             }
         },
         handleClickOutside(e) {
-            if (this._data.isActive) {
+            if (!this.$focusTrap.contains(e.target) && this._data.isActive) {
                 this.close(e)
             }
         },
