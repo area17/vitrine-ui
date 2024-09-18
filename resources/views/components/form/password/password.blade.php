@@ -1,4 +1,4 @@
-<v-ui-form-field
+<x-vui-form-field
 type="password"
 :id="$id ? $id : $name"
 :name="$name ?? null"
@@ -35,4 +35,4 @@ data-behavior="PasswordInput"
             data-PasswordInput-iconshown />
         <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>
     </button>
-</v-ui-form-field>
+</x-vui-form-field>
