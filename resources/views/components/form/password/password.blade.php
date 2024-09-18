@@ -1,59 +1,38 @@
-<div
-    data-behavior="PasswordInput Input"
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
-    {{ $disabled ? 'inert' : '' }}
+<v-ui-form-field
+type="password"
+:id="$id ? $id : $name"
+:name="$name ?? null"
+:value="$value ?? null"
+:placeholder="$placeholder ?? null"
+:pattern="$pattern ?? null"
+:autocomplete="$autocomplete ?? null"
+:form="$form ?? null"
+:list="$list ?? null"
+:max="$max ?? null"
+:maxlength="$maxlength ?? null"
+:min="$min ?? null"
+:minlength="$minlength ?? null"
+:step="$step ?? null"
+:autofocus="$autofocus ?? false"
+:disabled="$disabled ?? false"
+:multiple="$multiple ?? false"
+:readonly="$readonly ?? false"
+:required="$required ?? false"
+aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
+data-behavior="PasswordInput"
 >
-
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
-        <x-vui-form-label :name="$name" :required="$required">
-            {{$label}}
-        </x-vui-form-label>
-        @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
-        @endif
-    </div>
-
-    <div class="{{ $ui('input', 'wrapper') }}">
-        <button class="absolute right-12 top-1/2 -translate-y-1/2" data-PasswordInput-toggle>
-            <x-vui-icon
-                class="inline-block text-[#basa55] pointer-events-none"
-                name="eye-hide-24"
-                aria-hidden="true"
-                data-PasswordInput-iconhidden />
-            <x-vui-icon
-                class="inline-block text-[#basa55] pointer-events-none"
-                name="eye-24"
-                aria-hidden="true"
-                style="display: none;"
-                data-PasswordInput-iconshown />
-            <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>
-        </button>
-
-        <input type="password"
-            class="{{ $ui('input', 'wrapper') }} pr-40"
-            @if($id || $name) id="{{$id ? $id : $name}}" @endif
-            @if($name) name="{{$name}}" @endif
-            @if($value) value="{{$value}}" @endif
-            @if($placeholder) placeholder="{{$placeholder}}" @endif
-            @if($autocomplete) autocomplete="{{$autocomplete}}" @endif
-            @if($form) form="{{$form}}" @endif
-            aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
-            data-Input-input
-            data-PasswordInput-input
-            {{ $autofocus ? ' autofocus' : '' }}
-            {{ $disabled ? ' disabled' : '' }}
-            {{ $readonly ? ' readonly' : '' }}
-            {{ $required ? ' required' : '' }}
-        />
-    </div>
-
-    @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-4">{{ $note }}</p>
-    @endif
-
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-Input-error>
-        <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/>
-        {{$error ?? ''}}
-    </p>
-
-</div>
+    <button class="absolute right-12 top-1/2 -translate-y-1/2" data-PasswordInput-toggle>
+        <x-vui-icon
+            class="inline-block text-[#basa55] pointer-events-none"
+            name="eye-hide-24"
+            aria-hidden="true"
+            data-PasswordInput-iconhidden />
+        <x-vui-icon
+            class="inline-block text-[#basa55] pointer-events-none"
+            name="eye-24"
+            aria-hidden="true"
+            style="display: none;"
+            data-PasswordInput-iconshown />
+        <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>
+    </button>
+</v-ui-form-field>

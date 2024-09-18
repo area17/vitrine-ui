@@ -20,7 +20,7 @@ const PasswordInput = createBehavior(
     },
     {
         init() {
-            this.$input = this.getChild('input')
+            this.$input = this.$node.querySelector('input[type="password"]')
             this.$toggle = this.getChild('toggle')
             this.$iconHidden = this.getChild('iconhidden')
             this.$iconShown = this.getChild('iconshown')

@@ -1,5 +1,5 @@
 <div
-    data-behavior="Input"
+    {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')]) }}
     {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $disabled ? 'inert' : '' }}
 >
