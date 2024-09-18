@@ -24,12 +24,13 @@
         'minlength' => '',
         'multiple' => false,
         'readonly' => false,
-        'step' => ''
+        'step' => '',
+        'withIconRight' => false
     ]
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-input
+    <x-vui-form-field
         :label="$label ?? ''"
         :name="$name ?? ''"
         :id="$id ?? ''"
@@ -54,5 +55,6 @@
         :multiple="$multiple ?? ''"
         :readonly="$readonly ?? ''"
         :step="$step ?? ''"
+        :with-icon-right="$withIconRight ?? false"
     />
 </div>
