@@ -1,5 +1,5 @@
 <input type="{{$type ?? 'text'}}"
-    {{ $attributes->class([$ui('input', 'input'), 'pr-40' => $withIconRight]) }}
+    {{ $attributes->class([$ui('input', 'input'), 'pr-40' => $withIconRight ?? false]) }}
     @if($id || $name) id="{{$id ? $id : $name}}" @endif
     @if($name) name="{{$name}}" @endif
     @if($value) value="{{$value}}" @endif
