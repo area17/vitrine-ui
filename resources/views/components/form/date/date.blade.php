@@ -83,6 +83,8 @@
         <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-4">{{ $note }}</p>
     @endif
 
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="mt-4 f-body-1 text-error" style="display: none;" data-Input-error>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-Input-error>
+        <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/>{{$error ?? ''}}
+    </p>
 
 </div>
