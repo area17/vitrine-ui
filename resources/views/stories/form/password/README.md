@@ -23,3 +23,6 @@ The `PasswordInput` component allows users to securely input passwords into a fo
 The `Password` component uses ARIA attributes to enhance accessibility. The `aria-describedby` attribute is used to associate the input field with its hint, note, or error messages. A toggle button is provided to show or hide the password, and this action is accompanied by visually hidden text (`sr-only`) for screen readers to indicate the state change.
 
 Labeling and live error updates are handled through `aria-live` regions to ensure that users are informed of any issues with the input in real-time.
+
+## Theming
+Theming is using the same style define in the generic input.
