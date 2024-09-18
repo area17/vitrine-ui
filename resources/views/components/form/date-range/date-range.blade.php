@@ -8,15 +8,15 @@
     aria-labelledby="{{implode(' ', $ariaDescribedBy)}}"
     {{ $disabled ? 'inert' : '' }}
 >
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
-        <legend class="f-subhead-3">{{ $legend }}</legend>
+    <div class="{{  $ui('input', 'header') }}">
+        <legend class="{{  $ui('input', 'legend') }}">{{ $legend }}</legend>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{ $ui('input', 'hint') }}">{{ $hint }}</span>
         @endif
     </div>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-12">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{ $ui('input', 'note') }}">{{ $note }}</p>
     @endif
 
     {{-- screen reader only labels - linked with `aria-describedby` --}}
