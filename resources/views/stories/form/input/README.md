@@ -17,8 +17,6 @@ Any additional attributes are merged with the component's existing attributes, a
     note="Required field"
     form="registration"
     :autocomplete="false"
-    :autofocus="false"
-    :multiple="false"
     :readonly="false"
 />
 ```
