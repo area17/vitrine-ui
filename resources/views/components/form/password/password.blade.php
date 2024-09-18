@@ -13,7 +13,7 @@
         @endif
     </div>
 
-    <div class="m-input__wrapper">
+    <div class="{{ $ui('input', 'wrapper') }}">
         <button class="absolute right-12 top-1/2 -translate-y-1/2" data-PasswordInput-toggle>
             <x-vui-icon
                 class="inline-block text-[#basa55] pointer-events-none"
@@ -30,7 +30,7 @@
         </button>
 
         <input type="password"
-            class="p-12 pr-40 w-full f-body-1"
+            class="{{ $ui('input', 'wrapper') }} pr-40"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
             @if($name) name="{{$name}}" @endif
             @if($value) value="{{$value}}" @endif

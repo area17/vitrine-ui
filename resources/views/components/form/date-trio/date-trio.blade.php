@@ -53,9 +53,9 @@
           <x-vui-form-label name="{{$rand}}Day" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.day') }}
           </x-vui-form-label>
-          <div class="relative">
+          <div class="{{ $ui('input', 'wrapper') }}">
               <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{1,2}"
@@ -80,9 +80,9 @@
           <x-vui-form-label name="{{$rand}}Month" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.month') }}
           </x-vui-form-label>
-          <div class="relative">
+          <div class="{{ $ui('input', 'wrapper') }}">
                 <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{1,2}"
@@ -106,9 +106,9 @@
           <x-vui-form-label name="{{$rand}}Year" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.year') }}
           </x-vui-form-label>
-          <div class="relative">
+          <div class="{{ $ui('input', 'wrapper') }}">
               <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{2,4}"
