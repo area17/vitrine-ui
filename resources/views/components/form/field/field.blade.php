@@ -59,6 +59,7 @@
                     :multiple="$multiple ?? false"
                     :readonly="$readonly ?? false"
                     :required="$required ?? false"
+                    :with-icon-right="$withIconRight ?? false"
                     aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
                 />
             @break
