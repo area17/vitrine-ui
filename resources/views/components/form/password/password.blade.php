@@ -1,5 +1,6 @@
 <x-vui-form-field
     type="password"
+    :label="$label ?? ''"
     :id="$id ? $id : $name"
     :name="$name ?? null"
     :value="$value ?? null"
