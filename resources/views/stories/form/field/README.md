@@ -1,11 +1,12 @@
-The `Input` component create a form field. It supports customization with various attributes to control its appearance, behavior, and selection options.
+The `Field` component create a form field. It supports customization with various attributes to control its appearance, behavior, and selection options.
 
 Any additional attributes are merged with the component's existing attributes, allowing you to add IDs, behaviors, data attributes, etc.
 
 ## Usage
 
 ```html
- <x-vui-form-input
+ <x-vui-form-field
+    label="Full Name"
     type="text"
     name="name"
     id="name"
@@ -50,7 +51,7 @@ Hint and note texts are associated with the input using aria-describedby, ensuri
 ```
 
 `base`:
-Applied to the main container of the select component.
+Applied to the main container of the field component.
 
 `header`:
 Applied to the div that precedes the input element, containing the label and hint text.
