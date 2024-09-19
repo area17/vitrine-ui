@@ -17,15 +17,15 @@
     {{ $disabled ? 'disabled' : '' }}
     {{ $disabled ? 'inert' : '' }}
 >
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
-        <legend class="f-subhead-3">{{ $legend }}</legend>
+    <div class="{{  $ui('input', 'header') }}">
+        <legend class="{{  $ui('input', 'legend') }}">{{ $legend }}</legend>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{ $ui('input', 'hint') }}">{{ $hint }}</span>
         @endif
     </div>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-12">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{ $ui('input', 'note') }}">{{ $note }}</p>
     @endif
 
     <span class="sr-only" id="{{$ariaID}}Format">{{ __('vitrine-ui::fe.form.datepicker.date_format') }}: {{ date('d m Y') }}</span>
@@ -47,15 +47,15 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Day" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.day') }}
           </x-vui-form-label>
-          <div class="m-input__wrapper">
+          <div class="{{ $ui('input', 'wrapper') }}">
               <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{1,2}"
@@ -74,15 +74,15 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Month" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.month') }}
           </x-vui-form-label>
-          <div class="m-input__wrapper">
+          <div class="{{ $ui('input', 'wrapper') }}">
                 <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{1,2}"
@@ -100,15 +100,15 @@
       <li class="w-full sm:w-auto sm:flex-1">
         <div
             data-behavior=""
-            {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+            {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
             {{ $disabled ? 'inert' : '' }}
         >
           <x-vui-form-label name="{{$rand}}Year" :required="$required">
               {{ __('vitrine-ui::fe.form.datepicker.year') }}
           </x-vui-form-label>
-          <div class="m-input__wrapper">
+          <div class="{{ $ui('input', 'wrapper') }}">
               <input
-                  class="p-12 w-full f-body-1"
+                  class="{{ $ui('input', 'input') }}"
                   type="text"
                   inputmode="numeric"
                   pattern="\d{2,4}"
@@ -140,5 +140,8 @@
         {{ $required ? ' required' : '' }}
     />
 
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="mt-4 f-body-1 text-error" style="display: none;" data-DateTrio-error>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-DateTrio-error>
+        <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/>
+        {{$error ?? ''}}
+    </p>
 </fieldset>

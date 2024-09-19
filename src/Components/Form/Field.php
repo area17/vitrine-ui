@@ -98,6 +98,9 @@ class Field extends VitrineComponent
     /** @var array */
     public $ariaDescribedBy;
 
+    /** @var bool */
+    public $withIconRight;
+
     protected static array $assets = [
         'js' => [
             'behaviors/Input.js'
@@ -134,6 +137,7 @@ class Field extends VitrineComponent
         $spellcheck = '',
         $wrap = '',
         $step = '',
+        $withIconRight = false,
         $ui = []
     )
     {
@@ -163,6 +167,7 @@ class Field extends VitrineComponent
         $this->spellcheck = $spellcheck;
         $this->wrap = $wrap;
         $this->step = $step;
+        $this->withIconRight = $withIconRight;
 
         $this->rand = Str::random(4);
         $this->ariaID = 'ariaID'.$this->rand;

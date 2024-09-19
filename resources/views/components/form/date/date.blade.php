@@ -10,16 +10,16 @@
 <div
     data-behavior="Input DateInput{{ $fuzzy ? 'Fuzzy' : '' }}"
     @if($picker)data-DatePicker-el="{{$pickerID}}"@endif
-    {{ $attributes->class(['m-input', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
+    {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $dataAttrs }}
     {{ $disabled ? 'inert' : '' }}>
 
-    <div class="flex flex-row flex-nowrap justify-between items-baseline gap-gutter">
+    <div class="{{  $ui('input', 'header') }}">
         <x-vui-form-label :name="$name" :required="$required">
             {{$label}}
         </x-vui-form-label>
         @if ($hint)
-            <span id="{{$ariaID}}Hint" class="f-ui-2 text-secondary">{{ $hint }}</span>
+            <span id="{{$ariaID}}Hint" class="{{ $ui('input', 'hint') }}">{{ $hint }}</span>
         @endif
     </div>
 
@@ -33,7 +33,7 @@
         @if($maxDate)<span class="sr-only" id="{{$ariaID}}MaxDate" data-DateInput-maxDateA11yDisplay>{{ __('vitrine-ui::fe.form.datepicker.maximum_date') }}: {{ $maxDate }}</span>@endif
     @endunless
 
-    <div class="m-input__wrapper">
+    <div class="{{ $ui('input', 'wrapper') }}">
         @if($picker)
         {{-- Optional datepicker --}}
         <x-vui-datepicker
@@ -45,7 +45,7 @@
         @endif
         {{-- Visible input to user --}}
         <input
-            class="p-12 pr-40 w-full f-body-1"
+            class="{{ $ui('input', 'input') }} pr-40"
             type="text"
             placeholder="{{ __('vitrine-ui::fe.form.datepicker.format') }}"
             @if($id || $name) id="{{$id ? $id : $name}}" @endif
@@ -80,9 +80,11 @@
     ></output>
 
     @if ($note)
-        <p id="{{$ariaID}}Note" class="f-ui-2 text-secondary mt-4">{{ $note }}</p>
+        <p id="{{$ariaID}}Note" class="{{ $ui('input', 'note') }}">{{ $note }}</p>
     @endif
 
-    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="mt-4 f-body-1 text-error" style="display: none;" data-Input-error>{{$error ?? ''}}</p>
+    <p id="{{$errorID}}" aria-live="assertive" aria-relevant="additions removals" class="{{ $ui('input', 'error') }}" style="display: none;" data-Input-error>
+        <x-vui-icon name="{{ $ui('input', 'error-icon-name') }}"/>{{$error ?? ''}}
+    </p>
 
 </div>

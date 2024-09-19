@@ -66,6 +66,9 @@ class Input extends VitrineComponent
     /** @var string */
     public $step;
 
+    /** @var bool */
+    public $withIconRight;
+
     /** @var array */
     public $ariaDescribedBy;
 
@@ -99,6 +102,7 @@ class Input extends VitrineComponent
         $multiple = false,
         $readonly = false,
         $step = '',
+        $withIconRight = false,
         $ariaDescribedBy = [],
         $ui = []
     )
@@ -122,6 +126,8 @@ class Input extends VitrineComponent
         $this->multiple = $multiple;
         $this->readonly = $readonly;
         $this->step = $step;
+        $this->withIconRight = $withIconRight;
+
         $this->ariaDescribedBy = $ariaDescribedBy;
 
         parent::__construct($ui);

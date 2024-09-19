@@ -1,5 +1,5 @@
 <div
-    data-behavior="Input"
+    {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')]) }}
     {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly]) }}
     {{ $disabled ? 'inert' : '' }}
 >
@@ -59,6 +59,7 @@
                     :multiple="$multiple ?? false"
                     :readonly="$readonly ?? false"
                     :required="$required ?? false"
+                    :with-icon-right="$withIconRight ?? false"
                     aria-describedby="{{implode(' ', $ariaDescribedBy)}}"
                 />
             @break
