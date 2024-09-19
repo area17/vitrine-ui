@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.11.0] - 2024-19-09
+### Updated
+- DateRange : use Theme UI CSS
+- DateTrio : use Theme UI CSS
+- Date : use Theme UI CSS
+- Password : use Theme UI CSS
+- Add Documentation for Form Components
+- Update Stories for Form Components
+
 ## [2.10.4] - 2024-13-09
 ### Fixed
 - UI Merge : test if component theme is existing
