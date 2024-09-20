@@ -5,12 +5,12 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/area17/vitrine-ui/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/area17/vitrine-ui/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/area17/vitrine-ui.svg?style=flat-square)](https://packagist.org/packages/area17/vitrine-ui)
 
+*This library is under active development and name is subject to change in feature release.*
+
 Vitrine is a library of components crafted by AREA 17 to use inside Laravel applications.
 
 Components follow the best practices around performance, accessibility, and maintainability.
 
-
-This library is under active development and name is subject to change in feature release.
 
 ## Installation
 
@@ -70,7 +70,7 @@ Button
 
 Some components require CSS/JS:
 
-### Add alias to project `vite.config.js`:
+### Add aliases to project `vite.config.js`:
 
 ```js
 export default ({ mode }) =>
@@ -92,7 +92,7 @@ export default ({ mode }) =>
 
 ### Import behaviors
 
-Import single component behavior (Recommend way):
+1. Import single component behavior (Recommended!)
 
 ```js
 import { manageBehaviors } from '@area17/a17-behaviors'
@@ -100,17 +100,6 @@ import ModalBehavior from '@vitrineUIComponents/modal/modal'
 
 document.addEventListener('DOMContentLoaded', async function () {
     manageBehaviors.init({ ...ModalBehavior, ...Behaviors })
-})
-```
-
-Import all component behaviors:
-
-```js
-import { manageBehaviors } from '@area17/a17-behaviors'
-import * as VitrineBehaviors from '@vitrineUI/resources/frontend/scripts/behaviors'
-
-document.addEventListener('DOMContentLoaded', async function () {
-    manageBehaviors.init({ ...VitrineBehaviors, ...Behaviors })
 })
 ```
 
@@ -133,6 +122,22 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 ```
 
+And in your project ./behaviors/vitrine.js, list the needed behaviors :
+```js
+export { default as Modal } from '@vitrineUI/resources/frontend/scripts/behaviors/Modal.js';
+export { default as Pagination } from '@vitrineUI/resources/frontend/scripts/behaviors/Pagination.js';
+```
+
+2. Use Barrel File : Import all component behaviors (Not recommended!)
+
+```js
+import { manageBehaviors } from '@area17/a17-behaviors'
+import * as VitrineBehaviors from '@vitrineUI/resources/frontend/scripts/behaviors'
+
+document.addEventListener('DOMContentLoaded', async function () {
+    manageBehaviors.init({ ...VitrineBehaviors, ...Behaviors })
+})
+```
 
 ### Custom Events
 
@@ -183,6 +188,7 @@ Example of a component JSON config :
     "wrapper": "custom-class"
 }
 ```
+
 The base key will replace the base component classes, which is the root DOM element of the component.
 For some components, other properties are customizable. Refer to the [component's stories](resources/views/stories) to see which properties can be themed.
 
