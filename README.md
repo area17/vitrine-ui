@@ -122,13 +122,13 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 ```
 
-And in your project ./behaviors/vitrine.js, list the needed behaviors :
+And in your project, create ./behaviors/vitrine.js to list the needed behaviors only :
 ```js
 export { default as Modal } from '@vitrineUI/resources/frontend/scripts/behaviors/Modal.js';
 export { default as Pagination } from '@vitrineUI/resources/frontend/scripts/behaviors/Pagination.js';
 ```
 
-2. Use Barrel File : Import all component behaviors (Not recommended!)
+2. Or use Barrel File : Import all component behaviors (Not recommended!)
 
 ```js
 import { manageBehaviors } from '@area17/a17-behaviors'
