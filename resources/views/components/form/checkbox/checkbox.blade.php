@@ -1,46 +1,15 @@
-@props([
-    'label' => '',
-    'name' => '',
-    'id' => '',
-    'value' => '',
-    'disabled' => false,
-    'selected' => false,
-    'required' => false,
-    'error' => '',
-    'hint' => '',
-    'note' => '',
-    'inputAttr' => '',
-    'autofocus' => false,
-    'form' => '',
-    'icon' => 'checkmark-16',
-])
-
-@php
-    $rand = Str::random(4);
-    $ariaID = 'ariaID'.$rand;
-    $errorID = 'errorID'.$rand;
-    $ariaDescribedBy = [];
-    $ariaDescribedBy[] = $errorID;
-    if($hint) {
-        $ariaDescribedBy[] = $ariaID.'Hint';
-    }
-    if($note) {
-        $ariaDescribedBy[] = $ariaID.'Note';
-    }
-@endphp
-
 <div
         data-behavior="Input"
         {{ $attributes->class([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error]) }}
         {{ $disabled ? 'inert' : '' }}
 >
     <label class="{{ $ui('checkbox', 'base') }}"
-           @if($id || $name) for="{{$id ? $id : $name.$rand}}" @endif>
+           @if($id) for="{{$id}}" @endif>
         <div class="{{ $ui('checkbox', 'wrapper') }}">
             <input
                     type="checkbox"
                     class="{{ $ui('checkbox', 'input') }}"
-                    @if($id || $name) id="{{$id ? $id : $name.$rand}}" @endif
+                    @if($id) id="{{ $id }}" @endif
                     @if($name) name="{{$name}}" @endif
                     @if($value) value="{{$value}}" @endif
                     data-Input-input
