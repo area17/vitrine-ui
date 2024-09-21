@@ -23,15 +23,15 @@
     data-behavior="PasswordInput"
     :with-icon-right="true"
 >
-    <button class="absolute right-12 top-1/2 -translate-y-1/2" data-PasswordInput-toggle>
+    <button class="{{ $ui('input-password', 'base') }}" data-PasswordInput-toggle>
         <x-vui-icon
-            class="inline-block text-[#basa55] pointer-events-none"
-            name="eye-hide-24"
+            class="{{ $ui('input-password', 'icon') }}"
+            name="{{ $ui('input-password', 'icon-hide') }}"
             aria-hidden="true"
             data-PasswordInput-iconhidden />
         <x-vui-icon
-            class="inline-block text-[#basa55] pointer-events-none"
-            name="eye-24"
+            class="{{ $ui('input-password', 'icon') }}"
+            name="{{ $ui('input-password', 'icon-show') }}"
             aria-hidden="true"
             style="display: none;"
             data-PasswordInput-iconshown />

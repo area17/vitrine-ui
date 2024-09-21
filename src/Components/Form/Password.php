@@ -66,9 +66,6 @@ class Password extends VitrineComponent
         'js' => [
             'behaviors/PasswordInput.js',
             'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
         ]
     ];
 
@@ -87,6 +84,7 @@ class Password extends VitrineComponent
         $autofocus = false,
         $form = '',
         $readonly = false,
+        $ui = []
     )
     {
         $this->label = $label;
@@ -115,6 +113,8 @@ class Password extends VitrineComponent
         if($note) {
             $this->ariaDescribedBy[] = $this->ariaID.'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View
