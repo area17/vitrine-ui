@@ -7,11 +7,9 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class MapGoogle extends VitrineComponent
 {
-    /** @var string */
-    public $lat;
+    public ?string $lat;
 
-    /** @var string */
-    public $lng;
+    public ?string $lng;
 
     protected static array $assets = [
         'npm' => [
@@ -23,12 +21,15 @@ class MapGoogle extends VitrineComponent
     ];
 
     public function __construct(
-        $lat = null,
-        $lng = null,
+        string $lat = null,
+        string $lng = null,
+        array $ui = []
     )
     {
         $this->lat = $lat;
         $this->lng = $lng;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

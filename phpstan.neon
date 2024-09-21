@@ -6,9 +6,15 @@ parameters:
     paths:
         - src/
 
+    ignoreErrors:
+            -
+             identifier: missingType.iterableValue
+            -
+             identifier: missingType.generics
+
     excludePaths:
         - src/Commands/PublishComponent.php
 
-    level: 5
+    level: 6
 
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'

@@ -7,24 +7,24 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Tag extends VitrineComponent
 {
-    /** @var string */
-    public $href;
+    public ?string $href;
 
-    /** @var bool */
-    public $active;
+    public bool $active;
 
-    /** @var bool */
-    public $cancellable;
+    public bool $cancellable;
 
     public function __construct(
-        $href = null,
-        $active = false,
-        $cancellable = false,
+        ?string $href = null,
+        bool $active = false,
+        bool $cancellable = false,
+        array $ui = []
     )
     {
         $this->href = $href;
         $this->active = $active;
         $this->cancellable = $cancellable;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

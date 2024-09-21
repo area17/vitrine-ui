@@ -7,13 +7,11 @@ use Illuminate\Contracts\View\View;
 
 class Heading extends VitrineComponent
 {
-    /** @var int */
-    public $level;
+    public int $level;
 
-    /** @var string */
-    public $element;
+    public string $element;
 
-    public function __construct($level = null, $ui = [])
+    public function __construct(int $level = null, array $ui = [])
     {
         $this->level = $level;
         $this->element = $this->getElement();
@@ -26,7 +24,7 @@ class Heading extends VitrineComponent
         return view('vitrine-ui::components.heading.heading');
     }
 
-    protected function getElement()
+    protected function getElement(): string
     {
         return $this->level > 0 && $this->level <= 6 ? "h$this->level" : 'span';
     }

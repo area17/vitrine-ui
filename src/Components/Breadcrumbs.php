@@ -7,22 +7,25 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Breadcrumbs extends VitrineComponent
 {
-    /** @var array */
-    public $items;
+    public array $items;
 
-    /** @var string */
-    public $tag;
+    public string $tag;
 
     public function __construct(
-        $tag = 'nav',
-        $items = null,
-        $ui = []
+        ?string $tag = 'nav',
+        array $items = [],
+        array $ui = []
     )
     {
         $this->tag = $tag;
         $this->items = $items;
 
         parent::__construct($ui);
+    }
+
+    public function shouldRender(): bool
+    {
+        return count($this->items) > 0;
     }
 
     public function render(): View

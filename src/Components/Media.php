@@ -7,8 +7,7 @@ use Illuminate\Contracts\View\View;
 
 class Media extends VitrineComponent
 {
-    /** @var string */
-    public $caption;
+    public ?string $caption;
 
     /** @var array */
     public $image;
