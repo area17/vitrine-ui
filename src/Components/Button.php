@@ -8,46 +8,37 @@ use Illuminate\Contracts\View\View;
 class Button extends VitrineComponent
 {
 
-    /** @var string */
-    public $href;
+    public ?string $href;
 
-    /** @var string */
-    public $icon;
+    public ?string $icon;
 
-    /** @var bool */
-    public $iconOnly;
+    public bool $iconOnly;
 
-    /** @var string */
-    public $iconPosition;
+    public ?string $iconPosition;
 
-    /** @var null|string */
-    public $size;
+    public ?string $size;
 
-    /** @var bool */
-    public $static;
+    public bool $static;
 
-    /** @var string|bool */
-    public $target;
+    public ?string $target;
 
-    /** @var string */
-    public $tag;
+    public ?string $tag;
 
-    /** @var null|string */
-    public $variant;
+    public ?string $variant;
 
-    public $uiKeyComponent = 'button';
+    public string $uiKeyComponent = 'button';
 
     public function __construct(
-        $href = null,
-        $icon = null,
-        $iconPosition = 'after',
-        $static = false,
-        $target = null,
-        $size = null,
-        $variant = null,
-        $tag = null,
-        $iconOnly = false,
-        $ui = []
+        string $href = null,
+        string $icon = null,
+        string $iconPosition = 'after',
+        bool $static = false,
+        string $target = null,
+        string $size = null,
+        string $variant = null,
+        string $tag = null,
+        bool $iconOnly = false,
+        array $ui = []
     )
     {
         $this->href = $href;
