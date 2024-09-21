@@ -81,14 +81,14 @@ class VitrineUI
 
     /**
      * Return classes associated to specified component and keys
-     * @param $component string required - Request component ui
+     * @param string|null $component string required - Request component ui
      * @param $keys array|string (optional) - Keys to use for applying component tokens
      * @param $options array (optional) - key/value array for applying specific variants tokens: ex ['size' => 'sm', 'variant' => 'primary']
      * @param $customUI array|null (optional) - External theme merged with current theme
      * @return string
      * @throws Exception
      */
-    public static function ui(string $component, array|string $keys = 'base', array $options = [], array $customUI = null): string
+    public static function ui(?string $component, array|string $keys = 'base', array $options = [], array $customUI = null): string
     {
         if (!isset($component)) {
             throw new Exception('Component name is required');
@@ -266,11 +266,11 @@ class VitrineUI
 
     /**
      * Return component preset from config file
-     * @param $component string required - Request component ui
+     * @param string|null $component string required - Request component ui
      * @return array
      * @throws Exception
      */
-    public static function getComponentConfig(string $component): array
+    public static function getComponentConfig(?string $component): array
     {
         if (!isset($component)) {
             throw new Exception('Component name is required');
@@ -278,9 +278,7 @@ class VitrineUI
 
         $ui = self::getBaseVitrineTheme();
 
-        $ui = self::getComponentPreset($ui, $component);
-
-        return $ui;
+        return self::getComponentPreset($ui, $component);
     }
 
 }

@@ -2,6 +2,7 @@
     {{ $attributes->class([$ui('input', 'input'), $ui('input', 'input-icon-right') => $withIconRight ?? false]) }}
     @if($id || $name) id="{{$id ? $id : $name}}" @endif
     @if($name) name="{{$name}}" @endif
+    @if($inputmode) inputmode="{{$inputmode}}" @endif
     @if($value) value="{{$value}}" @endif
     @if($placeholder) placeholder="{{$placeholder}}" @endif
     @if($pattern) pattern="{{$pattern}}" @endif

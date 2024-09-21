@@ -69,8 +69,9 @@ class Input extends VitrineComponent
     /** @var bool */
     public $withIconRight;
 
-    /** @var array */
-    public $ariaDescribedBy;
+    public string $inputmode;
+
+    public array $ariaDescribedBy;
 
     protected static array $assets = [
         'js' => [
@@ -127,6 +128,7 @@ class Input extends VitrineComponent
         $this->readonly = $readonly;
         $this->step = $step;
         $this->withIconRight = $withIconRight;
+        $this->inputmode = $inputmode;
 
         $this->ariaDescribedBy = $ariaDescribedBy;
 

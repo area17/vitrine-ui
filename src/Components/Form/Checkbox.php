@@ -8,53 +8,39 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Checkbox extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
+
+    public ?string $name;
+
+    public ?string $id;
+
+    public ?string $value;
+
+    public bool $disabled;
+
+    public bool $selected;
+
+    public bool $required;
+
+    public ?string $error;
+
+    public ?string $hint;
+
+    public ?string $note;
+
+    public ?string $inputAttr;
+
+    public bool $autofocus;
+
+    public ?string $form;
 
     /** @var string */
-    public $name;
+    public string $ariaID;
 
     /** @var string */
-    public $id;
+    public string $errorID;
 
-    /** @var string */
-    public $value;
-
-    /** @var bool */
-    public $disabled;
-
-    /** @var bool */
-    public $selected;
-
-    /** @var bool */
-    public $required;
-
-    /** @var string */
-    public $error;
-
-    /** @var string */
-    public $hint;
-
-    /** @var string */
-    public $note;
-
-    /** @var string */
-    public $inputAttr;
-
-    /** @var bool */
-    public $autofocus;
-
-    /** @var string */
-    public $form;
-
-    /** @var string */
-    public $ariaId;
-
-    /** @var string */
-    public $errorId;
-
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
@@ -65,19 +51,19 @@ class Checkbox extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
-        $name = '',
-        $id = '',
-        $value = '',
+        $label = null,
+        $name = null,
+        $id = null,
+        $value = null,
         $disabled = false,
         $selected = false,
         $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $inputAttr = '',
+        $error = null,
+        $hint = null,
+        $note = null,
+        $inputAttr = null,
         $autofocus = false,
-        $form = '',
+        $form = null,
         $ui = []
     )
     {

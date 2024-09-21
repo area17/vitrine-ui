@@ -74,7 +74,7 @@ class Pagination extends VitrineComponent
 
     public function shouldRender(): bool
     {
-        return count($this->pages ?? []) > 1;
+        return count($this->pages) > 1;
     }
 
     public function render(): View

@@ -30,9 +30,9 @@ class Icon extends VitrineComponent
         parent::__construct($ui);
     }
 
-    public function shouldRender()
+    public function shouldRender(): bool
     {
-        return $this->iconComponent;
+        return !empty($this->iconComponent);
     }
 
     public function render(): View
@@ -40,7 +40,7 @@ class Icon extends VitrineComponent
         return view($this->iconComponent);
     }
 
-    public function getIconPath(): bool|string
+    public function getIconPath(): ?string
     {
         $iconPath = config('vitrine-ui.icons_view_path', 'icons'). $this->name;
 
@@ -52,6 +52,6 @@ class Icon extends VitrineComponent
 
         if($viewExists) return $localPath;
 
-        return false;
+        return null;
     }
 }

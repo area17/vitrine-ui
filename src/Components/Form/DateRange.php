@@ -38,8 +38,7 @@ class DateRange extends VitrineComponent
     /** @var string */
     public $ariaID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
     /** @var string */
     public $pickerID;

@@ -5,12 +5,12 @@ namespace A17\VitrineUI\Components;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
+use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Image extends VitrineComponent
 {
 
-    /** @var array */
-    public $image;
+    public array|null|TwillImageModel $image;
 
     /** @var string
      * @deprecated
@@ -109,8 +109,7 @@ class Image extends VitrineComponent
      */
     protected function getImageType()
     {
-        /** @phpstan-ignore-next-line */
-        if ($this->image instanceof \A17\Twill\Image\Models\Image) {
+        if ($this->image instanceof TwillImageModel) {
             return 'twill-image';
         } elseif (Arr::has($this->image, '_static')) {
             return 'twill-image-static';
@@ -118,7 +117,7 @@ class Image extends VitrineComponent
             return 'next-rendering';
         } elseif (Arr::has($this->image, 'src') && Arr::has($this->image, 'srcSet')) {
             return 'twill-image-array';
-        } elseif (is_array($this->image) && array_key_exists('src', $this->image)) {
+        } elseif (Arr::has($this->image, 'src')) {
             return 'static';
         } elseif ($this->usePlaceholder) {
             return 'placeholder';

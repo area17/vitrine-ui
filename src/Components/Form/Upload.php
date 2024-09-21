@@ -56,8 +56,7 @@ class Upload extends VitrineComponent
     /** @var string */
     public $errorID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
     /** @var string */
     public $rand;

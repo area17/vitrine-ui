@@ -1,5 +1,4 @@
 <?php
-
 namespace A17\VitrineUI\Commands;
 
 use A17\VitrineUI\VitrineUI;
@@ -21,45 +20,21 @@ class PublishComponent extends Command
 
     public $description = 'Publish a component';
 
-    /**
-     * @var Filesystem
-     */
-    protected $filesystem;
+    protected Filesystem $filesystem;
 
-    /**
-     * @var array
-     */
-    protected $vitrineUIComponents;
+    protected mixed $vitrineUIComponents;
 
-    /**
-     * @var array
-     */
-    protected $npmPackages;
+    protected array $npmPackages;
 
-    /**
-     * @var bool
-     */
-    protected $canCopyStoryData;
+    protected bool $canCopyStoryData;
 
-    /**
-     * @var string
-     */
-    protected $vendorAssetsPath;
+    protected mixed $vendorAssetsPath;
 
-    /**
-     * @var string
-     */
-    protected $publishedAssetsPath;
+    protected mixed $publishedAssetsPath;
 
-    /**
-     * @var bool
-     */
-    protected $publishedEverything;
+    protected bool $publishedEverything;
 
-    /**
-     * @var string
-     */
-    protected $storiesSubfolder;
+    protected string $storiesSubfolder;
 
     public function __construct(Filesystem $filesystem)
     {
@@ -69,7 +44,7 @@ class PublishComponent extends Command
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->storiesSubfolder = config('vitrine-ui.stories_subfolder', 'null');
         $this->npmPackages = [];
-        $this->canCopyStoryData = null;
+        $this->canCopyStoryData = false;
         $this->vendorAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
         $this->publishedAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
         $this->publishedEverything = true;

@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - src/
+
+    excludePaths:
+        - src/Commands/PublishComponent.php
+
+    level: 5
+
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
