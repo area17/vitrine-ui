@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 
 class Heading extends VitrineComponent
 {
-    public int $level;
+    public int|string $level;
 
     public string $element;
 
@@ -26,6 +26,7 @@ class Heading extends VitrineComponent
 
     protected function getElement(): string
     {
-        return $this->level > 0 && $this->level <= 6 ? "h$this->level" : 'span';
+        $level = (int) $this->level;
+        return $level > 0 && $level <= 6 ? "h$level" : 'span';
     }
 }

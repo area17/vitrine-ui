@@ -7,20 +7,17 @@ use Illuminate\Contracts\View\View;
 
 class Icon extends VitrineComponent
 {
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var string */
-    public $ariaLabel;
+    public ?string $ariaLabel;
 
-    /** @var string|null */
-    public $iconComponent;
+    public ?string $iconComponent;
 
     public function __construct(
-        $name = null,
-        $ariaLabel = null,
-        $iconPath = null,
-        $ui = []
+        string $name = null,
+        string $ariaLabel = null,
+        string $iconPath = null,
+        array $ui = []
     )
     {
         $this->name = $name;
