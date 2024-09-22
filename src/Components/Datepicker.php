@@ -4,26 +4,21 @@ namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
+use Psy\Util\Str;
 
 class Datepicker extends VitrineComponent
 {
-    /** @var string */
-    public $target;
+    public ?string $target;
 
-    /** @var string */
-    public $align;
+    public ?string $align;
 
-    /** @var bool */
-    public $range;
+    public bool $range;
 
-    /** @var string */
-    public $minDate;
+    public ?string $minDate;
 
-    /** @var string */
-    public $maxDate;
+    public ?string $maxDate;
 
-    /** @var bool */
-    public $showLabel;
+    public bool $showLabel;
 
     protected static array $assets = [
         'npm' => ['wc-datepicker', 'focus-trap'],
@@ -32,12 +27,13 @@ class Datepicker extends VitrineComponent
     ];
 
     public function __construct(
-        $target = '',
-        $align = 'right',
-        $range = false,
-        $minDate = '',
-        $maxDate = '',
-        $showLabel = false,
+        string $target = null,
+        string $align = 'right',
+        bool $range = false,
+        string $minDate = null,
+        string $maxDate = null,
+        bool $showLabel = false,
+        array $ui = []
     )
     {
         $this->target = $target;
@@ -46,6 +42,8 @@ class Datepicker extends VitrineComponent
         $this->minDate = $minDate;
         $this->maxDate = $maxDate;
         $this->showLabel = $showLabel;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

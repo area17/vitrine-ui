@@ -8,13 +8,13 @@ class Pagination extends VitrineComponent
 {
     public array $pages;
 
-    public int $currentPage;
+    public int|string|null $currentPage;
 
-    public int $lastPage;
+    public int|string|null $lastPage;
 
-    public int $total;
+    public int|string|null $total;
 
-    public int $currentPageCount;
+    public int|string|null $currentPageCount;
 
     public array $dropdownItems;
 
@@ -36,10 +36,10 @@ class Pagination extends VitrineComponent
 
     public function __construct(
         array $pages = [],
-        int $currentPage = 1,
-        ?int $currentPageCount = null,
-        ?int $total = null,
-        ?int $lastPage = 1,
+        string|int $currentPage = 1,
+        string|int $currentPageCount = null,
+        string|int $total = null,
+        string|int $lastPage = 1,
         ?string $btnVariant = 'secondary',
         ?string $iconLeft = 'arrow-left-24',
         ?string $iconRight = 'arrow-right-24',

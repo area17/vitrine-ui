@@ -7,16 +7,14 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Card extends VitrineComponent
 {
-    /** @var array */
-    public $variant;
+    public ?string $variant;
 
-    /** @var string */
-    public $tag;
+    public ?string $tag;
 
     public function __construct(
-        $tag = 'article',
-        $variant = null,
-        $ui = []
+        string $tag = 'article',
+        string $variant = null,
+        array $ui = []
     )
     {
         $this->tag = $tag;

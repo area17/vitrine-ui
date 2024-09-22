@@ -7,23 +7,18 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class AudioPlayer extends VitrineComponent
 {
-    /** @var string */
-    public $downloadUrl;
+    public ?string $downloadUrl;
+
+    public array $playbackRates;
+
+    public ?string $subtitle;
+
+    public ?string $title;
+
+    public ?string $variant;
 
     /** @var array */
-    public $playbackRates;
-
-    /** @var string */
-    public $subtitle;
-
-    /** @var string */
-    public $title;
-
-    /** @var string|null */
-    public $variant;
-
-    /** @var array */
-    public $sources;
+    public array $sources;
 
     protected static array $assets = [
         'js' => 'behaviors/AudioPlayer.js',
@@ -31,13 +26,13 @@ class AudioPlayer extends VitrineComponent
     ];
 
     public function __construct(
-        $downloadUrl = null,
-        $playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3],
-        $subtitle = null,
-        $title = null,
-        $variant = null,
-        $sources = [],
-        $ui = []
+        string $downloadUrl = null,
+        array $playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3],
+        string $subtitle = null,
+        string $title = null,
+        string $variant = null,
+        array $sources = [],
+        array $ui = []
     )
     {
         $this->downloadUrl = $downloadUrl;

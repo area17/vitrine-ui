@@ -15,10 +15,10 @@ class CardLink extends VitrineComponent
     public string $tag;
 
     public function __construct(
-        $href = null,
-        $target = null,
-        $tag = null,
-        $ui = []
+        string $href = null,
+        string $target = null,
+        string $tag = null,
+        array $ui = []
     )
     {
         $this->href = $href;
