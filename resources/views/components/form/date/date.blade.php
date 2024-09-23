@@ -49,13 +49,13 @@
     <div class="{{ $ui('input', 'wrapper') }}">
         @if ($picker)
             {{-- Optional datepicker --}}
-            <x-vui-datepicker class="right-12top-1/2 absolute mt-2 -translate-y-1/2"
+            <x-vui-datepicker class="{{ $ui('input', 'button') }}"
                               :target="$pickerID"
                               :minDate="$minDate"
                               :minDate="$minDate" />
         @endif
         {{-- Visible input to user --}}
-        <input class="{{ $ui('input', 'input') }} pr-40"
+        <input class="{{ $ui('input', 'input') }} {{ $ui('input', 'input-icon-right') }}"
                data-DateInput-input
                data-Input-input
                type="text"

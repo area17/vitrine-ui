@@ -14,6 +14,10 @@
         @endif
     </div>
 
+    @if ($slotLabel ?? false)
+        {{ $slotLabel }}
+    @endif
+
     <div class="{{ $ui('input', 'wrapper') }}">
         {{-- Input --}}
         @switch($type)
@@ -64,6 +68,10 @@
         @endswitch
         {{ $slot }}
     </div>
+
+    @if ($slotNote ?? false)
+        {{ $slotNote }}
+    @endif
 
     @if ($note)
         <p class="{{ $ui('input', 'note') }}"

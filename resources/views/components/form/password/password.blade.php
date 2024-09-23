@@ -21,7 +21,7 @@
                   :readonly="$readonly ?? false"
                   :required="$required ?? false"
                   :with-icon-right="true">
-    <button class="absolute right-12 top-1/2 -translate-y-1/2"
+    <button class="{{ $ui('input', 'button') }}"
             data-PasswordInput-toggle>
         <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
                     name="eye-hide-24"
