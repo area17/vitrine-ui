@@ -17,7 +17,7 @@
 <svg width="{{ $width }}"
      height="{{ $height }}"
      fill="none"
-     @if (isset($attributes)) {{ $attributes->class($class ?? null) }}
+     @if (isset($attributes)) {{ $attributes->twMerge($class ?? null) }}
     @else
         class="{{ $class ?? null }}" @endif
      viewBox="0 0 {{ $width }} {{ $height }}"

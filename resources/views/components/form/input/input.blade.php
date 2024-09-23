@@ -1,5 +1,5 @@
 <input type="{{ $type ?? 'text' }}"
-       {{ $attributes->class([$ui('input', 'input'), $ui('input', 'input-icon-right') => $withIconRight ?? false]) }}
+       {{ $attributes->twMerge([$ui('input', 'input'), $ui('input', 'input-icon-right') => $withIconRight ?? false]) }}
        @if ($id || $name) id="{{ $id ? $id : $name }}" @endif
        @if ($name) name="{{ $name }}" @endif
        @if ($inputmode) inputmode="{{ $inputmode }}" @endif
