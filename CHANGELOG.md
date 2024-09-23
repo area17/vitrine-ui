@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.12.1] - 2024-23-09
+
+### Fixed
+
+-   Rename Tailwind Config to cjs : it make it clear that it is a CommonJS module (all JS are now treated as ES module)
+
 ## [2.12.0] - 2024-23-09
 
 ### Updated
