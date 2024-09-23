@@ -146,7 +146,7 @@ class VitrineUI
             }
         }
 
-        return join(' ', $classes);
+        return tw(join(' ', $classes));
     }
 
     /**
