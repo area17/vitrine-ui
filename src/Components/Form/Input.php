@@ -9,67 +9,46 @@ use A17\VitrineUI\Components\VitrineComponent;
 class Input extends VitrineComponent
 {
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $type;
+    public ?string $type;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var string */
-    public $placeholder;
+    public ?string $placeholder;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
+    public ?string $pattern;
 
-    /** @var string */
-    public $pattern;
+    public ?string $autocomplete;
 
-    /** @var string */
-    public $autocomplete;
+    public bool $autofocus;
 
-    /** @var bool */
-    public $autofocus;
+    public ?string $form;
 
-    /** @var string */
-    public $form;
+    public ?string $list;
 
-    /** @var string */
-    public $list;
+    public ?string $max;
 
-    /** @var string */
-    public $max;
+    public ?string $maxlength;
 
-    /** @var string */
-    public $maxlength;
+    public ?string $min;
 
-    /** @var string */
-    public $min;
+    public ?string $minlength;
 
-    /** @var string */
-    public $minlength;
+    public bool $multiple;
 
-    /** @var bool */
-    public $multiple;
+    public bool $readonly;
 
-    /** @var bool */
-    public $readonly;
+    public ?string $step;
 
-    /** @var string */
-    public $step;
+    public bool $withIconRight;
 
-    /** @var bool */
-    public $withIconRight;
-
-    public string $inputmode;
+    public ?string $inputmode;
 
     public array $ariaDescribedBy;
 
@@ -83,29 +62,29 @@ class Input extends VitrineComponent
     ];
 
     public function __construct(
-        $name = null,
-        $id = '',
-        $type = 'text',
-        $value = '',
-        $placeholder = '',
-        $disabled = false,
-        $required = false,
-        $inputmode = '',
-        $pattern = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $form = '',
-        $list = '',
-        $max = '',
-        $maxlength = '',
-        $min = '',
-        $minlength = '',
-        $multiple = false,
-        $readonly = false,
-        $step = '',
-        $withIconRight = false,
-        $ariaDescribedBy = [],
-        $ui = []
+        string $name = null,
+        string $id = null,
+        string $type = 'text',
+        string $value = null,
+        string $placeholder = null,
+        bool $disabled = false,
+        bool $required = false,
+        string $inputmode = null,
+        string $pattern = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        string $form = null,
+        string $list = null,
+        string $max = null,
+        string $maxlength = null,
+        string $min = null,
+        string $minlength = null,
+        bool $multiple = false,
+        bool $readonly = false,
+        string $step = null,
+        bool $withIconRight = false,
+        array $ariaDescribedBy = [],
+        array $ui = []
     )
     {
         $this->name = $name;

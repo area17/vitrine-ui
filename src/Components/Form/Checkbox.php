@@ -34,10 +34,8 @@ class Checkbox extends VitrineComponent
 
     public ?string $form;
 
-    /** @var string */
     public string $ariaID;
 
-    /** @var string */
     public string $errorID;
 
     public array $ariaDescribedBy;
@@ -51,20 +49,20 @@ class Checkbox extends VitrineComponent
     ];
 
     public function __construct(
-        $label = null,
-        $name = null,
-        $id = null,
-        $value = null,
-        $disabled = false,
-        $selected = false,
-        $required = false,
-        $error = null,
-        $hint = null,
-        $note = null,
-        $inputAttr = null,
-        $autofocus = false,
-        $form = null,
-        $ui = []
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string|int $value = null,
+        bool $disabled = false,
+        bool $selected = false,
+        bool $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $inputAttr = null,
+        bool $autofocus = false,
+        string $form = null,
+        array $ui = []
     )
     {
         $this->label = $label;
@@ -80,7 +78,6 @@ class Checkbox extends VitrineComponent
         $this->inputAttr = $inputAttr;
         $this->autofocus = $autofocus;
         $this->form = $form;
-
 
         $rand = Str::random(4);
         $this->ariaID = 'ariaID'. $rand;

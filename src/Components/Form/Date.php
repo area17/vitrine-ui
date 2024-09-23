@@ -8,70 +8,49 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Date extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $minDate;
+    public ?string $minDate;
 
-    /** @var string */
-    public $maxDate;
+    public ?string $maxDate;
 
-    /** @var bool */
-    public $fuzzy;
+    public bool $fuzzy;
 
-    /** @var bool */
-    public $picker;
+    public bool $picker;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $dataAttrs;
+    public ?string $dataAttrs;
 
-    /** @var bool */
-    public $hideA11yLabels;
+    public bool $hideA11yLabels;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
     public array $ariaDescribedBy;
 
-    /** @var string */
-    public $pickerID;
+    public ?string $pickerID = null;
 
     protected static array $assets = [
         'npm' => ['@area17/parse-numeric-date'],
@@ -87,24 +66,25 @@ class Date extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
-        $name = '',
-        $id = '',
-        $value = '',
-        $disabled = false,
-        $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $minDate = '',
-        $maxDate = '',
-        $fuzzy = false,
-        $picker = true,
-        $autofocus = false,
-        $form = '',
-        $readonly = false,
-        $dataAttrs = '',
-        $hideA11yLabels = false,
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string $value = null,
+        bool $disabled = false,
+        bool $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $minDate = null,
+        string $maxDate = null,
+        bool $fuzzy = false,
+        bool $picker = true,
+        bool $autofocus = false,
+        string $form = null,
+        bool $readonly = false,
+        string $dataAttrs = null,
+        bool $hideA11yLabels = false,
+        array $ui = []
     )
     {
         $this->label = $label;
@@ -130,9 +110,7 @@ class Date extends VitrineComponent
         $this->ariaID = 'ariaID'.$rand;
         $this->errorID = 'errorID'.$rand;
 
-        if ($this->picker) {
-            $this->pickerID = 'pickerID'. $rand;
-        }
+        $this->pickerID = $this->picker ? 'pickerID'. $rand : null;
 
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->ariaID.'Format';
@@ -154,6 +132,8 @@ class Date extends VitrineComponent
         }
 
         $this->ariaDescribedBy[] = $this->errorID;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

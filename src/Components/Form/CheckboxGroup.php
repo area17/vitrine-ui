@@ -8,29 +8,19 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class CheckboxGroup extends VitrineComponent
 {
-    /** @var string */
-    public $legend;
+    public ?string $legend;
 
-    /** @var string */
-    public $type;
+    public ?string $value;
 
-    /** @var string */
-    public $value;
+    public array $options;
 
-    /** @var array */
-    public $options;
+    public bool $disabled;
 
-    /** @var string */
-    public $disabled;
+    public bool $required;
 
-    /** @var string */
-    public $required;
+    public ?string $hint;
 
-    /** @var string */
-    public $hint;
-
-    /** @var string */
-    public $note;
+    public ?string $note;
 
     protected static array $assets = [
         'css' => [
@@ -40,24 +30,25 @@ class CheckboxGroup extends VitrineComponent
     ];
 
     public function __construct(
-        $legend = '',
-        $type = 'text',
-        $value = '',
-        $options = [],
-        $disabled = false,
-        $required = true,
-        $hint = '',
-        $note = '',
+        string $legend = null,
+        string $value = null,
+        array $options = [],
+        bool $disabled = false,
+        bool $required = true,
+        string $hint = null,
+        string $note = null,
+        array $ui = []
     )
     {
         $this->legend = $legend;
-        $this->type = $type;
         $this->value = $value;
         $this->options = $options;
         $this->disabled = $disabled;
         $this->required = $required;
         $this->hint = $hint;
         $this->note = $note;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

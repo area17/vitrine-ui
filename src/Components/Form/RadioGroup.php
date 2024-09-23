@@ -8,40 +8,29 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class RadioGroup extends VitrineComponent
 {
-    /** @var string */
-    public $legend;
+    public ?string $legend;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var array */
-    public $options;
+    public array $options;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
     public array $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
         'js' => ['behaviors/RadioGroup.js'],
@@ -52,14 +41,15 @@ class RadioGroup extends VitrineComponent
     ];
 
     public function __construct(
-        $legend = '',
-        $name = null,
-        $options = [],
-        $disabled = false,
-        $required = true,
-        $error = '',
-        $hint = '',
-        $note = '',
+        string $legend = null,
+        string $name = null,
+        array $options = [],
+        bool $disabled = false,
+        bool $required = true,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        array $ui = []
     )
     {
         $this->legend = $legend;
@@ -99,6 +89,8 @@ class RadioGroup extends VitrineComponent
         if ($selectedIndex === -1 && count($options) > 1) {
             $this->options[0]['selected'] = true;
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

@@ -8,61 +8,43 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Select extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var array */
-    public $options;
+    public array $options;
 
-    /** @var string */
-    public $placeholder;
+    public ?string $placeholder;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var string */
-    public $autocomplete;
+    public ?string $autocomplete;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var bool */
-    public $multiple;
+    public bool $multiple;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
     public array $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
         'js' => [
@@ -74,22 +56,22 @@ class Select extends VitrineComponent
     ];
 
     public function __construct(
-        $label = false,
-        $name = null,
-        $id = null,
-        $disabled = false,
-        $required = true,
-        $options = [],
-        $placeholder = '',
-        $error = '',
-        $hint = '',
-        $note = '',
-        $form = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $multiple = false,
-        $readonly = false,
-        $ui = []
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        bool $disabled = false,
+        bool $required = true,
+        array $options = [],
+        string $placeholder = null,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $form = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        bool $multiple = false,
+        bool $readonly = false,
+        array $ui = []
     )
     {
         $this->label = $label;

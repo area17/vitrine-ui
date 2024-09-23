@@ -40,7 +40,7 @@
             :target="$pickerID"
             :minDate="$minDate"
             :minDate="$minDate"
-            class="absolute right-12 top-1/2 -translate-y-1/2 mt-2"
+            class="absolute right-12top-1/2 -translate-y-1/2 mt-2"
         />
         @endif
         {{-- Visible input to user --}}

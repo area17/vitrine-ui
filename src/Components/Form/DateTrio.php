@@ -8,70 +8,48 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class DateTrio extends VitrineComponent
 {
-    /** @var string */
-    public $legend;
+    public ?string $legend;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $minDate;
+    public ?string $minDate;
 
-    /** @var string */
-    public $maxDate;
+    public ?string $maxDate;
 
-    /** @var bool */
-    public $picker;
+    public bool $picker;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $dataAttrs;
+    public ?string $dataAttrs;
 
-    /** @var bool */
-    public $hideA11yLabels;
+    public bool $hideA11yLabels;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
     public array $ariaDescribedBy;
+    public ?string $pickerID;
 
-    /** @var string */
-    public $pickerID;
-
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
         'js' => [
@@ -83,23 +61,24 @@ class DateTrio extends VitrineComponent
     ];
 
     public function __construct(
-        $legend = '',
-        $name = '',
-        $id = '',
-        $value = '',
-        $disabled = false,
-        $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $minDate = '',
-        $maxDate = '',
-        $picker = true,
-        $autofocus = false,
-        $form = '',
-        $readonly = false,
-        $dataAttrs = '',
-        $hideA11yLabels = false,
+        string $legend = null,
+        string $name = null,
+        string $id = null,
+        string $value = null,
+        bool   $disabled = false,
+        bool   $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $minDate = null,
+        string $maxDate = null,
+        bool   $picker = true,
+        bool   $autofocus = false,
+        string $form = null,
+        bool   $readonly = false,
+        string $dataAttrs = null,
+        bool   $hideA11yLabels = false,
+        array  $ui = []
     )
     {
         $this->legend = $legend;
@@ -121,33 +100,35 @@ class DateTrio extends VitrineComponent
         $this->hideA11yLabels = $hideA11yLabels;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
 
         if ($this->picker) {
-            $this->pickerID = 'pickerID'. $this->rand;
+            $this->pickerID = 'pickerID' . $this->rand;
         }
 
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = $this->ariaID.'Format';
+        $this->ariaDescribedBy[] = $this->ariaID . 'Format';
 
-        if($this->minDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MinDate';
+        if ($this->minDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MinDate';
         }
 
-        if($this->maxDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MaxDate';
+        if ($this->maxDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MaxDate';
         }
 
-        if($this->hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($this->hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
 
-        if($this->note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($this->note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         $this->ariaDescribedBy[] = $this->errorID;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

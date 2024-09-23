@@ -8,29 +8,19 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Range extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
+    public bool $hideLower;
+    public bool $showOutput;
 
-    /** @var bool */
-    public $hideLower;
-
-    /** @var bool */
-    public $showOutput;
-
-    /** @var string */
-    public $options;
+    public ?array $options;
 
     protected static array $assets = [
         'npm' => ['range-slider-input'],
@@ -39,18 +29,19 @@ class Range extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
-        $name = null,
-        $disabled = false,
-        $required = true,
-        $error = '',
-        $hideLower = true,
-        $showOutput = true,
-        $options = [
+        string $label = null,
+        string $name = null,
+        bool $disabled = false,
+        bool $required = true,
+        string $error = null,
+        bool $hideLower = true,
+        bool $showOutput = true,
+        array $options = [
             'value' => [0, 50],
             'thumbsDisabled' => [true, false],
             'rangeSlideDisabled' => true
-        ]
+        ],
+        array $ui = []
     )
     {
         $this->label = $label;
@@ -61,6 +52,8 @@ class Range extends VitrineComponent
         $this->hideLower = $hideLower;
         $this->showOutput = $showOutput;
         $this->options = $options;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

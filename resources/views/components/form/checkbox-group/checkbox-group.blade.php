@@ -1,6 +1,5 @@
 @props([
     'legend' => '',
-    'type' => 'text',
     'value' => '',
     'options' => [],
     'disabled' => false,
@@ -9,6 +8,7 @@
     'note' => '',
 ])
 
+{{--todo: refactor me--}}
 @php
     $rand = Str::random(4);
     $ariaID = 'ariaID'.$rand;
