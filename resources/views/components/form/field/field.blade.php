@@ -1,5 +1,6 @@
-<div
-    {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+@props(['postLabel', 'preNote'])
+
+<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $disabled ? 'inert' : '' }}>
     <div class="{{ $ui('input', 'header') }}">
         @if (!empty($label))
@@ -14,8 +15,8 @@
         @endif
     </div>
 
-    @if ($slotLabel ?? false)
-        {{ $slotLabel }}
+    @if ($postLabel ?? false)
+        {{ $postLabel }}
     @endif
 
     <div class="{{ $ui('input', 'wrapper') }}">
@@ -69,8 +70,8 @@
         {{ $slot }}
     </div>
 
-    @if ($slotNote ?? false)
-        {{ $slotNote }}
+    @if ($preNote ?? null)
+        {{ $preNote }}
     @endif
 
     @if ($note)
