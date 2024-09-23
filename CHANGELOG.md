@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.12.0] - 2024-23-09
+
+### Updated
+
+-   Configure linters and code formatters to improve codebase's architecture :
+    -   Add Phpstan (level 6) and php-cs-fixer for static analysis
+    -   Add Eslint
+    -   Add Prettier with specifics plugin for PHP and Laravel
+    -   Run linters on pre-commit githook
+
 ## [2.11.0] - 2024-19-09
 
 ### Updated
