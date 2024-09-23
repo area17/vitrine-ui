@@ -2,8 +2,8 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class Tabs extends VitrineComponent
 {
@@ -11,7 +11,6 @@ class Tabs extends VitrineComponent
 
     public ?string $title;
     public int $titleLevel = 3;
-
 
     public int $startIndex = 0;
 
@@ -23,16 +22,15 @@ class Tabs extends VitrineComponent
     public string $tabListId;
 
     public function __construct(
-        $ariaLabel = null,
-        $tabsNames = [],
-        $startIndex = 0,
-        $name = '',
-        $title = null,
-        $titleLevel = 3,
-        $tabButtonVariant = 'primary',
-        $ui = []
-    )
-    {
+        string $ariaLabel = null,
+        array $tabsNames = [],
+        int $startIndex = 0,
+        string $name = '',
+        string $title = null,
+        string|int $titleLevel = 3,
+        string $tabButtonVariant = 'primary',
+        array $ui = [],
+    ) {
         $this->ariaLabel = $ariaLabel;
         $this->startIndex = $startIndex;
         $this->name = $name;

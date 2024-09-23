@@ -12,15 +12,10 @@ class TabPanel extends VitrineComponent
 
     public bool $selected;
 
-    public function __construct(
-        $selected = false,
-        $name = '',
-        $index = 1,
-        $ui = []
-    )
+    public function __construct(bool $selected = false, string $name = '', int $index = 1, array $ui = [])
     {
         $this->selected = $selected;
-        $this->name = $name.'_tab';
+        $this->name = $name . '_tab';
         $this->index = $index;
         parent::__construct($ui);
     }

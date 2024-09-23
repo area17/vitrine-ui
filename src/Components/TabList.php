@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class TabList extends VitrineComponent
@@ -19,16 +18,15 @@ class TabList extends VitrineComponent
     public ?string $name;
 
     public function __construct(
-        $ariaLabel = null,
-        $selectedIndex = 0,
-        $tabListId = null,
-        $tabButtonVariant = 'primary',
-        $tabsNames = [],
-        $name = '',
-        $ui = []
-    )
-    {
-        $this->name = $name.'_tab';
+        string $ariaLabel = null,
+        int $selectedIndex = 0,
+        string $tabListId = null,
+        string $tabButtonVariant = 'primary',
+        array $tabsNames = [],
+        string $name = '',
+        array $ui = [],
+    ) {
+        $this->name = $name . '_tab';
         $this->ariaLabel = $ariaLabel;
         $this->selectedIndex = $selectedIndex;
         $this->tabListId = $tabListId;
