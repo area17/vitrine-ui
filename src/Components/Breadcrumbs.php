@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Breadcrumbs extends VitrineComponent
 {
@@ -11,11 +10,7 @@ class Breadcrumbs extends VitrineComponent
 
     public string $tag;
 
-    public function __construct(
-        ?string $tag = 'nav',
-        array $items = [],
-        array $ui = []
-    )
+    public function __construct(?string $tag = 'nav', array $items = [], array $ui = [])
     {
         $this->tag = $tag;
         $this->items = $items;

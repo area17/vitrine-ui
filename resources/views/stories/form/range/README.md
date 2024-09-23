@@ -4,16 +4,16 @@ The `Range` component provides a slider for selecting a numeric value within a s
 
 ```html
 <x-vui-form-range
-  label="Price"
-  required="false"
-  name="price"
-  :disabled="false"
-  :options="[
+    label="Price"
+    required="false"
+    name="price"
+    :disabled="false"
+    :options="[
         'value' => [0, 50],
         'rangeSlideDisabled' => true
     ]"
-  :showOutput="true"
-  :hideLower="false"
+    :showOutput="true"
+    :hideLower="false"
 />
 ```
 

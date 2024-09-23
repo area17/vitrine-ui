@@ -34,10 +34,7 @@ class RadioGroup extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/RadioGroup.js'],
-        'css' => [
-            'components/form/radio.css',
-            'components/form/input.css',
-        ]
+        'css' => ['components/form/radio.css', 'components/form/input.css'],
     ];
 
     public function __construct(
@@ -49,9 +46,8 @@ class RadioGroup extends VitrineComponent
         string $error = null,
         string $hint = null,
         string $note = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->name = $name;
         $this->options = $options;
@@ -62,22 +58,22 @@ class RadioGroup extends VitrineComponent
         $this->note = $note;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         // set selected radio, if none selected
         $selectedIndex = -1;
         $index = 0;
 
-        foreach($this->options as $option){
+        foreach ($this->options as $option) {
             if (isset($option['selected']) && $option['selected'] === true) {
                 $selectedIndex = $index;
 

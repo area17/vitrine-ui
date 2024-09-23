@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Wysiwyg extends VitrineComponent
 {
@@ -13,9 +12,7 @@ class Wysiwyg extends VitrineComponent
         'css' => 'components/wysiwyg.css',
     ];
 
-    public function __construct(
-        ?string $variant = null,
-    )
+    public function __construct(?string $variant = null)
     {
         $this->variant = $variant;
 

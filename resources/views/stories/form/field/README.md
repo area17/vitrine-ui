@@ -5,7 +5,7 @@ Any additional attributes are merged with the component's existing attributes, a
 ## Usage
 
 ```html
- <x-vui-form-field
+<x-vui-form-field
     label="Full Name"
     type="text"
     name="name"
@@ -23,6 +23,7 @@ Any additional attributes are merged with the component's existing attributes, a
 ```
 
 ## Accessibility
+
 If the input element is required or contains an error, the appropriate attributes (e.g., aria-required, aria-invalid) are added for accessibility.
 
 Hint and note texts are associated with the input using aria-describedby, ensuring screen readers convey the necessary information to users. Additionally, `aria-live` may be used to dynamically inform users of changes in available options.
@@ -33,20 +34,20 @@ Hint and note texts are associated with the input using aria-describedby, ensuri
 
 ```json
 {
-  "rules": {
-    "merge": ["input"]
-  },
-  "base": "m-input [inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
-  "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
-  "legend": "f-subhead-3",
-  "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
-  "input": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
-  "input-icon-right": "pr-40",
-  "hint": "f-ui-2 text-secondary",
-  "note": "f-ui-2 text-secondary mt-4",
-  "link": "",
-  "error": "mt-4 f-body-1 text-error flex items-center gap-4",
-  "error-icon-name": "warning"
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": "m-input [inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
+    "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
+    "legend": "f-subhead-3",
+    "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
+    "input": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
+    "input-icon-right": "pr-40",
+    "hint": "f-ui-2 text-secondary",
+    "note": "f-ui-2 text-secondary mt-4",
+    "link": "",
+    "error": "mt-4 f-body-1 text-error flex items-center gap-4",
+    "error-icon-name": "warning"
 }
 ```
 

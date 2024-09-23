@@ -1,7 +1,8 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import * as focusTrap from 'focus-trap'
-import { customEvents } from '../constants/customEvents'
 import { WcDatepicker } from 'wc-datepicker/dist/components/wc-datepicker'
+
+import { customEvents } from '../constants/customEvents'
 
 const DatePicker = createBehavior(
     'DatePicker',
@@ -98,7 +99,8 @@ const DatePicker = createBehavior(
                 this.picker &&
                 !this.picker.range &&
                 event.detail?.date &&
-                event.detail?.originalEventType !== customEvents.DATE_INPUT_SELECT_DATE
+                event.detail?.originalEventType !==
+                    customEvents.DATE_INPUT_SELECT_DATE
             ) {
                 // make dates
                 let date = new Date(

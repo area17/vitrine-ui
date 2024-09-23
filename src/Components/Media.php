@@ -2,9 +2,9 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\Twill\Image\Models\Image as TwillImageModel;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\View\View;
+use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Media extends VitrineComponent
 {
@@ -27,9 +27,7 @@ class Media extends VitrineComponent
     public array $classes;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/ShowVideo.js'
-        ]
+        'js' => ['behaviors/ShowVideo.js'],
     ];
 
     public function __construct(
@@ -42,7 +40,7 @@ class Media extends VitrineComponent
         string $videoPlayIcon = null,
         array $backgroundVideo = null,
         bool $cover = false,
-        array $ui = []
+        array $ui = [],
     ) {
         $this->caption = $caption;
         $this->image = $image;

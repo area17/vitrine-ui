@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Heading extends VitrineComponent
@@ -27,6 +26,7 @@ class Heading extends VitrineComponent
     protected function getElement(): string
     {
         $level = (int) $this->level;
+
         return $level > 0 && $level <= 6 ? "h$level" : 'span';
     }
 }

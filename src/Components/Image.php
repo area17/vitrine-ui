@@ -9,7 +9,6 @@ use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Image extends VitrineComponent
 {
-
     public array|null|TwillImageModel $image;
 
     /**
@@ -73,15 +72,15 @@ class Image extends VitrineComponent
         string $src = null,
         string $sizes = null,
         array $sources = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->image = $image;
         $this->height = $height;
         $this->width = $width;
         $this->src = $src;
         $this->sizes = $sizes;
-        $this->sources = $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
+        $this->sources =
+            $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
 
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
@@ -92,7 +91,6 @@ class Image extends VitrineComponent
         $this->staticSettings = $this->getStaticSettings();
         $this->imageOptions = $this->parseImageOptions($imageOptions);
         $this->loading = $loading;
-
 
         parent::__construct($ui);
     }
@@ -126,7 +124,9 @@ class Image extends VitrineComponent
 
     public function setPictureFallbackImg(): ?array
     {
-        return Arr::has($this->image, 'src') ? $this->image : $this->image['fallbackImg'] ?? $this->image['image'] ?? $this->sources[0] ?? null;
+        return Arr::has($this->image, 'src')
+            ? $this->image
+            : $this->image['fallbackImg'] ?? ($this->image['image'] ?? ($this->sources[0] ?? null));
     }
 
     /**

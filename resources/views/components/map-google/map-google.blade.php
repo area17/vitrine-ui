@@ -1,17 +1,13 @@
 @props([
     'lat' => null,
-    'lng' => null
+    'lng' => null,
 ])
 
-<div
-    {{ $attributes }}
-    data-behavior="GoogleMaps"
-    data-GoogleMaps-lat="{{ $lat }}"
-    data-GoogleMaps-lng="{{ $lng }}"
->
-    <div
-        class="w-full h-full"
-        data-GoogleMaps-canvas=""
-    >
+<div data-behavior="GoogleMaps"
+     data-GoogleMaps-lat="{{ $lat }}"
+     data-GoogleMaps-lng="{{ $lng }}"
+     {{ $attributes }}>
+    <div class="h-full w-full"
+         data-GoogleMaps-canvas="">
     </div>
 </div>

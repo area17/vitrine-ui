@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class VideoBackground extends VitrineComponent
 {
@@ -43,10 +42,9 @@ class VideoBackground extends VitrineComponent
      */
     public bool $controlMute;
 
-
     protected static array $assets = [
         'npm' => ['video.js'],
-        'js' => ['behaviors/VideoBackground.js']
+        'js' => ['behaviors/VideoBackground.js'],
     ];
 
     public function __construct(
@@ -56,9 +54,8 @@ class VideoBackground extends VitrineComponent
         ?string $src = null,
         ?bool $native = true,
         ?string $variant = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->buttonVariant = $buttonVariant;
         $this->sources = $sources;
         $this->controlMute = $controlMute;
@@ -68,7 +65,6 @@ class VideoBackground extends VitrineComponent
 
         parent::__construct($ui);
     }
-
 
     public function render(): View
     {

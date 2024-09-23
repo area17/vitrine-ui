@@ -50,18 +50,15 @@
                 'inputAttr' => '',
                 'autofocus' => false,
                 'form' => '',
-            ]
-        ]
-    ]
-
+            ],
+        ],
+    ],
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-checkbox-group
-        :options="$options"
-        :legend="$legend"
-        :disabled="$disabled"
-        :hint="$hint"
-        :note="$note"
-    />
+    <x-vui-form-checkbox-group :options="$options"
+                               :legend="$legend"
+                               :disabled="$disabled"
+                               :hint="$hint"
+                               :note="$note" />
 </div>

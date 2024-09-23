@@ -1,7 +1,8 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { queryStringHandler } from '@area17/a17-helpers'
+
 import { customEvents } from '../constants/customEvents'
-import { PARAM_YOUTUBE, PARAM_VIMEO } from '../constants/videoParam'
+import { PARAM_VIMEO, PARAM_YOUTUBE } from '../constants/videoParam'
 
 // Show Youtuve/Vimeo video player
 const ShowVideo = createBehavior(
@@ -20,7 +21,8 @@ const ShowVideo = createBehavior(
             const id = this.options.id
 
             if (this.videoInitialized) return
-            if(!type || !id) return console.warn('ShowVideo: missing type or id')
+            if (!type || !id)
+                return console.warn('ShowVideo: missing type or id')
 
             const params = this.handleParams(type)
 
@@ -77,13 +79,15 @@ const ShowVideo = createBehavior(
 
             let queryString = queryStringHandler.fromObject(videoparams)
             return queryString
-        },
+        }
     },
     {
         init() {
             // State
             this.videoInitialized = false
-            this.autoplay = Boolean(this.options.autoplay && this.options.autoplay !== '0')
+            this.autoplay = Boolean(
+                this.options.autoplay && this.options.autoplay !== '0'
+            )
 
             // Elements
             this.$videoPlayer = this.getChild('player')

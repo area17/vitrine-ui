@@ -1,35 +1,26 @@
-<div
-    {{ $attributes->class($ui('dropdown', 'base')) }}
-    data-behavior="Dropdown"
->
-    <button
-        class="{{ $ui('dropdown', 'trigger') }}"
-        type="button"
-        aria-label="{{ $ariaLabel }}"
-        data-dropdown-btn
-    >
+<div data-behavior="Dropdown"
+     {{ $attributes->class($ui('dropdown', 'base')) }}>
+    <button class="{{ $ui('dropdown', 'trigger') }}"
+            data-dropdown-btn
+            type="button"
+            aria-label="{{ $ariaLabel }}">
         {{ $label }}
 
-        <x-vui-icon
-            class="{{ $ui('dropdown', 'icon') }}"
-            name="{{ $ui('dropdown', 'icon-name') }}"
-            data-dropdown-chevron
-        />
+        <x-vui-icon class="{{ $ui('dropdown', 'icon') }}"
+                    name="{{ $ui('dropdown', 'icon-name') }}"
+                    data-dropdown-chevron />
     </button>
 
-    <div
-        class="{{ $ui('dropdown', 'list') }}"
-        data-dropdown-list
-    >
-        <x-vui-heading
-            :level="$headingLevel"
-            id="{{ $listlabelId }}"
-            class="sr-only"
-        >
+    <div class="{{ $ui('dropdown', 'list') }}"
+         data-dropdown-list>
+        <x-vui-heading class="sr-only"
+                       id="{{ $listlabelId }}"
+                       :level="$headingLevel">
             {{ __('vitrine-ui::fe.dropdown_items') }}
         </x-vui-heading>
 
-        <ul aria-labelledby="{{ $listlabelId }}" class="{{ $ui('dropdown', 'content')}}">
+        <ul class="{{ $ui('dropdown', 'content') }}"
+            aria-labelledby="{{ $listlabelId }}">
             {!! $slot !!}
         </ul>
     </div>

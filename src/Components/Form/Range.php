@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
@@ -25,7 +24,7 @@ class Range extends VitrineComponent
     protected static array $assets = [
         'npm' => ['range-slider-input'],
         'js' => ['behaviors/RangeInput.js'],
-        'css' => ['components/form/range.css']
+        'css' => ['components/form/range.css'],
     ];
 
     public function __construct(
@@ -39,11 +38,10 @@ class Range extends VitrineComponent
         array $options = [
             'value' => [0, 50],
             'thumbsDisabled' => [true, false],
-            'rangeSlideDisabled' => true
+            'rangeSlideDisabled' => true,
         ],
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->disabled = $disabled;

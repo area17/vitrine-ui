@@ -50,21 +50,18 @@
                 'inputAttr' => '',
                 'autofocus' => false,
                 'form' => '',
-            ]
-        ]
-    ]
-
+            ],
+        ],
+    ],
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-radio-group
-        :options="$options"
-        :legend="$legend"
-        :required="$required"
-        :name="$name"
-        :error="$error"
-        :disabled="$disabled"
-        :hint="$hint"
-        :note="$note"
-    />
+    <x-vui-form-radio-group :options="$options"
+                            :legend="$legend"
+                            :required="$required"
+                            :name="$name"
+                            :error="$error"
+                            :disabled="$disabled"
+                            :hint="$hint"
+                            :note="$note" />
 </div>

@@ -6,8 +6,8 @@
         'icon_position' => $getIconPosition(),
     ]),
 ) }}
-    @if ($href) href="{{ $href }}" @endif
-    @if ($target) target="{{ $target }}" @endif>
+                     @if ($href) href="{{ $href }}" @endif
+                     @if ($target) target="{{ $target }}" @endif>
 
     @if ($iconBefore())
         <x-vui-icon class="{{ $ui($uiKeyComponent, 'icon') }}"

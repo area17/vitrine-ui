@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class MapGoogle extends VitrineComponent
 {
@@ -12,19 +11,11 @@ class MapGoogle extends VitrineComponent
     public ?string $lng;
 
     protected static array $assets = [
-        'npm' => [
-            '@googlemaps/js-api-loader'
-        ],
-        'js' => [
-            'behaviors/GoogleMaps.js'
-        ]
+        'npm' => ['@googlemaps/js-api-loader'],
+        'js' => ['behaviors/GoogleMaps.js'],
     ];
 
-    public function __construct(
-        string $lat = null,
-        string $lng = null,
-        array $ui = []
-    )
+    public function __construct(string $lat = null, string $lng = null, array $ui = [])
     {
         $this->lat = $lat;
         $this->lng = $lng;

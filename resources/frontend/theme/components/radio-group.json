@@ -1,19 +1,13 @@
 {
-  "rules": {
-    "merge": [
-      "input"
-    ]
-  },
-  "base": [
-    "m-input"
-  ],
-  "wrapper": [
-    "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
-  ],
-  "list": [
-    "space-y-24"
-  ],
-  "list-item": "",
-  "hint": ["f-ui-2 text-secondary"],
-  "note": ["f-ui-2 text-secondary mt-12"]
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": ["m-input"],
+    "wrapper": [
+        "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
+    ],
+    "list": ["space-y-24"],
+    "list-item": "",
+    "hint": ["f-ui-2 text-secondary"],
+    "note": ["f-ui-2 text-secondary mt-12"]
 }

@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Modal extends VitrineComponent
@@ -25,7 +24,7 @@ class Modal extends VitrineComponent
 
     protected static array $assets = [
         'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
-        'js' => 'behaviors/Modal.js'
+        'js' => 'behaviors/Modal.js',
     ];
 
     public function __construct(
@@ -39,7 +38,6 @@ class Modal extends VitrineComponent
         array $ui = [],
         string $modalsStack = 'modals',
     ) {
-
         $this->id = $id;
         $this->showClose = $showClose;
         $this->title = $title;

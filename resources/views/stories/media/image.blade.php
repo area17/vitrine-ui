@@ -6,7 +6,7 @@
             'alt' => 'Sample Alt Text',
         ],
         'caption' => 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-        'cover' => false
+        'cover' => false,
     ],
     'argTypes' => [
         'image' => [
@@ -21,17 +21,14 @@
             'description' => 'Set to `true` to enable `object-fit: cover`.',
             'defaultValue' => ['summary' => false],
         ],
-    ]
+    ],
 ])
 
 <div class="{{ Arr::toCssClasses([
-    'w-screen h-[50vh] -ml-[1rem]' => $cover
+    'w-screen h-[50vh] -ml-[1rem]' => $cover,
 ]) }}"
-    style="min-width: 300px;"
->
-    <x-vui-media
-        :image="$image ?? null"
-        :caption="$caption ?? null"
-        :cover="$cover ?? null"
-    />
+     style="min-width: 300px;">
+    <x-vui-media :image="$image ?? null"
+                 :caption="$caption ?? null"
+                 :cover="$cover ?? null" />
 </div>

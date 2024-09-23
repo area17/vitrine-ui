@@ -6,21 +6,21 @@
         'items' => [
             [
                 'href' => '#',
-                'text' => 'Link 1'
+                'text' => 'Link 1',
             ],
             [
                 'href' => '#',
-                'text' => 'Link 2'
+                'text' => 'Link 2',
             ],
             [
                 'href' => '#',
-                'text' => 'Link 3'
+                'text' => 'Link 3',
             ],
             [
                 'href' => '#',
-                'text' => 'Link 4'
+                'text' => 'Link 4',
             ],
-        ]
+        ],
     ],
     'argTypes' => [
         'headingLevel' => [
@@ -38,16 +38,15 @@
             'defaultValue' => ['summary' => 'Options'],
             'control' => 'text',
         ],
-    ]
+    ],
 ])
 
-<x-vui-dropdown
-    :label="$label ?? null"
-    :aria-label="$ariaLabel ?? null"
->
+<x-vui-dropdown :label="$label ?? null"
+                :aria-label="$ariaLabel ?? null">
     @foreach ($items as $item)
         <li>
-            <x-vui-link variant="secondary" :href="$item['href']">
+            <x-vui-link variant="secondary"
+                        :href="$item['href']">
                 {{ $item['text'] }}
             </x-vui-link>
         </li>

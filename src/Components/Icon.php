@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Icon extends VitrineComponent
@@ -13,12 +12,7 @@ class Icon extends VitrineComponent
 
     public ?string $iconComponent;
 
-    public function __construct(
-        string $name = null,
-        string $ariaLabel = null,
-        string $iconPath = null,
-        array $ui = []
-    )
+    public function __construct(string $name = null, string $ariaLabel = null, string $iconPath = null, array $ui = [])
     {
         $this->name = $name;
         $this->ariaLabel = $ariaLabel;
@@ -39,15 +33,19 @@ class Icon extends VitrineComponent
 
     public function getIconPath(): ?string
     {
-        $iconPath = config('vitrine-ui.icons_view_path', 'icons'). $this->name;
+        $iconPath = config('vitrine-ui.icons_view_path', 'icons') . $this->name;
 
         $viewExists = view()->exists($iconPath);
-        if($viewExists) return $iconPath;
+        if ($viewExists) {
+            return $iconPath;
+        }
 
-        $localPath = 'vitrine-ui::components.icon._icons.'.$this->name;
+        $localPath = 'vitrine-ui::components.icon._icons.' . $this->name;
         $viewExists = view()->exists($localPath);
 
-        if($viewExists) return $localPath;
+        if ($viewExists) {
+            return $localPath;
+        }
 
         return null;
     }

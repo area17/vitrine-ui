@@ -32,7 +32,7 @@ return [
     'prefix' => 'vui',
 
     // CSS Preset
-    "css_preset" => "tailwindcss",
+    'css_preset' => 'tailwindcss',
 
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
@@ -71,5 +71,5 @@ return [
         'tag' => A17\VitrineUI\Components\Tag::class,
         'video-background' => A17\VitrineUI\Components\VideoBackground::class,
         'wysiwyg' => A17\VitrineUI\Components\Wysiwyg::class,
-    ]
+    ],
 ];

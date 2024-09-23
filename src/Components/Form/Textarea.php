@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
@@ -36,14 +35,9 @@ class Textarea extends VitrineComponent
 
     public ?string $wrap;
 
-
     protected static array $assets = [
-        'js' => [
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
@@ -61,9 +55,8 @@ class Textarea extends VitrineComponent
         bool $readonly = false,
         string $spellcheck = null,
         string $wrap = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->name = $name;
         $this->id = $id;
         $this->value = $value;

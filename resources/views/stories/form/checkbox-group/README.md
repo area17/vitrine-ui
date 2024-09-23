@@ -18,6 +18,7 @@ The `CheckboxGroup` component is a container for a group of checkboxes, allowing
 ```
 
 ## Accessibility
+
 The CheckboxGroup component uses a `fieldset` with a `legend` to group and label related checkboxes, enhancing accessibility. It manages accessibility through `ARIA` attributes, such as `aria-describedby`, for hint and note texts. Ensure that each checkbox within the group has a meaningful label and appropriate name for form submission and user interaction.
 
 ## Theming
@@ -26,40 +27,34 @@ The CheckboxGroup component uses a `fieldset` with a `legend` to group and label
 
 ```json
 {
-  "rules": {
-    "merge": [
-      "input"
-    ]
-  },
-  "base": [
-    "m-input"
-  ],
-  "wrapper": [
-    "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
-  ],
-  "list": [
-    "space-y-24"
-  ],
-  "list-item": "",
-  "hint": ["f-ui-2 text-secondary"],
-  "note": ["f-ui-2 text-secondary mt-12"]
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": ["m-input"],
+    "wrapper": [
+        "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
+    ],
+    "list": ["space-y-24"],
+    "list-item": "",
+    "hint": ["f-ui-2 text-secondary"],
+    "note": ["f-ui-2 text-secondary mt-12"]
 }
 ```
 
-`base`: 
+`base`:
 Applied to the main `fieldset` element of the checkbox group.
 
-`wrapper`: 
+`wrapper`:
 Applied to the container holding the legend and hint elements.
 
-`list`: 
+`list`:
 Applied to the `ol` element that contains the list of checkboxes.
 
-`list-item`: 
+`list-item`:
 Applied to each `li` element containing a checkbox.
 
-`hint`: 
+`hint`:
 Applied to the hint text element associated with the checkbox group.
 
-`note`: 
+`note`:
 Applied to the note text element below the checkbox group.

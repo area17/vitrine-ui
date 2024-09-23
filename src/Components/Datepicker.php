@@ -3,8 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
-use Psy\Util\Str;
 
 class Datepicker extends VitrineComponent
 {
@@ -33,9 +31,8 @@ class Datepicker extends VitrineComponent
         string $minDate = null,
         string $maxDate = null,
         bool $showLabel = false,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->target = $target;
         $this->align = $align;
         $this->range = $range;

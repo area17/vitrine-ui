@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class AudioPlayer extends VitrineComponent
 {
@@ -32,9 +31,8 @@ class AudioPlayer extends VitrineComponent
         string $title = null,
         string $variant = null,
         array $sources = [],
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->downloadUrl = $downloadUrl;
         $this->playbackRates = $playbackRates;
         $this->subtitle = $subtitle;

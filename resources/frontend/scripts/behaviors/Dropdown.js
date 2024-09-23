@@ -1,5 +1,5 @@
-import {createBehavior} from '@area17/a17-behaviors'
-import {getFocusableElements} from "@area17/a17-helpers";
+import { createBehavior } from '@area17/a17-behaviors'
+import { getFocusableElements } from '@area17/a17-helpers'
 
 const Dropdown = createBehavior(
     'Dropdown',
@@ -17,8 +17,10 @@ const Dropdown = createBehavior(
             this.$node.setAttribute('aria-expanded', 'true')
             this.initOutClick()
             this.timeout = window.setTimeout(() => {
-                this.$focusableItems = this.$list ? getFocusableElements(this.$list) : [];
-                this.$focusIndex = 0;
+                this.$focusableItems = this.$list
+                    ? getFocusableElements(this.$list)
+                    : []
+                this.$focusIndex = 0
                 this.focusItem()
             }, 500) // wait for potential reveal animations
         },
@@ -52,18 +54,18 @@ const Dropdown = createBehavior(
                 case 'Up':
                 case 'ArrowUp':
                     e.preventDefault()
-                    this.$focusIndex--;
+                    this.$focusIndex--
                     if (this.$focusIndex < 0) {
-                        this.$focusIndex = 0;
+                        this.$focusIndex = 0
                     }
                     this.focusItem()
                     break
                 case 'Down':
                 case 'ArrowDown':
                     e.preventDefault()
-                    this.$focusIndex++;
+                    this.$focusIndex++
                     if (this.$focusIndex >= this.$focusableItems.length) {
-                        this.$focusIndex = this.$focusableItems.length - 1;
+                        this.$focusIndex = this.$focusableItems.length - 1
                     }
                     this.focusItem()
                     break
@@ -82,12 +84,14 @@ const Dropdown = createBehavior(
             this.isOpen = false
 
             // elems
-            this.$btn = this.getChild('btn');
-            this.$list = this.getChild('list');
-            this.$focusableItems = this.$list ? getFocusableElements(this.$list) : [];
-            this.timeout = null;
-            this.$focusIndex = 0;
-            this.$btn.addEventListener('click', this.toggleList);
+            this.$btn = this.getChild('btn')
+            this.$list = this.getChild('list')
+            this.$focusableItems = this.$list
+                ? getFocusableElements(this.$list)
+                : []
+            this.timeout = null
+            this.$focusIndex = 0
+            this.$btn.addEventListener('click', this.toggleList)
         },
         destroy() {
             this.$btn.removeEventListener('click', this.toggleList)

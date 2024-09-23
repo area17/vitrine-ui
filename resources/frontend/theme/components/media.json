@@ -1,14 +1,14 @@
 {
-  "base": "",
-  "cover": {
-    "true": "w-full h-full object-cover",
-    "false": ""
-  },
-  "video-wrapper": "group relative h-full cursor-pointer overflow-hidden",
-  "image-wrapper": "relative flex h-full overflow-hidden",
-  "image-placeholder": "",
-  "image": "",
-  "video-player": "absolute inset-0 z-30 hidden h-full w-full",
-  "video-play-button": "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform",
-  "caption": "f-ui-1 mt-12 text-primary lg:mt-16"
+    "base": "",
+    "cover": {
+        "true": "w-full h-full object-cover",
+        "false": ""
+    },
+    "video-wrapper": "group relative h-full cursor-pointer overflow-hidden",
+    "image-wrapper": "relative flex h-full overflow-hidden",
+    "image-placeholder": "",
+    "image": "",
+    "video-player": "absolute inset-0 z-30 hidden h-full w-full",
+    "video-play-button": "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform",
+    "caption": "f-ui-1 mt-12 text-primary lg:mt-16"
 }

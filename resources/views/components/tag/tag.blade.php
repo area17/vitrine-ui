@@ -13,17 +13,15 @@
         'hover:bg-accent-3' => $href,
         'disabled:opacity-30',
         'text-left',
-        'whitespace-nowrap'
+        'whitespace-nowrap',
     ];
 @endphp
 
-<x-vui-button
-    :href="$href ?? null"
-    :icon="$cancellable ? 'close-16' : null"
-    icon-position="after"
-    :icon-spacing="8"
-    :static="!$href"
-    {{ $attributes->class($classes) }}
->
+<x-vui-button :href="$href ?? null"
+              :icon="$cancellable ? 'close-16' : null"
+              icon-position="after"
+              :icon-spacing="8"
+              :static="!$href"
+              {{ $attributes->class($classes) }}>
     {{ $slot }}
 </x-vui-button>

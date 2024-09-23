@@ -26,7 +26,7 @@ class Pagination extends VitrineComponent
 
     public ?string $iconLeft = 'arrow-left-24';
 
-    public ?string$iconRight = 'arrow-right-24';
+    public ?string $iconRight = 'arrow-right-24';
 
     public bool $labelInsideDropdown = true;
 
@@ -44,9 +44,8 @@ class Pagination extends VitrineComponent
         ?string $iconLeft = 'arrow-left-24',
         ?string $iconRight = 'arrow-right-24',
         bool $labelInsideDropdown = true,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->btnVariant = $btnVariant;
         $this->pages = $pages;
         $this->currentPage = $currentPage;
@@ -60,7 +59,7 @@ class Pagination extends VitrineComponent
         $this->iconLeft = $iconLeft;
         $this->iconRight = $iconRight;
 
-        Parent::__construct($ui);
+        parent::__construct($ui);
     }
 
     public function shouldRender(): bool
@@ -81,7 +80,9 @@ class Pagination extends VitrineComponent
             $i = $key;
             $items[] = [
                 'value' => $page['url'],
-                'label' => $this->labelInsideDropdown ? __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage]) : $i,
+                'label' => $this->labelInsideDropdown
+                    ? __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage])
+                    : $i,
                 'selected' => $i === $this->currentPage,
             ];
         }

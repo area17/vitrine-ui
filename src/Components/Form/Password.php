@@ -45,13 +45,8 @@ class Password extends VitrineComponent
     public ?string $rand;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/PasswordInput.js',
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/PasswordInput.js', 'behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
@@ -69,9 +64,8 @@ class Password extends VitrineComponent
         bool $autofocus = false,
         string $form = null,
         bool $readonly = false,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -88,15 +82,15 @@ class Password extends VitrineComponent
         $this->readonly = $readonly;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         parent::__construct($ui);

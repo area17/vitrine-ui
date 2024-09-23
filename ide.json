@@ -1,17 +1,15 @@
 {
-  "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
-  "blade": {
-    "components": {
-      "fromConfig": [
-        {
-          "componentsKey": "components",
-          "prefixKey": "prefix",
-          "configFileName": "vitrine-ui"
+    "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
+    "blade": {
+        "components": {
+            "fromConfig": [
+                {
+                    "componentsKey": "components",
+                    "prefixKey": "prefix",
+                    "configFileName": "vitrine-ui"
+                }
+            ],
+            "ignoreViewPaths": ["resources/views/"]
         }
-      ],
-      "ignoreViewPaths": [
-        "resources/views/"
-      ]
     }
-  }
 }

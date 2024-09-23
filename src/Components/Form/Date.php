@@ -54,15 +54,8 @@ class Date extends VitrineComponent
 
     protected static array $assets = [
         'npm' => ['@area17/parse-numeric-date'],
-        'js' => [
-            'utils/formatDate.js',
-            'behaviors/Input.js',
-            'behaviors/DateInput.js',
-            'behaviors/DateInputFuzzy.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['utils/formatDate.js', 'behaviors/Input.js', 'behaviors/DateInput.js', 'behaviors/DateInputFuzzy.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
@@ -84,9 +77,8 @@ class Date extends VitrineComponent
         bool $readonly = false,
         string $dataAttrs = null,
         bool $hideA11yLabels = false,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -107,28 +99,28 @@ class Date extends VitrineComponent
         $this->hideA11yLabels = $hideA11yLabels;
 
         $rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$rand;
-        $this->errorID = 'errorID'.$rand;
+        $this->ariaID = 'ariaID' . $rand;
+        $this->errorID = 'errorID' . $rand;
 
-        $this->pickerID = $this->picker ? 'pickerID'. $rand : null;
+        $this->pickerID = $this->picker ? 'pickerID' . $rand : null;
 
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = $this->ariaID.'Format';
+        $this->ariaDescribedBy[] = $this->ariaID . 'Format';
 
-        if($this->minDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MinDate';
+        if ($this->minDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MinDate';
         }
 
-        if($this->maxDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MaxDate';
+        if ($this->maxDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MaxDate';
         }
 
-        if($this->hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($this->hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
 
-        if($this->note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($this->note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         $this->ariaDescribedBy[] = $this->errorID;

@@ -6,7 +6,7 @@ Video is setup with an array containing the video `id` from the video URL, the `
 
 Default slot can de used to display any content on top of the media.
 
-*To display a simple image : please use the dedicated image component instead*
+_To display a simple image : please use the dedicated image component instead_
 
 ## Usage
 
@@ -58,22 +58,21 @@ It will generate figure element if a figcaption is present.
 
 ### Config
 
-``` json
+```json
 {
-  "base": "",
-  "cover": {
-    "true": "w-full h-full object-cover",
-    "false": ""
-  },
-  "video-wrapper": "group relative h-full cursor-pointer overflow-hidden",
-  "image-wrapper": "relative flex h-full overflow-hidden",
-  "image-placeholder": "",
-  "image": "",
-  "video-player": "absolute inset-0 z-30 hidden h-full w-full",
-  "video-play-button": "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform",
-  "caption": "f-ui-1 mt-12 text-primary lg:mt-16"
+    "base": "",
+    "cover": {
+        "true": "w-full h-full object-cover",
+        "false": ""
+    },
+    "video-wrapper": "group relative h-full cursor-pointer overflow-hidden",
+    "image-wrapper": "relative flex h-full overflow-hidden",
+    "image-placeholder": "",
+    "image": "",
+    "video-player": "absolute inset-0 z-30 hidden h-full w-full",
+    "video-play-button": "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform",
+    "caption": "f-ui-1 mt-12 text-primary lg:mt-16"
 }
-
 ```
 
 `base`:

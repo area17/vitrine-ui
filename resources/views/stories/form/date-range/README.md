@@ -1,10 +1,11 @@
 The `DateRange` component allows users to select a date range using two date inputs, paired together within a parent element that synchronizes them. This component also includes optional fuzzy date input parsing and can display date picker popups for easier selection.
 
 ### Features
-- **Fuzzy Input Parsing**: The component supports fuzzy input parsing, allowing users to enter dates in various formats, which are then interpreted correctly.
-- **Optional Date Picker**: Each input can optionally display a date picker popup. This can be toggled via the `picker` prop.
-- **Date Synchronization**: The "From" and "To" inputs are synchronized to ensure that the selected range is valid.
-- **Accessibility**: The `legend` prop provides a descriptive label for screen readers, and both inputs are fully accessible with support for error states, hints, and notes.
+
+-   **Fuzzy Input Parsing**: The component supports fuzzy input parsing, allowing users to enter dates in various formats, which are then interpreted correctly.
+-   **Optional Date Picker**: Each input can optionally display a date picker popup. This can be toggled via the `picker` prop.
+-   **Date Synchronization**: The "From" and "To" inputs are synchronized to ensure that the selected range is valid.
+-   **Accessibility**: The `legend` prop provides a descriptive label for screen readers, and both inputs are fully accessible with support for error states, hints, and notes.
 
 ## Usage
 
@@ -47,6 +48,7 @@ The `DateRange` component allows users to select a date range using two date inp
 ```
 
 ## Accessibility
-- **Legend**: The legend provides context for assistive technologies to understand the grouped nature of the "From" and "To" inputs.
-- **Error Handling**: Errors are announced to assistive technologies, helping users correct any issues with their input.
-- **Hints and Notes**: Both inputs support additional hints and notes for further guidance.
+
+-   **Legend**: The legend provides context for assistive technologies to understand the grouped nature of the "From" and "To" inputs.
+-   **Error Handling**: Errors are announced to assistive technologies, helping users correct any issues with their input.
+-   **Hints and Notes**: Both inputs support additional hints and notes for further guidance.

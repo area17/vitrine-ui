@@ -62,7 +62,11 @@
     display: none;
 }
 
-.m-form-checkbox input:checked + .m-form-checkbox-wrap .m-form-checkbox-check svg {
+.m-form-checkbox
+    input:checked
+    + .m-form-checkbox-wrap
+    .m-form-checkbox-check
+    svg {
     display: block;
 }
 

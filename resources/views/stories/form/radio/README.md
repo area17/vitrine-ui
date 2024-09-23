@@ -19,6 +19,7 @@ Any additional attributes are merged with the component's existing attributes to
 ```
 
 ## Accessibility
+
 Radio buttons should always have an accessible name. The label provided is used as the accessible name for the radio button. Additionally, if the radio button is required, selected, or has an error, the relevant attributes are automatically added to enhance accessibility.
 
 If there are errors or additional notes (hints) associated with the radio button, they are linked to the radio element using `aria-describedby` for screen readers.
@@ -29,44 +30,33 @@ If there are errors or additional notes (hints) associated with the radio button
 
 ```json
 {
-  "rules": {
-    "merge": ["input"]
-  },
-  "base":  [
-    "m-form-radio cursor-pointer group"
-  ],
-  "wrapper": [
-    "m-form-radio-wrap",
-    "flex items-center space-x-8"
-  ],
-  "label": [
-    "m-form-radio-label",
-    "f-body-1 inline-flex relative"
-  ],
-  "check": [
-    "m-form-radio-check",
-    "w-24 h-24 rounded-full relative",
-    "before:absolute before:content-['']",
-    "before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2",
-    "before:rounded-full",
-    "before:transition-colors before:duration-300 before:ease--out",
-    "before:border-[1px] before:border-[#989EA3]",
-    "peer-checked:before:bg-[black] peer-checked:before:border-[black]",
-    "group-hover:before:border-[black]",
-    "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
-  ],
-  "input": [
-    "absolute w-1 h-1",
-    "border-0 p-0 -m-1",
-    "overflow-hidden whitespace-nowrap",
-    "peer",
-    "focus:outline-none",
-    "[clip:rect(0,0,0,0)]"
-  ],
-  "hint": [
-    "m-form-radio-hint",
-    "f-ui-2 text-secondary"
-  ]
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": ["m-form-radio cursor-pointer group"],
+    "wrapper": ["m-form-radio-wrap", "flex items-center space-x-8"],
+    "label": ["m-form-radio-label", "f-body-1 inline-flex relative"],
+    "check": [
+        "m-form-radio-check",
+        "w-24 h-24 rounded-full relative",
+        "before:absolute before:content-['']",
+        "before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2",
+        "before:rounded-full",
+        "before:transition-colors before:duration-300 before:ease--out",
+        "before:border-[1px] before:border-[#989EA3]",
+        "peer-checked:before:bg-[black] peer-checked:before:border-[black]",
+        "group-hover:before:border-[black]",
+        "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
+    ],
+    "input": [
+        "absolute w-1 h-1",
+        "border-0 p-0 -m-1",
+        "overflow-hidden whitespace-nowrap",
+        "peer",
+        "focus:outline-none",
+        "[clip:rect(0,0,0,0)]"
+    ],
+    "hint": ["m-form-radio-hint", "f-ui-2 text-secondary"]
 }
 ```
 

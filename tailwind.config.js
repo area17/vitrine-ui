@@ -65,7 +65,7 @@ module.exports = {
         columnCount: feConfig.structure.columns,
         fontFamilies: feConfig.typography.families, // https://systemfontstack.com/
         typesets: feConfig.typography.typesets,
-        spacingGroupProperties: {h: ['height']},
+        spacingGroupProperties: { h: ['height'] },
         spacingGroups: feConfig.spacing.groups,
         spacing: SpacingTokens(feConfig.spacing.tokens),
         colors: feConfig.color.tokens,
@@ -116,9 +116,9 @@ module.exports = {
             height: {
                 'header-panel': '30vh'
             },
-            minHeight: ({theme}) => theme('spacing'),
-            minWidth: ({theme}) => theme('spacing'),
-            maxWidth: ({theme}) => theme('spacing'),
+            minHeight: ({ theme }) => theme('spacing'),
+            minWidth: ({ theme }) => theme('spacing'),
+            maxWidth: ({ theme }) => theme('spacing'),
             spacing: {
                 'safe-top': 'env(safe-area-inset-top)',
                 'safe-bottom': 'env(safe-area-inset-bottom)',

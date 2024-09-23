@@ -24,9 +24,7 @@ To use the Datepicker component in your Blade templates:
 ### Single Date Example :
 
 ```html
-<x-vui-datepicker
-    :range="false"
-/>
+<x-vui-datepicker :range="false" />
 ```
 
 ### Date Range Example :
@@ -41,4 +39,4 @@ To use the Datepicker component in your Blade templates:
 
 ### Accessibility :
 
-The Datepicker is designed with accessibility in mind. It uses ARIA attributes such as `aria-modal` and `aria-hidden` to ensure proper announcement by screen readers. The `button that triggers the Datepicker has a visually hidden label when `showLabel` is set to `false`, ensuring that screen readers can still provide context to users.
+The Datepicker is designed with accessibility in mind. It uses ARIA attributes such as `aria-modal` and `aria-hidden` to ensure proper announcement by screen readers. The `button that triggers the Datepicker has a visually hidden label when `showLabel`is set to`false`, ensuring that screen readers can still provide context to users.

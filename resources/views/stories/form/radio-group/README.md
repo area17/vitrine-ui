@@ -18,6 +18,7 @@ The `RadioGroup` component organizes a set of radio buttons, allowing users to s
 ```
 
 ## Accessibility
+
 The `RadioGroup` component uses a `fieldset` and `legend` to group related radio buttons, improving accessibility. It includes `ARIA` attributes such as `aria-describedby` to associate hint and note texts with the group. Each radio button should have a clear label and the same name attribute to ensure proper form submission and user interaction.
 
 ## Theming
@@ -26,40 +27,34 @@ The `RadioGroup` component uses a `fieldset` and `legend` to group related radio
 
 ```json
 {
-  "rules": {
-    "merge": [
-      "input"
-    ]
-  },
-  "base": [
-    "m-input"
-  ],
-  "wrapper": [
-    "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
-  ],
-  "list": [
-    "space-y-24"
-  ],
-  "list-item": "",
-  "hint": ["f-ui-2 text-secondary"],
-  "note": ["f-ui-2 text-secondary mt-12"]
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": ["m-input"],
+    "wrapper": [
+        "flex flex-row flex-nowrap justify-between items-baseline gap-gutter"
+    ],
+    "list": ["space-y-24"],
+    "list-item": "",
+    "hint": ["f-ui-2 text-secondary"],
+    "note": ["f-ui-2 text-secondary mt-12"]
 }
 ```
 
-`base`: 
+`base`:
 Applied to the main `fieldset` element of the radio group.
 
-`wrapper`: 
+`wrapper`:
 Applied to the container holding the legend and hint elements.
 
-`list`: 
+`list`:
 Applied to the `ol` element that contains the list of radio buttons.
 
-`list-item`: 
+`list-item`:
 Applied to each `li` element containing a radio button.
 
-`hint`: 
+`hint`:
 Applied to the hint text element associated with the radio group.
 
-`note`: 
+`note`:
 Applied to the note text element below the radio group.

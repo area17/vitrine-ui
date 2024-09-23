@@ -2,7 +2,6 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
@@ -23,10 +22,7 @@ class CheckboxGroup extends VitrineComponent
     public ?string $note;
 
     protected static array $assets = [
-        'css' => [
-            'components/form/checkbox.css',
-            'components/form/input.css',
-        ],
+        'css' => ['components/form/checkbox.css', 'components/form/input.css'],
     ];
 
     public function __construct(
@@ -37,9 +33,8 @@ class CheckboxGroup extends VitrineComponent
         bool $required = true,
         string $hint = null,
         string $note = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->value = $value;
         $this->options = $options;

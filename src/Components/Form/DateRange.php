@@ -39,25 +39,21 @@ class DateRange extends VitrineComponent
     public ?string $pickerID;
 
     protected static array $assets = [
-        'js' => [
-            'utils/formatDate.js',
-            'behaviors/DateRange.js',
-        ],
+        'js' => ['utils/formatDate.js', 'behaviors/DateRange.js'],
     ];
 
     public function __construct(
         string $legend = null,
-        bool   $disabled = false,
+        bool $disabled = false,
         string $minDate = null,
         string $maxDate = null,
         string $hint = null,
         string $note = null,
-        bool   $picker = true,
-        array  $from = [],
-        array  $to = [],
-        array  $ui = []
-    )
-    {
+        bool $picker = true,
+        array $from = [],
+        array $to = [],
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->disabled = $disabled;
         $this->minDate = $minDate;

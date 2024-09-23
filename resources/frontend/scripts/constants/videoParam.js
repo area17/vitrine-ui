@@ -9,7 +9,7 @@ export const PARAM_YOUTUBE = {
     showinfo: 0,
     enablejsapi: 1,
     autoplay: 1,
-    origin: window.location.origin,
+    origin: window.location.origin
 }
 
 // https://help.vimeo.com/hc/en-us/articles/12426260232977-Player-parameters-overview

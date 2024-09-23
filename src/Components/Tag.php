@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Tag extends VitrineComponent
 {
@@ -13,12 +12,7 @@ class Tag extends VitrineComponent
 
     public bool $cancellable;
 
-    public function __construct(
-        ?string $href = null,
-        bool $active = false,
-        bool $cancellable = false,
-        array $ui = []
-    )
+    public function __construct(?string $href = null, bool $active = false, bool $cancellable = false, array $ui = [])
     {
         $this->href = $href;
         $this->active = $active;

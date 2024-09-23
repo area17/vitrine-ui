@@ -33,6 +33,7 @@ abstract class VitrineComponent extends Component
             return VitrineUI::ui($component, $key, $options, $this->ui);
         } catch (\Exception $e) {
             report($e);
+
             return '';
         }
     }
@@ -43,6 +44,7 @@ abstract class VitrineComponent extends Component
             return VitrineUI::getComponentConfig($component);
         } catch (\Exception $e) {
             report($e);
+
             return [];
         }
     }

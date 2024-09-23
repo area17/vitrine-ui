@@ -2,12 +2,10 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Button extends VitrineComponent
 {
-
     public ?string $href;
 
     public ?string $icon;
@@ -38,9 +36,8 @@ class Button extends VitrineComponent
         string $variant = null,
         string $tag = null,
         bool $iconOnly = false,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->href = $href;
         $this->icon = $icon;
         $this->iconPosition = $iconPosition;

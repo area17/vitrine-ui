@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Card extends VitrineComponent
 {
@@ -11,11 +10,7 @@ class Card extends VitrineComponent
 
     public ?string $tag;
 
-    public function __construct(
-        string $tag = 'article',
-        string $variant = null,
-        array $ui = []
-    )
+    public function __construct(string $tag = 'article', string $variant = null, array $ui = [])
     {
         $this->tag = $tag;
         $this->variant = $variant;

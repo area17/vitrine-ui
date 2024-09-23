@@ -2,13 +2,11 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
 class Input extends VitrineComponent
 {
-
     public ?string $name;
 
     public ?string $id;
@@ -53,12 +51,8 @@ class Input extends VitrineComponent
     public array $ariaDescribedBy;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
@@ -84,9 +78,8 @@ class Input extends VitrineComponent
         string $step = null,
         bool $withIconRight = false,
         array $ariaDescribedBy = [],
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->name = $name;
         $this->id = $id;
         $this->type = $type;

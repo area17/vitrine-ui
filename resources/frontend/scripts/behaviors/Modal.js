@@ -1,7 +1,8 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock-upgrade'
-import { customEvents } from '../constants/customEvents'
 import * as focusTrap from 'focus-trap'
+
+import { customEvents } from '../constants/customEvents'
 
 const Modal = createBehavior(
     'Modal',
@@ -28,22 +29,30 @@ const Modal = createBehavior(
                     enableBodyScroll(this.$scroller)
                 }, 200)
 
-                this.$node.dispatchEvent(new CustomEvent(customEvents.MODAL_NODE_CLOSED))
-                document.dispatchEvent(new CustomEvent(customEvents.MODAL_CLOSED))
+                this.$node.dispatchEvent(
+                    new CustomEvent(customEvents.MODAL_NODE_CLOSED)
+                )
+                document.dispatchEvent(
+                    new CustomEvent(customEvents.MODAL_CLOSED)
+                )
                 this.disposeOpenEvents()
             }
         },
         openFromOutside(e) {
-            if(e.detail?.modalId === this.$modalId && !this._data.isActive) {
+            if (e.detail?.modalId === this.$modalId && !this._data.isActive) {
                 e.preventDefault()
                 e.stopPropagation()
                 this.open()
             }
         },
         open() {
-            document.dispatchEvent(new CustomEvent(customEvents.MODAL_CLOSE_ALL))
+            document.dispatchEvent(
+                new CustomEvent(customEvents.MODAL_CLOSE_ALL)
+            )
             document.dispatchEvent(new CustomEvent(customEvents.MODAL_OPENED))
-            this.$node.dispatchEvent(new CustomEvent(customEvents.MODAL_NODE_OPENED))
+            this.$node.dispatchEvent(
+                new CustomEvent(customEvents.MODAL_NODE_OPENED)
+            )
 
             disableBodyScroll(this.$scroller, {
                 reserveScrollBarGap: true
@@ -111,10 +120,13 @@ const Modal = createBehavior(
     {
         init() {
             this.$focusTrap = this.getChild('focus-trap')
-            this.$scroller = this.getChild('scroller') ? this.getChild('scroller') : this.$focusTrap
+            this.$scroller = this.getChild('scroller')
+                ? this.getChild('scroller')
+                : this.$focusTrap
             this.$closeButtons = this.getChildren('close-trigger')
             this.$initialFocus = this.getChild('initial-focus')
-            this.$clickOutside = this.options['panel'] || this.options['clickoutside']
+            this.$clickOutside =
+                this.options['panel'] || this.options['clickoutside']
 
             if (!this.$initialFocus) {
                 console.warn(
@@ -136,12 +148,32 @@ const Modal = createBehavior(
                 })
             }
 
-            this.$node.addEventListener(customEvents.MODAL_NODE_OPEN, this.open, false)
-            this.$node.addEventListener(customEvents.MODAL_NODE_TOGGLE, this.toggle, false)
-            this.$node.addEventListener(customEvents.MODAL_NODE_CLOSE, this.close, false)
+            this.$node.addEventListener(
+                customEvents.MODAL_NODE_OPEN,
+                this.open,
+                false
+            )
+            this.$node.addEventListener(
+                customEvents.MODAL_NODE_TOGGLE,
+                this.toggle,
+                false
+            )
+            this.$node.addEventListener(
+                customEvents.MODAL_NODE_CLOSE,
+                this.close,
+                false
+            )
 
-            document.addEventListener(customEvents.MODAL_OPEN_BY_ID, this.openFromOutside, false)
-            document.addEventListener(customEvents.MODAL_CLOSE_ALL, this.close, false)
+            document.addEventListener(
+                customEvents.MODAL_OPEN_BY_ID,
+                this.openFromOutside,
+                false
+            )
+            document.addEventListener(
+                customEvents.MODAL_CLOSE_ALL,
+                this.close,
+                false
+            )
             document.addEventListener('keyup', this.handleEsc, false)
 
             // add listener to modal toggle buttons
@@ -154,7 +186,6 @@ const Modal = createBehavior(
             this.$triggers?.forEach((trigger) => {
                 trigger.addEventListener('click', this.toggle)
             })
-
         },
         destroy() {
             this.close()
@@ -165,13 +196,28 @@ const Modal = createBehavior(
                 })
             }
 
-            this.$node.removeEventListener(customEvents.MODAL_NODE_OPEN, this.open)
-            this.$node.removeEventListener(customEvents.MODAL_NODE_TOGGLE, this.toggle)
-            this.$node.removeEventListener(customEvents.MODAL_NODE_CLOSE, this.close)
+            this.$node.removeEventListener(
+                customEvents.MODAL_NODE_OPEN,
+                this.open
+            )
+            this.$node.removeEventListener(
+                customEvents.MODAL_NODE_TOGGLE,
+                this.toggle
+            )
+            this.$node.removeEventListener(
+                customEvents.MODAL_NODE_CLOSE,
+                this.close
+            )
             this.$node.removeEventListener('click', this.handleClickOutside)
 
-            document.removeEventListener(customEvents.MODAL_OPEN_BY_ID, this.openFromOutside)
-            document.removeEventListener(customEvents.MODAL_CLOSE_ALL, this.close)
+            document.removeEventListener(
+                customEvents.MODAL_OPEN_BY_ID,
+                this.openFromOutside
+            )
+            document.removeEventListener(
+                customEvents.MODAL_CLOSE_ALL,
+                this.close
+            )
             document.removeEventListener('keyup', this.handleEsc)
 
             this.$triggers?.forEach((trigger) => {

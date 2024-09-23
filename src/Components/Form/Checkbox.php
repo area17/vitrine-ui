@@ -42,10 +42,7 @@ class Checkbox extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
-        'css' => [
-            'components/form/checkbox.css',
-            'components/form/input.css',
-        ]
+        'css' => ['components/form/checkbox.css', 'components/form/input.css'],
     ];
 
     public function __construct(
@@ -62,9 +59,8 @@ class Checkbox extends VitrineComponent
         string $inputAttr = null,
         bool $autofocus = false,
         string $form = null,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -80,16 +76,16 @@ class Checkbox extends VitrineComponent
         $this->form = $form;
 
         $rand = Str::random(4);
-        $this->ariaID = 'ariaID'. $rand;
-        $this->errorID = 'errorID'. $rand;
+        $this->ariaID = 'ariaID' . $rand;
+        $this->errorID = 'errorID' . $rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
 
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         parent::__construct($ui);

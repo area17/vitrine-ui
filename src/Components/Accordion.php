@@ -3,7 +3,6 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Accordion extends VitrineComponent
 {
@@ -24,9 +23,8 @@ class Accordion extends VitrineComponent
         int $headingLevel = 3,
         bool $scrollOnOpen = false,
         bool $exclusive = false,
-        array $ui = []
-    )
-    {
+        array $ui = [],
+    ) {
         $this->a11yLabel = $a11yLabel;
         $this->headingLevel = $headingLevel;
         $this->scrollOnOpen = $scrollOnOpen;

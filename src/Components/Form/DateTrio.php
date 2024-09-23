@@ -52,12 +52,8 @@ class DateTrio extends VitrineComponent
     public ?string $rand;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/DateTrio.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/DateTrio.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
@@ -65,22 +61,21 @@ class DateTrio extends VitrineComponent
         string $name = null,
         string $id = null,
         string $value = null,
-        bool   $disabled = false,
-        bool   $required = false,
+        bool $disabled = false,
+        bool $required = false,
         string $error = null,
         string $hint = null,
         string $note = null,
         string $minDate = null,
         string $maxDate = null,
-        bool   $picker = true,
-        bool   $autofocus = false,
+        bool $picker = true,
+        bool $autofocus = false,
         string $form = null,
-        bool   $readonly = false,
+        bool $readonly = false,
         string $dataAttrs = null,
-        bool   $hideA11yLabels = false,
-        array  $ui = []
-    )
-    {
+        bool $hideA11yLabels = false,
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->name = $name;
         $this->id = $id;

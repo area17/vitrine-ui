@@ -14,17 +14,18 @@ Each breadcrumb item can be either a link (when href or url is provided) or plai
 ```
 
 ### Accessibility
+
 The breadcrumb navigation is wrapped with an element that has the aria-label="breadcrumbs" attribute, ensuring it is announced correctly by screen readers. The last breadcrumb item is automatically marked with aria-current="page" to indicate the current page in the trail.
 
 ## Theming
 
 ### Config
 
-``` json
+```json
 {
-  "base": "flex items-center f-ui-3 gap-x-24",
-  "item": "relative after:content-[''] after:absolute after:inset-y-0 after:w-px after:-right-12 after:rotate-12 after:border-r last:after:content-[none]",
-  "link": "underline underline-offset-4 hover:no-underline hover:underline-offset-0"
+    "base": "flex items-center f-ui-3 gap-x-24",
+    "item": "relative after:content-[''] after:absolute after:inset-y-0 after:w-px after:-right-12 after:rotate-12 after:border-r last:after:content-[none]",
+    "link": "underline underline-offset-4 hover:no-underline hover:underline-offset-0"
 }
 ```
 
