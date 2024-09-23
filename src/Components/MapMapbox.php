@@ -3,35 +3,25 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class MapMapbox extends VitrineComponent
 {
-    /** @var string */
-    public $lat;
+    public ?string $lat;
 
-    /** @var string */
-    public $lng;
+    public ?string $lng;
 
     protected static array $assets = [
-        'npm' => [
-            'mapbox-gl'
-        ],
-        'js' => [
-            'behaviors/MapboxMaps.js'
-        ],
-        'css' => [
-            'components/map-mapbox.css'
-        ]
+        'npm' => ['mapbox-gl'],
+        'js' => ['behaviors/MapboxMaps.js'],
+        'css' => ['components/map-mapbox.css'],
     ];
 
-    public function __construct(
-        $lat = null,
-        $lng = null,
-    )
+    public function __construct(string $lat = null, string $lng = null, array $ui = [])
     {
         $this->lat = $lat;
         $this->lng = $lng;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

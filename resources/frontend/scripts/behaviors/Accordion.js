@@ -1,6 +1,6 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
-const TIMEOUT = 16;
+const TIMEOUT = 16
 
 const Accordion = createBehavior(
     'Accordion',
@@ -10,20 +10,25 @@ const Accordion = createBehavior(
         },
         triggerClose(index) {
             this.close(index)
-            this._data.activeIndexes = this._data.activeIndexes.filter((item) => item !== index)
+            this._data.activeIndexes = this._data.activeIndexes.filter(
+                (item) => item !== index
+            )
         },
         triggerOpen(index) {
             this.open(index)
             this._data.activeIndexes.push(index)
 
             // exclusive mode : close other opened accordion items
-            if(this.exclusive) {
+            if (this.exclusive) {
                 setTimeout(() => {
                     this.$triggers.forEach((trigger) => {
                         const triggerIndex = this.getTriggerIndex(trigger)
 
                         // closed opened accordion items
-                        if (this._data.activeIndexes.includes(triggerIndex) && triggerIndex !== index) {
+                        if (
+                            this._data.activeIndexes.includes(triggerIndex) &&
+                            triggerIndex !== index
+                        ) {
                             this.triggerClose(triggerIndex)
                         }
                     })
@@ -90,7 +95,10 @@ const Accordion = createBehavior(
 
                     // set overflow unset after animation to avoid content to overflow while animating
                     e.currentTarget.setAttribute('aria-hidden', 'false')
-                    e.currentTarget.setAttribute(`data-${this.name}-open`, 'true')
+                    e.currentTarget.setAttribute(
+                        `data-${this.name}-open`,
+                        'true'
+                    )
 
                     if (this.scrollOnOpen) {
                         this.$scrollElement.scrollTo({
@@ -115,14 +123,15 @@ const Accordion = createBehavior(
         },
         enabled() {
             if (this.scrollOnOpen) {
-                this.$scrollElement = this.$node.closest('[data-accordion-scroll-wrapper]')
+                this.$scrollElement = this.$node.closest(
+                    '[data-accordion-scroll-wrapper]'
+                )
             }
 
             this.$triggers.forEach((trigger) => {
                 const index = this.getTriggerIndex(trigger)
 
                 trigger.addEventListener('click', this.toggle, false)
-
 
                 // closed opened accordion items
                 // to make sure content is not re-opened when resizing the window
@@ -131,7 +140,8 @@ const Accordion = createBehavior(
                 }
 
                 // check if the accordion item should be opened by default
-                const isOpen = trigger.getAttribute(`data-${this.name}-open`) === 'true'
+                const isOpen =
+                    trigger.getAttribute(`data-${this.name}-open`) === 'true'
                 if (isOpen) {
                     this.triggerOpen(index)
                 }
@@ -164,7 +174,7 @@ const Accordion = createBehavior(
 
             // reset height to auto for opened contents
             setTimeout(() => {
-                if(!this.$contents) return
+                if (!this.$contents) return
                 this.$contents.forEach((content) => {
                     content.style.height = ''
                 })

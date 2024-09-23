@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
 import { customEvents } from '../constants/customEvents'
 import formatDate from '../utils/formatDate'
 
@@ -25,17 +26,23 @@ const DateRange = createBehavior(
                     if (index === 0) {
                         this.from = date
                         this.$inputFrom.dispatchEvent(
-                            new CustomEvent(customEvents.DATE_INPUT_SELECT_DATE, {
-                                detail: date
-                            })
+                            new CustomEvent(
+                                customEvents.DATE_INPUT_SELECT_DATE,
+                                {
+                                    detail: date
+                                }
+                            )
                         )
                     }
                     if (index === 1) {
                         this.to = date
                         this.$inputTo.dispatchEvent(
-                            new CustomEvent(customEvents.DATE_INPUT_SELECT_DATE, {
-                                detail: date
-                            })
+                            new CustomEvent(
+                                customEvents.DATE_INPUT_SELECT_DATE,
+                                {
+                                    detail: date
+                                }
+                            )
                         )
                     }
                 })
@@ -100,7 +107,8 @@ const DateRange = createBehavior(
             // update date picker
             if (
                 event.detail?.date &&
-                event.detail?.originalEventType !== customEvents.DATE_INPUT_SELECT_DATE
+                event.detail?.originalEventType !==
+                    customEvents.DATE_INPUT_SELECT_DATE
             ) {
                 this.$node.dispatchEvent(
                     new CustomEvent(customEvents.DATE_PICKER_CHANGE, {
@@ -123,11 +131,14 @@ const DateRange = createBehavior(
                     event.srcElement === this.$inputFrom
                 ) {
                     this.$inputFrom.dispatchEvent(
-                        new CustomEvent(customEvents.DATE_INPUT_RANGE_VALIDATION, {
-                            detail:
-                                this.labels.from_date_after_to_date ||
-                                'Start date should be before end date'
-                        })
+                        new CustomEvent(
+                            customEvents.DATE_INPUT_RANGE_VALIDATION,
+                            {
+                                detail:
+                                    this.labels.from_date_after_to_date ||
+                                    'Start date should be before end date'
+                            }
+                        )
                     )
                 } else if (this.from <= this.to) {
                     this.clearValidationMessages()
@@ -135,11 +146,14 @@ const DateRange = createBehavior(
 
                 if (this.to < this.from && event.srcElement === this.$inputTo) {
                     this.$inputTo.dispatchEvent(
-                        new CustomEvent(customEvents.DATE_INPUT_RANGE_VALIDATION, {
-                            detail:
-                                this.labels.to_date_before_from_date ||
-                                'End date should be after start date'
-                        })
+                        new CustomEvent(
+                            customEvents.DATE_INPUT_RANGE_VALIDATION,
+                            {
+                                detail:
+                                    this.labels.to_date_before_from_date ||
+                                    'End date should be after start date'
+                            }
+                        )
                     )
                 } else if (this.to >= this.from) {
                     this.clearValidationMessages()

@@ -1,17 +1,13 @@
 @props([
     'lat' => null,
-    'lng' => null
+    'lng' => null,
 ])
 
-<div
-    {{ $attributes }}
-    data-behavior="MapBoxMaps"
-    data-MapBoxMaps-lat="{{ $lat }}"
-    data-MapBoxMaps-lng="{{ $lng }}"
->
-    <div
-        id="map"
-        class="w-full h-full"
-        data-MapBoxMaps-canvas=""
-    ></div>
+<div data-behavior="MapBoxMaps"
+     data-MapBoxMaps-lat="{{ $lat }}"
+     data-MapBoxMaps-lng="{{ $lng }}"
+     {{ $attributes }}>
+    <div class="h-full w-full"
+         id="map"
+         data-MapBoxMaps-canvas=""></div>
 </div>

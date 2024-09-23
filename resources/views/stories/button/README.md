@@ -19,7 +19,6 @@ The default component slot is used for the label text within the button. It can 
 </x-vui-button>
 ```
 
-
 ## Accessibility
 
 Buttons should always have an accessible name. For most buttons this will be the label text but for buttons without label text they should have an `aria-label` or `aria-labelledby` attribute.
@@ -42,33 +41,32 @@ External links must open in a new window/tab and the element must have an `aria-
 
 ### Config
 
-``` json
+```json
 {
-  "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
-  "size": {
-    "sm": "p-4",
-    "md": "p-8"
-  },
-  "variant": {
-    "primary": "bg-primary",
-    "secondary": "bg-secondary text-inverse",
-    "outline": ""
-  },
-  "icon_only": {
-    "true": "",
-    "false": ""
-  },
-  "icon_position": {
-    "before": "",
-    "after": ""
-  },
-  "default": {
-    "size": "sm",
-    "variant": "primary"
-  },
-  "label": "text-inherit"
+    "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
+    "size": {
+        "sm": "p-4",
+        "md": "p-8"
+    },
+    "variant": {
+        "primary": "bg-primary",
+        "secondary": "bg-secondary text-inverse",
+        "outline": ""
+    },
+    "icon_only": {
+        "true": "",
+        "false": ""
+    },
+    "icon_position": {
+        "before": "",
+        "after": ""
+    },
+    "default": {
+        "size": "sm",
+        "variant": "primary"
+    },
+    "label": "text-inherit"
 }
-
 ```
 
 `size`:

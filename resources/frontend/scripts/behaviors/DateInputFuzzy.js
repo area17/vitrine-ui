@@ -22,7 +22,6 @@ const DateInputFuzzy = createBehavior(
                             .toLowerCase()
                             .trim()
                         let regex = new RegExp(
-                            // eslint-disable-next-line
                             `[0-9]{1,4}[^0-9]{0,1}[0-9]{1,4}[^0-9]{0,1}[0-9]{1,4}|${parentBehavior.labels.today}|${parentBehavior.labels.tomorrow}`,
                             'gi'
                         )

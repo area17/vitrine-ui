@@ -2,54 +2,42 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Button extends VitrineComponent
 {
+    public ?string $href;
 
-    /** @var string */
-    public $href;
+    public ?string $icon;
 
-    /** @var string */
-    public $icon;
+    public bool $iconOnly;
 
-    /** @var bool */
-    public $iconOnly;
+    public ?string $iconPosition;
 
-    /** @var string */
-    public $iconPosition;
+    public ?string $size;
 
-    /** @var null|string */
-    public $size;
+    public bool $static;
 
-    /** @var bool */
-    public $static;
+    public ?string $target;
 
-    /** @var string|bool */
-    public $target;
+    public ?string $tag;
 
-    /** @var string */
-    public $tag;
+    public ?string $variant;
 
-    /** @var null|string */
-    public $variant;
-
-    public $uiKeyComponent = 'button';
+    public string $uiKeyComponent = 'button';
 
     public function __construct(
-        $href = null,
-        $icon = null,
-        $iconPosition = 'after',
-        $static = false,
-        $target = null,
-        $size = null,
-        $variant = null,
-        $tag = null,
-        $iconOnly = false,
-        $ui = []
-    )
-    {
+        string $href = null,
+        string $icon = null,
+        string $iconPosition = 'after',
+        bool $static = false,
+        string $target = null,
+        string $size = null,
+        string $variant = null,
+        string $tag = null,
+        bool $iconOnly = false,
+        array $ui = [],
+    ) {
         $this->href = $href;
         $this->icon = $icon;
         $this->iconPosition = $iconPosition;

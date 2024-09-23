@@ -6,56 +6,46 @@ use Illuminate\Contracts\View\View;
 
 class Pagination extends VitrineComponent
 {
-    /** @var array */
-    public $pages;
+    public array $pages;
 
-    /** @var int */
-    public $currentPage;
+    public int|string|null $currentPage;
 
-    /** @var int */
-    public $lastPage;
+    public int|string|null $lastPage;
 
-    /** @var int */
-    public $total;
+    public int|string|null $total;
 
-    /** @var int */
-    public $currentPageCount;
+    public int|string|null $currentPageCount;
 
-    /** @var array */
-    public $dropdownItems;
+    public array $dropdownItems;
 
-    /** @var bool */
-    public $onFirstPage;
+    public bool $onFirstPage;
 
-    /** @var bool */
-    public $onLastPage;
+    public bool $onLastPage;
 
-    /** @var string */
-    public $btnVariant;
+    public ?string $btnVariant;
 
-    public $iconLeft = 'arrow-left-24';
+    public ?string $iconLeft = 'arrow-left-24';
 
-    public $iconRight = 'arrow-right-24';
+    public ?string $iconRight = 'arrow-right-24';
 
-    public $labelInsideDropdown = true;
+    public bool $labelInsideDropdown = true;
 
     protected static array $assets = [
         'js' => 'behaviors/Pagination.js',
     ];
 
     public function __construct(
-        $pages = [],
-        $currentPage = 1,
-        $currentPageCount = null,
-        $total = null,
-        $lastPage = 1,
-        $btnVariant = 'secondary',
-        $iconLeft = 'arrow-left-24',
-        $iconRight = 'arrow-right-24',
-        $labelInsideDropdown = true,
-        $ui = []
-    )
-    {
+        array $pages = [],
+        string|int $currentPage = 1,
+        string|int $currentPageCount = null,
+        string|int $total = null,
+        string|int $lastPage = 1,
+        ?string $btnVariant = 'secondary',
+        ?string $iconLeft = 'arrow-left-24',
+        ?string $iconRight = 'arrow-right-24',
+        bool $labelInsideDropdown = true,
+        array $ui = [],
+    ) {
         $this->btnVariant = $btnVariant;
         $this->pages = $pages;
         $this->currentPage = $currentPage;
@@ -69,12 +59,12 @@ class Pagination extends VitrineComponent
         $this->iconLeft = $iconLeft;
         $this->iconRight = $iconRight;
 
-        Parent::__construct($ui);
+        parent::__construct($ui);
     }
 
     public function shouldRender(): bool
     {
-        return count($this->pages ?? []) > 1;
+        return count($this->pages) > 1;
     }
 
     public function render(): View
@@ -90,7 +80,9 @@ class Pagination extends VitrineComponent
             $i = $key;
             $items[] = [
                 'value' => $page['url'],
-                'label' => $this->labelInsideDropdown ? __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage]) : $i,
+                'label' => $this->labelInsideDropdown
+                    ? __('vitrine-ui::fe.pagination.page_of', ['current' => $i, 'last' => $this->lastPage])
+                    : $i,
                 'selected' => $i === $this->currentPage,
             ];
         }

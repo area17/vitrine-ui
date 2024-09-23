@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
-$filesystem = new Filesystem;
+$filesystem = new Filesystem();
 $files = $filesystem->files(base_path('vendor/area17/vitrine-ui/resources/views/components/icon/_icons'));
 
 // $files = Storage::disk('views')->files('components/atoms/icon/_icons');

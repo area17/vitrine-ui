@@ -26,7 +26,8 @@ The `Textarea` component is designed to provide a multi-line text input field, a
 ```
 
 ## Accessibility
-The `Textarea` component uses the `label` and `name` attributes to associate the label with the text area, improving accessibility for screen readers and other assistive technologies. 
+
+The `Textarea` component uses the `label` and `name` attributes to associate the label with the text area, improving accessibility for screen readers and other assistive technologies.
 
 If the field is required, an appropriate indicator is added to the label, and if there are errors or hints, they are linked to the textarea using `aria-describedby`.
 
@@ -36,7 +37,7 @@ If the field is required, an appropriate indicator is added to the label, and if
 
 ```json
 {
-  "textarea": ""
+    "textarea": ""
 }
 ```
 

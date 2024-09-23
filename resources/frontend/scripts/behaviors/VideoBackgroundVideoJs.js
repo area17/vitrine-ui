@@ -1,6 +1,7 @@
 import { extendBehavior } from '@area17/a17-behaviors'
-import { VideoBackground } from './VideoBackground'
 import videojs from 'video.js'
+
+import { VideoBackground } from './VideoBackground'
 
 const VIDEO_JS_PAYER_OPTIONS = {
     controls: false,
@@ -10,7 +11,7 @@ const VIDEO_JS_PAYER_OPTIONS = {
             overrideNative: false
         }
     }
-};
+}
 
 /*
   Same as VideoBackground but this is using videoJS to play/pause
@@ -53,7 +54,7 @@ export const VideoBackgroundVideoJs = extendBehavior(
                 this.$videojs.muted(false)
                 this.updateMuteButton(false)
             }
-        },
+        }
     },
     {
         init() {
@@ -63,8 +64,12 @@ export const VideoBackgroundVideoJs = extendBehavior(
             const getChildFromParent = (selector) => {
                 const parentBehaviorName = 'VideoBackground'
                 return this.$node.querySelector(
-                    '[data-' + parentBehaviorName.toLowerCase() + '-' + selector.toLowerCase() + ']'
-                  )
+                    '[data-' +
+                        parentBehaviorName.toLowerCase() +
+                        '-' +
+                        selector.toLowerCase() +
+                        ']'
+                )
             }
 
             // elems
@@ -83,7 +88,7 @@ export const VideoBackgroundVideoJs = extendBehavior(
             this.$player.addEventListener('pause', this.handlePause, false)
 
             this.initEvents()
-        },
+        }
     }
 )
 

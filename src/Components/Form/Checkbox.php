@@ -8,79 +8,59 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Checkbox extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $selected;
+    public bool $selected;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $inputAttr;
+    public ?string $inputAttr;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var string */
-    public $ariaId;
+    public string $ariaID;
 
-    /** @var string */
-    public $errorId;
+    public string $errorID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
-        'css' => [
-            'components/form/checkbox.css',
-            'components/form/input.css',
-        ]
+        'css' => ['components/form/checkbox.css', 'components/form/input.css'],
     ];
 
     public function __construct(
-        $label = '',
-        $name = '',
-        $id = '',
-        $value = '',
-        $disabled = false,
-        $selected = false,
-        $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $inputAttr = '',
-        $autofocus = false,
-        $form = '',
-        $ui = []
-    )
-    {
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string|int $value = null,
+        bool $disabled = false,
+        bool $selected = false,
+        bool $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $inputAttr = null,
+        bool $autofocus = false,
+        string $form = null,
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -95,18 +75,17 @@ class Checkbox extends VitrineComponent
         $this->autofocus = $autofocus;
         $this->form = $form;
 
-
         $rand = Str::random(4);
-        $this->ariaID = 'ariaID'. $rand;
-        $this->errorID = 'errorID'. $rand;
+        $this->ariaID = 'ariaID' . $rand;
+        $this->errorID = 'errorID' . $rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
 
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         parent::__construct($ui);

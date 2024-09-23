@@ -2,7 +2,7 @@
     'status' => 'readyForQA',
     'args' => [
         'level' => 1,
-        'text' => 'Heading'
+        'text' => 'Heading',
     ],
     'argTypes' => [
         'level' => [
@@ -10,9 +10,9 @@
                 'type' => 'number',
                 'min' => 0,
                 'max' => 6,
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ])
 
 <x-vui-heading :level="$level">

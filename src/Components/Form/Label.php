@@ -7,24 +7,19 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Label extends VitrineComponent
 {
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $tag;
+    public ?string $tag;
 
-    /** @var string */
-    public $required;
+    public bool $required;
 
-    public function __construct(
-        $name = '',
-        $tag = 'label',
-        $required = ''
-    )
+    public function __construct(string $name = null, string $tag = 'label', bool $required = false, array $ui = [])
     {
         $this->name = $name;
         $this->tag = $tag;
         $this->required = $required;
+
+        parent::__construct($ui);
     }
 
     public function render(): View

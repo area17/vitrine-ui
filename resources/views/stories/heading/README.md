@@ -7,7 +7,5 @@ This is important for accessibility because screen readers can use heading hiera
 ## Usage
 
 ```html
-<x-vui-heading :level="2">
-    Some Heading Text
-</x-vui-heading>
+<x-vui-heading :level="2"> Some Heading Text </x-vui-heading>
 ```

@@ -15,40 +15,41 @@ abstract class VitrineComponent extends Component
         return static::$assets;
     }
 
-    /** @var array */
     public array $ui = [];
 
-    public function __construct($ui = [])
+    public function __construct(array $ui = [])
     {
         $this->ui = $ui;
     }
 
-    public function isExternalUrl($url): bool
+    public function isExternalUrl(?string $url): bool
     {
         return VitrineUI::isExternalUrl($url);
     }
 
-    public function ui($component, $key = 'base', $options = []): string
+    public function ui(?string $component, array|string $key = 'base', array $options = []): string
     {
         try {
             return VitrineUI::ui($component, $key, $options, $this->ui);
         } catch (\Exception $e) {
             report($e);
+
             return '';
         }
     }
 
-    public function preset($component): array
+    public function preset(?string $component): array
     {
         try {
             return VitrineUI::getComponentConfig($component);
         } catch (\Exception $e) {
             report($e);
+
             return [];
         }
     }
 
-    public function setAttributes($attributes): string
+    public function setAttributes(array $attributes): string
     {
         return VitrineUI::setAttributes($attributes);
     }

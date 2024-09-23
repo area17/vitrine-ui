@@ -3,11 +3,9 @@
 namespace A17\VitrineUI;
 
 use Exception;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use TailwindMerge\Laravel\Facades\TailwindMerge;
-
 
 class VitrineUI
 {
@@ -81,15 +79,19 @@ class VitrineUI
 
     /**
      * Return classes associated to specified component and keys
-     * @param $component string required - Request component ui
+     * @param string|null $component string required - Request component ui
      * @param $keys array|string (optional) - Keys to use for applying component tokens
      * @param $options array (optional) - key/value array for applying specific variants tokens: ex ['size' => 'sm', 'variant' => 'primary']
      * @param $customUI array|null (optional) - External theme merged with current theme
      * @return string
      * @throws Exception
      */
-    public static function ui(string $component, array|string $keys = 'base', array $options = [], array $customUI = null): string
-    {
+    public static function ui(
+        ?string $component,
+        array|string $keys = 'base',
+        array $options = [],
+        array $customUI = null,
+    ): string {
         if (!isset($component)) {
             throw new Exception('Component name is required');
         }
@@ -112,7 +114,7 @@ class VitrineUI
             // Set classes from keys
             $keys = Arr::wrap($keys);
             foreach ($keys as $key) {
-                $key = (string)$key;
+                $key = (string) $key;
                 if ($key && ($uiComponent[$key] ?? false)) {
                     $classes[] = is_array($uiComponent[$key]) ? join(' ', $uiComponent[$key]) : $uiComponent[$key];
                 }
@@ -121,7 +123,7 @@ class VitrineUI
             foreach ($options as $option => $value) {
                 // set classes from options
                 if ($value ?? null) {
-                    $value = (string)$value;
+                    $value = (string) $value;
                 }
 
                 if ($value && ($uiComponent[$option][$value] ?? false)) {
@@ -150,7 +152,7 @@ class VitrineUI
     /**
      * @throws Exception
      */
-    public static function setPrefixedClass($classes = []): string
+    public static function setPrefixedClass(array|string|null $classes = []): string
     {
         if (!is_array($classes) && !is_string($classes)) {
             throw new Exception('setPrefixedClass() expects an array of string or a string');
@@ -166,7 +168,7 @@ class VitrineUI
         foreach ($classes as $key => $value) {
             if (is_int($key)) {
                 $class .= $prefix . $value . ' ';
-            } else if (isset($value) && $value) {
+            } elseif (isset($value) && $value) {
                 $class .= $prefix . $key . ' ';
             }
         }
@@ -174,7 +176,7 @@ class VitrineUI
         return trim($class);
     }
 
-    public static function removeTrailingSlash($string = '')
+    public static function removeTrailingSlash(?string $string = ''): string
     {
         return once(function () use ($string) {
             if (Str::endsWith($string, '/')) {
@@ -185,11 +187,9 @@ class VitrineUI
         });
     }
 
-    public static function isExternalUrl($url): bool
+    public static function isExternalUrl(?string $url): bool
     {
         return once(function () use ($url) {
-            $url = (string)$url;
-
             if (blank($url)) {
                 return false;
             }
@@ -210,41 +210,47 @@ class VitrineUI
 
     public static function setAttributes(array $attributes): string
     {
-
-        return implode(' ', array_map(
-            function ($v, $k) {
-                if (is_array($v)) {
-                    return $k . '[]=' . implode('&' . $k . '[]=', $v);
-                } else {
-                    return $k .'=' .'"'.$v.'"';
-                }
-            },
-            $attributes,
-            array_keys($attributes)
-        ));
+        return implode(
+            ' ',
+            array_map(
+                function ($v, $k) {
+                    if (is_array($v)) {
+                        return $k . '[]=' . implode('&' . $k . '[]=', $v);
+                    } else {
+                        return $k . '=' . '"' . $v . '"';
+                    }
+                },
+                $attributes,
+                array_keys($attributes),
+            ),
+        );
     }
 
-    private static function applyCustomUiProps(array $ui, array $customUI)
+    private static function applyCustomUiProps(array $ui, array $customUI): array
     {
         return once(function () use ($ui, $customUI) {
-            if(is_array($customUI)) {
+            if (is_array($customUI)) {
                 foreach ($customUI as $key => $theme) {
                     $ui = self::mergeOrReplaceComponentPreset($ui, $key, $theme);
                 }
             }
+
             return $ui;
         });
     }
 
-    private static function mergeOrReplaceComponentPreset($ui, $component, $component_theme): array
+    private static function mergeOrReplaceComponentPreset(array $ui, ?string $component, ?array $component_theme): array
     {
         if ($component_theme['rules']['merge'] ?? false) {
             foreach ($component_theme as $key => $value) {
                 if ($key !== 'rules') {
+                    $val = is_array($value) ? join(' ', $value) : $value;
                     if (in_array($key, $component_theme['rules']['merge'] ?? [])) {
                         // merge
-                        $val = is_array($value) ? join(' ', $value) : $value;
-                        $existingVal = isset($ui[$component]) && is_array($ui[$component][$key] ?? []) ? join(' ', $ui[$component][$key]) : $ui[$component][$key] ?? '';
+                        $existingVal =
+                            isset($ui[$component]) && is_array($ui[$component][$key] ?? [])
+                                ? join(' ', $ui[$component][$key])
+                                : $ui[$component][$key] ?? '';
                         if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
                             $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
                         } else {
@@ -252,7 +258,6 @@ class VitrineUI
                         }
                     } else {
                         // replace value
-                        $val = is_array($value) ? join(' ', $value) : $value;
                         $ui[$component][$key] = $val;
                     }
                 }
@@ -266,11 +271,11 @@ class VitrineUI
 
     /**
      * Return component preset from config file
-     * @param $component string required - Request component ui
+     * @param string|null $component string required - Request component ui
      * @return array
      * @throws Exception
      */
-    public static function getComponentConfig(string $component): array
+    public static function getComponentConfig(?string $component): array
     {
         if (!isset($component)) {
             throw new Exception('Component name is required');
@@ -278,9 +283,6 @@ class VitrineUI
 
         $ui = self::getBaseVitrineTheme();
 
-        $ui = self::getComponentPreset($ui, $component);
-
-        return $ui;
+        return self::getComponentPreset($ui, $component);
     }
-
 }

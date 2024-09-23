@@ -4,15 +4,12 @@
         'label' => 'Label',
         'name' => 'label',
         'tag' => 'label',
-        'required' => false
-    ]
-
+        'required' => false,
+    ],
 ])
 
-<x-vui-form-label
-    :name="$name ?? null"
-    :tag="$tag ?? null"
-    :required="$required ?? null"
->
+<x-vui-form-label :name="$name ?? null"
+                  :tag="$tag ?? null"
+                  :required="$required ?? null">
     {{ $label ?? 'Label' }}
 </x-vui-form-label>

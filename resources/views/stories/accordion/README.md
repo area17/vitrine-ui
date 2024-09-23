@@ -9,17 +9,16 @@ The `accordion.item` renders text passed to the `title` prop, used in the button
 ```html
 <x-vui-accordion>
     @foreach ($items as $item)
-        <x-vui-accordion-item
-            :title="$item['title']"
-            :index="$loop->index"
-            :set-fixed-height="false"
-        >
-           Accordion item content
-        </x-vui-accordion-item>
+    <x-vui-accordion-item
+        :title="$item['title']"
+        :index="$loop->index"
+        :set-fixed-height="false"
+    >
+        Accordion item content
+    </x-vui-accordion-item>
     @endforeach
 </x-vui-accordion>
 ```
-
 
 ## Accessibility
 
@@ -47,26 +46,26 @@ For more info check out https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
 
 accordion :
 
-``` json
+```json
 {
-  "base": "",
-  "list": ""
+    "base": "",
+    "list": ""
 }
 ```
 
 accordion-item :
 
-``` json
+```json
 {
-  "base": "",
-  "heading": "flex w-full",
-  "trigger": "group relative flex justify-start items-center w-full py-12 lg:py-32 f-subhead-3 text-left underline-thickness-1 underline-transparent underline-offset-4 hover:underline-text-primary transition-all",
-  "title": "",
-  "icons": "relative bg-quaternary ml-16 flex-none w-24 h-24 lg:w-32 lg:h-32 pointer-events-none",
-  "icon": "w-24 h-24 lg:w-32 lg:h-32 top-0 left-0 absolute transition-opacity duration-300 ease-out pointer-events-none",
-  "icon-open": "opacity-0 group-data-[accordion-open=true]:opacity-100",
-  "icon-close": "opacity-0 group-data-[accordion-open=false]:opacity-100",
-  "content": "data-[accordion-open=false]:h-0 overflow-hidden transition-all duration-300 ease-out",
-  "content-inner": ""
+    "base": "",
+    "heading": "flex w-full",
+    "trigger": "group relative flex justify-start items-center w-full py-12 lg:py-32 f-subhead-3 text-left underline-thickness-1 underline-transparent underline-offset-4 hover:underline-text-primary transition-all",
+    "title": "",
+    "icons": "relative bg-quaternary ml-16 flex-none w-24 h-24 lg:w-32 lg:h-32 pointer-events-none",
+    "icon": "w-24 h-24 lg:w-32 lg:h-32 top-0 left-0 absolute transition-opacity duration-300 ease-out pointer-events-none",
+    "icon-open": "opacity-0 group-data-[accordion-open=true]:opacity-100",
+    "icon-close": "opacity-0 group-data-[accordion-open=false]:opacity-100",
+    "content": "data-[accordion-open=false]:h-0 overflow-hidden transition-all duration-300 ease-out",
+    "content-inner": ""
 }
 ```

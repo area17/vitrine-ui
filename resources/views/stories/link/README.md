@@ -39,25 +39,25 @@ External links must open in a new window/tab and the element must have an `aria-
 
 ### Config
 
-``` json
+```json
 {
-  "base": "f-ui-3 underline-thickness-1 underline underline-inherit underline-offset-4 hover:no-underline active:underline-transparent disabled:cursor-not-allowed disabled:opacity-30 inline-flex items-center gap-4",
-  "variant": {
-    "primary": "text-primary",
-    "secondary": "text-inverse"
-  },
-  "icon_only": {
-    "true": "",
-    "false": ""
-  },
-  "icon_position": {
-    "before": "",
-    "after": ""
-  },
-  "default": {
-    "variant": "primary"
-  },
-  "label": "text-inherit"
+    "base": "f-ui-3 underline-thickness-1 underline underline-inherit underline-offset-4 hover:no-underline active:underline-transparent disabled:cursor-not-allowed disabled:opacity-30 inline-flex items-center gap-4",
+    "variant": {
+        "primary": "text-primary",
+        "secondary": "text-inverse"
+    },
+    "icon_only": {
+        "true": "",
+        "false": ""
+    },
+    "icon_position": {
+        "before": "",
+        "after": ""
+    },
+    "default": {
+        "variant": "primary"
+    },
+    "label": "text-inherit"
 }
 ```
 

@@ -11,7 +11,6 @@ Vitrine is a library of components crafted by AREA 17 to use inside Laravel appl
 
 Components follow the best practices around performance, accessibility, and maintainability.
 
-
 ## Installation
 
 This package is not yet available on Packagist. You can install it from GitHub:
@@ -47,25 +46,19 @@ php artisan vendor:publish --tag="vitrine-ui-config"
 Modal:
 
 ```html
-<x-vui-modal>
-    ...
-</x-vui-modal>
+<x-vui-modal> ... </x-vui-modal>
 ```
 
 Heading
 
 ```html
-<x-vui-heading>
-    ...
-</x-vui-heading>
+<x-vui-heading> ... </x-vui-heading>
 ```
 
 Button
 
 ```html
-<x-vui-button>
-    ...
-</x-vui-button>
+<x-vui-button> ... </x-vui-button>
 ```
 
 Some components require CSS/JS:
@@ -77,17 +70,14 @@ export default ({ mode }) =>
     defineConfig({
         resolve: {
             alias: {
-                '@vitrineUI': resolve(
+                "@vitrineUI": resolve(__dirname, "vendor/area17/vitrine-ui"),
+                "@vitrineUIComponents": resolve(
                     __dirname,
-                    'vendor/area17/vitrine-ui'
+                    "vendor/area17/vitrine-ui/resources/views/components/",
                 ),
-                '@vitrineUIComponents': resolve(
-                    __dirname,
-                    'vendor/area17/vitrine-ui/resources/views/components/'
-                )
-            }
-        }
-    })
+            },
+        },
+    });
 ```
 
 ### Import behaviors
@@ -95,48 +85,49 @@ export default ({ mode }) =>
 1. Import single component behavior (Recommended!)
 
 ```js
-import { manageBehaviors } from '@area17/a17-behaviors'
-import ModalBehavior from '@vitrineUIComponents/modal/modal'
+import { manageBehaviors } from "@area17/a17-behaviors";
+import ModalBehavior from "@vitrineUIComponents/modal/modal";
 
-document.addEventListener('DOMContentLoaded', async function () {
-    manageBehaviors.init({ ...ModalBehavior, ...Behaviors })
-})
+document.addEventListener("DOMContentLoaded", async function () {
+    manageBehaviors.init({ ...ModalBehavior, ...Behaviors });
+});
 ```
 
 Or
 
 ```js
-import { manageBehaviors } from '@area17/a17-behaviors'
-import * as Behaviors from './behaviors'
-import * as VitrineBehaviors from './behaviors/vitrine' /* import only the needed behaviors from VitrineUI */
+import { manageBehaviors } from "@area17/a17-behaviors";
+import * as Behaviors from "./behaviors";
+import * as VitrineBehaviors from "./behaviors/vitrine"; /* import only the needed behaviors from VitrineUI */
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // expose manageBehaviors
-    window.A17.behaviors = manageBehaviors
+    window.A17.behaviors = manageBehaviors;
     // init behaviors!
     // TBD: We may switch to direct import instead of barrel file
     window.A17.behaviors.init({
         ...VitrineBehaviors,
-        ...Behaviors
-    })
-})
+        ...Behaviors,
+    });
+});
 ```
 
 And in your project, create ./behaviors/vitrine.js to list the needed behaviors only :
+
 ```js
-export { default as Modal } from '@vitrineUI/resources/frontend/scripts/behaviors/Modal.js';
-export { default as Pagination } from '@vitrineUI/resources/frontend/scripts/behaviors/Pagination.js';
+export { default as Modal } from "@vitrineUI/resources/frontend/scripts/behaviors/Modal.js";
+export { default as Pagination } from "@vitrineUI/resources/frontend/scripts/behaviors/Pagination.js";
 ```
 
 2. Or use Barrel File : Import all component behaviors (Not recommended!)
 
 ```js
-import { manageBehaviors } from '@area17/a17-behaviors'
-import * as VitrineBehaviors from '@vitrineUI/resources/frontend/scripts/behaviors'
+import { manageBehaviors } from "@area17/a17-behaviors";
+import * as VitrineBehaviors from "@vitrineUI/resources/frontend/scripts/behaviors";
 
-document.addEventListener('DOMContentLoaded', async function () {
-    manageBehaviors.init({ ...VitrineBehaviors, ...Behaviors })
-})
+document.addEventListener("DOMContentLoaded", async function () {
+    manageBehaviors.init({ ...VitrineBehaviors, ...Behaviors });
+});
 ```
 
 ### Custom Events
@@ -144,14 +135,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 Custom Events are referenced into a shared object so you can easily use these in new behaviors created outside Vitrine.
 
 ```js
-import { customEvents } from '@vitrineUI/resources/frontend/scripts/constants/customEvents.js'
+import { customEvents } from "@vitrineUI/resources/frontend/scripts/constants/customEvents.js";
 
 /* Trigger openModal() when a modal is opened into the document */
-document.addEventListener(
-    customEvents.MODAL_OPENED,
-    this.openModal,
-    false
-)
+document.addEventListener(customEvents.MODAL_OPENED, this.openModal, false);
 ```
 
 ## Publish Components
@@ -160,24 +147,23 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 
 ### Supported options:
 
-- `--all` : publish all vitrine-ui components
-- `--view` : Publish only the view of the component
-- `--class` : Publish only the class of the component
-- `--force` : Overwrite existing files
-- `--stories` : Publish only the stories for the component
+-   `--all` : publish all vitrine-ui components
+-   `--view` : Publish only the view of the component
+-   `--class` : Publish only the class of the component
+-   `--force` : Overwrite existing files
+-   `--stories` : Publish only the stories for the component
 
 ## Theming
 
 Each component has default classes that you can customize through its associated JSON file located in the [components folder](resources/frontend/theme/components).
-You can override this config in your Laravel application by updating 'vitrine_path' key set in [vitrine-ui config](config/vitrine-ui.php)  
+You can override this config in your Laravel application by updating 'vitrine_path' key set in [vitrine-ui config](config/vitrine-ui.php)
 
 ### Configure tailwind for theming in your laravel application `tailwind.config.js`:
+
 ```js
 module.exports = {
-    content: [
-        join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}"),
-    ],
-}
+    content: [join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}")],
+};
 ```
 
 Example of a component JSON config :
@@ -197,7 +183,7 @@ The configuration will replace existing default vitrine-ui classes. You can chan
 ```json
 {
     "rules": {
-      "merge": "base"
+        "merge": "base"
     },
     "base": "custom-class",
     "wrapper": "custom-class"
@@ -205,19 +191,23 @@ The configuration will replace existing default vitrine-ui classes. You can chan
 ```
 
 You can also override the json configuration directly in the component call by passing 'ui' key :
+
 ```html
-<x-vui-component :ui="[
+<x-vui-component
+    :ui="[
     'json-file-name' => [
         'base' => [
             'custom-class',
         ],
     ],
-]" >
+]"
+>
     ...
 </x-vui-component>
 ```
 
-###  Add variants
+### Add variants
+
 For some components, you can also add variants by including a variant key in the component's JSON config.
 
 ```json
@@ -232,40 +222,80 @@ For some components, you can also add variants by including a variant key in the
 ```
 
 To use a variant, specify it in the component call:
+
 ```html
-<x-vui-component variant="primary">
-    ...
-</x-vui-component>
+<x-vui-component variant="primary"> ... </x-vui-component>
 ```
 
-###  Retrieve config CSS classes
+### Retrieve config CSS classes
+
 You can retrieve CSS classes from the JSON configuration file by calling the Vitrine's helper using the following syntax:
 
 ```php
 VitrineUI::ui('json_file_name', 'key_in_json_file', array_of_options)
 ```
+
 array_of_options can be used for variant mapping.
 
 ## IDE configuration
 
-Auto-completion for Vitrine's components is supported on PhpStorm and VS Code. 
+Auto-completion for Vitrine's components is supported on PhpStorm and VS Code.
 
 ### Phpstorm
-For Phpstorm, you need to have [Laravel idea plugin](https://plugins.jetbrains.com/plugin/13441-laravel-idea) installed. 
 
-Vitrine contains an ide.json file that will be read by the plugin. 
+For Phpstorm, you need to have [Laravel idea plugin](https://plugins.jetbrains.com/plugin/13441-laravel-idea) installed.
 
-This file looks for the components key inside the Vitrine's config file. If your published the config file in your project. You can lose auto-completion feature if you remove the components key inside the published file.  
+Vitrine contains an ide.json file that will be read by the plugin.
 
+This file looks for the components key inside the Vitrine's config file. If your published the config file in your project. You can lose auto-completion feature if you remove the components key inside the published file.
 
 ### VS Code
+
 VS Code autocompletion support is available from a fork of [blade-components](https://github.com/m4n1ok/blade-components/tree/improve-autocompletion) plugin.
 
-A packaged version of the plugin can be downloaded here: [blade-components-next-1.0.0.vsix](https://drive.google.com/file/d/1RccB7syGVgqH5h-Jw9bCeSlROzzRgQYT/view?usp=drive_link). 
+A packaged version of the plugin can be downloaded here: [blade-components-next-1.0.0.vsix](https://drive.google.com/file/d/1RccB7syGVgqH5h-Jw9bCeSlROzzRgQYT/view?usp=drive_link).
 
 You can manually install the plugin by following instructions from [VS Code documentation](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix).
 
 Please note that this package is currently in development and may not work as expected.
+
+## Development
+
+### Installation
+
+```shell
+$ composer install
+$ npm install # to install git hooks and linters
+```
+
+#### Linters and code formatters
+We are using a series of tools to prettify and lint the code we write:
+
+- Husky: to install and run the pre-commit hooks
+- PHPStan: to do static analysis check on PHP code
+- PHP-CS-Fixer: to remove unused dependencies and do some basic formatting
+- Prettier: to fully format the code
+- Eslint: to find and fix problems in JavaScript files
+- Git conflict markers: the pre-commit checker tool also checks if the developer didn't stage any Git conflicted files by looking for conflict markers on the staged files.
+
+These tools are executed automatically on every commit, only on staged files, and for it to work you need to make sure you executed. Composer and NPM are responsible for making sure husky is installed. And these commands are also available if a developer needs to run the commands manually:
+
+Global commands:
+
+- sh tools/linters.sh lint
+- sh tools/linters.sh format
+
+Specific commands:
+
+- sh tools/linters.sh phpstan
+- sh tools/linters.sh eslint
+- sh tools/linters.sh prettify
+- sh tools/linters.sh php-cs-fixer
+
+Commands execution also generates a log file with the result at tools/logs/<tool-name>.log, you can check for PHPStan errors on this file, for example.
+Linter commands have available aliases and can be run through Composer or NPM. For more details take a look to composer.json file and package.json file.
+
+```bash
 
 ## Testing
 

@@ -8,8 +8,7 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Field extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
     /** @var string */
     public $name;
@@ -102,45 +101,40 @@ class Field extends VitrineComponent
     public $withIconRight;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css'
-        ],
+        'js' => ['behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
-        $label = '',
-        $name = null,
-        $id = '',
-        $type = 'text',
-        $value = '',
-        $placeholder = '',
-        $disabled = false,
-        $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $inputmode = '',
-        $pattern = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $form = '',
-        $list = '',
-        $max = '',
-        $maxlength = '',
-        $min = '',
-        $minlength = '',
-        $multiple = false,
-        $readonly = false,
-        $spellcheck = '',
-        $wrap = '',
-        $step = '',
-        $withIconRight = false,
-        $ui = []
-    )
-    {
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string $type = 'text',
+        string $value = null,
+        string $placeholder = null,
+        bool $disabled = false,
+        bool $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $inputmode = null,
+        string $pattern = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        string $form = null,
+        string $list = null,
+        string $max = null,
+        string $maxlength = null,
+        string $min = null,
+        string $minlength = null,
+        bool $multiple = false,
+        bool $readonly = false,
+        string $spellcheck = null,
+        string $wrap = null,
+        string $step = null,
+        bool $withIconRight = false,
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -170,16 +164,16 @@ class Field extends VitrineComponent
         $this->withIconRight = $withIconRight;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
 
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         parent::__construct($ui);

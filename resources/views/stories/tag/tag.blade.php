@@ -4,7 +4,7 @@
     'args' => [
         'label' => 'Lorem Ipsum',
         'href' => '#',
-        'cancellable' => false
+        'cancellable' => false,
     ],
     'argTypes' => [
         'label' => [
@@ -18,13 +18,11 @@
         'cancellable' => [
             'description' => 'Adds a close icon. Used for active filters',
             'defaultValue' => ['summary' => false],
-        ]
-    ]
+        ],
+    ],
 ])
 
-<x-vui-tag
-    :href="$href ?? null"
-    :cancellable="$cancellable ?? null"
->
+<x-vui-tag :href="$href ?? null"
+           :cancellable="$cancellable ?? null">
     {{ $label ?? null }}
 </x-vui-tag>

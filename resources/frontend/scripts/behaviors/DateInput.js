@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
 import { customEvents } from '../constants/customEvents'
 import formatDate from '../utils/formatDate'
 
@@ -20,12 +21,12 @@ const DateInput = createBehavior(
                 try {
                     return this.options.parseInput(this)
                 } catch (err) {
+                    console.error(err)
                     return NaN
                 }
             }
             let value = this.$input.value.toLowerCase().trim()
             let regex = new RegExp(
-                // eslint-disable-next-line
                 `[0-9]{4}[^0-9]{1}[0-9]{1,2}[^0-9]{1}[0-9]{1,2}|${this.labels.today}|${this.labels.tomorrow}`,
                 'gi'
             )
@@ -291,7 +292,7 @@ const DateInput = createBehavior(
             this.$input.removeAttribute('name')
             this.$input.setAttribute(
                 'pattern',
-                // eslint-disable-next-line
+
                 `[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}|${
                     this.patternifyWord(this.labels.today) ||
                     this.patternifyWord('Today')

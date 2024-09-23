@@ -4,62 +4,43 @@ namespace A17\VitrineUI\Components;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\View\View;
+use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Media extends VitrineComponent
 {
-    /** @var string */
-    public $caption;
+    public ?string $caption;
 
-    /** @var array */
-    public $image;
+    public array|null|TwillImageModel $image;
+    public ?array $imageOptions;
 
-    /** @var string */
-    public $imageOptions;
+    public ?string $imagePreset;
 
-    /** @var string */
-    public $imagePreset;
+    public bool $usePlaceholder;
 
-    /** @var bool */
-    public $usePlaceholder;
+    public ?array $video;
 
-    /** @var array */
-    public $video;
+    public ?array $backgroundVideo;
 
-    /** @var array */
-    public $backgroundVideo;
+    public bool $cover;
+    public ?string $videoPlayIcon;
 
-    /** @var array */
-    public $imageType;
-
-    /** @var array */
-    public $staticSettings;
-
-    /** @var bool */
-    public $cover;
-
-    /** @var string|null */
-    public $videoPlayIcon;
-
-    /** @var array */
-    public $classes;
+    public array $classes;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/ShowVideo.js'
-        ]
+        'js' => ['behaviors/ShowVideo.js'],
     ];
 
     public function __construct(
-        $caption = null,
-        $image = null,
-        $imageOptions = null,
-        $imagePreset = 'generic',
-        $usePlaceholder = false,
-        $video = null,
-        $videoPlayIcon = null,
-        $backgroundVideo = null,
-        $cover = false,
-        $ui = []
+        string $caption = null,
+        array|null|TwillImageModel $image = null,
+        array $imageOptions = null,
+        string $imagePreset = 'generic',
+        bool $usePlaceholder = false,
+        ?array $video = null,
+        string $videoPlayIcon = null,
+        array $backgroundVideo = null,
+        bool $cover = false,
+        array $ui = [],
     ) {
         $this->caption = $caption;
         $this->image = $image;
@@ -86,10 +67,10 @@ class Media extends VitrineComponent
         return (isset($this->mediaCaption) && !empty($this->mediaCaption)) || !empty($this->caption) ? 'figure' : 'div';
     }
 
-    protected function parseBackgroundVideo($data)
+    protected function parseBackgroundVideo(?array $data): ?array
     {
         if (!Arr::has($data, 'sources')) {
-            return false;
+            return null;
         }
 
         return $data;

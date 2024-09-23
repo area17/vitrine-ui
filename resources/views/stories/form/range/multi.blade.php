@@ -16,20 +16,18 @@ https://www.npmjs.com/package/range-slider-input
         'showOutput' => true,
         'options' => [
             'value' => [0, 50],
-            'rangeSlideDisabled' => true
-        ]
-    ]
+            'rangeSlideDisabled' => true,
+        ],
+    ],
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-range
-        :label="$label"
-        :required="$required"
-        :name="$name"
-        :error="$error"
-        :disabled="$disabled"
-        :options="$options"
-        :showOutput="$showOutput"
-        :hideLower="$hideLower"
-    />
+    <x-vui-form-range :label="$label"
+                      :required="$required"
+                      :name="$name"
+                      :error="$error"
+                      :disabled="$disabled"
+                      :options="$options"
+                      :showOutput="$showOutput"
+                      :hideLower="$hideLower" />
 </div>

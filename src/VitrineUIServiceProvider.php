@@ -3,7 +3,6 @@
 namespace A17\VitrineUI;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
 use A17\VitrineUI\Commands\PublishComponent;
 use Illuminate\View\Compilers\BladeCompiler;
 
@@ -11,12 +10,10 @@ final class VitrineUIServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/vitrine-ui.php', 'vitrine-ui');
+        $this->mergeConfigFrom(__DIR__ . '/../config/vitrine-ui.php', 'vitrine-ui');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                PublishComponent::class,
-            ]);
+            $this->commands([PublishComponent::class]);
         }
     }
 
@@ -30,19 +27,16 @@ final class VitrineUIServiceProvider extends ServiceProvider
 
     private function bootResources(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'vitrine-ui');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'vitrine-ui');
     }
 
     private function bootTranslations(): void
     {
-
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'vitrine-ui');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'vitrine-ui');
     }
 
     private function bootBladeComponents(): void
     {
-
-
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $prefix = config('vitrine-ui.prefix', 'vui');
 
@@ -65,13 +59,19 @@ final class VitrineUIServiceProvider extends ServiceProvider
     private function bootPublishing(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/vitrine-ui.php' => $this->app->configPath('vitrine-ui.php'),
-            ], 'vitrine-ui-config');
+            $this->publishes(
+                [
+                    __DIR__ . '/../config/vitrine-ui.php' => $this->app->configPath('vitrine-ui.php'),
+                ],
+                'vitrine-ui-config',
+            );
 
-            $this->publishes([
-                __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/vitrine-ui'),
-            ], 'vitrine-ui-views');
+            $this->publishes(
+                [
+                    __DIR__ . '/../resources/views' => $this->app->resourcePath('views/vendor/vitrine-ui'),
+                ],
+                'vitrine-ui-views',
+            );
         }
     }
 }

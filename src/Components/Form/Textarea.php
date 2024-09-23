@@ -2,84 +2,61 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
 class Textarea extends VitrineComponent
 {
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $placeholder;
+    public ?string $placeholder;
 
-    /** @var string */
-    public $autocomplete;
+    public ?string $autocomplete;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var string */
-    public $maxlength;
+    public ?string $maxlength;
 
-    /** @var string */
-    public $minlength;
+    public ?string $minlength;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $spellcheck;
+    public ?string $spellcheck;
 
-    /** @var string */
-    public $wrap;
-
-    /** @var string */
-    public $ariaDescribedBy;
+    public ?string $wrap;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
-        $name = null,
-        $id = null,
-        $value = '',
-        $disabled = false,
-        $required = false,
-        $placeholder = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $form = '',
-        $maxlength = '',
-        $minlength = '',
-        $readonly = false,
-        $spellcheck = '',
-        $wrap = '',
-        $ui = []
-    )
-    {
+        string $name = null,
+        string $id = null,
+        string $value = '',
+        bool $disabled = false,
+        bool $required = false,
+        string $placeholder = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        string $form = null,
+        string $maxlength = null,
+        string $minlength = null,
+        bool $readonly = false,
+        string $spellcheck = null,
+        string $wrap = null,
+        array $ui = [],
+    ) {
         $this->name = $name;
         $this->id = $id;
         $this->value = $value;

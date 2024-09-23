@@ -12,7 +12,7 @@
             {{ $a11yLabel }}
         </x-vui-heading>
 
-        <ul class="{{ $ui('accordion','list') }}"
+        <ul class="{{ $ui('accordion', 'list') }}"
             data-behavior="Accordion"
             aria-labelledby="{{ $headingId }}"
             {!! $exclusive ? 'data-accordion-exclusive="true"' : '' !!}

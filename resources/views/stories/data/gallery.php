@@ -13,7 +13,7 @@ $items = [
         'image' => [
             'src' => 'https://placehold.co/600x400.png',
             'alt' => 'Sample Alt Text',
-        ]
+        ],
     ],
     [
         'image' => [

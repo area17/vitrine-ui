@@ -8,87 +8,64 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Password extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var string */
-    public $placeholder;
+    public ?string $placeholder;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $autocomplete;
+    public ?string $autocomplete;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var string */
-    public $form;
+    public ?string $form;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/PasswordInput.js',
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/PasswordInput.js', 'behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
-        $label = '',
-        $name = null,
-        $id = '',
-        $value = '',
-        $placeholder = '',
-        $disabled = false,
-        $required = false,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $form = '',
-        $readonly = false,
-    )
-    {
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string $value = null,
+        string $placeholder = null,
+        bool $disabled = false,
+        bool $required = false,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        string $form = null,
+        bool $readonly = false,
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -105,16 +82,18 @@ class Password extends VitrineComponent
         $this->readonly = $readonly;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

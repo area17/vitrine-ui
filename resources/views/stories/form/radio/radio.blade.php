@@ -14,24 +14,21 @@
         'inputAttr' => '',
         'autofocus' => false,
         'form' => '',
-    ]
-
+    ],
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-radio
-        :label="$label ?? ''"
-        :name="$name ?? ''"
-        :id="$id ?? ''"
-        :value="$value ?? ''"
-        :disabled="$disabled ?? ''"
-        :required="$required ?? ''"
-        :selected="$selected ?? ''"
-        :error="$error ?? ''"
-        :hint="$hint ?? ''"
-        :note="$note ?? ''"
-        :inputAttr="$inputAttr"
-        :autofocus="$autofocus ?? ''"
-        :form="$form ?? ''"
-    />
+    <x-vui-form-radio :label="$label ?? ''"
+                      :name="$name ?? ''"
+                      :id="$id ?? ''"
+                      :value="$value ?? ''"
+                      :disabled="$disabled ?? ''"
+                      :required="$required ?? ''"
+                      :selected="$selected ?? ''"
+                      :error="$error ?? ''"
+                      :hint="$hint ?? ''"
+                      :note="$note ?? ''"
+                      :inputAttr="$inputAttr"
+                      :autofocus="$autofocus ?? ''"
+                      :form="$form ?? ''" />
 </div>

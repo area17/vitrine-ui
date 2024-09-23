@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
 import { customEvents } from '../constants/customEvents'
 
 const ERROR_CSS = 's-error'
@@ -51,8 +52,14 @@ const Input = createBehavior(
             }
         },
         destroy() {
-            this.$input.removeEventListener(customEvents.INPUT_VALIDATED, this.validated)
-            this.$input.removeEventListener(customEvents.INPUT_RESET, this.resetErrorState)
+            this.$input.removeEventListener(
+                customEvents.INPUT_VALIDATED,
+                this.validated
+            )
+            this.$input.removeEventListener(
+                customEvents.INPUT_RESET,
+                this.resetErrorState
+            )
         }
     }
 )

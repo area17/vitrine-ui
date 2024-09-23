@@ -8,61 +8,52 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class DateRange extends VitrineComponent
 {
-    /** @var string */
-    public $legend;
+    public ?string $legend;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var string */
-    public $minDate;
+    public ?string $minDate;
 
-    /** @var string */
-    public $maxDate;
+    public ?string $maxDate;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var bool */
-    public $picker;
+    public bool $picker;
 
-    /** @var array */
-    public $from;
+    /*
+     * Array with properties for the from child vui-input-date component
+     */
+    public array $from;
 
-    /** @var array */
-    public $to;
+    /*
+     * Array with properties for the to child vui-input-date component
+     */
+    public array $to;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
-    /** @var string */
-    public $pickerID;
+    public ?string $pickerID;
 
     protected static array $assets = [
-        'js' => [
-            'utils/formatDate.js',
-            'behaviors/DateRange.js',
-        ],
+        'js' => ['utils/formatDate.js', 'behaviors/DateRange.js'],
     ];
 
     public function __construct(
-        $legend = '',
-        $disabled = false,
-        $minDate = '',
-        $maxDate = '',
-        $hint = '',
-        $note = '',
-        $picker = true,
-        $from = [],
-        $to = [],
-    )
-    {
+        string $legend = null,
+        bool $disabled = false,
+        string $minDate = null,
+        string $maxDate = null,
+        string $hint = null,
+        string $note = null,
+        bool $picker = true,
+        array $from = [],
+        array $to = [],
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->disabled = $disabled;
         $this->minDate = $minDate;
@@ -74,30 +65,30 @@ class DateRange extends VitrineComponent
         $this->to = $to;
 
         $rand = Str::random(4);
-        $this->ariaID = 'ariaID'. $rand;
+        $this->ariaID = 'ariaID' . $rand;
 
-        if ($this->picker) {
-            $this->pickerID = 'pickerID'. $rand;
-        }
+        $this->pickerID = $this->picker ? 'pickerID' . $rand : null;
 
         $this->ariaDescribedBy = [];
-        $this->ariaDescribedBy[] = $this->ariaID.'Format';
+        $this->ariaDescribedBy[] = $this->ariaID . 'Format';
 
-        if($this->minDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MinDate';
+        if ($this->minDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MinDate';
         }
 
-        if($this->maxDate) {
-            $this->ariaDescribedBy[] = $this->ariaID.'MaxDate';
+        if ($this->maxDate) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'MaxDate';
         }
 
-        if($this->hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($this->hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
 
-        if($this->note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($this->note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

@@ -3,34 +3,28 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class Accordion extends VitrineComponent
 {
-    /** @var string */
-    public $a11yLabel;
+    public ?string $a11yLabel;
 
-    /** @var int */
-    public $headingLevel;
+    public int $headingLevel;
 
-    /** @var bool */
-    public $scrollOnOpen;
+    public bool $scrollOnOpen;
 
-    /** @var bool */
-    public $exclusive;
+    public bool $exclusive;
 
     protected static array $assets = [
         'js' => 'behaviors/Accordion.js',
     ];
 
     public function __construct(
-        $a11yLabel = null,
-        $headingLevel = 3,
-        $scrollOnOpen = false,
-        $exclusive = false,
-        $ui = []
-    )
-    {
+        ?string $a11yLabel = null,
+        int $headingLevel = 3,
+        bool $scrollOnOpen = false,
+        bool $exclusive = false,
+        array $ui = [],
+    ) {
         $this->a11yLabel = $a11yLabel;
         $this->headingLevel = $headingLevel;
         $this->scrollOnOpen = $scrollOnOpen;

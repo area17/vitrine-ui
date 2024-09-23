@@ -1,0 +1,16 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - src/
+
+    ignoreErrors:
+            -
+             identifier: missingType.iterableValue
+
+    excludePaths:
+        - src/Commands/PublishComponent.php
+
+    level: 6

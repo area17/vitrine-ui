@@ -3,62 +3,59 @@
 namespace A17\VitrineUI\Components;
 
 use Illuminate\Contracts\View\View;
-use A17\VitrineUI\Components\VitrineComponent;
 
 class VideoBackground extends VitrineComponent
 {
-    /** @var array
+    /**
      * Array of video sources with src and type keys
      * Default: []
      */
-    public array|null $sources;
+    public ?array $sources;
 
-    /** @var string
+    /**
      * URL of the video
      * Default: null
      */
-    public string|null $src;
+    public ?string $src;
 
-    /** @var bool
+    /**
      * Define if the video should use video.js or native video tag
      * Default: true
      */
-    public $native = true;
+    public bool $native;
 
-    /** @var string|null
+    /**
      * Pass variant attribute to play/mute buttons
      */
-    public string|null $buttonVariant = 'secondary';
+    public ?string $buttonVariant;
 
-    /** @var string|null
+    /**
      * Pass variant key to parent div.
      * Used to style the video background with theme options
      * Default: null
      */
-    public string|null $variant;
+    public ?string $variant;
 
-    /** @var bool
+    /**
      * Add button to control mute/unmute state
      * Default: false
      */
     public bool $controlMute;
 
-
     protected static array $assets = [
         'npm' => ['video.js'],
-        'js' => ['behaviors/VideoBackground.js']
+        'js' => ['behaviors/VideoBackground.js'],
     ];
 
     public function __construct(
-        $sources = null,
-        $controlMute = false,
-        $buttonVariant = 'secondary',
-        $src = null,
-        $native = true,
-        $variant = null,
-        $ui = []
-    )
-    {
+        ?array $sources = null,
+        ?bool $controlMute = false,
+        ?string $buttonVariant = 'secondary',
+        ?string $src = null,
+        ?bool $native = true,
+        ?string $variant = null,
+        array $ui = [],
+    ) {
         $this->buttonVariant = $buttonVariant;
         $this->sources = $sources;
         $this->controlMute = $controlMute;
@@ -68,7 +65,6 @@ class VideoBackground extends VitrineComponent
 
         parent::__construct($ui);
     }
-
 
     public function render(): View
     {

@@ -8,61 +8,46 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class RadioGroup extends VitrineComponent
 {
-    /** @var string */
-    public $legend;
+    public ?string $legend;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var array */
-    public $options;
+    public array $options;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
         'js' => ['behaviors/RadioGroup.js'],
-        'css' => [
-            'components/form/radio.css',
-            'components/form/input.css',
-        ]
+        'css' => ['components/form/radio.css', 'components/form/input.css'],
     ];
 
     public function __construct(
-        $legend = '',
-        $name = null,
-        $options = [],
-        $disabled = false,
-        $required = true,
-        $error = '',
-        $hint = '',
-        $note = '',
-    )
-    {
+        string $legend = null,
+        string $name = null,
+        array $options = [],
+        bool $disabled = false,
+        bool $required = true,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        array $ui = [],
+    ) {
         $this->legend = $legend;
         $this->name = $name;
         $this->options = $options;
@@ -73,22 +58,22 @@ class RadioGroup extends VitrineComponent
         $this->note = $note;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
 
         // set selected radio, if none selected
         $selectedIndex = -1;
         $index = 0;
 
-        foreach($this->options as $option){
+        foreach ($this->options as $option) {
             if (isset($option['selected']) && $option['selected'] === true) {
                 $selectedIndex = $index;
 
@@ -100,6 +85,8 @@ class RadioGroup extends VitrineComponent
         if ($selectedIndex === -1 && count($options) > 1) {
             $this->options[0]['selected'] = true;
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View

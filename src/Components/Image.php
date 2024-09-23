@@ -5,96 +5,92 @@ namespace A17\VitrineUI\Components;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
+use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Image extends VitrineComponent
 {
+    public array|null|TwillImageModel $image;
 
-    /** @var array */
-    public $image;
-
-    /** @var string
+    /**
      * @deprecated
      */
-    public $imageOptions;
+    public array $imageOptions;
 
-    /** @var string
+    /**
      * @deprecated
      */
-    public $imagePreset;
+    public ?string $imagePreset;
 
-    /** @var bool
+    /**
      * @deprecated
      */
-    public $usePlaceholder;
+    public bool $usePlaceholder;
 
     /** @var array
      * @deprecated
      */
     protected $presetData;
 
-    /** @var array
+    /**
      * @deprecated
      */
-    public $imageType;
+    public ?string $imageType;
 
     /**
      * @var array
      * @deprecated
      */
-    public $staticSettings;
+    public bool|array $staticSettings;
 
     /**
-     * @var bool
      * Used to determine if the image is an array and should be rendered with future default rendering
      */
-    public $nextRendering;
+    public bool $nextRendering;
 
-    public $width;
-    public $height;
-    public $src;
+    public int|string|null $width;
+    public int|string|null $height;
+    public ?string $src;
 
     /**
-     * @var string
      * Define image loading strategy
-     * Default: lazy
+     * @default: lazy
      */
-    public $loading;
-    public $sizes;
+    public ?string $loading;
+    public ?string $sizes;
 
     public ?array $sources;
 
     public function __construct(
-        $image = null,
-        $imageOptions = null,
-        $imagePreset = 'generic',
-        $usePlaceholder = false,
-        $nextRendering = false,
-        $loading = 'lazy',
-        $height = null,
-        $width = null,
-        $src = null,
-        $sizes = null,
-        $sources = null,
-        $ui = []
-    )
-    {
+        array|TwillImageModel|null $image = null,
+        ?array $imageOptions = [],
+        string $imagePreset = 'generic',
+        bool $usePlaceholder = false,
+        bool $nextRendering = false,
+        string $loading = 'lazy',
+        int|string $height = null,
+        int|string $width = null,
+        string $src = null,
+        string $sizes = null,
+        array $sources = null,
+        array $ui = [],
+    ) {
         $this->image = $image;
         $this->height = $height;
         $this->width = $width;
         $this->src = $src;
         $this->sizes = $sizes;
-        $this->sources = $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
+        $this->sources =
+            $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
 
         $this->imagePreset = $imagePreset;
         $this->usePlaceholder = $usePlaceholder;
-        $this->nextRendering = $nextRendering ?? false;
+        $this->nextRendering = $nextRendering;
 
         $this->presetData = config('twill-image.presets.' . $this->imagePreset);
         $this->imageType = $this->getImageType();
         $this->staticSettings = $this->getStaticSettings();
         $this->imageOptions = $this->parseImageOptions($imageOptions);
-        $this->loading = $loading ?? $this->imageOptions['loading'] ?? 'lazy';
-
+        $this->loading = $loading;
 
         parent::__construct($ui);
     }
@@ -107,10 +103,9 @@ class Image extends VitrineComponent
     /**
      * @deprecated, in next major version, image type will be only an array. Define today with 'next-rendering'.
      */
-    protected function getImageType()
+    protected function getImageType(): ?string
     {
-        /** @phpstan-ignore-next-line */
-        if ($this->image instanceof \A17\Twill\Image\Models\Image) {
+        if ($this->image instanceof TwillImageModel) {
             return 'twill-image';
         } elseif (Arr::has($this->image, '_static')) {
             return 'twill-image-static';
@@ -118,24 +113,26 @@ class Image extends VitrineComponent
             return 'next-rendering';
         } elseif (Arr::has($this->image, 'src') && Arr::has($this->image, 'srcSet')) {
             return 'twill-image-array';
-        } elseif (is_array($this->image) && array_key_exists('src', $this->image)) {
+        } elseif (Arr::has($this->image, 'src')) {
             return 'static';
         } elseif ($this->usePlaceholder) {
             return 'placeholder';
         }
 
-        return false;
+        return null;
     }
 
-    public function setPictureFallbackImg()
+    public function setPictureFallbackImg(): ?array
     {
-        return Arr::has($this->image, 'src') ? $this->image : $this->image['fallbackImg'] ?? $this->image['image'] ?? $this->sources[0] ?? null;
+        return Arr::has($this->image, 'src')
+            ? $this->image
+            : $this->image['fallbackImg'] ?? ($this->image['image'] ?? ($this->sources[0] ?? null));
     }
 
     /**
      * @deprecated
      */
-    protected function getStaticSettings()
+    protected function getStaticSettings(): bool|array
     {
         if (!$this->image || !is_array($this->image) || !Arr::has($this->image, '_static')) {
             return false;
@@ -149,7 +146,7 @@ class Image extends VitrineComponent
     /**
      * @deprecated
      */
-    protected function parseImageOptions($imageOptions = [])
+    protected function parseImageOptions(?array $imageOptions = []): array
     {
         $breakpointRatios = Arr::get($this->presetData, 'breakpointRatios');
         $classes = [];

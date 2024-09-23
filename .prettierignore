@@ -1,0 +1,11 @@
+*.md
+*.lock
+*.svg
+
+vendor
+node_modules
+public
+
+.platform
+bootstrap/*
+artisan

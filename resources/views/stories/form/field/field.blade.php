@@ -25,36 +25,34 @@
         'multiple' => false,
         'readonly' => false,
         'step' => '',
-        'withIconRight' => false
-    ]
+        'withIconRight' => false,
+    ],
 ])
 
 <div style="min-width: 500px;">
-    <x-vui-form-field
-        :label="$label ?? ''"
-        :name="$name ?? ''"
-        :id="$id ?? ''"
-        :type="$type ?? ''"
-        :value="$value ?? ''"
-        :placeholder="$placeholder ?? ''"
-        :disabled="$disabled ?? ''"
-        :required="$required ?? ''"
-        :error="$error ?? ''"
-        :hint="$hint ?? ''"
-        :note="$note ?? ''"
-        :inputmode="$inputmode ?? ''"
-        :pattern="$pattern ?? ''"
-        :autocomplete="$autocomplete ?? ''"
-        :autofocus="$autofocus ?? ''"
-        :form="$form ?? ''"
-        :list="$list ?? ''"
-        :max="$max ?? ''"
-        :maxlength="$maxlength ?? ''"
-        :min="$min ?? ''"
-        :minlength="$minlength ?? ''"
-        :multiple="$multiple ?? ''"
-        :readonly="$readonly ?? ''"
-        :step="$step ?? ''"
-        :with-icon-right="$withIconRight ?? false"
-    />
+    <x-vui-form-field :label="$label ?? ''"
+                      :name="$name ?? ''"
+                      :id="$id ?? ''"
+                      :type="$type ?? ''"
+                      :value="$value ?? ''"
+                      :placeholder="$placeholder ?? ''"
+                      :disabled="$disabled ?? ''"
+                      :required="$required ?? ''"
+                      :error="$error ?? ''"
+                      :hint="$hint ?? ''"
+                      :note="$note ?? ''"
+                      :inputmode="$inputmode ?? ''"
+                      :pattern="$pattern ?? ''"
+                      :autocomplete="$autocomplete ?? ''"
+                      :autofocus="$autofocus ?? ''"
+                      :form="$form ?? ''"
+                      :list="$list ?? ''"
+                      :max="$max ?? ''"
+                      :maxlength="$maxlength ?? ''"
+                      :min="$min ?? ''"
+                      :minlength="$minlength ?? ''"
+                      :multiple="$multiple ?? ''"
+                      :readonly="$readonly ?? ''"
+                      :step="$step ?? ''"
+                      :with-icon-right="$withIconRight ?? false" />
 </div>

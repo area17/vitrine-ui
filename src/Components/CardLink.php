@@ -2,33 +2,19 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class CardLink extends VitrineComponent
 {
+    public ?string $href;
 
-    /** @var string */
-    public $href;
+    public ?string $target;
 
-    /** @var string|bool */
-    public $target;
+    public string $tag;
 
-    public $uiKeyComponent = 'card-link';
-
-    /** @var string */
-    public $tag;
-
-    public function __construct(
-        $href = null,
-        $target = null,
-        $size = null,
-        $tag = null,
-        $ui = []
-    )
+    public function __construct(string $href = null, string $target = null, string $tag = null, array $ui = [])
     {
         $this->href = $href;
-        $this->size = $size;
         $this->tag = $tag ?? empty($href) ? 'span' : 'a';
 
         $isExternalUrl = $this->isExternalUrl($href);

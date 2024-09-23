@@ -168,12 +168,16 @@ wc-datepicker {
     cursor: default;
 }
 
-.wc-datepicker__date--disabled:not(.wc-datepicker__date--selected):not(.wc-datepicker__date--in-range):hover
+.wc-datepicker__date--disabled:not(.wc-datepicker__date--selected):not(
+        .wc-datepicker__date--in-range
+    ):hover
     > * {
     background-color: transparent;
 }
 
-.wc-datepicker__date--disabled.wc-datepicker__date--in-range:not(.wc-datepicker__date--selected):not(.wc-datepicker__date--in-range)
+.wc-datepicker__date--disabled.wc-datepicker__date--in-range:not(
+        .wc-datepicker__date--selected
+    ):not(.wc-datepicker__date--in-range)
     > * {
     background-color: transparent;
 }

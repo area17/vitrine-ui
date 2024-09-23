@@ -19,7 +19,7 @@
         'labelInsideDropdown' => true,
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
-        'btnVariant' => 'secondary'
+        'btnVariant' => 'secondary',
     ],
     'argTypes' => [
         'pages' => [
@@ -67,10 +67,17 @@
             'defaultValue' => ['summary' => true],
             'control' => 'boolean',
         ],
-    ]
+    ],
 ])
 
 <div class="container">
-    <x-vui-pagination :btnVariant="$btnVariant" :pages="$pages ?? []" :iconLeft="$iconLeft" :iconRight="$iconRight" :currentPage="$current_page" :currentPageCount="$current_page_count" :lastPage="$last_page" :total="$total"
-        btnVariant="secondary-icon" />
+    <x-vui-pagination :btnVariant="$btnVariant"
+                      :pages="$pages ?? []"
+                      :iconLeft="$iconLeft"
+                      :iconRight="$iconRight"
+                      :currentPage="$current_page"
+                      :currentPageCount="$current_page_count"
+                      :lastPage="$last_page"
+                      :total="$total"
+                      btnVariant="secondary-icon" />
 </div>

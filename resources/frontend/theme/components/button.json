@@ -1,25 +1,25 @@
 {
-  "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
-  "size": {
-    "sm": "p-4",
-    "md": "p-8"
-  },
-  "variant": {
-    "primary": "bg-primary",
-    "secondary": "bg-secondary text-inverse",
-    "outline": ""
-  },
-  "icon_only": {
-    "true": "",
-    "false": ""
-  },
-  "icon_position": {
-    "before": "",
-    "after": ""
-  },
-  "default": {
-    "size": "sm",
-    "variant": "primary"
-  },
-  "label": "text-inherit"
+    "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
+    "size": {
+        "sm": "p-4",
+        "md": "p-8"
+    },
+    "variant": {
+        "primary": "bg-primary",
+        "secondary": "bg-secondary text-inverse",
+        "outline": ""
+    },
+    "icon_only": {
+        "true": "",
+        "false": ""
+    },
+    "icon_position": {
+        "before": "",
+        "after": ""
+    },
+    "default": {
+        "size": "sm",
+        "variant": "primary"
+    },
+    "label": "text-inherit"
 }

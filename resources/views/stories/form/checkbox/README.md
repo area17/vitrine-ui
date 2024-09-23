@@ -23,6 +23,7 @@ Any additional attributes are merged with the component's existing attributes to
 ```
 
 ## Accessibility
+
 Checkboxes should always have an accessible name. The label provided is used as the accessible name for the checkbox. Additionally, if the checkbox is required, selected, or has an error, the relevant attributes are automatically added to enhance accessibility.
 
 If there are errors or additional notes (hints) associated with the checkbox, they are linked to the checkbox using `aria-describedby` for screen readers.
@@ -33,46 +34,35 @@ If there are errors or additional notes (hints) associated with the checkbox, th
 
 ```json
 {
-  "rules": {
-    "merge": ["input"]
-  },
-  "base":  [
-    "m-form-checkbox cursor-pointer"
-  ],
-  "wrapper": [
-    "m-form-checkbox-wrap",
-    "flex items-center space-x-8"
-  ],
-  "label": [
-    "m-form-checkbox-label",
-    "f-body-1 inline-flex relative"
-  ],
-  "check": [
-    "m-form-checkbox-check",
-    "peer",
-    "w-24 h-24 rounded-sm relative",
-    "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
-    "transition-colors duration-300 ease-out",
-    "peer-checked:bg-[black]",
-    "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
-  ],
-  "checkmark": [
-    "checkmark",
-    "absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2",
-    "text-[white]"
-  ],
-  "input": [
-    "absolute w-1 h-1",
-    "border-0 p-0 -m-1",
-    "overflow-hidden whitespace-nowrap",
-    "peer",
-    "focus:outline-none",
-    "[clip:rect(0,0,0,0)]"
-  ],
-  "hint": [
-    "m-form-checkbox-hint",
-    "f-ui-2 text-secondary"
-  ]
+    "rules": {
+        "merge": ["input"]
+    },
+    "base": ["m-form-checkbox cursor-pointer"],
+    "wrapper": ["m-form-checkbox-wrap", "flex items-center space-x-8"],
+    "label": ["m-form-checkbox-label", "f-body-1 inline-flex relative"],
+    "check": [
+        "m-form-checkbox-check",
+        "peer",
+        "w-24 h-24 rounded-sm relative",
+        "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
+        "transition-colors duration-300 ease-out",
+        "peer-checked:bg-[black]",
+        "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
+    ],
+    "checkmark": [
+        "checkmark",
+        "absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2",
+        "text-[white]"
+    ],
+    "input": [
+        "absolute w-1 h-1",
+        "border-0 p-0 -m-1",
+        "overflow-hidden whitespace-nowrap",
+        "peer",
+        "focus:outline-none",
+        "[clip:rect(0,0,0,0)]"
+    ],
+    "hint": ["m-form-checkbox-hint", "f-ui-2 text-secondary"]
 }
 ```
 

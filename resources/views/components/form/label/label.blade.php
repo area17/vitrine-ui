@@ -2,17 +2,15 @@
     'label' => '',
     'name' => '',
     'tag' => 'label',
-    'required' => false
+    'required' => false,
 ])
 
-<{{$tag}}
-    {{$attributes->class(VitrineUI::ui('form', 'label'))}}
-    @if($name) for="{{$name}}" @endif
->
+<{{ $tag }} {{ $attributes->class(VitrineUI::ui('form', 'label')) }}
+                     @if ($name) for="{{ $name }}" @endif>
     @if ($slot && !$slot->isEmpty())
-        {{$slot}}
+        {{ $slot }}
     @endif
     @if ($required)
         {{ __('vitrine-ui::fe.form.required') }}
     @endif
-</{{$tag}}>
+    </{{ $tag }}>

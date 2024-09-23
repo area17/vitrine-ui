@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
 import { customEvents } from '../constants/customEvents'
 import formatDate from '../utils/formatDate'
 

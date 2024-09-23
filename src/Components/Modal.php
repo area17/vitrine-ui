@@ -2,52 +2,42 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Modal extends VitrineComponent
 {
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var bool */
-    public $showClose;
+    public bool $showClose;
 
-    /** @var string */
-    public $title;
+    public ?string $title;
 
-    /** @var bool */
-    public $panel;
+    public bool $panel;
 
-    /** @var bool */
-    public $clickOutsideToClose;
+    public bool $clickOutsideToClose;
 
-    /** @var bool */
-    public $setInitialFocus;
+    public bool $setInitialFocus;
 
-    /** @var string */
-    public $variant;
+    public ?string $variant;
 
-    /** @var string */
-    public $modalsStack;
+    public ?string $modalsStack;
 
     protected static array $assets = [
         'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
-        'js' => 'behaviors/Modal.js'
+        'js' => 'behaviors/Modal.js',
     ];
 
     public function __construct(
-        $id = null,
-        $showClose = true,
-        $title = null,
-        $panel = false,
-        $variant = null,
-        $setInitialFocus = true,
-        $clickOutsideToClose = false,
-        $ui = [],
-        $modalsStack = 'modals',
+        string $id = null,
+        bool $showClose = true,
+        string $title = null,
+        bool $panel = false,
+        string $variant = null,
+        bool $setInitialFocus = true,
+        bool $clickOutsideToClose = false,
+        array $ui = [],
+        string $modalsStack = 'modals',
     ) {
-
         $this->id = $id;
         $this->showClose = $showClose;
         $this->title = $title;

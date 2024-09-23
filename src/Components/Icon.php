@@ -2,26 +2,17 @@
 
 namespace A17\VitrineUI\Components;
 
-use A17\VitrineUI\Components\VitrineComponent;
 use Illuminate\Contracts\View\View;
 
 class Icon extends VitrineComponent
 {
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var string */
-    public $ariaLabel;
+    public ?string $ariaLabel;
 
-    /** @var string|null */
-    public $iconComponent;
+    public ?string $iconComponent;
 
-    public function __construct(
-        $name = null,
-        $ariaLabel = null,
-        $iconPath = null,
-        $ui = []
-    )
+    public function __construct(string $name = null, string $ariaLabel = null, string $iconPath = null, array $ui = [])
     {
         $this->name = $name;
         $this->ariaLabel = $ariaLabel;
@@ -30,9 +21,9 @@ class Icon extends VitrineComponent
         parent::__construct($ui);
     }
 
-    public function shouldRender()
+    public function shouldRender(): bool
     {
-        return $this->iconComponent;
+        return !empty($this->iconComponent);
     }
 
     public function render(): View
@@ -40,18 +31,22 @@ class Icon extends VitrineComponent
         return view($this->iconComponent);
     }
 
-    public function getIconPath(): bool|string
+    public function getIconPath(): ?string
     {
-        $iconPath = config('vitrine-ui.icons_view_path', 'icons'). $this->name;
+        $iconPath = config('vitrine-ui.icons_view_path', 'icons') . $this->name;
 
         $viewExists = view()->exists($iconPath);
-        if($viewExists) return $iconPath;
+        if ($viewExists) {
+            return $iconPath;
+        }
 
-        $localPath = 'vitrine-ui::components.icon._icons.'.$this->name;
+        $localPath = 'vitrine-ui::components.icon._icons.' . $this->name;
         $viewExists = view()->exists($localPath);
 
-        if($viewExists) return $localPath;
+        if ($viewExists) {
+            return $localPath;
+        }
 
-        return false;
+        return null;
     }
 }

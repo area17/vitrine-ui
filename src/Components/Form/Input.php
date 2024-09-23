@@ -2,111 +2,84 @@
 
 namespace A17\VitrineUI\Components\Form;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use A17\VitrineUI\Components\VitrineComponent;
 
 class Input extends VitrineComponent
 {
+    public ?string $name;
 
-    /** @var string */
-    public $name;
+    public ?string $id;
 
-    /** @var string */
-    public $id;
+    public ?string $type;
 
-    /** @var string */
-    public $type;
+    public ?string $value;
 
-    /** @var string */
-    public $value;
+    public ?string $placeholder;
 
-    /** @var string */
-    public $placeholder;
+    public bool $disabled;
 
-    /** @var bool */
-    public $disabled;
+    public bool $required;
+    public ?string $pattern;
 
-    /** @var bool */
-    public $required;
+    public ?string $autocomplete;
 
-    /** @var string */
-    public $pattern;
+    public bool $autofocus;
 
-    /** @var string */
-    public $autocomplete;
+    public ?string $form;
 
-    /** @var bool */
-    public $autofocus;
+    public ?string $list;
 
-    /** @var string */
-    public $form;
+    public ?string $max;
 
-    /** @var string */
-    public $list;
+    public ?string $maxlength;
 
-    /** @var string */
-    public $max;
+    public ?string $min;
 
-    /** @var string */
-    public $maxlength;
+    public ?string $minlength;
 
-    /** @var string */
-    public $min;
+    public bool $multiple;
 
-    /** @var string */
-    public $minlength;
+    public bool $readonly;
 
-    /** @var bool */
-    public $multiple;
+    public ?string $step;
 
-    /** @var bool */
-    public $readonly;
+    public bool $withIconRight;
 
-    /** @var string */
-    public $step;
+    public ?string $inputmode;
 
-    /** @var bool */
-    public $withIconRight;
-
-    /** @var array */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
     protected static array $assets = [
-        'js' => [
-            'behaviors/Input.js'
-        ],
-        'css' => [
-            'components/form/input.css',
-        ]
+        'js' => ['behaviors/Input.js'],
+        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
-        $name = null,
-        $id = '',
-        $type = 'text',
-        $value = '',
-        $placeholder = '',
-        $disabled = false,
-        $required = false,
-        $inputmode = '',
-        $pattern = '',
-        $autocomplete = '',
-        $autofocus = false,
-        $form = '',
-        $list = '',
-        $max = '',
-        $maxlength = '',
-        $min = '',
-        $minlength = '',
-        $multiple = false,
-        $readonly = false,
-        $step = '',
-        $withIconRight = false,
-        $ariaDescribedBy = [],
-        $ui = []
-    )
-    {
+        string $name = null,
+        string $id = null,
+        string $type = 'text',
+        string $value = null,
+        string $placeholder = null,
+        bool $disabled = false,
+        bool $required = false,
+        string $inputmode = null,
+        string $pattern = null,
+        string $autocomplete = null,
+        bool $autofocus = false,
+        string $form = null,
+        string $list = null,
+        string $max = null,
+        string $maxlength = null,
+        string $min = null,
+        string $minlength = null,
+        bool $multiple = false,
+        bool $readonly = false,
+        string $step = null,
+        bool $withIconRight = false,
+        array $ariaDescribedBy = [],
+        array $ui = [],
+    ) {
         $this->name = $name;
         $this->id = $id;
         $this->type = $type;
@@ -127,6 +100,7 @@ class Input extends VitrineComponent
         $this->readonly = $readonly;
         $this->step = $step;
         $this->withIconRight = $withIconRight;
+        $this->inputmode = $inputmode;
 
         $this->ariaDescribedBy = $ariaDescribedBy;
 

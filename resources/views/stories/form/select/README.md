@@ -5,7 +5,7 @@ Any additional attributes are merged with the component's existing attributes, a
 ## Usage
 
 ```html
- <x-vui-form-select
+<x-vui-form-select
     label="Choose a city"
     name="city"
     id="city"
@@ -29,6 +29,7 @@ Any additional attributes are merged with the component's existing attributes, a
 ```
 
 ## Accessibility
+
 The `Select` component ensures that each dropdown has an accessible name provided by the label. If the select element is required or contains an error, the appropriate attributes (e.g., aria-required, aria-invalid) are added for accessibility.
 
 Hint and note texts are associated with the dropdown using aria-describedby, ensuring screen readers convey the necessary information to users. Additionally, `aria-live` may be used to dynamically inform users of changes in available options.
@@ -39,19 +40,19 @@ Hint and note texts are associated with the dropdown using aria-describedby, ens
 
 ```json
 {
-  "rules": {
-    "merge": ["select"]
-  },
-  "base": "[inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
-  "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
-  "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
-  "select": "p-12 pr-36 w-full f-body-1 appearance-none [.s-readonly_&]:bg-transparent",
-  "icon": "absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none",
-  "icon-name": "chevron-down-24",
-  "hint": "f-ui-2 text-secondary",
-  "note": "f-ui-2 text-secondary mt-4",
-  "error": "mt-4 f-body-1 text-error flex items-center gap-4",
-  "error-icon-name": "warning"
+    "rules": {
+        "merge": ["select"]
+    },
+    "base": "[inert]:opacity-25 [inert]:cursor-not-allowed [inert]:pointer-events-none [&.s-disabled]:pointer-events-none [&.s-disabled]:opacity-25 [&.s-disabled]:cursor-not-allowed",
+    "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
+    "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
+    "select": "p-12 pr-36 w-full f-body-1 appearance-none [.s-readonly_&]:bg-transparent",
+    "icon": "absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none",
+    "icon-name": "chevron-down-24",
+    "hint": "f-ui-2 text-secondary",
+    "note": "f-ui-2 text-secondary mt-4",
+    "error": "mt-4 f-body-1 text-error flex items-center gap-4",
+    "error-icon-name": "warning"
 }
 ```
 

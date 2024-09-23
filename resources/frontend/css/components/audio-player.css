@@ -11,8 +11,6 @@
         @apply block;
     }
 
-
-
     .o-audio__range::before {
         @apply absolute top-1/2 left-0 right-0 z-[-1] h-4 -translate-y-1/2 transform border border-primary content-[''];
     }
@@ -36,13 +34,16 @@
         margin-top: -12.2px;
         border: none;
         border-radius: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A") transparent center center no-repeat;
+        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+            transparent center center no-repeat;
         box-shadow: none;
         -webkit-appearance: none;
     }
 
     .o-audio__range
-    input[type="range"]:not([data-focus-method="mouse"]):focus::-webkit-slider-thumb {
+        input[type="range"]:not(
+            [data-focus-method="mouse"]
+        ):focus::-webkit-slider-thumb {
         outline: 2px solid black;
         transition: 300ms cubic-bezier(0.4, 0, 0.2, 1) all;
     }
@@ -52,11 +53,11 @@
         border: none;
         border-radius: 0;
         background: linear-gradient(
-                to right,
-                black 0%,
-                black var(--backgroundVal),
-                transparent var(--backgroundVal),
-                transparent 100%
+            to right,
+            black 0%,
+            black var(--backgroundVal),
+            transparent var(--backgroundVal),
+            transparent 100%
         );
         background-repeat: no-repeat;
         background-position: center center;
@@ -69,12 +70,15 @@
         height: 28px;
         border: none;
         border-radius: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A") transparent center center no-repeat;
+        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+            transparent center center no-repeat;
         box-shadow: none;
     }
 
     .o-audio__range
-    input[type="range"]:not([data-focus-method="mouse"]):focus::-moz-range-thumb {
+        input[type="range"]:not(
+            [data-focus-method="mouse"]
+        ):focus::-moz-range-thumb {
         border: 2px solid black;
     }
 
@@ -83,11 +87,11 @@
         border: none;
         border-radius: 0;
         background: linear-gradient(
-                to right,
-                black 0%,
-                black var(--backgroundVal),
-                transparent var(--backgroundVal),
-                transparent 100%
+            to right,
+            black 0%,
+            black var(--backgroundVal),
+            transparent var(--backgroundVal),
+            transparent 100%
         );
         background-repeat: no-repeat;
         background-position: center center;
@@ -114,13 +118,14 @@
         margin-top: 0;
         border: none;
         border-radius: 100%;
-        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A") transparent center center no-repeat;
+        background: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 20C17.3137 20 20 17.3137 20 14C20 10.6863 17.3137 8 14 8C10.6863 8 8 10.6863 8 14C8 17.3137 10.6863 20 14 20Z' fill='black'/%3E%3C/svg%3E%0A")
+            transparent center center no-repeat;
         box-shadow: none;
         box-sizing: border-box;
     }
 
     .o-audio__range
-    input[type="range"]:not([data-focus-method="mouse"]):focus::-ms-thumb {
+        input[type="range"]:not([data-focus-method="mouse"]):focus::-ms-thumb {
         border: 2px solid black;
     }
 

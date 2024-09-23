@@ -8,59 +8,41 @@ use A17\VitrineUI\Components\VitrineComponent;
 
 class Upload extends VitrineComponent
 {
-    /** @var string */
-    public $label;
+    public ?string $label;
 
-    /** @var string */
-    public $name;
+    public ?string $name;
 
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var string */
-    public $value;
+    public ?string $value;
 
-    /** @var bool */
-    public $disabled;
+    public bool $disabled;
 
-    /** @var bool */
-    public $required;
+    public bool $required;
 
-    /** @var string */
-    public $error;
+    public ?string $error;
 
-    /** @var string */
-    public $hint;
+    public ?string $hint;
 
-    /** @var string */
-    public $note;
+    public ?string $note;
 
-    /** @var string */
-    public $allowed;
+    public ?string $allowed;
 
-    /** @var string */
-    public $fileSize;
+    public string|int|null $fileSize;
 
-    /** @var bool */
-    public $autofocus;
+    public bool $autofocus;
 
-    /** @var bool */
-    public $multiple;
+    public bool $multiple;
 
-    /** @var bool */
-    public $readonly;
+    public bool $readonly;
 
-    /** @var string */
-    public $ariaID;
+    public ?string $ariaID;
 
-    /** @var string */
-    public $errorID;
+    public ?string $errorID;
 
-    /** @var string */
-    public $ariaDescribedBy;
+    public array $ariaDescribedBy;
 
-    /** @var string */
-    public $rand;
+    public ?string $rand;
 
     protected static array $assets = [
         'js' => ['behaviors/FileUpload.js', 'behaviors/Input.js'],
@@ -68,22 +50,22 @@ class Upload extends VitrineComponent
     ];
 
     public function __construct(
-        $label = '',
-        $name = null,
-        $id = null,
-        $value = '',
-        $disabled = false,
-        $required = true,
-        $error = '',
-        $hint = '',
-        $note = '',
-        $allowed = 'image/*,.pdf',
-        $fileSize = 5,
-        $autofocus = false,
-        $multiple = false,
-        $readonly = false,
-    )
-    {
+        string $label = null,
+        string $name = null,
+        string $id = null,
+        string $value = null,
+        bool $disabled = false,
+        bool $required = true,
+        string $error = null,
+        string $hint = null,
+        string $note = null,
+        string $allowed = 'image/*,.pdf',
+        string|int $fileSize = 5,
+        bool $autofocus = false,
+        bool $multiple = false,
+        bool $readonly = false,
+        array $ui = [],
+    ) {
         $this->label = $label;
         $this->name = $name;
         $this->id = $id;
@@ -100,18 +82,20 @@ class Upload extends VitrineComponent
         $this->readonly = $readonly;
 
         $this->rand = Str::random(4);
-        $this->ariaID = 'ariaID'.$this->rand;
-        $this->errorID = 'errorID'.$this->rand;
+        $this->ariaID = 'ariaID' . $this->rand;
+        $this->errorID = 'errorID' . $this->rand;
         $this->ariaDescribedBy = [];
         $this->ariaDescribedBy[] = $this->errorID;
 
-        if($hint) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Hint';
+        if ($hint) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Hint';
         }
 
-        if($note) {
-            $this->ariaDescribedBy[] = $this->ariaID.'Note';
+        if ($note) {
+            $this->ariaDescribedBy[] = $this->ariaID . 'Note';
         }
+
+        parent::__construct($ui);
     }
 
     public function render(): View
