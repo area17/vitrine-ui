@@ -10,15 +10,12 @@ use Illuminate\Contracts\View\View;
 
 class ImageZoom extends VitrineComponent
 {
-    /** @var string */
-    public $id;
+    public ?string $id;
 
-    /** @var array */
-    public $sources;
+    public array $sources;
 
-    /** @var array */
     // set false to listen for `image-zoom:init` event to init behavior
-    public $autoInit;
+    public bool $autoInit;
 
     protected static array $assets = [
         'npm' => [
@@ -30,10 +27,10 @@ class ImageZoom extends VitrineComponent
     ];
 
     public function __construct(
-        $id = null,
-        $sources = [],
-        $autoInit = true,
-        $ui = []
+        string $id = null,
+        array $sources = [],
+        bool $autoInit = true,
+        array $ui = []
     )
     {
         $this->id = $id ?? 'ImageZoom'. Str::random(3);
@@ -48,7 +45,7 @@ class ImageZoom extends VitrineComponent
         return view('vitrine-ui::components.image-zoom.image-zoom');
     }
 
-    protected function parseSources($sources = []): array
+    protected function parseSources(array $sources = []): array
     {
         $parsedSources = [];
 

@@ -63,7 +63,7 @@ class Image extends VitrineComponent
 
     public function __construct(
         array|TwillImageModel|null $image = null,
-        array $imageOptions = [],
+        ?array $imageOptions = [],
         string $imagePreset = 'generic',
         bool $usePlaceholder = false,
         bool $nextRendering = false,
@@ -146,7 +146,7 @@ class Image extends VitrineComponent
     /**
      * @deprecated
      */
-    protected function parseImageOptions(array $imageOptions = []): array
+    protected function parseImageOptions(?array $imageOptions = []): array
     {
         $breakpointRatios = Arr::get($this->presetData, 'breakpointRatios');
         $classes = [];
