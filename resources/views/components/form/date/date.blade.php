@@ -66,7 +66,7 @@
                 for="{{ $name }}"></output>
     </x-slot:preNote>
 
-    @if ($pickerID)
+    @if ($picker)
         {{-- Optional datepicker --}}
         <x-vui-datepicker class="{{ $ui('input', 'button') }}"
                           :target="$pickerID"
