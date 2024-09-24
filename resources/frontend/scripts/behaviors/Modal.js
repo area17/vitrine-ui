@@ -71,20 +71,12 @@ const Modal = createBehavior(
             }
         },
         handleClickOutside(e) {
-            if (this._data.isActive) {
+            if (this._data.isActive && !this.$focusTrap.contains(e.target)) {
                 this.close(e)
             }
         },
-        handleCloseInside(e) {
-            e.stopPropagation()
-        },
         registerOpenEvents() {
             if (this.$clickOutside) {
-                this.$focusTrap.addEventListener(
-                    'click',
-                    this.handleCloseInside,
-                    false
-                )
                 document.addEventListener(
                     'click',
                     this.handleClickOutside,
