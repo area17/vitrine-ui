@@ -1,7 +1,6 @@
 @push($modalsStack)
 
     <div id="{{ $id }}"
-         data-behavior="Modal"
          role="dialog"
          aria-labelledby="{{ $id . '_title' }}"
          aria-modal="true"
