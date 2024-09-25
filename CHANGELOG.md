@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.13.0] - 2024-25-09
+
+### Updated
+
+-   Use TailwindMerge for passing custom class via attributes-bags
+-   Modal : allow to add a behavior on Modal element
+
+### Fixed
+
+-   Modal Click Outside option will not interfering with click events inside the modal
+
 ## [2.12.1] - 2024-23-09
 
 ### Fixed
