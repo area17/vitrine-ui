@@ -1,9 +1,8 @@
 import { createBehavior } from '@area17/a17-behaviors'
-
-import { customEvents } from '../constants/customEvents'
-
 import Swiper from 'swiper'
 import { A11y, EffectFade, Navigation, Pagination } from 'swiper/modules'
+
+import { customEvents } from '../constants/customEvents'
 
 const Carousel = createBehavior(
     'Carousel',
@@ -38,10 +37,13 @@ const Carousel = createBehavior(
             }
 
             this.opts = {
-                loop: 'loop' in this.options ? this.options.loop === 'true'  : true,
+                loop:
+                    'loop' in this.options
+                        ? this.options.loop === 'true'
+                        : true,
                 pagination: {
-                    el: ".swiper-pagination",
-                    type: "fraction",
+                    el: '.swiper-pagination',
+                    type: 'fraction'
                 },
                 ...(this.options.effect === 'fade' && {
                     effect: 'fade',
@@ -63,7 +65,7 @@ const Carousel = createBehavior(
                     nextEl: '.swiper-next-btn',
                     prevEl: '.swiper-prev-btn'
                 },
-                ...configuration,
+                ...configuration
             }
         },
         enabled() {
