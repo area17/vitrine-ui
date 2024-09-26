@@ -2,12 +2,11 @@
     $sliderTag = $asList ? 'ul' : 'div';
     $sliderItemTag = $asList ? 'li' : 'div';
 @endphp
-<div>
-</div>
+
 <div data-behavior="Carousel"
      data-Carousel-configuration="{{ $configuration }}"
      {{ $attributes->twMerge([$ui('carousel', 'base')]) }}>
-    <{{ $sliderTag }} class="{{ $ui('carousel', 'wrapper') }} swiper-wrapper">
+    <{{ $sliderTag }} class="{{ $ui('carousel', 'wrapper') }} {{ $swiperWrapperClass ?? '' }} swiper-wrapper">
         @foreach ($items as $item)
             <{{ $sliderItemTag }} class="{{ $itemClass }} {{ $ui('carousel', 'item') }} swiper-slide">
                 <x-dynamic-component :component="$component"

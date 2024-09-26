@@ -2,17 +2,16 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class Carousel extends VitrineComponent
 {
-
     public ?string $configuration;
 
     public array $items = [];
 
     public string $itemClass = '';
+    public string $swiperWrapperClass = '';
 
     public ?string $component;
 
@@ -23,20 +22,21 @@ class Carousel extends VitrineComponent
     public bool $withPagination = true;
 
     public function __construct(
-        $items = [],
-        $itemClass = '',
-        $component = null,
-        $configuration = null,
-        $controlsButtonVariant = '',
-        $asList = false,
-        $withControls = true,
-        $withPagination = true,
-        $ui = []
-    )
-    {
+        array $items = [],
+        string $itemClass = '',
+        string $swiperWrapperClass = '',
+        string $component = null,
+        string $configuration = null,
+        string $controlsButtonVariant = '',
+        bool $asList = false,
+        bool $withControls = true,
+        bool $withPagination = true,
+        array $ui = [],
+    ) {
         $this->component = $component;
         $this->items = $items;
         $this->itemClass = $itemClass;
+        $this->swiperWrapperClass = $swiperWrapperClass;
         $this->configuration = $configuration;
         $this->asList = $asList;
         $this->controlsButtonVariant = $controlsButtonVariant;
