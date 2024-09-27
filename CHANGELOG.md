@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.13.2] - 2024-27-09
+
+### Added
+
+-   Translations : add French translation keys
+
 ## [2.13.1] - 2024-27-09
 
 ### Fixed
