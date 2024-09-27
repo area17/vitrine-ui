@@ -14,7 +14,7 @@ const Dropdown = createBehavior(
         openDropdown() {
             this.isOpen = true
             this.$node.setAttribute('data-is-open', 'true')
-            this.$node.setAttribute('aria-expanded', 'true')
+            this.$btn.setAttribute('aria-expanded', 'true')
             this.initOutClick()
             this.timeout = window.setTimeout(() => {
                 this.$focusableItems = this.$list
@@ -27,7 +27,7 @@ const Dropdown = createBehavior(
         closeDropdown() {
             this.isOpen = false
             this.$node.removeAttribute('data-is-open')
-            this.$node.setAttribute('aria-expanded', 'false')
+            this.$btn.setAttribute('aria-expanded', 'false')
             this.disabledOutClick(this.$node)
             window.clearTimeout(this.timeout)
         },
