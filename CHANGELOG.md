@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.13.1] - 2024-27-09
+
+### Fixed
+
+-   CardLink : Make sure we can use other tags than span, a (ie : button)
+
 ## [2.13.0] - 2024-25-09
 
 ### Updated
