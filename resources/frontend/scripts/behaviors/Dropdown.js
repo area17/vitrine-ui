@@ -12,6 +12,13 @@ const Dropdown = createBehavior(
             }
         },
         openDropdown() {
+            // Timing
+            const mediaQueryReducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            )
+            let TIMING = 500
+            mediaQueryReducedMotion.matches && (TIMING = 100)
+
             this.isOpen = true
             this.$node.setAttribute('data-is-open', 'true')
             this.$btn.setAttribute('aria-expanded', 'true')
@@ -22,7 +29,7 @@ const Dropdown = createBehavior(
                     : []
                 this.$focusIndex = 0
                 this.focusItem()
-            }, 500) // wait for potential reveal animations
+            }, TIMING) // wait for potential reveal animations
         },
         focusAndCloseDropdown() {
             this.$btn.focus()
