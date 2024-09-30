@@ -24,6 +24,10 @@ const Dropdown = createBehavior(
                 this.focusItem()
             }, 500) // wait for potential reveal animations
         },
+        focusAndCloseDropdown() {
+            this.$btn.focus()
+            this.closeDropdown()
+        },
         closeDropdown() {
             this.isOpen = false
             this.$node.removeAttribute('data-is-open')
@@ -46,10 +50,28 @@ const Dropdown = createBehavior(
             const key = e.key
             switch (key) {
                 case 'Tab':
-                case 'Escape':
+                    e.preventDefault()
                     e.stopPropagation()
-                    this.$btn.focus()
-                    this.closeDropdown()
+
+                    // shift + tab
+                    if (e.shiftKey) {
+                        this.$focusIndex--
+                        if (this.$focusIndex < 0) {
+                            this.$focusIndex = 0
+                            this.focusAndCloseDropdown()
+                        } else {
+                            this.focusItem()
+                        }
+                        return
+                    } else {
+                        this.$focusIndex++
+                        if (this.$focusIndex >= this.$focusableItems.length) {
+                            this.focusAndCloseDropdown()
+                        } else {
+                            this.focusItem()
+                        }
+                    }
+
                     break
                 case 'Up':
                 case 'ArrowUp':
