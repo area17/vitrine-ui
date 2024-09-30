@@ -12,9 +12,16 @@ const Dropdown = createBehavior(
             }
         },
         openDropdown() {
+            // Timing
+            const mediaQueryReducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            )
+            let TIMING = 500
+            mediaQueryReducedMotion.matches && (TIMING = 100)
+
             this.isOpen = true
             this.$node.setAttribute('data-is-open', 'true')
-            this.$node.setAttribute('aria-expanded', 'true')
+            this.$btn.setAttribute('aria-expanded', 'true')
             this.initOutClick()
             this.timeout = window.setTimeout(() => {
                 this.$focusableItems = this.$list
@@ -22,12 +29,16 @@ const Dropdown = createBehavior(
                     : []
                 this.$focusIndex = 0
                 this.focusItem()
-            }, 500) // wait for potential reveal animations
+            }, TIMING) // wait for potential reveal animations
+        },
+        focusAndCloseDropdown() {
+            this.$btn.focus()
+            this.closeDropdown()
         },
         closeDropdown() {
             this.isOpen = false
             this.$node.removeAttribute('data-is-open')
-            this.$node.setAttribute('aria-expanded', 'false')
+            this.$btn.setAttribute('aria-expanded', 'false')
             this.disabledOutClick(this.$node)
             window.clearTimeout(this.timeout)
         },
@@ -46,10 +57,28 @@ const Dropdown = createBehavior(
             const key = e.key
             switch (key) {
                 case 'Tab':
-                case 'Escape':
+                    e.preventDefault()
                     e.stopPropagation()
-                    this.$btn.focus()
-                    this.closeDropdown()
+
+                    // shift + tab
+                    if (e.shiftKey) {
+                        this.$focusIndex--
+                        if (this.$focusIndex < 0) {
+                            this.$focusIndex = 0
+                            this.focusAndCloseDropdown()
+                        } else {
+                            this.focusItem()
+                        }
+                        return
+                    } else {
+                        this.$focusIndex++
+                        if (this.$focusIndex >= this.$focusableItems.length) {
+                            this.focusAndCloseDropdown()
+                        } else {
+                            this.focusItem()
+                        }
+                    }
+
                     break
                 case 'Up':
                 case 'ArrowUp':
