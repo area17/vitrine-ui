@@ -46,7 +46,6 @@ class Password extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/PasswordInput.js', 'behaviors/Input.js'],
-        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
