@@ -10,8 +10,6 @@ const Carousel = createBehavior(
         async initCarousel() {
             if (this.swiper) return
 
-            // const { Swiper } = await import('swiper')
-
             this.swiper = new Swiper(this.$node, {
                 ...this.opts
             })
@@ -20,11 +18,6 @@ const Carousel = createBehavior(
     {
         init() {
             this.swiper = null
-            const modules = [Navigation, A11y, Pagination]
-            if (this.options.effect === 'fade') {
-                modules.push(EffectFade)
-            }
-
             this.configuration = this.options.configuration
             let configuration = {}
             if (
@@ -36,21 +29,35 @@ const Carousel = createBehavior(
                     window.A17.sliderConfigurations[this.configuration]
             }
 
+            // Default modules
+            const modules = [Navigation, A11y]
+            if (this.options.pagination || configuration.pagination) {
+                modules.push(Pagination)
+            }
+            if (this.options.effect === 'fade' || configuration.effect) {
+                modules.push(EffectFade)
+            }
+
+            // options
             this.opts = {
                 loop:
                     'loop' in this.options
                         ? this.options.loop === 'true'
                         : true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'fraction'
-                },
-                ...(this.options.effect === 'fade' && {
-                    effect: 'fade',
-                    fadeEffect: {
-                        crossFade: true
-                    }
-                }),
+                ...(this.options.effect === 'fade' ||
+                    (configuration.effect && {
+                        effect: 'fade',
+                        fadeEffect: {
+                            crossFade: true
+                        }
+                    })),
+                ...(this.options.pagination ||
+                    (configuration.pagination && {
+                        pagination: {
+                            el: '.swiper-pagination',
+                            type: 'fraction'
+                        }
+                    })),
                 modules,
                 on: {
                     slideChange: () => {

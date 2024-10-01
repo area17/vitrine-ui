@@ -19,7 +19,7 @@ class Carousel extends VitrineComponent
 
     public bool $asList = false;
     public bool $withControls = true;
-    public bool $withPagination = true;
+    public bool $withPagination = false;
 
     public function __construct(
         array $items = [],
@@ -30,7 +30,7 @@ class Carousel extends VitrineComponent
         string $controlsButtonVariant = '',
         bool $asList = false,
         bool $withControls = true,
-        bool $withPagination = true,
+        bool $withPagination = false,
         array $ui = [],
     ) {
         $this->component = $component;

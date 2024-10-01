@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.13.3] - 2024-30-09
+
+### Fixed
+
+-   Dropdown : Update keyboard behavior to match Disclosure pattern. https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+
+## [2.13.2] - 2024-27-09
+
+### Added
+
+-   Translations : add French translation keys
+
 ## [2.13.1] - 2024-27-09
 
 ### Fixed
