@@ -41,6 +41,7 @@ return [
         'button' => A17\VitrineUI\Components\Button::class,
         'card' => A17\VitrineUI\Components\Card::class,
         'card-link' => A17\VitrineUI\Components\CardLink::class,
+        'carousel' => A17\VitrineUI\Components\Carousel::class,
         'datepicker' => A17\VitrineUI\Components\Datepicker::class,
         'dropdown' => A17\VitrineUI\Components\Dropdown::class,
         'form-checkbox' => A17\VitrineUI\Components\Form\Checkbox::class,
