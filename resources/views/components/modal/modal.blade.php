@@ -1,13 +1,12 @@
 @push($modalsStack)
 
     <div id="{{ $id }}"
-         data-behavior="Modal"
          role="dialog"
          aria-labelledby="{{ $id . '_title' }}"
          aria-modal="true"
+         {{ $attributes->merge(['data-behavior' => $attributes->prepends('Modal')])->twMerge($ui('modal', ['base'])) }}
          {!! $panel ? 'data-Modal-panel="true"' : '' !!}
-         {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}
-         {{ $attributes->class($ui('modal', ['base'])) }}>
+         {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}>
         <div class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"
              data-Modal-focus-trap
              tabindex="-1">

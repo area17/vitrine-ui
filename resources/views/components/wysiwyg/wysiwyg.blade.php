@@ -1,3 +1,3 @@
-<div {{ $attributes->class(VitrineUI::setPrefixedClass(['wysiwyg', 'wysiwyg--' . $variant => $variant])) }}>
+<div {{ $attributes->twMerge(VitrineUI::setPrefixedClass(['wysiwyg', 'wysiwyg--' . $variant => $variant])) }}>
     {!! $slot !!}
 </div>

@@ -1,9 +1,11 @@
 <div data-behavior="Dropdown"
-     {{ $attributes->class($ui('dropdown', 'base')) }}>
+     {{ $attributes->twMerge($ui('dropdown', 'base')) }}>
     <button class="{{ $ui('dropdown', 'trigger') }}"
             data-dropdown-btn
             type="button"
-            aria-label="{{ $ariaLabel }}">
+            aria-label="{{ $ariaLabel }}"
+            aria-expanded="false"
+            aria-controls="{{ $listId }}">
         {{ $label }}
 
         <x-vui-icon class="{{ $ui('dropdown', 'icon') }}"
@@ -12,6 +14,7 @@
     </button>
 
     <div class="{{ $ui('dropdown', 'list') }}"
+         id="{{ $listId }}"
          data-dropdown-list>
         <x-vui-heading class="sr-only"
                        id="{{ $listlabelId }}"
