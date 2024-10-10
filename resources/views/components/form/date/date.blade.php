@@ -6,10 +6,12 @@
         window.A17.translations.form.datepicker = @json(__('vitrine-ui::fe.form.datepicker'));
     }
 </script>
-
-<div data-behavior="Input DateInput{{ $fuzzy ? 'Fuzzy' : '' }}"
-     @if ($picker) data-DatePicker-el="{{ $pickerID }}" @endif
-     {{ $attributes->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+@php
+    $behaviors[] = 'Input';
+    $behaviors[] = $fuzzy ? 'DateInputFuzzy' : 'DateInput';
+@endphp
+<div @if ($picker) data-DatePicker-el="{{ $pickerID }}" @endif
+     {{ $attributes->merge(['data-behavior' => $attributes->prepends(implode(' ', $behaviors))])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $dataAttrs }}
      {{ $disabled ? 'inert' : '' }}>
 
