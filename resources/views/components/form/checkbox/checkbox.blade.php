@@ -55,7 +55,9 @@
             <span class="{{ $ui('checkbox', 'label') }}">
                 {{ $label }}
                 @if ($required)
-                    {{ __('vitrine-ui::fe.form.required') }}
+                    <span class="{{ $ui('checkbox', 'required') }}">
+                        {{ __('vitrine-ui::fe.form.required') }}
+                    </span>
                 @endif
             </span>
             @if ($hint)
