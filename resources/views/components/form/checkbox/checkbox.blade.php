@@ -29,8 +29,7 @@
     }
 @endphp
 
-<div data-behavior="Input"
-     {{ $attributes->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error])) }}
+<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error])) }}
      {{ $disabled ? 'inert' : '' }}>
     <label class="{{ $ui('checkbox', 'base') }}"
            @if ($id || $name) for="{{ $id ? $id : $name . $rand }}" @endif>
@@ -56,7 +55,9 @@
             <span class="{{ $ui('checkbox', 'label') }}">
                 {{ $label }}
                 @if ($required)
-                    {{ __('vitrine-ui::fe.form.required') }}
+                    <span class="{{ $ui('checkbox', 'required') }}">
+                        {{ __('vitrine-ui::fe.form.required') }}
+                    </span>
                 @endif
             </span>
             @if ($hint)

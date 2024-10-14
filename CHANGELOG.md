@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.13.3] - 2024-30-09
+
+### Fixed
+
+-   Dropdown : Update keyboard behavior to match Disclosure pattern. https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+
+## [2.13.2] - 2024-27-09
+
+### Added
+
+-   Translations : add French translation keys
+
+## [2.13.1] - 2024-27-09
+
+### Fixed
+
+-   CardLink : Make sure we can use other tags than span, a (ie : button)
+
+## [2.13.0] - 2024-25-09
+
+### Updated
+
+-   Use TailwindMerge for passing custom class via attributes-bags
+-   Modal : allow to add a behavior on Modal element
+
+### Fixed
+
+-   Modal Click Outside option will not interfering with click events inside the modal
+
 ## [2.12.1] - 2024-23-09
 
 ### Fixed

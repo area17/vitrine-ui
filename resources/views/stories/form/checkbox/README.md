@@ -40,6 +40,7 @@ If there are errors or additional notes (hints) associated with the checkbox, th
     "base": ["m-form-checkbox cursor-pointer"],
     "wrapper": ["m-form-checkbox-wrap", "flex items-center space-x-8"],
     "label": ["m-form-checkbox-label", "f-body-1 inline-flex relative"],
+    "required": "sr-only",
     "check": [
         "m-form-checkbox-check",
         "peer",
@@ -74,6 +75,9 @@ Applied to the direct container of the checkbox and its label.
 
 `label`:
 Applied to the label element that describes the checkbox.
+
+`required`:
+Applied to the children of the label element added if field is required.
 
 `check`:
 Applied to the visual checkbox element itself.

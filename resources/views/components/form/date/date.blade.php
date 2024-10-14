@@ -7,7 +7,11 @@
     }
 </script>
 
-<x-vui-form-field data-behavior="DateInput{{ $fuzzy ? 'Fuzzy' : '' }}"
+@php
+    $behaviors[] = 'Input';
+    $behaviors[] = $fuzzy ? 'DateInputFuzzy' : 'DateInput';
+@endphp
+<x-vui-form-field {{ $attributes->merge(['data-behavior' => $attributes->prepends(implode(' ', $behaviors))])->twMerge(Arr::toCssClasses([$ui('input', 'base')])) }}
                   data-DatePicker-el="{{ $pickerID ? $pickerID : null }}"
                   type="text"
                   aria-describedby="{{ implode(' ', $ariaDescribedBy) }}"

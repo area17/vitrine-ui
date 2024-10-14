@@ -1,9 +1,9 @@
 <div data-behavior="Input FileUpload"
      data-fileupload-size="{{ $fileSize }}"
-     {{ $attributes->twMerge(Arr::toCssClasses(['m-form-upload', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+     {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input FileUpload')])->twMerge(Arr::toCssClasses(['m-form-upload', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $disabled ? 'inert' : '' }}>
 
-    <div class="flex flex-row flex-nowrap items-baseline justify-between gap-gutter">
+    <div class="gap-gutter flex flex-row flex-nowrap items-baseline justify-between">
         <x-vui-form-label :name="$name"
                           :required="$required">
             {{ $label }}
@@ -39,41 +39,41 @@
 
         <div class="relative hidden"
              data-fileupload-selected>
-            <span class="absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full bg-success"
+            <span class="bg-success absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full"
                   data-fileupload-successicon>
-                <x-vui-icon class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-inverse"
+                <x-vui-icon class="text-inverse absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                             name="checkmark-16" />
             </span>
 
-            <span class="absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full bg-error"
+            <span class="bg-error absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full"
                   data-fileupload-erroricon>
-                <x-vui-icon class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-inverse"
+                <x-vui-icon class="text-inverse absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                             name="close-16" />
             </span>
 
             <span class="f-body-1"
                   data-fileupload-selected-name></span>
             <br />
-            <x-vui-link class="f-body-1 mt-4 text-secondary"
+            <x-vui-link class="f-body-1 text-secondary mt-4"
                         variant="primary">Remove</x-vui-link>
         </div>
     </div>
 
-    <p class="f-body-1 mt-4 text-error"
+    <p class="f-body-1 text-error mt-4"
        id="{{ $errorID }}"
        data-Input-error
        aria-live="assertive"
        aria-relevant="additions removals"
        style="display: none;">{{ $error ?? '' }}</p>
 
-    <div class="m-form-upload__info f-body-1 mt-12 text-secondary"
+    <div class="m-form-upload__info f-body-1 text-secondary mt-12"
          id="{{ $ariaID }}UploadInfo">
         <p class="f-ui-2">Accepted file types: {{ $allowed }}</p>
         <p class="f-ui-2">Max file size: {{ $fileSize }}</p>
     </div>
 
     @if ($note)
-        <p class="f-ui-2 mt-4 text-secondary"
+        <p class="f-ui-2 text-secondary mt-4"
            id="{{ $ariaID }}Note">{{ $note }}</p>
     @endif
 </div>
