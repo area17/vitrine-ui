@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.4] - 2024-14-10
+
+### Updated
+
+- Inputs - allow to set additional behaviors
+- Set Theme key for required label and checkbox (because sometimes we dont to display "Required" to every fields)
+
 ## [2.13.3] - 2024-30-09
 
 ### Fixed
