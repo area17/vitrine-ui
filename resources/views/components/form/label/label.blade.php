@@ -11,6 +11,8 @@
         {{ $slot }}
     @endif
     @if ($required)
-        {{ __('vitrine-ui::fe.form.required') }}
+        <span class="{{ $ui('form', 'required') }}">
+            {{ __('vitrine-ui::fe.form.required') }}
+        </span>
     @endif
     </{{ $tag }}>
