@@ -43,6 +43,7 @@ Hint and note texts are associated with the input using aria-describedby, ensuri
     "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
     "input": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
     "input-icon-right": "pr-40",
+    "button": "absolute right-12 top-1/2 -translate-y-1/2",
     "hint": "f-ui-2 text-secondary",
     "note": "f-ui-2 text-secondary mt-4",
     "link": "",
@@ -65,6 +66,9 @@ Applied to the visual input element itself.
 
 `input-icon-right`:
 Additionnal style applied to the input element if withIconRight boolean is true
+
+`button`:
+Applied to positioning the optionnal CTA of the field component.
 
 `hint`:
 Applied to the text element that provides additional guidance or clarification about the input element.
