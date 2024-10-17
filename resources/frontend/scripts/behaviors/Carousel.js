@@ -1,6 +1,12 @@
 import { createBehavior } from '@area17/a17-behaviors'
 import Swiper from 'swiper'
-import { A11y, EffectFade, Navigation, Pagination } from 'swiper/modules'
+import {
+    A11y,
+    Autoplay,
+    EffectFade,
+    Navigation,
+    Pagination
+} from 'swiper/modules'
 
 import { customEvents } from '../constants/customEvents'
 
@@ -36,6 +42,9 @@ const Carousel = createBehavior(
             }
             if (this.options.effect === 'fade' || configuration.effect) {
                 modules.push(EffectFade)
+            }
+            if (this.options.autoplay || configuration.autoplay) {
+                modules.push(Autoplay)
             }
 
             // options
