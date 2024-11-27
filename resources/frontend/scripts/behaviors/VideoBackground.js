@@ -198,7 +198,7 @@ export const VideoBackground = createBehavior(
             }
 
             this.motionReduceDestroy()
-            this.observer.disconnect()
+            this.observer?.disconnect()
         }
     }
 )
