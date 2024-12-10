@@ -31,13 +31,11 @@ export const VideoBackground = createBehavior(
 
         play() {
             this.$player.play()
-            this.updatePlayButton(true)
             this.$player.removeAttribute('data-paused-manual')
         },
 
         pause() {
             this.$player.pause()
-            this.updatePlayButton(false)
         },
 
         mute() {
@@ -56,11 +54,11 @@ export const VideoBackground = createBehavior(
         },
 
         handlePlay() {
-            this.isPlaying = true
+            this.updatePlayButton(true)
         },
 
         handlePause() {
-            this.isPlaying = false
+            this.updatePlayButton(false)
         },
 
         startIntersectionObserver() {
@@ -143,6 +141,11 @@ export const VideoBackground = createBehavior(
                 false
             )
 
+            if (this.$player) {
+                this.$player.addEventListener('play', this.handlePlay)
+                this.$player.addEventListener('pause', this.handlePause)
+            }
+
             if (this.$pauseButton) {
                 this.$pauseButton.addEventListener(
                     'click',
@@ -182,8 +185,10 @@ export const VideoBackground = createBehavior(
             this.initEvents()
         },
         destroy() {
-            this.$player.removeEventListener('play', this.handlePlay)
-            this.$player.removeEventListener('pause', this.handlePause)
+            if (this.$player) {
+                this.$player.removeEventListener('play', this.handlePlay)
+                this.$player.removeEventListener('pause', this.handlePause)
+            }
             document.removeEventListener(
                 customEvents.VIDEO_BACKGROUND_MUTE_ALL,
                 this.mute
