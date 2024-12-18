@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.13.7] - 2024-18-12
+
+### Fixed
+
+- Modal - Check if scroller exist to avoid issues when called from destroy method when navigating from page to page
+
 ## [2.13.6] - 2024-10-12
 
 ### Fixed
