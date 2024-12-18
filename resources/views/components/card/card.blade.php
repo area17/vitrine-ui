@@ -1,8 +1,7 @@
-<{{ $tag }}
-                     {{ $attributes->class(
-                         $ui('card', 'base', [
-                             'variant' => $variant,
-                         ]),
-                     ) }}>
+<{{$tag}} {{ $attributes->twMerge(
+        $ui('card', 'base', [
+            'variant' => $variant
+        ])
+    ) }}>
     {{ $slot }}
     </{{ $tag }}>

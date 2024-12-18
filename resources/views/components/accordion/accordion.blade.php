@@ -5,7 +5,7 @@
         $accordion_id = 'accordion' . $id;
     @endphp
 
-    <div {{ $attributes->class($ui('accordion')) }}>
+    <div {{ $attributes->twMerge($ui('accordion')) }}>
         <x-vui-heading class="sr-only"
                        id="{{ $headingId }}"
                        :level="$headingLevel">

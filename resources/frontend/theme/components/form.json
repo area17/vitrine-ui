@@ -1,4 +1,5 @@
 {
     "base": "",
-    "label": "block f-body-1 font-medium"
+    "label": "block f-body-1 font-medium",
+    "required": "sr-only"
 }

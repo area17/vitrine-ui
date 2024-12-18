@@ -18,9 +18,13 @@ If the field is required, the component appends a "required" indicator to the la
 
 ```json
 {
-    "label": "block f-body-1 font-medium"
+    "label": "block f-body-1 font-medium",
+    "required": "sr-only"
 }
 ```
 
 `label`:
 Applied to the label element.
+
+`required`:
+Applied to the children of the label element added if field is required.

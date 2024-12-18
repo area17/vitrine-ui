@@ -21,7 +21,7 @@
     }
 @endphp
 
-<fieldset {{ $attributes->class([$ui('checkbox-group', 'base'), 's-disabled' => $disabled]) }}
+<fieldset {{ $attributes->twMerge(Arr::toCssClasses([$ui('checkbox-group', 'base'), 's-disabled' => $disabled])) }}
           {{ $disabled ? 'inert' : '' }}>
 
     <div class="{{ $ui('checkbox-group', 'wrapper') }}">

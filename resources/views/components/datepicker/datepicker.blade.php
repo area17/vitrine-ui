@@ -12,7 +12,7 @@
      @if ($maxDate) data-DatePicker-max="{{ $maxDate }}" @endif
      @if ($range) data-DatePicker-range="true" @endif
      @if ($target) data-DatePicker-target="{{ $target }}" @endif
-     {{ $attributes->class(['z-9999']) }}>
+     {{ $attributes->twMerge(['z-9999']) }}>
     <button class="flex items-center gap-8"
             data-DatePicker-trigger
             style="visibility: hidden;">

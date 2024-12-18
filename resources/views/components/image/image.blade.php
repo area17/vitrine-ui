@@ -12,12 +12,12 @@
     {{-- This will be the default in next major version --}}
     @case('next-rendering')
         @if (count($sources ?? []))
-            <x-vui-picture {{ $attributes->class([$ui('media', 'image')]) }}
+            <x-vui-picture {{ $attributes->twMerge([$ui('media', 'image')]) }}
                            :sources="$sources"
                            :fallBackImg="$setPictureFallbackImg($image)"
                            :loading="$loading" />
         @else
-            <x-vui-img {{ $attributes->class([$ui('media', 'image')]) }}
+            <x-vui-img {{ $attributes->twMerge([$ui('media', 'image')]) }}
                        :img="$image"
                        :loading="$loading"
                        :width="$width"
@@ -25,11 +25,10 @@
                        :sizes="$sizes" />
         @endif
     @break
-
     @case('static' || 'twill-image-array')
         <img src="{{ $image['src'] ?? '' }}"
              alt="{{ $image['alt'] ?? '' }}"
-             {{ $attributes->class([$ui('media', 'image'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}
+             {{ $attributes->twMerge([$ui('media', 'image'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}
              @if (Arr::has($imageOptions, 'attributes') && is_array($imageOptions['attributes'])) {!! $setAttributes($imageOptions['attributes']) !!} @endif
              @if (Arr::has($imageOptions, 'width')) width="{{ $imageOptions['width'] }}" @endif
              @if (Arr::has($imageOptions, 'height')) height="{{ $imageOptions['height'] }}" @endif
@@ -42,8 +41,7 @@
     {{-- @deprecated ? --}}
     @case('placeholder')
         <div
-             {{ $attributes->class([$ui('media', 'image-placeholder'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}>
+             {{ $attributes->twMerge([$ui('media', 'image-placeholder'), Arr::has($imageOptions, 'imageClass') ? $imageOptions['imageClass'] : null]) }}>
         </div>
     @break
-
 @endswitch

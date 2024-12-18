@@ -13,6 +13,8 @@ class Dropdown extends VitrineComponent
 
     public ?string $label;
 
+    public string $listId;
+
     public string $listlabelId;
 
     protected static array $assets = [
@@ -28,6 +30,7 @@ class Dropdown extends VitrineComponent
         $this->headingLevel = $headingLevel;
         $this->label = $label ?? __('fe.select_an_option');
         $this->ariaLabel = $ariaLabel ?? $label;
+        $this->listId = 'Dropdown' . Str::random(5);
         $this->listlabelId = 'DropdownLabel' . Str::random(5);
         parent::__construct($ui);
     }
