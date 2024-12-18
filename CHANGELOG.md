@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.13.6] - 2024-10-12
+
+### Fixed
+
+- VideoBackground - Make sure the Play/Pause button are displaying properly following video status
+
+## [2.13.5] - 2024-03-12
+
+### Fixed
+
+- Motion reduced - avoid issue when calling destroy on videoBackground
+
 ## [2.13.4] - 2024-14-10
 
 ### Updated
