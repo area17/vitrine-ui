@@ -1,12 +1,4 @@
 import { createBehavior } from '@area17/a17-behaviors'
-import Swiper from 'swiper'
-import {
-    A11y,
-    Autoplay,
-    EffectFade,
-    Navigation,
-    Pagination
-} from 'swiper/modules'
 
 import { customEvents } from '../constants/customEvents'
 
@@ -16,15 +8,12 @@ const Carousel = createBehavior(
         async initCarousel() {
             if (this.swiper) return
 
-            this.swiper = new Swiper(this.$node, {
-                ...this.opts
-            })
-        }
-    },
-    {
-        init() {
-            this.swiper = null
-            this.configuration = this.options.configuration
+            // import swiper and modules only when initializing the carousel
+            const { Swiper } = await import('swiper')
+            const { A11y, Autoplay, EffectFade, Navigation, Pagination } =
+                await import('swiper/modules')
+
+            // extra configuration
             let configuration = {}
             if (
                 this.configuration &&
@@ -37,6 +26,7 @@ const Carousel = createBehavior(
 
             // Default modules
             const modules = [Navigation, A11y]
+
             if (this.options.pagination || configuration.pagination) {
                 modules.push(Pagination)
             }
@@ -47,8 +37,8 @@ const Carousel = createBehavior(
                 modules.push(Autoplay)
             }
 
-            // options
-            this.opts = {
+            // init swiper
+            this.swiper = new Swiper(this.$node, {
                 loop:
                     'loop' in this.options
                         ? this.options.loop === 'true'
@@ -67,7 +57,19 @@ const Carousel = createBehavior(
                             type: 'fraction'
                         }
                     })),
+                ...this.opts,
                 modules,
+                ...configuration
+            })
+        }
+    },
+    {
+        init() {
+            this.swiper = null
+            this.configuration = this.options.configuration
+
+            // options
+            this.opts = {
                 on: {
                     slideChange: () => {
                         document.dispatchEvent(
@@ -80,8 +82,7 @@ const Carousel = createBehavior(
                 navigation: {
                     nextEl: '.swiper-next-btn',
                     prevEl: '.swiper-prev-btn'
-                },
-                ...configuration
+                }
             }
         },
         enabled() {
