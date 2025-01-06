@@ -1,41 +1,43 @@
-This is a basic button component. It renders an `a`, `span` or `button` depending on the props (see below) passed to the component.
+The carousel component that is based on the Swiper JS library. It renders a list of carousel slides depending on the props passed to the component.
 
-Any additional attributes are merged with the component's existing attributes to allow you to add ids, behaviors, data attributes, etc to the component.
+The `component` prop is mandatory to set the markup for each slides by loading a dynamic component. The dynamic component must have an `item` prop to properly load data for each slide.
 
-The default component slot is used for the label text within the button. It can be left blank and used with the `icon` prop to render an 'icon-only' button.
+Custom configuration object can setup globally to the `window.A17.sliderConfigurations` JS object.
+Additionnal props are present to deactivate controls or pagination.
 
 ## Usage
 
 ```html
-<x-vui-button
-    href="https://example.url"
-    icon="chevron-right"
-    icon-position="after"
-    :static="false"
-    :disabled="false"
-    :active="false"
->
-    Label Text
-</x-vui-button>
+@php
+    $MEDIA_CAROUSEL = [
+        'slidesPerView' => 'auto',
+        'freeMode' => false,
+        'allowTouchMove' => true,
+        'loop' => false,
+        'spaceBetween' => 10,
+    ];
+@endphp
+<script>
+    window.A17 = window.A17 || {};
+    window.A17.sliderConfigurations = {
+        'media-carousel': {
+            ...@json($MEDIA_CAROUSEL)
+        }
+    };
+</script>
+
+<x-vui-carousel class="h-[320px] px-outer-gutter"
+    :items="$items"
+    component="cards.media-carousel-item"
+    configuration="media-carousel"
+    :with-controls="false"
+    item-class="flex"
+    />
 ```
 
 ## Accessibility
 
-Buttons should always have an accessible name. For most buttons this will be the label text but for buttons without label text they should have an `aria-label` or `aria-labelledby` attribute.
-
-External links must open in a new window/tab and the element must have an `aria-label` with the link text + '. Opens in a new tab' as the value. eg:
-
-```html
-<x-vui-button
-    variant="primary"
-    size="small"
-    href="https://area17.com"
-    target="_blank"
-    aria-label="Site by AREA 17. Opens in a new tab."
->
-    Site by AREA 17
-</x-vui-button>
-```
+Carousel is using A11y modules from Swiper JS by default.
 
 ## Theming
 
@@ -43,43 +45,38 @@ External links must open in a new window/tab and the element must have an `aria-
 
 ```json
 {
-    "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
-    "size": {
-        "sm": "p-4",
-        "md": "p-8"
-    },
-    "variant": {
-        "primary": "bg-primary",
-        "secondary": "bg-secondary text-inverse",
-        "outline": ""
-    },
-    "icon_only": {
-        "true": "",
-        "false": ""
-    },
-    "icon_position": {
-        "before": "",
-        "after": ""
-    },
-    "default": {
-        "size": "sm",
-        "variant": "primary"
-    },
-    "label": "text-inherit"
+  "base": "container",
+  "wrapper": "flex flex-nowrap",
+  "item": "",
+  "controls": "flex items-center gap-4",
+  "controls-button": "flex items-center",
+  "controls-icon-left": "arrow-left-24",
+  "controls-icon-right": "arrow-right-24",
+  "footer": "flex justify-between items-center mt-16 relative",
+  "pagination": "ml-auto f-ui-01 relative"
 }
 ```
 
-`size`:
-Defines the size variations of the button, typically adjusting the padding around the text or icon. The available options (sm, md, etc.) allow you to choose different levels of button compactness.
+`wrapper`:
+Styling of the Swiper wrapper div
 
-`variant`:
-Controls the visual style of the button, such as background colors, text colors, and borders. You can define multiple variants (primary, secondary, outline, etc.) to suit different use cases of the button in the interface.
+`item`:
+Additional styling for each slides (li or div element) that is wrapping the dynamic component.
 
-`icon_only`:
-Indicates whether the button is used without text, only with an icon. This can alter how spacing around the icon is handled, allowing for a more compact appearance in icon-only buttons.
+`controls`:
+Visual styling for the wrapper of the controls
 
-`icon_position`:
-Determines the position of the icon relative to the button’s text. The options (before, after) allow you to place the icon before or after the button label.
+`controls-button`:
+Additional styling applied for the Previous/Next buttons (using Vitrine UI Button with icon-only mode)
 
-`default`:
-Specifies default values for the size and variant properties when they are not explicitly set.
+`controls-icon-left`:
+Icon used for the Previous button
+
+`controls-icon-right`:
+Icon used for the Next button
+
+`footer`:
+Styling for the wrapper of the pagination and the controls if pagination of controls are setup
+
+`pagination`:
+Control the styling of the pagination wrapper div if any pagination must show

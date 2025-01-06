@@ -26,7 +26,9 @@ const Modal = createBehavior(
                 this._data.isActive = false
 
                 setTimeout(() => {
-                    enableBodyScroll(this.$scroller)
+                    if (this.$scroller) {
+                        enableBodyScroll(this.$scroller)
+                    }
                 }, 200)
 
                 this.$node.dispatchEvent(

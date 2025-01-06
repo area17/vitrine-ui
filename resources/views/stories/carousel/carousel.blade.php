@@ -1,14 +1,60 @@
 @storybook([
     'status' => 'readyForQA',
-    'preset' => 'button.base',
+    'layout' => 'fullscreen',
+    'args' => [
+        'items' => [
+            [
+                'title' => 'Slide 1',
+            ],
+            [
+                'title' => 'Slide 2',
+            ],
+            [
+                'title' => 'Slide 3',
+            ],
+            [
+                'title' => 'Slide 4',
+            ],
+            [
+                'title' => 'Slide 5',
+            ],
+            [
+                'title' => 'Slide 6',
+            ],
+            [
+                'title' => 'Slide 7',
+            ],
+            [
+                'title' => 'Slide 8',
+            ],
+        ],
+    ],
 ])
 
-<x-vui-button :href="$href ?? null"
-              :icon="$icon ?? null"
-              :icon-position="$iconPosition ?? null"
-              :static="$static ?? null"
-              :disabled="$disabled ?? null"
-              :active="$active ?? null"
-              variant="primary">
-    {{ $label ?? null }}
-</x-vui-button>
+@php
+    $MEDIA_CAROUSEL = [
+        'slidesPerView' => 'auto',
+        'freeMode' => false,
+        'allowTouchMove' => true,
+        'loop' => false,
+        'spaceBetween' => 10,
+    ];
+@endphp
+
+<script>
+    window.A17 = window.A17 || {};
+    window.A17.sliderConfigurations = {
+        'media-carousel': {
+            ...@json($MEDIA_CAROUSEL)
+        }
+    };
+</script>
+
+<div class="w-full overflow-hidden">
+    <x-vui-carousel class="px-outer-gutter"
+                    :items="$items"
+                    item-class="w-[300px] shrink-0"
+                    component="demo-carousel-item"
+                    configuration="media-carousel"
+                    :with-controls="false" />
+</div>
