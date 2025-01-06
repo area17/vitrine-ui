@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.0] - 2025-06-01
+
+### Updated
+
+- New : Carousel Component using SwiperJS
+
 ## [2.13.7] - 2024-18-12
 
 ### Fixed
