@@ -44,6 +44,7 @@
         "@area17/a17-tailwind-plugins": "3.x",
         "body-scroll-lock-upgrade": "1.x",
         "focus-trap": "7.x",
+        "swiper": "11.x",
         "tailwindcss": "3.x"
     },
     "authors": [
