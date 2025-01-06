@@ -54,5 +54,4 @@
                 item-class="w-1/4 flex"
                 component="demo-carousel-item"
                 configuration="media-carousel"
-                :with-controls="false"
-                item-class="flex" />
+                :with-controls="false" />
