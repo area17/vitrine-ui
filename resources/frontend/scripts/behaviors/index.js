@@ -5,6 +5,7 @@
 // This is not recommended to use in projects, as it will import all components at once
 export { default as Accordion } from './Accordion'
 export { default as AudioPlayer } from './AudioPlayer'
+export { default as Carousel } from './Carousel'
 export { default as DateInput } from './DateInput'
 export { default as DateInputFuzzy } from './DateInputFuzzy'
 export { default as DatePicker } from './Datepicker'

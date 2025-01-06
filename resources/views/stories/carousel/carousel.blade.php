@@ -3,24 +3,22 @@
     'args' => [
         'items' => [
             [
-                'src' => 'https://placehold.co/600x400.png',
-                'alt' => 'Sample Alt Text',
+                'title' => 'Slide 1',
             ],
             [
-                'src' => 'https://placehold.co/600x400.png',
-                'alt' => 'Sample Alt Text',
+                'title' => 'Slide 2',
             ],
             [
-                'src' => 'https://placehold.co/600x400.png',
-                'alt' => 'Sample Alt Text',
+                'title' => 'Slide 3',
             ],
             [
-                'src' => 'https://placehold.co/600x400.png',
-                'alt' => 'Sample Alt Text',
+                'title' => 'Slide 4',
             ],
             [
-                'src' => 'https://placehold.co/600x400.png',
-                'alt' => 'Sample Alt Text',
+                'title' => 'Slide 5',
+            ],
+            [
+                'title' => 'Slide 6',
             ],
         ],
     ],
@@ -47,7 +45,7 @@
 
 <x-vui-carousel @class(['h-[320px] px-outer-gutter'])
                 :items="$items"
-                component="x-vui-image"
+                component="demo-card"
                 configuration="media-carousel"
                 :with-controls="false"
                 item-class="flex" />
