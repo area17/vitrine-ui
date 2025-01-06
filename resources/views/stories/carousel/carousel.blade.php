@@ -20,6 +20,12 @@
             [
                 'title' => 'Slide 6',
             ],
+            [
+                'title' => 'Slide 7',
+            ],
+            [
+                'title' => 'Slide 8',
+            ],
         ],
     ],
 ])
@@ -45,7 +51,8 @@
 
 <x-vui-carousel @class(['h-[320px] px-outer-gutter'])
                 :items="$items"
-                component="demo-card"
+                item-class="w-1/4 flex"
+                component="demo-carousel-item"
                 configuration="media-carousel"
                 :with-controls="false"
                 item-class="flex" />
