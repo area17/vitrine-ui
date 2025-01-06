@@ -1,5 +1,6 @@
 @storybook([
     'status' => 'readyForQA',
+    'layout' => 'fullscreen',
     'args' => [
         'items' => [
             [
@@ -52,7 +53,7 @@
 <div class="w-full overflow-hidden">
     <x-vui-carousel class="px-outer-gutter"
                     :items="$items"
-                    item-class="w-1/4 flex"
+                    item-class="w-[300px] flex"
                     component="demo-carousel-item"
                     configuration="media-carousel"
                     :with-controls="false" />
