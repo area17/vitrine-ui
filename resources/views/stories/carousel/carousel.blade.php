@@ -49,9 +49,11 @@
     };
 </script>
 
-<x-vui-carousel @class(['h-[320px] px-outer-gutter'])
-                :items="$items"
-                item-class="w-1/4 flex"
-                component="demo-carousel-item"
-                configuration="media-carousel"
-                :with-controls="false" />
+<div class="w-full overflow-hidden">
+    <x-vui-carousel class="px-outer-gutter"
+                    :items="$items"
+                    item-class="w-1/4 flex"
+                    component="demo-carousel-item"
+                    configuration="media-carousel"
+                    :with-controls="false" />
+</div>
