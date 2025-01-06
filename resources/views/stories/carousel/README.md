@@ -1,6 +1,7 @@
-The carousel component that is based on the Swiper JS library. It renders a list of carousel slides depending on the props (see below) passed to the component.
+The carousel component that is based on the Swiper JS library. It renders a list of carousel slides depending on the props passed to the component.
 
-The `component` prop is mandatory to set the markup for each slides by loading a dynamic component.
+The `component` prop is mandatory to set the markup for each slides by loading a dynamic component. The dynamic component must have an `item` prop to properly load data for each slide.
+
 Custom configuration object can setup globally to the `window.A17.sliderConfigurations` JS object.
 Additionnal props are present to deactivate controls or pagination.
 
