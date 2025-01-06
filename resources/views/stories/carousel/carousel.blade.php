@@ -53,7 +53,7 @@
 <div class="w-full overflow-hidden">
     <x-vui-carousel class="px-outer-gutter"
                     :items="$items"
-                    item-class="w-[300px] flex"
+                    item-class="w-[300px] shrink-0"
                     component="demo-carousel-item"
                     configuration="media-carousel"
                     :with-controls="false" />
