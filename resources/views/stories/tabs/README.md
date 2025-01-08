@@ -1,7 +1,7 @@
 The tabs component renders a list with button to show/hide an active content defined into the slot.
 Each component must be defined using the tabs-panel component with the same $name so ids are matching between panels and buttons.
 
-In the example below, the `$tabNames` array will define the label for each buttons and the `$contents` Array will define the iner content of each panel.
+In the example below, the `$tabNames` array will define the label text for each button and the `$contents` Array will define the inner content for each panel.
 
 ## Usage
 
