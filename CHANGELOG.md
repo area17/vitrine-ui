@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.1] - 2025-08-01
+
+### Updated
+
+- New : Tabs Component
+
 ## [2.14.0] - 2025-06-01
 
 ### Updated
