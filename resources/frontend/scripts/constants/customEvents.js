@@ -6,6 +6,8 @@
 /* - Avoid duplicated values */
 
 export const customEvents = {
+    CAROUSEL_CHANGE: 'Carousel:Change' /* node event */,
+
     MODAL_CLOSED: 'Modal:hasClosed' /* document event */,
     MODAL_OPENED: 'Modal:hasOpened' /* document event */,
     MODAL_CLOSE_ALL: 'Modal:closeAll' /* document event */,
@@ -32,5 +34,9 @@ export const customEvents = {
     DATE_PICKER_UPDATE: 'DatePicker:MinMaxUpdate' /* node event */,
 
     INPUT_VALIDATED: 'Input:Validated' /* node event */,
-    INPUT_RESET: 'Input:Reset' /* node event */
+    INPUT_RESET: 'Input:Reset' /* node event */,
+
+    TABS_OPENED: 'Tabs:opened', /* node event */
+    TABS_SHOWN: 'Tabs:shown', /* node event */
+    TABS_HIDDEN: 'Tabs:hidden' /* node event */
 }

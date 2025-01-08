@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.14.1] - 2025-08-01
+
+### Updated
+
+- New : Tabs Component
+
+## [2.14.0] - 2025-06-01
+
+### Updated
+
+- New : Carousel Component using SwiperJS
+
+## [2.13.7] - 2024-18-12
+
+### Fixed
+
+- Modal - Check if scroller exist to avoid issues when called from destroy method when navigating from page to page
+
+## [2.13.6] - 2024-10-12
+
+### Fixed
+
+- VideoBackground - Make sure the Play/Pause button are displaying properly following video status
+
 ## [2.13.5] - 2024-03-12
 
 ### Fixed
