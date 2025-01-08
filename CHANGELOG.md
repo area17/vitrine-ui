@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.2] - 2025-08-01
+
+### Updated
+
+- Modal : add 'data-init' attribute when modal is first opened. This can be used to set some styling before modal is first opened. For example, this can be used to set a display none (to avoid iOS Safari crashing for example)
+
 ## [2.14.1] - 2025-08-01
 
 ### Updated
