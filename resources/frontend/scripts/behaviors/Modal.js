@@ -60,6 +60,7 @@ const Modal = createBehavior(
                 reserveScrollBarGap: true
             })
 
+            this.$node.setAttribute('data-init', 'true')
             this.$node.setAttribute('data-active', 'true')
             this._data.isActive = true
 
