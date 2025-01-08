@@ -16,8 +16,9 @@
             :title-level="$titleLevel">
     @foreach ($contents as $content)
         <x-vui-tabs-panel :name="$name"
-                          :index="$loop->index">
-            {{ $content }}
+                          :index="$loop->index"
+                          :selected="$loop->first">
+            {!! $content !!}
         </x-vui-tabs-panel>
     @endforeach
 </x-vui-tabs>
