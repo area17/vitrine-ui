@@ -20,6 +20,7 @@
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
         'btnVariant' => 'secondary',
+        'btnSize' => 'sm',
     ],
     'argTypes' => [
         'pages' => [
@@ -71,13 +72,13 @@
 ])
 
 <div class="container">
-    <x-vui-pagination :btnVariant="$btnVariant"
+    <x-vui-pagination :btn-variant="$btnVariant"
                       :pages="$pages ?? []"
-                      :iconLeft="$iconLeft"
-                      :iconRight="$iconRight"
-                      :currentPage="$current_page"
-                      :currentPageCount="$current_page_count"
-                      :lastPage="$last_page"
+                      :icon-left="$iconLeft"
+                      :icon-right="$iconRight"
+                      :current-page="$current_page"
+                      :current-page-count="$current_page_count"
+                      :last-page="$last_page"
                       :total="$total"
-                      btnVariant="secondary-icon" />
+                      :btn-size="$btnSize" />
 </div>
