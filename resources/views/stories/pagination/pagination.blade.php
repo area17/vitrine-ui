@@ -53,6 +53,11 @@
             'defaultValue' => ['summary' => 'secondary'],
             'control' => 'text',
         ],
+        'btnSize' => [
+            'description' => 'The variant size of the buttons used in pagination (previous/next).',
+            'defaultValue' => ['summary' => 'sm'],
+            'control' => 'text',
+        ],
         'iconLeft' => [
             'description' => 'The icon used for the previous button.',
             'defaultValue' => ['summary' => 'arrow-left-24'],
