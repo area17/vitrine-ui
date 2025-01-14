@@ -17,8 +17,10 @@
                           :href="$prevPageUrl()"
                           :variant="$btnVariant ?? 'secondary'"
                           :icon="$iconLeft ?? 'arrow-left-24'"
+                          :size="$btnSize ?? null"
                           :static="$onFirstPage"
-                          :disabled="$onFirstPage" />
+                          :disabled="$onFirstPage"
+                          :icon-only="true" />
 
             <x-vui-button class="{{ Arr::toCssClasses([
                 $ui('pagination', 'action-disabled') => $onLastPage,
@@ -27,8 +29,10 @@
                           :href="$nextPageUrl()"
                           :icon="$iconRight ?? 'arrow-right-24'"
                           :variant="$btnVariant ?? 'secondary'"
+                          :size="$btnSize ?? null"
                           :static="$onLastPage"
-                          :disabled="$onLastPage" />
+                          :disabled="$onLastPage"
+                          :icon-only="true" />
         </div>
         <span class="{{ $ui('pagination', 'show-message') }}">
             {{ __('vitrine-ui::fe.pagination.showing', ['count' => $currentPageCount, 'total' => $total]) }}
