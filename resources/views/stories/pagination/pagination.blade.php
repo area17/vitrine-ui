@@ -20,6 +20,7 @@
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
         'btnVariant' => 'secondary',
+        'btnSize' => 'sm',
     ],
     'argTypes' => [
         'pages' => [
@@ -52,6 +53,11 @@
             'defaultValue' => ['summary' => 'secondary'],
             'control' => 'text',
         ],
+        'btnSize' => [
+            'description' => 'The variant size of the buttons used in pagination (previous/next).',
+            'defaultValue' => ['summary' => 'sm'],
+            'control' => 'text',
+        ],
         'iconLeft' => [
             'description' => 'The icon used for the previous button.',
             'defaultValue' => ['summary' => 'arrow-left-24'],
@@ -71,13 +77,13 @@
 ])
 
 <div class="container">
-    <x-vui-pagination :btnVariant="$btnVariant"
+    <x-vui-pagination :btn-variant="$btnVariant"
                       :pages="$pages ?? []"
-                      :iconLeft="$iconLeft"
-                      :iconRight="$iconRight"
-                      :currentPage="$current_page"
-                      :currentPageCount="$current_page_count"
-                      :lastPage="$last_page"
+                      :icon-left="$iconLeft"
+                      :icon-right="$iconRight"
+                      :current-page="$current_page"
+                      :current-page-count="$current_page_count"
+                      :last-page="$last_page"
                       :total="$total"
-                      btnVariant="secondary-icon" />
+                      :btn-size="$btnSize" />
 </div>

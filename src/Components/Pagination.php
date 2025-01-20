@@ -24,6 +24,8 @@ class Pagination extends VitrineComponent
 
     public ?string $btnVariant;
 
+    public ?string $btnSize;
+
     public ?string $iconLeft = 'arrow-left-24';
 
     public ?string $iconRight = 'arrow-right-24';
@@ -41,12 +43,14 @@ class Pagination extends VitrineComponent
         string|int $total = null,
         string|int $lastPage = 1,
         ?string $btnVariant = 'secondary',
+        ?string $btnSize = null,
         ?string $iconLeft = 'arrow-left-24',
         ?string $iconRight = 'arrow-right-24',
         bool $labelInsideDropdown = true,
         array $ui = [],
     ) {
         $this->btnVariant = $btnVariant;
+        $this->btnSize = $btnSize;
         $this->pages = $pages;
         $this->currentPage = $currentPage;
         $this->currentPageCount = $currentPageCount;

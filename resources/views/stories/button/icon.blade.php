@@ -6,7 +6,7 @@
 
 <x-vui-button :href="$href ?? null"
               :icon="$icon ?? null"
-              :iconOnly="true"
+              :icon-only="true"
               :static="$static ?? null"
               :inverse="$inverse ?? null"
               :disabled="$disabled ?? null"

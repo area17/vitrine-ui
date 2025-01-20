@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.3] - 2025-14-01
+
+### Updated
+
+- Pagination : add option to control Prev/Next button sizes.
+
 ## [2.14.2] - 2025-08-01
 
 ### Updated
