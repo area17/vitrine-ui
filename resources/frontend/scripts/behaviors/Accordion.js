@@ -1,5 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
+import { customEvents } from '../constants/customEvents'
+
 const TIMEOUT = 16
 
 const Accordion = createBehavior(
@@ -90,6 +92,18 @@ const Accordion = createBehavior(
             if (e.currentTarget) {
                 if (e.currentTarget.clientHeight === 0) {
                     e.currentTarget.classList.add('hidden')
+
+                    let allClosed = true
+                    this.$triggers.forEach(($trigger) => {
+                        if ($trigger.getAttribute('aria-expanded') === 'true')
+                            allClosed = false
+                    })
+
+                    if (allClosed) {
+                        this.$node.dispatchEvent(
+                            new CustomEvent(customEvents.ACCORDION_CLOSED)
+                        )
+                    }
                 } else {
                     if (e.currentTarget.dataset.setFixedHeight === 'false') {
                         e.currentTarget.style.height = 'auto'
@@ -108,6 +122,10 @@ const Accordion = createBehavior(
                             behavior: 'smooth'
                         })
                     }
+
+                    this.$node.dispatchEvent(
+                        new CustomEvent(customEvents.ACCORDION_OPENED)
+                    )
                 }
             }
         }
