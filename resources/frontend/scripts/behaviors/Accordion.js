@@ -63,6 +63,7 @@ const Accordion = createBehavior(
             activeTrigger.setAttribute(`data-${this.name}-open`, 'false')
             activeContent.setAttribute('aria-hidden', 'true')
             activeContent.setAttribute(`data-${this.name}-open`, 'false')
+            activeContent.setAttribute('inert', '')
         },
 
         open(index) {
@@ -72,6 +73,7 @@ const Accordion = createBehavior(
             const activeContentInner = this.$contentInners[index]
 
             activeContent.classList.remove('hidden')
+            activeContent.removeAttribute('inert')
 
             // Start Animation
             setTimeout(() => {
