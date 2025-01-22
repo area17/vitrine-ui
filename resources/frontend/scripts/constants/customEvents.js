@@ -6,6 +6,7 @@
 /* - Avoid duplicated values */
 
 export const customEvents = {
+    ACCORDION_OPEN: 'Accordion:open' /* node event */,
     ACCORDION_OPENED: 'Accordion:opened' /* node event */,
     ACCORDION_CLOSED: 'Accordion:closed' /* node event */,
 

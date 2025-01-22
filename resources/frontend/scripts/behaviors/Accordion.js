@@ -77,6 +77,10 @@ const Accordion = createBehavior(
             activeContent.classList.remove('hidden')
             activeContent.removeAttribute('inert')
 
+            this.$node.dispatchEvent(
+                new CustomEvent(customEvents.ACCORDION_OPEN)
+            )
+
             // Start Animation
             setTimeout(() => {
                 const contentHeight = activeContentInner.offsetHeight
