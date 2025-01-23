@@ -6,6 +6,10 @@
 /* - Avoid duplicated values */
 
 export const customEvents = {
+    ACCORDION_OPEN: 'Accordion:open' /* node event */,
+    ACCORDION_OPENED: 'Accordion:opened' /* node event */,
+    ACCORDION_CLOSED: 'Accordion:closed' /* node event */,
+
     CAROUSEL_CHANGE: 'Carousel:Change' /* node event */,
 
     MODAL_CLOSED: 'Modal:hasClosed' /* document event */,
@@ -36,7 +40,7 @@ export const customEvents = {
     INPUT_VALIDATED: 'Input:Validated' /* node event */,
     INPUT_RESET: 'Input:Reset' /* node event */,
 
-    TABS_OPENED: 'Tabs:opened', /* node event */
-    TABS_SHOWN: 'Tabs:shown', /* node event */
+    TABS_OPENED: 'Tabs:opened' /* node event */,
+    TABS_SHOWN: 'Tabs:shown' /* node event */,
     TABS_HIDDEN: 'Tabs:hidden' /* node event */
 }

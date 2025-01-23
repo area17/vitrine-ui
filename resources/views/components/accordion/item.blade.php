@@ -20,14 +20,13 @@
     <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading') }}"
                    :level="$headingLevel">
         <button class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
-                id="{{ $label_id }}"
                 class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
-                aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
-                aria-controls="{{ $item_id }}"
+                id="{{ $label_id }}"
                 data-accordion-trigger
                 data-accordion-open="{{ $isOpen ? 'true' : 'false' }}"
                 data-accordion-index="{{ $index }}"
-        >
+                aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
+                aria-controls="{{ $item_id }}">
             @if ($slotTrigger ?? false)
                 {{ $slotTrigger }}
             @else
@@ -55,7 +54,8 @@
          data-set-fixed-height="{{ $setFixedHeight ? 'true' : 'false' }}"
          role="region"
          aria-labelledby="{{ $label_id }}"
-         aria-hidden="{{ $isOpen ? 'false' : 'true' }}">
+         aria-hidden="{{ $isOpen ? 'false' : 'true' }}"
+         {{ !$isOpen ? 'inert' : '' }}>
         <div class="{{ VitrineUI::ui('accordion-item', 'content-inner') }}"
              data-accordion-content-inner>
             {!! $slot !!}
