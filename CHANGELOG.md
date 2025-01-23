@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.4] - 2025-23-01
+
+### Updated
+
+- Accordion : add events for closed/opened status.
+- Accordion : Set invisible content as inert to better avoid link being focusable on page load.
+
 ## [2.14.3] - 2025-14-01
 
 ### Updated
