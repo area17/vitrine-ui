@@ -23,17 +23,21 @@ const Accordion = createBehavior(
             // exclusive mode : close other opened accordion items
             if (this.exclusive) {
                 setTimeout(() => {
-                    this.$triggers.forEach((trigger) => {
-                        const triggerIndex = this.getTriggerIndex(trigger)
+                    if (this.$triggers) {
+                        this.$triggers.forEach((trigger) => {
+                            const triggerIndex = this.getTriggerIndex(trigger)
 
-                        // closed opened accordion items
-                        if (
-                            this._data.activeIndexes.includes(triggerIndex) &&
-                            triggerIndex !== index
-                        ) {
-                            this.triggerClose(triggerIndex)
-                        }
-                    })
+                            // closed opened accordion items
+                            if (
+                                this._data.activeIndexes.includes(
+                                    triggerIndex
+                                ) &&
+                                triggerIndex !== index
+                            ) {
+                                this.triggerClose(triggerIndex)
+                            }
+                        })
+                    }
                 }, TIMEOUT + 1)
             }
         },
