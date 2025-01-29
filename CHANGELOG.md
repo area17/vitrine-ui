@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.5] - 2025-29-01
+
+### Fixed
+
+- Accordion : Exclusive mode should not throw error when destroy() is called.
+
+
 ## [2.14.4] - 2025-23-01
 
 ### Updated
