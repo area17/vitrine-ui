@@ -6,6 +6,7 @@
     'iconClosed' => 'plus-32',
     'iconOpen' => 'minus-32',
     'open' => false,
+    'ui' => [],
 ])
 
 @php
@@ -17,9 +18,9 @@
 
 <li data-accordion-item
     {{ $attributes->twMerge(VitrineUI::ui('accordion-item')) }}>
-    <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading') }}"
+    <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading', [], $ui ?? []) }}"
                    :level="$headingLevel">
-        <button class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
+        <button class="{{ VitrineUI::ui('accordion-item', 'trigger', [], $ui ?? []) }}"
                 id="{{ $label_id }}"
                 data-accordion-trigger
                 data-accordion-open="{{ $isOpen ? 'true' : 'false' }}"
@@ -29,8 +30,8 @@
             @if ($slotTrigger ?? false)
                 {{ $slotTrigger }}
             @else
-                <span class="{{ VitrineUI::ui('accordion-item', 'title') }}">{{ $title }}</span>
-                <div class="{{ VitrineUI::ui('accordion-item', 'icons') }}">
+                <span class="{{ VitrineUI::ui('accordion-item', 'title', [], $ui ?? []) }}">{{ $title }}</span>
+                <div class="{{ VitrineUI::ui('accordion-item', 'icons', [], $ui ?? []) }}">
                     @if ($iconClosed ?? false)
                         <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-close']) }}"
                                     aria-hidden="true"
@@ -46,7 +47,7 @@
         </button>
     </x-vui-heading>
 
-    <div class="{{ VitrineUI::ui('accordion-item', 'content') }}"
+    <div class="{{ VitrineUI::ui('accordion-item', 'content', [], $ui ?? []) }}"
          id="{{ $item_id }}"
          data-accordion-content
          data-accordion-open="{{ $isOpen ? 'true' : 'false' }}"
@@ -55,7 +56,7 @@
          aria-labelledby="{{ $label_id }}"
          aria-hidden="{{ $isOpen ? 'false' : 'true' }}"
          {{ !$isOpen ? 'inert' : '' }}>
-        <div class="{{ VitrineUI::ui('accordion-item', 'content-inner') }}"
+        <div class="{{ VitrineUI::ui('accordion-item', 'content-inner', [], $ui ?? []) }}"
              data-accordion-content-inner>
             {!! $slot !!}
         </div>
