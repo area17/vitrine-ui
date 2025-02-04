@@ -33,12 +33,12 @@
                 <span class="{{ VitrineUI::ui('accordion-item', 'title', [], $ui ?? []) }}">{{ $title }}</span>
                 <div class="{{ VitrineUI::ui('accordion-item', 'icons', [], $ui ?? []) }}">
                     @if ($iconClosed ?? false)
-                        <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-close']) }}"
+                        <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-close'], $ui ?? []) }}"
                                     aria-hidden="true"
                                     :name="$iconClosed" />
                     @endif
                     @if ($iconOpen ?? false)
-                        <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-open']) }}"
+                        <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-open'], $ui ?? []) }}"
                                     aria-hidden="true"
                                     :name="$iconOpen" />
                     @endif
