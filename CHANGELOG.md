@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.6] - 2025-04-02
+
+### Updated
+
+- Accordion Item : add $ui override capablity. Accordion Item can now be styled individually to override default style.
+
 ## [2.14.5] - 2025-29-01
 
 ### Fixed
