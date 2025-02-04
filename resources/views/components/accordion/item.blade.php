@@ -20,7 +20,6 @@
     <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading') }}"
                    :level="$headingLevel">
         <button class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
-                class="{{ VitrineUI::ui('accordion-item', 'trigger') }}"
                 id="{{ $label_id }}"
                 data-accordion-trigger
                 data-accordion-open="{{ $isOpen ? 'true' : 'false' }}"
