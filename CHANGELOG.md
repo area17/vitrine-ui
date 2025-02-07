@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.7] - 2025-07-02
+
+### Updated
+
+- Icon : Avoid duplicated aria-hidden attributes when using Icon Component. The attribute is already added when rendering the icon.
+
 ## [2.14.6] - 2025-04-02
 
 ### Updated
