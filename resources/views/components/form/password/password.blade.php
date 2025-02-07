@@ -25,13 +25,11 @@
             data-PasswordInput-toggle>
         <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
                     name="eye-hide-24"
-                    data-PasswordInput-iconhidden
-                    aria-hidden="true" />
+                    data-PasswordInput-iconhidden />
         <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
                     name="eye-24"
                     data-PasswordInput-iconshown
-                    aria-hidden="true"
-                    style="display: none;" />
+                    aria-hidden="true" />
         <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>
     </button>
 </x-vui-form-field>
