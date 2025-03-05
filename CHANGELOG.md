@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.14.5] - 2025-05-03
+
+### Updated
+
+- Modal : Add 'open' prop to tell if a modal must open on page load.
+
 ## [2.14.7] - 2025-07-02
 
 ### Updated
