@@ -181,6 +181,11 @@ const Modal = createBehavior(
             this.$triggers?.forEach((trigger) => {
                 trigger.addEventListener('click', this.toggle)
             })
+
+            // open on page load
+            if (this.options['open']) {
+                this.open()
+            }
         },
         destroy() {
             this.close()

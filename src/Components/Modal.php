@@ -18,6 +18,8 @@ class Modal extends VitrineComponent
 
     public bool $setInitialFocus;
 
+    public bool $open;
+
     public ?string $variant;
 
     public ?string $modalsStack;
@@ -35,6 +37,7 @@ class Modal extends VitrineComponent
         string $variant = null,
         bool $setInitialFocus = true,
         bool $clickOutsideToClose = false,
+        bool $open = false,
         array $ui = [],
         string $modalsStack = 'modals',
     ) {
@@ -44,6 +47,7 @@ class Modal extends VitrineComponent
         $this->panel = $panel;
         $this->clickOutsideToClose = $clickOutsideToClose;
         $this->setInitialFocus = $setInitialFocus;
+        $this->open = $open;
         $defaultVariant = $this->panel ? 'panel' : 'default';
         $this->variant = $variant ?? $defaultVariant;
         $this->modalsStack = $modalsStack;
