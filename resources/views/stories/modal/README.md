@@ -28,6 +28,10 @@ To open the modal component use a `button` with the `data-modal-target="$modalId
 
 To close the modal use a `button` with the `data-Modal-close-trigger` attribute inside the modal component (supports multiple close buttons). The modal can also be closed by triggering the `Modal:close` event on the modal node, `Modal:closeAll` event on the `document` or by pressing the escape key. If the modal is set to the panel layout you can also click outside the content area to close the modal.
 
+### Opening on page load
+
+On the modal, use the `open` prop to set the modal to open on page load.
+
 ## Customization
 
 The modal uses custom css to handle the layout and transitions. It can be found in `resources/frontend/styles/organisms/modal.css`.
