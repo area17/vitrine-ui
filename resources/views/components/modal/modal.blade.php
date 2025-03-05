@@ -6,6 +6,7 @@
          aria-modal="true"
          {{ $attributes->merge(['data-behavior' => $attributes->prepends('Modal')])->twMerge($ui('modal', ['base'])) }}
          {!! $panel ? 'data-Modal-panel="true"' : '' !!}
+         {!! $open ? 'data-Modal-open="true"' : '' !!}
          {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}>
         <div class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"
              data-Modal-focus-trap
