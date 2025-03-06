@@ -17,8 +17,7 @@
             data-DatePicker-trigger
             style="visibility: hidden;">
         <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
-                    name="calendar-24"
-                    aria-hidden="true" />
+                    name="calendar-24" />
         @if ($showLabel)
             <span class="f-ui-2">{{ __('vitrine-ui::fe.form.datepicker.open_date_picker') }}</span>
             <span class="sr-only">{{ __('vitrine-ui::fe.form.datepicker.open_date_picker_a11y') }}</span>
@@ -36,7 +35,7 @@
          aria-hidden="true"
          style="visibility: hidden; opacity: 0;"
          inert>
-        <div class="relative z-20 border bg-primary px-12 pb-12 pt-56">
+        <div class="bg-primary relative z-20 border px-12 pb-12 pt-56">
             <wc-datepicker show-clear-button
                            show-today-button></wc-datepicker>
             <x-vui-button class="absolute right-12 top-12"

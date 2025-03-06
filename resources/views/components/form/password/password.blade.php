@@ -25,12 +25,10 @@
             data-PasswordInput-toggle>
         <x-vui-icon class="{{ $ui('input-password', 'icon') }}"
                     name="{{ $ui('input-password', 'icon-hide') }}"
-                    data-PasswordInput-iconhidden
-                    aria-hidden="true" />
+                    data-PasswordInput-iconhidden />
         <x-vui-icon class="{{ $ui('input-password', 'icon') }}"
                     name="{{ $ui('input-password', 'icon-show') }}"
                     data-PasswordInput-iconshown
-                    aria-hidden="true"
                     style="display: none;" />
         <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>
     </button>

@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.14.8] - 2025-05-03
+
+### Updated
+
+- Modal : Add 'open' prop to tell if a modal must open on page load.
+
+## [2.14.7] - 2025-07-02
+
+### Updated
+
+- Icon : Avoid duplicated aria-hidden attributes when using Icon Component. The attribute is already added when rendering the icon.
+
+## [2.14.6] - 2025-04-02
+
+### Updated
+
+- Accordion Item : add $ui override capablity. Accordion Item can now be styled individually to override default style.
+
+## [2.14.5] - 2025-29-01
+
+### Fixed
+
+- Accordion : Exclusive mode should not throw error when destroy() is called.
+
+
+## [2.14.4] - 2025-23-01
+
+### Updated
+
+- Accordion : add events for closed/opened status.
+- Accordion : Set invisible content as inert to better avoid link being focusable on page load.
+
 ## [2.14.3] - 2025-14-01
 
 ### Updated

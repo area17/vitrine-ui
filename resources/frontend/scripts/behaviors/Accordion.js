@@ -1,5 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
+import { customEvents } from '../constants/customEvents'
+
 const TIMEOUT = 16
 
 const Accordion = createBehavior(
@@ -21,17 +23,21 @@ const Accordion = createBehavior(
             // exclusive mode : close other opened accordion items
             if (this.exclusive) {
                 setTimeout(() => {
-                    this.$triggers.forEach((trigger) => {
-                        const triggerIndex = this.getTriggerIndex(trigger)
+                    if (this.$triggers) {
+                        this.$triggers.forEach((trigger) => {
+                            const triggerIndex = this.getTriggerIndex(trigger)
 
-                        // closed opened accordion items
-                        if (
-                            this._data.activeIndexes.includes(triggerIndex) &&
-                            triggerIndex !== index
-                        ) {
-                            this.triggerClose(triggerIndex)
-                        }
-                    })
+                            // closed opened accordion items
+                            if (
+                                this._data.activeIndexes.includes(
+                                    triggerIndex
+                                ) &&
+                                triggerIndex !== index
+                            ) {
+                                this.triggerClose(triggerIndex)
+                            }
+                        })
+                    }
                 }, TIMEOUT + 1)
             }
         },
@@ -63,6 +69,7 @@ const Accordion = createBehavior(
             activeTrigger.setAttribute(`data-${this.name}-open`, 'false')
             activeContent.setAttribute('aria-hidden', 'true')
             activeContent.setAttribute(`data-${this.name}-open`, 'false')
+            activeContent.setAttribute('inert', '')
         },
 
         open(index) {
@@ -72,6 +79,11 @@ const Accordion = createBehavior(
             const activeContentInner = this.$contentInners[index]
 
             activeContent.classList.remove('hidden')
+            activeContent.removeAttribute('inert')
+
+            this.$node.dispatchEvent(
+                new CustomEvent(customEvents.ACCORDION_OPEN)
+            )
 
             // Start Animation
             setTimeout(() => {
@@ -88,6 +100,18 @@ const Accordion = createBehavior(
             if (e.currentTarget) {
                 if (e.currentTarget.clientHeight === 0) {
                     e.currentTarget.classList.add('hidden')
+
+                    let allClosed = true
+                    this.$triggers.forEach(($trigger) => {
+                        if ($trigger.getAttribute('aria-expanded') === 'true')
+                            allClosed = false
+                    })
+
+                    if (allClosed) {
+                        this.$node.dispatchEvent(
+                            new CustomEvent(customEvents.ACCORDION_CLOSED)
+                        )
+                    }
                 } else {
                     if (e.currentTarget.dataset.setFixedHeight === 'false') {
                         e.currentTarget.style.height = 'auto'
@@ -106,6 +130,10 @@ const Accordion = createBehavior(
                             behavior: 'smooth'
                         })
                     }
+
+                    this.$node.dispatchEvent(
+                        new CustomEvent(customEvents.ACCORDION_OPENED)
+                    )
                 }
             }
         }
