@@ -61,6 +61,12 @@ const Carousel = createBehavior(
                 modules,
                 ...configuration
             })
+
+            this.$node.dispatchEvent(
+                new CustomEvent(customEvents.CAROUSEL_INIT, {
+                    detail: { swiper: this.swiper }
+                })
+            )
         }
     },
     {
@@ -71,10 +77,10 @@ const Carousel = createBehavior(
             // options
             this.opts = {
                 on: {
-                    slideChange: () => {
+                    slideChange: (swiper) => {
                         document.dispatchEvent(
                             new CustomEvent(customEvents.CAROUSEL_CHANGE, {
-                                detail: { sliderEl: this.$node }
+                                detail: { sliderEl: this.$node, swiper }
                             })
                         )
                     }
@@ -91,6 +97,10 @@ const Carousel = createBehavior(
         disabled() {
             this.swiper?.destroy()
             this.swiper = null
+
+            this.$node.dispatchEvent(
+                new CustomEvent(customEvents.CAROUSEL_DESTROY)
+            )
         }
     }
 )

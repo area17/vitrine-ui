@@ -10,7 +10,10 @@ export const customEvents = {
     ACCORDION_OPENED: 'Accordion:opened' /* node event */,
     ACCORDION_CLOSED: 'Accordion:closed' /* node event */,
 
-    CAROUSEL_CHANGE: 'Carousel:Change' /* node event */,
+    CAROUSEL_INIT: 'Carousel:Init' /* node event */,
+    CAROUSEL_DESTROY: 'Carousel:Destroy' /* node event */,
+
+    CAROUSEL_CHANGE: 'Carousel:Change' /* document event */,
 
     MODAL_CLOSED: 'Modal:hasClosed' /* document event */,
     MODAL_OPENED: 'Modal:hasOpened' /* document event */,
