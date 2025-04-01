@@ -2,6 +2,7 @@
     'id' => null,
     'showClose' => true,
     'closeButtonVariant' => null,
+    'closeButtonSize' => null,
     'cookieTimeout' => 3, // Added cookieTimeout as a prop
 ])
 
@@ -17,6 +18,7 @@
                               aria-label="{{ __('vitrine-ui::fe.close_banner') }}"
                               :icon-only="true"
                               variant="{{ $closeButtonVariant }}"
+                              size="{{ $closeButtonSize }}"
                               icon="{{ VitrineUI::ui('banner', 'close-icon') }}"
                               icon-only />
             @endif

@@ -1,6 +1,6 @@
 {
-    "base": "",
-    "content": "container pr-40 relative",
+    "base": "py-40",
+    "wrapper": "container pr-40 relative",
     "close": "absolute top-0 right-0",
     "close-icon": "close-32"
 }

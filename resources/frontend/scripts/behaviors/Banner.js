@@ -5,7 +5,10 @@ import { customEvents } from '../constants/customEvents'
 
 const BANNER_COOKIE_NAME = 'banner_closed'
 const setBannerHeight = (bannerH) => {
-    document.documentElement.style.setProperty('--bannerHeight', `${bannerH}px`)
+    document.documentElement.style.setProperty(
+        '--banner-height',
+        `${bannerH}px`
+    )
 }
 
 const Banner = createBehavior(
@@ -54,7 +57,7 @@ const Banner = createBehavior(
             } else {
                 this.$node.removeAttribute('hidden')
                 this.setResize()
-                this.$close = this.getChild('close')
+                this.$close = this.getChild('close-trigger')
 
                 if (this.$close) {
                     this.$close.addEventListener('click', this.handleClose)
