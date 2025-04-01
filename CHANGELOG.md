@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.0] - 2025-01-04
+
+### Updated
+
+- New : Banner Component
+
 ## [2.14.9] - 2025-10-03
 
 ### Updated
