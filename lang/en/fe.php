@@ -7,6 +7,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'close_banner' => 'Close Banner',
     'close_modal' => 'Close Modal',
     'copied_to_clipboard' => 'Copied to clipboard!',
     'dropdown_items' => 'Dropdown items',

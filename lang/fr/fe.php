@@ -7,6 +7,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'close_banner' => 'Fermer la bannière',
     'close_modal' => 'Fermer la fenêtre modale',
     'copied_to_clipboard' => 'Copié dans le presse-papiers !',
     'dropdown_items' => 'Éléments du menu déroulant',
