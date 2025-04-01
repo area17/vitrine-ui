@@ -41,6 +41,7 @@ const Banner = createBehavior(
                 this.cookieTimeout
             )
             this.$node.setAttribute('hidden', '')
+            this.unsetResize()
 
             document.dispatchEvent(new CustomEvent(customEvents.BANNER_CLOSED))
         }
