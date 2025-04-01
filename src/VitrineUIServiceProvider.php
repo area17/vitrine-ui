@@ -42,6 +42,7 @@ final class VitrineUIServiceProvider extends ServiceProvider
 
             $variations = [
                 'vitrine-ui::components.accordion.item' => 'accordion-item',
+                'vitrine-ui::components.banner.banner' => 'banner',
                 'vitrine-ui::components.media.img' => 'img',
                 'vitrine-ui::components.media.picture' => 'picture',
                 'vitrine-ui::components.icon._output' => 'icon-output',
