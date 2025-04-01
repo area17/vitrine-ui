@@ -48,14 +48,12 @@ const Banner = createBehavior(
     },
     {
         init() {
-            this.id = this.options.id || Math.random().toString(36).substring(7)
+            this.id = this.options.id || '1'
             this.cookieTimeout = this.options.cookietimeout || 3
             this.resizeObserver = null
 
-            // check if cookie exist to hide banner
-            if (cookieHandler.read(BANNER_COOKIE_NAME + this.id)) {
-                this.handleClose()
-            } else {
+            // check if cookie exist before showing the banner
+            if (!cookieHandler.read(BANNER_COOKIE_NAME + this.id)) {
                 this.$node.removeAttribute('hidden')
                 this.setResize()
                 this.$close = this.getChild('close-trigger')
