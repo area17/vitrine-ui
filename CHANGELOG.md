@@ -10,7 +10,7 @@
 
 ### Updated
 
-- Carousel : Add CAROUSEL_INIT and CAROUSEL_DESTROY events on the Carousel behavior to notifiy other behaviors. Add swiper instace into the CAROUSEL_CHANGE behavior.
+- Carousel : Add CAROUSEL_INIT and CAROUSEL_DESTROY events on the Carousel behavior to notifiy other behaviors. Add swiper instance into the CAROUSEL_CHANGE behavior.
 
 ## [2.14.8] - 2025-05-03
 
