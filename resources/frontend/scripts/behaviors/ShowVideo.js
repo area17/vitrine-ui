@@ -16,6 +16,13 @@ const ShowVideo = createBehavior(
             this.playVideo()
         },
 
+        disableButton($button) {
+            if ($button) {
+                $button.setAttribute('tabindex', '-1')
+                $button.setAttribute('inert', 'true')
+            }
+        },
+
         playVideo() {
             const type = this.options.type
             const id = this.options.id
@@ -42,7 +49,19 @@ const ShowVideo = createBehavior(
 
             if (iframe) {
                 iframe.onload = () => {
+                    // set focus on iframe and make sure the play button is not focusable anymore
                     iframe.classList.add('is-loaded')
+                    if (iframe.contentWindow) {
+                        iframe.contentWindow.focus()
+                    }
+
+                    if (this.$trigger) {
+                        const $buttons =
+                            this.$trigger.querySelectorAll('button, a')
+                        $buttons.forEach(($button) =>
+                            this.disableButton($button)
+                        )
+                    }
                 }
             }
 
