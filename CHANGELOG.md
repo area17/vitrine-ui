@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.1] - 2025-08-04
+
+### Fixed
+
+- VideoBackground : A11Y fix in the Show Video behavior - set focus on iframe on loading, make sure the play button is not focusable anymore.
+
 ## [2.15.0] - 2025-01-04
 
 ### Updated
