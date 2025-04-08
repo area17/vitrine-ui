@@ -51,7 +51,9 @@ const ShowVideo = createBehavior(
                 iframe.onload = () => {
                     // set focus on iframe and make sure the play button is not focusable anymore
                     iframe.classList.add('is-loaded')
-                    iframe.contentWindow.focus()
+                    if (iframe.contentWindow) {
+                        iframe.contentWindow.focus()
+                    }
 
                     if (this.$trigger) {
                         const $buttons =
