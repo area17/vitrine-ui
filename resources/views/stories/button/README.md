@@ -19,6 +19,21 @@ The default component slot is used for the label text within the button. It can 
 </x-vui-button>
 ```
 
+Additional scoped slots are available to add extra markup before or after the label :
+
+```html
+<x-vui-button href="https://example.url">
+    <x-slot:slotBefore>
+        <span>BEFORE CONTENT</span>
+    </x-slot:slotBefore>
+    <x-slot:slotAfter>
+        <span>AFTER CONTENT</span>
+    </x-slot:slotAfter>
+
+    Label Text
+</x-vui-button>
+```
+
 ## Accessibility
 
 Buttons should always have an accessible name. For most buttons this will be the label text but for buttons without label text they should have an `aria-label` or `aria-labelledby` attribute.
