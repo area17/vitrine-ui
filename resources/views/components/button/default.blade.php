@@ -1,3 +1,8 @@
+@props([
+    'slotBefore' => null,
+    'slotAfter' => null,
+])
+
 <{{ $tag }} {{ $attributes->twMerge(
     $ui($uiKeyComponent, 'base', [
         'size' => $size,
@@ -8,6 +13,9 @@
 ) }}
                      @if ($href) href="{{ $href }}" @endif
                      @if ($target) target="{{ $target }}" @endif>
+    @if ($slotBefore)
+        {{ $slotBefore }}
+    @endif
 
     @if ($iconBefore())
         <x-vui-icon class="{{ $ui($uiKeyComponent, 'icon') }}"
@@ -21,5 +29,9 @@
     @if ($iconAfter())
         <x-vui-icon class="{{ $ui($uiKeyComponent, 'icon') }}"
                     :name="$icon" />
+    @endif
+
+    @if ($slotAfter)
+        {{ $slotAfter }}
     @endif
     </{{ $tag }}>
