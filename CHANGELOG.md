@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.2] - 2025-10-04
+
+### Updated
+
+- Button : New scoped Slots added to handle extra markup/content before or after the label span.
+
 ## [2.15.1] - 2025-08-04
 
 ### Fixed
