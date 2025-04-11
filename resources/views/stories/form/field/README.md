@@ -68,7 +68,7 @@ Applied to the visual input element itself.
 Additionnal style applied to the input element if withIconRight boolean is true
 
 `button`:
-Applied to positioning the optionnal CTA of the field component.
+Applied to positioning the optional CTA of the field component.
 
 `hint`:
 Applied to the text element that provides additional guidance or clarification about the input element.
