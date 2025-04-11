@@ -3,7 +3,7 @@ import { cookieHandler } from '@area17/a17-helpers'
 
 import { customEvents } from '../constants/customEvents'
 
-// export usefull constants and functions
+// export useful constants and functions
 // to be used in other files
 export const BANNER_COOKIE_NAME = 'banner_closed'
 export const setBannerHeight = (bannerH) => {
