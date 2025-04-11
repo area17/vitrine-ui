@@ -11,6 +11,7 @@ export const customEvents = {
     ACCORDION_CLOSED: 'Accordion:closed' /* node event */,
 
     BANNER_CLOSED: 'Banner:closed' /* document event */,
+    BANNER_OPENED: 'Banner:opened' /* document event */,
 
     CAROUSEL_INIT: 'Carousel:Init' /* node event */,
     CAROUSEL_DESTROY: 'Carousel:Destroy' /* node event */,

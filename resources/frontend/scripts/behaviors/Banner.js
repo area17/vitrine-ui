@@ -3,8 +3,10 @@ import { cookieHandler } from '@area17/a17-helpers'
 
 import { customEvents } from '../constants/customEvents'
 
-const BANNER_COOKIE_NAME = 'banner_closed'
-const setBannerHeight = (bannerH) => {
+// export usefull constants and functions
+// to be used in other files
+export const BANNER_COOKIE_NAME = 'banner_closed'
+export const setBannerHeight = (bannerH) => {
     document.documentElement.style.setProperty(
         '--banner-height',
         `${bannerH}px`
@@ -56,11 +58,16 @@ const Banner = createBehavior(
             if (!cookieHandler.read(BANNER_COOKIE_NAME + this.id)) {
                 this.$node.removeAttribute('hidden')
                 this.setResize()
+                setBannerHeight(this.$node.offsetHeight)
                 this.$close = this.getChild('close-trigger')
 
                 if (this.$close) {
                     this.$close.addEventListener('click', this.handleClose)
                 }
+
+                document.dispatchEvent(
+                    new CustomEvent(customEvents.BANNER_OPENED)
+                )
             }
         },
         destroy() {
