@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.3] - 2025-11-04
+
+### Updated
+
+- Banner : Add OPENED event and export method to set banner height so it can be use in app.js
+
 ## [2.15.2] - 2025-10-04
 
 ### Updated
