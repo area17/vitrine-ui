@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.4] - 2025-16-04
+
+### Updated
+
+- Pagination : Fix story data
+
 ## [2.15.3] - 2025-11-04
 
 ### Updated
