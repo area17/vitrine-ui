@@ -2,13 +2,13 @@
     'layout' => 'fullscreen',
     'args' => [
         'pages' => [
-            [
+            1 => [
                 'url' => '?page=1',
             ],
-            [
+            2 => [
                 'url' => '?page=2',
             ],
-            [
+            3 => [
                 'url' => '?page=3',
             ],
         ],
