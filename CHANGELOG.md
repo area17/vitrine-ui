@@ -1,10 +1,11 @@
 # Changelog
 
-## [2.15.4] - 2025-16-04
+## [2.15.4] - 2025-17-04
 
-### Updated
+### Fixed
 
 - Pagination : Fix story data
+- Button / Card Link : Update logic to set target value (fix issue when target is set as a string)
 
 ## [2.15.3] - 2025-11-04
 
