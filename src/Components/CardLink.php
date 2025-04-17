@@ -18,7 +18,7 @@ class CardLink extends VitrineComponent
         $this->tag = $tag ? $tag : (empty($href) ? 'span' : 'a');
 
         $isExternalUrl = $this->isExternalUrl($href);
-        $this->target = $target ?? $isExternalUrl ? '_blank' : false;
+        $this->target = $target ?? ($isExternalUrl ? '_blank' : false);
 
         parent::__construct($ui);
     }
