@@ -26,7 +26,7 @@ class Datepicker extends VitrineComponent
 
     public function __construct(
         string $target = null,
-        string $align = 'right',
+        string $align = null,
         bool $range = false,
         string $minDate = null,
         string $maxDate = null,
@@ -34,7 +34,7 @@ class Datepicker extends VitrineComponent
         array $ui = [],
     ) {
         $this->target = $target;
-        $this->align = $align;
+        $this->align = $align ?? 'right';
         $this->range = $range;
         $this->minDate = $minDate;
         $this->maxDate = $maxDate;

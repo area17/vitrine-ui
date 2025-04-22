@@ -28,7 +28,7 @@
             </span>
         @endif
     </button>
-    <div class="{{ $align === 'left' ? 'left' : 'right' }}-0 absolute top-full"
+    <div class="{{ $align && $align === 'left' ? 'left' : 'right' }}-0 absolute top-full"
          data-DatePicker-picker
          role="dialog"
          aria-modal="true"
