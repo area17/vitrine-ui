@@ -34,7 +34,7 @@ class ImageZoom extends VitrineComponent
         return view('vitrine-ui::components.image-zoom.image-zoom');
     }
 
-    protected function parseImage(array $image = []): array
+    protected function parseImage(array $image = []): string|array|null
     {
         if (empty($image)) {
             return [];
@@ -48,7 +48,7 @@ class ImageZoom extends VitrineComponent
             $parsedImage = $image;
         }
 
-        return $parsedImage;
+        return $parsedImage ?? [];
     }
 
     protected function parseSources(array $sources = []): array
