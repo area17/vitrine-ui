@@ -34,7 +34,6 @@ class RadioGroup extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/RadioGroup.js'],
-        'css' => ['components/form/radio.css'],
     ];
 
     public function __construct(

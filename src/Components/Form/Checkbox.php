@@ -42,7 +42,6 @@ class Checkbox extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
-        'css' => ['components/form/checkbox.css'],
     ];
 
     public function __construct(

@@ -8,6 +8,7 @@
     "check": [
         "m-form-radio-check",
         "w-24 h-24 rounded-full relative",
+        "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
         "before:absolute before:content-['']",
         "before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2",
         "before:rounded-full",
