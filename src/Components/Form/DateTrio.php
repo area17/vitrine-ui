@@ -53,7 +53,6 @@ class DateTrio extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/DateTrio.js'],
-        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(

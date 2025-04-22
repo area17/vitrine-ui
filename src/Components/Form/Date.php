@@ -55,7 +55,6 @@ class Date extends VitrineComponent
     protected static array $assets = [
         'npm' => ['@area17/parse-numeric-date'],
         'js' => ['utils/formatDate.js', 'behaviors/Input.js', 'behaviors/DateInput.js', 'behaviors/DateInputFuzzy.js'],
-        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(

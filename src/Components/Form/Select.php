@@ -48,7 +48,6 @@ class Select extends VitrineComponent
 
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
-        'css' => ['components/form/input.css'],
     ];
 
     public function __construct(
