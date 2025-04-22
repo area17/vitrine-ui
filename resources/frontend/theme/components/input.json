@@ -9,6 +9,7 @@
     "input": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
     "textarea": "p-12 w-full f-body-1 [.s-readonly_&]:bg-transparent",
     "input-icon-right": "pr-40",
+    "button": "absolute right-12 top-1/2 -translate-y-1/2",
     "hint": "f-ui-2 text-secondary",
     "note": "f-ui-2 text-secondary mt-4",
     "link": "",

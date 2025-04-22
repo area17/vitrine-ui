@@ -3,7 +3,7 @@
     'args' => [
         'target' => '',
         'class' => 'relative',
-        'align' => '',
+        'align' => 'right',
         'range' => true,
         'minDate' => '',
         'maxDate' => '',
@@ -48,15 +48,15 @@
         <x-vui-datepicker :target="$target ?? null"
                           :class="$class ?? null"
                           :align="$align ?? null"
-                          :range="$range ?? null"
+                          :range="$range ?? false"
                           :min-date="$minDate ?? null"
                           :max-date="$maxDate ?? null" />
     </div>
-    <hr class="mt-60 border-t-quaternary">
+    <hr class="border-t-quaternary mt-60">
     <p class="f-body-1 mt-40">The popup either requires a <code
-              class="f-ui-1 inline-block inline-block bg-quaternary px-4 px-4 py-1 py-1">position: relative;</code>
+              class="f-ui-1 bg-quaternary inline-block inline-block px-4 px-4 py-1 py-1">position: relative;</code>
         container or for the datepicker itself to have <code
-              class="f-ui-1 inline-block inline-block bg-quaternary px-4 px-4 py-1 py-1">position: relative;</code>.</p>
+              class="f-ui-1 bg-quaternary inline-block inline-block px-4 px-4 py-1 py-1">position: relative;</code>.</p>
     <p class="f-body-1 mt-20">Alignment options are basic, top aligned, left or right aligned - with the switch currently
         powered by Tailwind classes.</p>
     <p class="f-body-1 mt-20">Its important to note that you will need vertical space, possibly scroll space below - take

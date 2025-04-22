@@ -21,13 +21,13 @@
                   :readonly="$readonly ?? false"
                   :required="$required ?? false"
                   :with-icon-right="true">
-    <button class="absolute right-12 top-1/2 -translate-y-1/2"
+    <button class="{{ $ui('input-password', 'base') }}"
             data-PasswordInput-toggle>
-        <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
-                    name="eye-hide-24"
+        <x-vui-icon class="{{ $ui('input-password', 'icon') }}"
+                    name="{{ $ui('input-password', 'icon-hide') }}"
                     data-PasswordInput-iconhidden />
-        <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
-                    name="eye-24"
+        <x-vui-icon class="{{ $ui('input-password', 'icon') }}"
+                    name="{{ $ui('input-password', 'icon-show') }}"
                     data-PasswordInput-iconshown
                     style="display: none;" />
         <span class="sr-only">{{ __('vitrine-ui::fe.form.toggle_password_visibility') }}</span>

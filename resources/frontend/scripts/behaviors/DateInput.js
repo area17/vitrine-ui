@@ -265,7 +265,7 @@ const DateInput = createBehavior(
     },
     {
         init() {
-            this.$input = this.getChild('input')
+            this.$input = this.$node.querySelector('[data-Input-input]')
             this.$isoinput = this.getChild('isoinput')
             this.$output = this.getChild('output')
             this.$minDateA11yDisplay = this.getChild('minDateA11yDisplay')

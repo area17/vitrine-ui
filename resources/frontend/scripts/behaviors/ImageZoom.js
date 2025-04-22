@@ -1,26 +1,29 @@
 import { createBehavior } from '@area17/a17-behaviors'
-import OpenSeadragon from 'openseadragon'
 
 const ImageZoom = createBehavior(
     'ImageZoom',
     {
+        async initOpenSeaDragon() {
+            const OpenSeadragon = await import('openseadragon')
+            this.viewer = OpenSeadragon.default(this.viewerOptions)
+            this.viewer.goToPage(0)
+            this.viewer.addHandler('open', () => {
+                // remove the OSD hard-coded inline styles from the buttons on init because there's no other way to customize it
+                Object.values(this.buttonIds).forEach((id) => {
+                    const button = this.$node.querySelector(`#${id}`)
+
+                    if (button) {
+                        button.style.display = ''
+                        button.style.opacity = ''
+                    }
+                })
+            })
+
+            this.isActive = true
+        },
         initViewer() {
             if (!this.isActive) {
-                this.viewer = OpenSeadragon(this.viewerOptions)
-                this.viewer.goToPage(0)
-                this.isActive = true
-
-                this.viewer.addHandler('open', () => {
-                    // remove the OSD hard-coded inline styles from the buttons on init because there's no other way to customize it
-                    Object.values(this.buttonIds).forEach((id) => {
-                        const button = this.$node.querySelector(`#${id}`)
-
-                        if (button) {
-                            button.style.display = ''
-                            button.style.opacity = ''
-                        }
-                    })
-                })
+                this.initOpenSeaDragon()
             }
         },
 
@@ -42,6 +45,7 @@ const ImageZoom = createBehavior(
             this.sources = JSON.parse(this.options.sources)
             this.$canvas = this.getChild('canvas')
             this.id = this.$canvas.id
+            this.viewer = null
 
             const tileSources = this.sources.map(function (source) {
                 if (typeof source === 'string') {
@@ -133,7 +137,10 @@ const ImageZoom = createBehavior(
         mediaQueryUpdated() {},
         disabled() {},
         destroy() {
-            this.viewer.destroy()
+            if (this.viewer) {
+                this.viewer.destroy()
+                this.viewer = null
+            }
             document.removeEventListener(
                 'image-zoom:update',
                 this.updateViewer,
