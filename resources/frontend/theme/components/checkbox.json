@@ -2,9 +2,9 @@
     "rules": {
         "merge": ["input"]
     },
-    "base": ["m-form-checkbox cursor-pointer"],
+    "base": ["m-form-checkbox", "cursor-pointer items-center"],
     "wrapper": ["m-form-checkbox-wrap", "flex items-center space-x-8"],
-    "label": ["m-form-checkbox-label", "f-body-1 inline-flex relative"],
+    "label": ["m-form-checkbox-label", "f-body-1 cursor-pointer inline-flex relative justify-start ml-8"],
     "required": "sr-only",
     "check": [
         "m-form-checkbox-check",
@@ -28,5 +28,5 @@
         "focus:outline-none",
         "[clip:rect(0,0,0,0)]"
     ],
-    "hint": ["m-form-checkbox-hint", "f-ui-2 text-secondary"]
+    "hint": ["m-form-checkbox-hint", "f-ui-2 ml-auto text-secondary"]
 }
