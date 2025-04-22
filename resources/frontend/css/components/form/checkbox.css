@@ -1,9 +1,3 @@
-.m-form-checkbox input[data-focus-method="key"] + .m-form-checkbox-wrap {
-    @apply outline outline-offset-4;
-
-    outline-width: 1px;
-}
-
 .m-form-checkbox input + .m-form-checkbox-wrap .m-form-checkbox-check svg {
     display: none;
 }
