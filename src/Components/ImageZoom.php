@@ -2,11 +2,9 @@
 
 namespace A17\VitrineUI\Components;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use A17\Twill\Image\Models\Image;
 use Illuminate\Contracts\View\View;
-use A17\Twill\Image\TwillStaticImage;
 
 class ImageZoom extends VitrineComponent
 {
@@ -36,6 +34,23 @@ class ImageZoom extends VitrineComponent
         return view('vitrine-ui::components.image-zoom.image-zoom');
     }
 
+    protected function parseImage(array $image = []): array
+    {
+        if (empty($image)) {
+            return [];
+        }
+
+        $parsedImage = [];
+
+        if (is_array($image) && array_key_exists('src', $image)) {
+            $parsedImage = $image['src'];
+        } elseif (is_array($image) && array_key_exists('iiifId', $image)) {
+            $parsedImage = $image;
+        }
+
+        return $parsedImage;
+    }
+
     protected function parseSources(array $sources = []): array
     {
         $parsedSources = [];
@@ -47,19 +62,10 @@ class ImageZoom extends VitrineComponent
         foreach ($sources as $source) {
             $image = $source['image'] ?? null;
 
-            if ($image instanceof Image) {
-                $parsedSources[] = $image->preset('image_zoom')->toArray()['image']['src'];
-            } elseif (Arr::has($image, '_static')) {
-                $presetData = config('twill-image.presets.image_zoom');
-                $presetStatic = Arr::get($presetData, '_static') ?? [];
-                $staticSettings = array_merge($presetStatic, $image['_static']);
-
-                $staticImage = new TwillStaticImage();
-                $parsedSources[] = $staticImage->make($staticSettings)->toArray()['image']['src'];
-            } elseif (is_array($image) && array_key_exists('src', $image)) {
-                $parsedSources[] = $image['src'];
-            } elseif (is_array($image) && array_key_exists('iiifId', $image)) {
-                $parsedSources[] = $image;
+            if (is_array($image) && array_key_exists('image', $image)) {
+                $parsedSources[] = $this->parseImage($image['image']);
+            } elseif (is_array($image)) {
+                $parsedSources[] = $this->parseImage($image);
             }
         }
 

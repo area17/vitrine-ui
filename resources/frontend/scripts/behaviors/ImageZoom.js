@@ -1,12 +1,17 @@
 import { createBehavior } from '@area17/a17-behaviors'
-import OpenSeadragon from 'openseadragon'
 
 const ImageZoom = createBehavior(
     'ImageZoom',
     {
+        async initOpenSeaDragon() {
+            const OpenSeadragon = await import('openseadragon')
+            this.viewer = OpenSeadragon.default(this.viewerOptions)
+        },
         initViewer() {
+            this.viewer = null
+
             if (!this.isActive) {
-                this.viewer = OpenSeadragon(this.viewerOptions)
+                this.initOpenSeaDragon()
                 this.viewer.goToPage(0)
                 this.isActive = true
 

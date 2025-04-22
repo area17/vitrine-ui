@@ -4,18 +4,12 @@ namespace A17\VitrineUI\Components;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\View\View;
-use A17\Twill\Image\Models\Image as TwillImageModel;
 
 class Media extends VitrineComponent
 {
     public ?string $caption;
 
-    public array|null|TwillImageModel $image;
-    public ?array $imageOptions;
-
-    public ?string $imagePreset;
-
-    public bool $usePlaceholder;
+    public array|null $image;
 
     public ?array $video;
 
@@ -32,10 +26,7 @@ class Media extends VitrineComponent
 
     public function __construct(
         string $caption = null,
-        array|null|TwillImageModel $image = null,
-        array $imageOptions = null,
-        string $imagePreset = 'generic',
-        bool $usePlaceholder = false,
+        array|null $image = null,
         ?array $video = null,
         string $videoPlayIcon = null,
         array $backgroundVideo = null,
@@ -44,14 +35,10 @@ class Media extends VitrineComponent
     ) {
         $this->caption = $caption;
         $this->image = $image;
-        $this->imagePreset = $imagePreset;
-        $this->usePlaceholder = $usePlaceholder;
         $this->video = $video;
         $this->videoPlayIcon = $videoPlayIcon;
         $this->backgroundVideo = $this->parseBackgroundVideo($backgroundVideo);
         $this->cover = $cover;
-
-        $this->imageOptions = $imageOptions;
         $this->classes = ['h-full' => $this->cover];
 
         parent::__construct($ui);

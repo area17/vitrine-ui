@@ -67,7 +67,6 @@ It will generate figure element if a figcaption is present.
     },
     "video-wrapper": "group relative h-full cursor-pointer overflow-hidden",
     "image-wrapper": "relative flex h-full overflow-hidden",
-    "image-placeholder": "",
     "image": "",
     "video-player": "absolute inset-0 z-30 hidden h-full w-full",
     "video-play-button": "absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform",
@@ -80,9 +79,6 @@ Controls the visual style the media wrapper element : this is the element that c
 
 `image-wrapper`:
 Style of the image parent element.
-
-`image-placeholder`:
-Style of the image placeholder if any.
 
 `image`:
 Generic style for images : style is applied on the img tag.
