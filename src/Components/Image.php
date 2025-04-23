@@ -11,6 +11,7 @@ class Image extends VitrineComponent
     public int|string|null $width;
     public int|string|null $height;
     public ?string $src;
+    public ?string $alt;
 
     /**
      * Define image loading strategy
@@ -27,6 +28,7 @@ class Image extends VitrineComponent
         int|string $height = null,
         int|string $width = null,
         string $src = null,
+        string $alt = null,
         string $sizes = null,
         array $sources = null,
         array $ui = [],
@@ -35,6 +37,7 @@ class Image extends VitrineComponent
         $this->height = $height;
         $this->width = $width;
         $this->src = $src;
+        $this->alt = $alt;
         $this->sizes = $sizes;
         $this->sources =
             $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
