@@ -1,5 +1,9 @@
 @props([
     'sources' => [],
+    'src' => null,
+    'alt' => null,
+    'width' => null,
+    'height' => null,
     'fallBackImg' => null,
     'loading' => 'lazy',
 ])
@@ -17,6 +21,10 @@
     @endforeach
     @if (isset($fallBackImg))
         <x-vui-img :img="$fallBackImg"
+                   :src="$src ?? null"
+                   :width="$width ?? null"
+                   :height="$height ?? null"
+                   :alt="$alt ?? null"
                    :loading="$loading" />
     @endif
 </picture>
