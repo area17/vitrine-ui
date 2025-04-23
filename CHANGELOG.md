@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0-alpha] - 2025-23-04
+
+### Updated
+
+- Remove Twill Image dependency
+- Lazyload Openseadragon inside ImageZoom behavior
+- Update Image story
+- Update Datepicker story
+- Form inputs : update the input components so all components are using the master x-vui-form-field component and that each input can be styled using themes.
+- Remove radio CSS (styling done with Tailwind CSS instead)
+- Remove checkbox CSS (styling done with Tailwind CSS instead)
+- Allow styling of password-input with theme
+
 ## [2.15.4] - 2025-17-04
 
 ### Fixed
