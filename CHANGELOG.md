@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2] - 2025-05-05
+
+### Updated
+
+- Carousel : Add option to set initial slide
+
 ## [3.0.1] - 2025-23-04
 
 ### Updated
