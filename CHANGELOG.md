@@ -5,6 +5,7 @@
 ### Updated
 
 - Carousel : Add option to set initial slide
+- Image : Add possiblity to set image tag without an image object
 
 ## [3.0.1] - 2025-23-04
 
