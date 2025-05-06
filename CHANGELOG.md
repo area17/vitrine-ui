@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.3] - 2025-06-05
+
+### Updated
+
+- Select : Add option to resize automatically Select based on current value
+
 ## [3.0.2] - 2025-05-05
 
 ### Updated
