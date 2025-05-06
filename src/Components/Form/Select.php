@@ -46,6 +46,8 @@ class Select extends VitrineComponent
 
     public ?string $rand;
 
+    public bool $fitValue;
+
     protected static array $assets = [
         'js' => ['behaviors/Input.js'],
     ];
@@ -66,6 +68,7 @@ class Select extends VitrineComponent
         bool $autofocus = false,
         bool $multiple = false,
         bool $readonly = false,
+        bool $fitValue = false,
         array $ui = [],
     ) {
         $this->label = $label;
@@ -83,6 +86,7 @@ class Select extends VitrineComponent
         $this->autofocus = $autofocus;
         $this->multiple = $multiple;
         $this->readonly = $readonly;
+        $this->fitValue = $fitValue;
 
         $this->rand = Str::random(4);
         $this->ariaID = 'ariaID' . $this->rand;

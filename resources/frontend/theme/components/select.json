@@ -6,6 +6,7 @@
     "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
     "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
     "select": "p-12 pr-36 w-full f-body-1 appearance-none [.s-readonly_&]:bg-transparent",
+    "sizer": "p-12 pr-36 f-body-1",
     "icon": "absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none",
     "icon-name": "chevron-down-24",
     "hint": "f-ui-2 text-secondary",
