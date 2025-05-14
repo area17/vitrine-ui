@@ -47,7 +47,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "mrdoinel/tailwind-merge-laravel": "dev-main",
+        "gehrisandro/tailwind-merge-laravel": "dev-main",
         "spatie/once": "^3.1",
         "yieldstudio/tailwind-merge-php": "^0.0.2"
     },
