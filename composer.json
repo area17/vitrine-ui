@@ -39,9 +39,15 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "url": "https://github.com/mrdoinel/tailwind-merge-laravel.git",
+            "type": "git"
+        }
+    ],
     "require": {
         "php": "^8.1",
-        "gehrisandro/tailwind-merge-laravel": "^0.1|^1.0",
+        "mrdoinel/tailwind-merge-laravel": "dev-main",
         "spatie/once": "^3.1",
         "yieldstudio/tailwind-merge-php": "^0.0.2"
     },
