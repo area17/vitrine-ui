@@ -205,8 +205,8 @@ class VitrineUI
             }
 
             // Check if the URL host is a subdomain of the home host
-            $homeHost = parse_url($home, PHP_URL_HOST);
-            $urlHost = parse_url($url, PHP_URL_HOST);
+            $homeHost = strtolower(parse_url($home, PHP_URL_HOST));
+            $urlHost = strtolower(parse_url($url, PHP_URL_HOST));
 
             if ($urlHost && $homeHost && ($urlHost === $homeHost || Str::endsWith($urlHost, '.' . $homeHost))) {
                 return false;
