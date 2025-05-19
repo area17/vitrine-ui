@@ -34,6 +34,9 @@ return [
     // CSS Preset
     'css_preset' => 'tailwindcss',
 
+    // Open subdomains links as external links
+    'open_subdomains_external' => true,
+
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
