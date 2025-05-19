@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.5] - 2025-19-05
+
+### Updated
+
+- Button / Card Link : Update isExternalUrl helper to handle subdomains. Add new config 'open_subdomains_external' to set the behavior in app.
+
 ## [2.15.4] - 2025-17-04
 
 ### Fixed
