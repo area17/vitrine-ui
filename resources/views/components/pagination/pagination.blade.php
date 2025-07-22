@@ -13,7 +13,7 @@
             <x-vui-button class="{{ Arr::toCssClasses([
                 $ui('pagination', 'action-disabled') => $onFirstPage,
             ]) }}"
-                          aria-label="{{ __('vitrine-ui::fe.pagination.previous') }}"
+                          :aria-label="$onFirstPage ? null : __('vitrine-ui::fe.pagination.previous')"
                           :href="$prevPageUrl()"
                           :variant="$btnVariant ?? 'secondary'"
                           :icon="$iconLeft ?? 'arrow-left-24'"
@@ -25,7 +25,7 @@
             <x-vui-button class="{{ Arr::toCssClasses([
                 $ui('pagination', 'action-disabled') => $onLastPage,
             ]) }}"
-                          aria-label="{{ __('vitrine-ui::fe.pagination.next') }}"
+                          :aria-label="$onLastPage ? null : __('vitrine-ui::fe.pagination.next')"
                           :href="$nextPageUrl()"
                           :icon="$iconRight ?? 'arrow-right-24'"
                           :variant="$btnVariant ?? 'secondary'"
