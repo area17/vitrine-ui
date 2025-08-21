@@ -71,11 +71,11 @@
 ])
 
 <div class="container">
-    <x-vui-pagination :btn-variant="$btnVariant"
-                      :pages="$pages ?? []"
-                      :icon-left="$iconLeft"
-                      :icon-right="$iconRight"
-                      :current-page="$current_page"
-                      :last-page="$last_page"
-                      :btn-size="$btnSize" />
+    <x-vui-pagination-numbered :btn-variant="$btnVariant"
+                               :pages="$pages ?? []"
+                               :icon-left="$iconLeft"
+                               :icon-right="$iconRight"
+                               :current-page="$current_page"
+                               :last-page="$last_page"
+                               :btn-size="$btnSize" />
 </div>
