@@ -47,6 +47,7 @@ final class VitrineUIServiceProvider extends ServiceProvider
                 'vitrine-ui::components.media.picture' => 'picture',
                 'vitrine-ui::components.icon._output' => 'icon-output',
                 'vitrine-ui::components.icon.sprite' => 'icon-sprite',
+                'vitrine-ui::components.pagination-numbered.pagination-numbered' => 'pagination-numbered',
             ];
 
             foreach (config('vitrine-ui.components', []) as $alias => $component) {
