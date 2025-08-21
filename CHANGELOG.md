@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.4] - 2025-21-08
+
+### Updated
+
+- Banner : Add documentation
+
+### Fixed
+
+- Accordion : Fix incorrect HTML for accordion, checkbox, radio and pagination
+
 ## [3.0.3] - 2025-06-05
 
 ### Updated
