@@ -57,7 +57,7 @@ function toPaginationNumberedArr(LengthAwarePaginator $paginator): array
 
 ## Accessibility
 
-The "Previous" and "Next" buttons include aria-label attributes to describe their function, ensuring they are accessible to screen readers. When these buttons are disabled, they should also include aria-disabled="true" to indicate their inactive state. Current page have aria-current="page" attribute.
+The "Previous" and "Next" buttons include aria-label attributes to describe their function, ensuring they are accessible to screen readers. When these buttons are disabled, they should also include aria-disabled="true" to indicate their inactive state. Current page has aria-current="page" attribute.
 
 ## Theming
 
