@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.5] - 2025-22-08
+
+### Updated
+
+- New : Pagination Numbered Component
+
 ## [3.0.4] - 2025-21-08
 
 ### Updated
