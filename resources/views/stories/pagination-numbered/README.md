@@ -67,11 +67,12 @@ The "Previous" and "Next" buttons include aria-label attributes to describe thei
 {
     "base": "container mt-space-9 pt-space-4 border-t",
     "wrapper": "flex w-full items-center justify-between gap-x-24",
-    "pages" : "flex flex-row items-center gap-x-spacing-set-2",
+    "pages" : "hidden md:flex flex-row items-center gap-x-space-2",
     "action-disabled": "pointer-events-none opacity-30",
     "current" : "f-ui-1",
     "ellipsis": "f-ui-1",
-    "link": "f-ui-1"
+    "link": "f-ui-1 underline",
+    "message" : "f-ui-1 text-center pt-space-2 block md:hidden"
 }
 ```
 
@@ -85,7 +86,7 @@ Styling of the nav div that is around both the buttons and the pages
 Styling of the disabled prev/next button if any
 
 `pages`:
-Styling of the div around the page links
+Styling of the div around the page links (by default : hidden on mobile)
 
 `current`:
 Styling of the current page number span
@@ -96,3 +97,5 @@ Styling of the ellipsis span
 `link`:
 Styling of the page links a:href
 
+`message`:
+Styling the message showing under the buttons displaying "Page 5 of 10" (by default : display only on mobile)
