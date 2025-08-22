@@ -47,7 +47,7 @@
                         @endif
                     @else
                         <span class="{{ VitrineUI::ui('pagination-numbered', 'ellipsis') }}"
-                              aria-hidden="true">...</span>
+                              aria-hidden="true">&hellip;</span>
                     @endif
                 @endforeach
             </div>
@@ -65,4 +65,10 @@
                       :disabled="$onLastPage"
                       :icon-only="true" />
     </nav>
+    <span class="{{ VitrineUI::ui('pagination-numbered', 'message') }}">
+        {{ __('vitrine-ui::fe.pagination.page_of', [
+            'current' => $currentPage,
+            'last' => $lastPage,
+        ]) }}
+    </span>
 </div>
