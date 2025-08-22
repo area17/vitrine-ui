@@ -39,11 +39,11 @@ function toPaginationNumberedArr(LengthAwarePaginator $paginator): array
     }
 
     // Add ellipsis if needed after first page
-    if ($start > 2) $pages['gap-start'] = ['url' => null];
+    if ($start > 2) $pages[2] = ['url' => null];
     // Add middle range
     for ($i = $start; $i <= $end; $i++) $pages[$i] = ['url' => $paginator->url($i)];
     // Add ellipsis if needed before last page
-    if ($end < $last - 1) $pages['gap-end'] = ['url' => null];
+    if ($end < $last - 1) $pages[$last - 1] = ['url' => null];
     //last page
     if ($last > 1) $pages[$last] = ['url' => $paginator->url($last)];
 
