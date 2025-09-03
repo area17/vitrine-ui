@@ -17,6 +17,7 @@
         'current_page_count' => 10,
         'total' => 25,
         'labelInsideDropdown' => true,
+        'labelAfterActions' => false,
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
         'btnVariant' => 'secondary',
