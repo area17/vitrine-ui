@@ -73,7 +73,7 @@
             'defaultValue' => ['summary' => true],
             'control' => 'boolean',
         ],
-        'labelUnderActions' => [
+        'labelAfterActions' => [
             'description' => 'Boolean to display "Page x of y" message under the action buttons on mobile view',
             'defaultValue' => ['summary' => false],
             'control' => 'boolean',
@@ -90,7 +90,7 @@
                       :current-page-count="$current_page_count"
                       :last-page="$last_page"
                       :label-inside-dropdown="$labelInsideDropdown"
-                      :label-under-actions="$labelUnderActions"
+                      :label-after-actions="$labelAfterActions"
                       :total="$total"
                       :btn-size="$btnSize" />
 </div>

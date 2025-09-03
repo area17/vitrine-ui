@@ -6,7 +6,7 @@
     "action-disabled": "pointer-events-none opacity-30",
     "dropdown-wrapper": "hidden md:flex items-center ml-auto",
     "dropdown-message": "ml-12 f-ui-1",
-    "under-message": "flex md:hidden f-ui-1 text-center",
+    "after-actions-message": "flex md:hidden f-ui-1 text-center",
     "dropdown": "",
     "select": {}
 }

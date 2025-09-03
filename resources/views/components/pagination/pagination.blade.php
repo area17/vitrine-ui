@@ -50,8 +50,8 @@
             @endif
         </div>
     </div>
-    @if ($labelUnderActions)
-        <p class="{{ $ui('pagination', 'under-message') }}">
+    @if ($labelAfterActions)
+        <p class="{{ $ui('pagination', 'after-actions-message') }}">
             {{ __('vitrine-ui::fe.pagination.page_of', ['current' => $currentPage, 'last' => $this->lastPage]) }}</p>
     @endif
 </div>
