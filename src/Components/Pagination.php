@@ -32,6 +32,8 @@ class Pagination extends VitrineComponent
 
     public bool $labelInsideDropdown = true;
 
+    public bool $labelUnderActions = false;
+
     protected static array $assets = [
         'js' => 'behaviors/Pagination.js',
     ];
@@ -47,6 +49,7 @@ class Pagination extends VitrineComponent
         ?string $iconLeft = 'arrow-left-24',
         ?string $iconRight = 'arrow-right-24',
         bool $labelInsideDropdown = true,
+        bool $labelUnderActions = false,
         array $ui = [],
     ) {
         $this->btnVariant = $btnVariant;
@@ -59,6 +62,7 @@ class Pagination extends VitrineComponent
         $this->onFirstPage = $this->currentPage === 1;
         $this->onLastPage = $this->currentPage === $this->lastPage;
         $this->labelInsideDropdown = $labelInsideDropdown;
+        $this->labelUnderActions = $labelUnderActions;
         $this->dropdownItems = $this->buildDropdownItems();
         $this->iconLeft = $iconLeft;
         $this->iconRight = $iconRight;

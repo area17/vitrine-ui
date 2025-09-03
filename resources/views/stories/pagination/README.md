@@ -9,6 +9,7 @@ Any additional attributes are merged with the component's existing attributes to
     :pages="$pages"
     :currentPage="$currentPage"
     :currentPageCount="$currentPageCount"
+    :labelUnderActions="false"
     :lastPage="$lastPage"
     :total="$total"
 />
@@ -24,14 +25,21 @@ The "Previous" and "Next" buttons include aria-label attributes to describe thei
 
 ```json
 {
-    "base": "mb-140",
-    "wrapper": "md:flex w-full items-center gap-x-24",
-    "show-message": "hidden md:block f-ui-01",
-    "dropdown-wrapper": "md:flex items-center ml-auto mt-10 md:mt-0",
-    "dropdown": "pointer-events-none md:pointer-events-auto",
+    "base": "container mt-space-9 pt-space-4 border-t",
+    "wrapper": "flex w-full items-center gap-x-24",
+    "actions": "flex items-start justify-end gap-x-8",
+    "show-message": "hidden sm:block f-ui-1",
+    "action-disabled": "pointer-events-none opacity-30",
+    "dropdown-wrapper": "hidden md:flex items-center ml-auto",
+    "dropdown-message": "ml-12 f-ui-1",
+    "under-message": "flex md:hidden f-ui-1",
+    "dropdown": "",
     "select": {}
 }
 ```
+
+`under-message`:
+Style for "Page 1 of 10" message showing after action if `labelUnderActions` prop is true
 
 The pagination component uses the select Vitrine UI styles, defined in the [select.json](resources/frontend/theme/components/select.json) configuration.
 
