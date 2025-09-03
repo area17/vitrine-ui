@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.6] - 2025-03-09
+
+### Updated
+
+- Pagination : add labelAfterActions prop – Boolean to display "Page x of y" message under the action buttons on mobile view
+
 ## [3.0.5] - 2025-22-08
 
 ### Updated
