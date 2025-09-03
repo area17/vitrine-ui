@@ -37,6 +37,20 @@ The "Previous" and "Next" buttons include aria-label attributes to describe thei
     "select": {}
 }
 ```
+`base`:
+Styling of the main div
+
+`wrapper`:
+Styling of the wrapper div that is around both the actions, the message and the dropdown
+
+`actions`:
+Styling of the div that is around the prev/next buttons
+
+`show-message`:
+Styling of the message "Showing 10 of 25 items" displaying between the action and the dropdown
+
+`action-disabled`:
+Styling the Prev button when on the first page. Styling the Next button on the last page.
 
 `under-message`:
 Style for "Page 1 of 10" message showing after action if `labelUnderActions` prop is true
