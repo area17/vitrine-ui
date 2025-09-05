@@ -3,6 +3,15 @@ import { createBehavior } from '@area17/a17-behaviors'
 import { customEvents } from '../constants/customEvents'
 import { useMotionReduce } from '../utils/motion'
 
+/* ensure threshold is a number between 0 and 1 */
+function parseThreshold(value, defaultValue) {
+    const num = parseFloat(value)
+    if (isNaN(num) || num < 0 || num > 1) {
+        return defaultValue
+    }
+    return num
+}
+
 export const VideoBackground = createBehavior(
     'VideoBackground',
     {
@@ -169,9 +178,11 @@ export const VideoBackground = createBehavior(
             this.initState()
 
             // options
-            this.thresholdStart =
-                parseFloat(this.options.thresholdstart) || 0.25
-            this.thresholdEnd = parseFloat(this.options.thresholdend) || 0.75
+            this.thresholdStart = parseThreshold(
+                this.options.thresholdstart,
+                0.25
+            )
+            this.thresholdEnd = parseThreshold(this.options.thresholdend, 0.75)
 
             // elems
             this.$player = this.getChild('player')
