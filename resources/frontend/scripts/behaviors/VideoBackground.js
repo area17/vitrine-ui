@@ -178,11 +178,20 @@ export const VideoBackground = createBehavior(
             this.initState()
 
             // options
-            this.thresholdStart = parseThreshold(
-                this.options.thresholdstart,
-                0.25
-            )
-            this.thresholdEnd = parseThreshold(this.options.thresholdend, 0.75)
+            const DEFAULT_THRESHOLD_START = 0.25
+            const DEFAULT_THRESHOLD_END = 0.75
+            this.thresholdStart = this.options.thresholdstart
+                ? parseThreshold(
+                      this.options.thresholdstart,
+                      DEFAULT_THRESHOLD_START
+                  )
+                : DEFAULT_THRESHOLD_START
+            this.thresholdEnd = this.options.thresholdend
+                ? parseThreshold(
+                      this.options.thresholdend,
+                      DEFAULT_THRESHOLD_END
+                  )
+                : DEFAULT_THRESHOLD_END
 
             // elems
             this.$player = this.getChild('player')
