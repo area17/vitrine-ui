@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.7] - 2025-05-09
+
+### Updated
+
+- VideoBackground : Add 2 options in behavior to set threshold start/end. This way you can fine tune how video should play/pause on scroll based on visibility
+
 ## [3.0.6] - 2025-03-09
 
 ### Updated
