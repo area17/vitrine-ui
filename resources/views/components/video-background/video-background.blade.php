@@ -5,22 +5,25 @@
                  'variant' => $variant,
              ]),
          ]) }}
+         {{-- Play/pause observer on scroll --}}
+         {!! $thresholdStart ? 'data-' . $behaviorName . '-thresholdstart="' . $thresholdStart . '"' : '' !!}
+         {!! $thresholdEnd ? 'data-' . $behaviorName . '-thresholdend="' . $thresholdEnd . '"' : '' !!}
          {!! 'data-' .
              $behaviorName .
              '-text-pause="' .
              __('vitrine-ui::fe.pause') .
              '"
-                                      data-' .
+                                               data-' .
              $behaviorName .
              '-text-play="' .
              __('vitrine-ui::fe.play') .
              '"
-                                      data-' .
+                                               data-' .
              $behaviorName .
              '-text-mute="' .
              __('vitrine-ui::fe.mute') .
              '"
-                                      data-' .
+                                               data-' .
              $behaviorName .
              '-text-unmute="' .
              __('vitrine-ui::fe.unmute') .

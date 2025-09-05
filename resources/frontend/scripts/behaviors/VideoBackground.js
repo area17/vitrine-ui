@@ -63,7 +63,7 @@ export const VideoBackground = createBehavior(
 
         startIntersectionObserver() {
             const options = {
-                threshold: [0.25, 0.75]
+                threshold: [this.thresholdStart, this.thresholdEnd]
             }
 
             this.observer = new IntersectionObserver(
@@ -167,6 +167,11 @@ export const VideoBackground = createBehavior(
         init() {
             // state
             this.initState()
+
+            // options
+            this.thresholdStart =
+                parseFloat(this.options.thresholdstart) || 0.25
+            this.thresholdEnd = parseFloat(this.options.thresholdend) || 0.75
 
             // elems
             this.$player = this.getChild('player')
