@@ -328,7 +328,6 @@ class PublishComponent extends Command
         $newPath = "'$this->vendorAssetsPath/css";
         $modifiedCssContent = Str::replace($oldPath, $newPath, $publishedCssContent);
 
-        // replace './css/[components/input.css] with './vendor/vitrine-ui/[components/input.css]
         foreach ($cssAssets as $asset) {
             // get new path (full path before filename)
             $originalAsset = $originalAssetPath . '/css/' . $asset;

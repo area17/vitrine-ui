@@ -31,7 +31,7 @@
                 {{ $slotTrigger }}
             @else
                 <span class="{{ VitrineUI::ui('accordion-item', 'title', [], $ui ?? []) }}">{{ $title }}</span>
-                <div class="{{ VitrineUI::ui('accordion-item', 'icons', [], $ui ?? []) }}">
+                <span class="{{ VitrineUI::ui('accordion-item', 'icons', [], $ui ?? []) }}">
                     @if ($iconClosed ?? false)
                         <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-close'], [], $ui ?? []) }}"
                                     :name="$iconClosed" />
@@ -40,7 +40,7 @@
                         <x-vui-icon class="{{ VitrineUI::ui('accordion-item', ['icon', 'icon-open'], [], $ui ?? []) }}"
                                     :name="$iconOpen" />
                     @endif
-                </div>
+                </span>
             @endif
         </button>
     </x-vui-heading>

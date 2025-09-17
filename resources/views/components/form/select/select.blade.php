@@ -12,7 +12,8 @@
         @endif
     </div>
 
-    <div class="{{ $ui('select', 'wrapper') }}">
+    <div class="{{ $ui('select', 'wrapper') }}"
+         @if ($fitValue) data-behavior="SelectSizer" data-selectsizer-css="{{ $ui('select', 'sizer') }}" @endif>
         <select class="{{ $ui('select', 'select') }}"
                 data-Input-input
                 aria-describedby="{{ implode(' ', $ariaDescribedBy) }}"

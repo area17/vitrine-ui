@@ -5,19 +5,23 @@
             1 => [
                 'url' => '?page=1',
             ],
-            2 => [
-                'url' => '?page=2',
+            2 => [],
+            5 => [
+                'url' => '?page=5',
             ],
-            3 => [
-                'url' => '?page=3',
+            6 => [
+                'url' => '?page=6',
+            ],
+            7 => [
+                'url' => '?page=7',
+            ],
+            9 => [],
+            10 => [
+                'url' => '?page=10',
             ],
         ],
-        'current_page' => 1,
-        'last_page' => 3,
-        'current_page_count' => 10,
-        'total' => 25,
-        'labelInsideDropdown' => true,
-        'labelAfterActions' => false,
+        'current_page' => 6,
+        'last_page' => 10,
         'iconRight' => 'arrow-right-24',
         'iconLeft' => 'arrow-left-24',
         'btnVariant' => 'secondary',
@@ -37,16 +41,6 @@
         'last_page' => [
             'description' => 'The last page number.',
             'defaultValue' => ['summary' => 1],
-            'control' => 'number',
-        ],
-        'current_page_count' => [
-            'description' => 'The number of items displayed on the current page.',
-            'defaultValue' => ['summary' => 10],
-            'control' => 'number',
-        ],
-        'total' => [
-            'description' => 'The total number of items.',
-            'defaultValue' => ['summary' => 25],
             'control' => 'number',
         ],
         'btnVariant' => [
@@ -69,29 +63,15 @@
             'defaultValue' => ['summary' => 'arrow-right-24'],
             'control' => 'text',
         ],
-        'labelInsideDropdown' => [
-            'description' => 'Boolean to display label inside the dropdown. If set to false will display only the page number',
-            'defaultValue' => ['summary' => true],
-            'control' => 'boolean',
-        ],
-        'labelAfterActions' => [
-            'description' => 'Boolean to display "Page x of y" message under the action buttons on mobile view',
-            'defaultValue' => ['summary' => false],
-            'control' => 'boolean',
-        ],
     ],
 ])
 
 <div class="container">
-    <x-vui-pagination :btn-variant="$btnVariant"
-                      :pages="$pages ?? []"
-                      :icon-left="$iconLeft"
-                      :icon-right="$iconRight"
-                      :current-page="$current_page"
-                      :current-page-count="$current_page_count"
-                      :last-page="$last_page"
-                      :label-inside-dropdown="$labelInsideDropdown"
-                      :label-after-actions="$labelAfterActions"
-                      :total="$total"
-                      :btn-size="$btnSize" />
+    <x-vui-pagination-numbered :btn-variant="$btnVariant"
+                               :pages="$pages ?? []"
+                               :icon-left="$iconLeft"
+                               :icon-right="$iconRight"
+                               :current-page="$current_page"
+                               :last-page="$last_page"
+                               :btn-size="$btnSize" />
 </div>

@@ -39,6 +39,7 @@ const Carousel = createBehavior(
 
             // init swiper
             this.swiper = new Swiper(this.$node, {
+                initialSlide: this.options.initialslide || 0,
                 loop:
                     'loop' in this.options
                         ? this.options.loop === 'true'

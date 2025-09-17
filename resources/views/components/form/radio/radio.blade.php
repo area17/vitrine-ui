@@ -32,7 +32,7 @@
      {{ $disabled ? 'inert' : '' }}>
     <label class="{{ $ui('radio', 'base') }}"
            @if ($id || $name) for="{{ $id ? $id : $name . $rand }}" @endif>
-        <div class="{{ $ui('radio', 'wrapper') }}">
+        <span class="{{ $ui('radio', 'wrapper') }}">
             <input class="{{ $ui('radio', 'input') }}"
                    data-Input-input
                    type="radio"
@@ -55,7 +55,7 @@
                 <span class="{{ $ui('radio', 'hint') }}"
                       id="{{ $ariaID }}Hint">{{ $hint }}</span>
             @endif
-        </div>
+        </span>
     </label>
     <p class="{{ $ui('input', 'error') }}"
        id="{{ $errorID }}"

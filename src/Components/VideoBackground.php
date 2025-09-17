@@ -42,6 +42,13 @@ class VideoBackground extends VitrineComponent
      */
     public bool $controlMute;
 
+    /**
+     * Intersection Observer thresholds
+     * Default: null
+     */
+    public ?float $thresholdStart;
+    public ?float $thresholdEnd;
+
     protected static array $assets = [
         'npm' => ['video.js'],
         'js' => ['behaviors/VideoBackground.js'],
@@ -54,6 +61,8 @@ class VideoBackground extends VitrineComponent
         ?string $src = null,
         ?bool $native = true,
         ?string $variant = null,
+        ?float $thresholdStart = null,
+        ?float $thresholdEnd = null,
         array $ui = [],
     ) {
         $this->buttonVariant = $buttonVariant;
@@ -61,6 +70,8 @@ class VideoBackground extends VitrineComponent
         $this->controlMute = $controlMute;
         $this->native = $native;
         $this->variant = $variant;
+        $this->thresholdStart = $thresholdStart;
+        $this->thresholdEnd = $thresholdEnd;
         $this->src = $src;
 
         parent::__construct($ui);
