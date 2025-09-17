@@ -8,6 +8,22 @@ import { customEvents } from '../constants/customEvents'
 */
 
 const DEFAULT_TRANSITION_TIME = 200
+/*
+    Example of CSS to create transitions for tab panels :
+    [data-behavior*='tabs'] {
+        --tab-transition-time: 200ms;
+    }
+    [data-behavior*='tabs'][data-tabs-immediate='true'] {
+        --tab-transition-time: 0ms;
+    }
+    [data-behavior*='tabs'] [role='tabpanel'] {
+        opacity: 1;
+        transition: opacity var(--tab-transition-time) ease-in;
+    }
+    [data-behavior*='tabs'] [role='tabpanel'][inert] {
+        opacity: 0;
+    }
+*/
 
 const Tabs = createBehavior(
     'Tabs',
