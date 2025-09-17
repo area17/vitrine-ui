@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.15.5] - 2025-17-09
+
+### Updated
+
+- Tabs : Refactor the code to make sure the CSS transitions are looking good (first transition was broken).
+
 ## [2.15.5] - 2025-19-05
 
 ### Updated
