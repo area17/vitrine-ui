@@ -1,4 +1,5 @@
 import { createBehavior } from '@area17/a17-behaviors'
+
 import { customEvents } from '../constants/customEvents'
 
 /*
@@ -6,14 +7,33 @@ import { customEvents } from '../constants/customEvents'
     https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-manual/
 */
 
+const DEFAULT_TRANSITION_TIME = 200
+/*
+    Example of CSS to create transitions for tab panels :
+    [data-behavior*='tabs'] {
+        --tab-transition-time: 200ms;
+    }
+    [data-behavior*='tabs'][data-tabs-immediate='true'] {
+        --tab-transition-time: 0ms;
+    }
+    [data-behavior*='tabs'] [role='tabpanel'] {
+        opacity: 1;
+        transition: opacity var(--tab-transition-time) ease-in;
+    }
+    [data-behavior*='tabs'] [role='tabpanel'][inert] {
+        opacity: 0;
+    }
+*/
+
 const Tabs = createBehavior(
     'Tabs',
     {
-        setSelectedTab(selectedTab, init) {
-            if (this.current.tab === selectedTab) {
+        setSelectedTab(selectedTab, avoidScroll, forceImmediate) {
+            if (this.current.tab === selectedTab && !forceImmediate) {
                 return
             }
 
+            let transitionTime = this.transitionTime
             let nextCurrentTab = {
                 tab: selectedTab,
                 tabpanel: document.getElementById(
@@ -21,29 +41,26 @@ const Tabs = createBehavior(
                 )
             }
 
-            this.transitionTime =
-                16 +
-                parseInt(
-                    window
-                        .getComputedStyle(this.$node)
-                        .getPropertyValue('--tab-transition-time') || 200
-                )
-
             if (
                 this.$node.dataset.tabsImmediate === true ||
                 this.$node.dataset.tabsImmediate === 'true'
             ) {
-                this.transitionTime = 0
+                transitionTime = 0
+            }
+
+            // on page load, if the current tab is not set
+            if (forceImmediate) {
+                transitionTime = 0
             }
 
             this.current.tab.setAttribute('aria-selected', 'false')
             this.current.tab.tabIndex = -1
             this.current.tabpanel.inert = true
-            this.current.tabpanel.dispatchEvent(new CustomEvent(customEvents.TABS_HIDDEN))
-            document.dispatchEvent(
+            this.current.tabpanel.dispatchEvent(
                 new CustomEvent(customEvents.TABS_HIDDEN)
             )
-            if (!init && this.options.scrollonclick) {
+            document.dispatchEvent(new CustomEvent(customEvents.TABS_HIDDEN))
+            if (!avoidScroll && this.options.scrollonclick) {
                 this.$node.scrollIntoView(true)
             }
 
@@ -53,24 +70,27 @@ const Tabs = createBehavior(
                 nextCurrentTab.tab.setAttribute('aria-selected', 'true')
                 nextCurrentTab.tab.removeAttribute('tabindex')
                 nextCurrentTab.tabpanel.hidden = false
-                window.requestAnimationFrame(() => {
+                setTimeout(() => {
                     nextCurrentTab.tabpanel.inert = false
                     nextCurrentTab.tabpanel.dispatchEvent(
                         new CustomEvent(customEvents.TABS_SHOWN)
                     )
                     document.dispatchEvent(
-                        new CustomEvent(customEvents.TABS_SHOWN, { detail: this.current })
+                        new CustomEvent(customEvents.TABS_SHOWN, {
+                            detail: this.current
+                        })
                     )
-                })
+                }, 16) // allow time for the display to be set to block before removing inert
 
                 this.current = nextCurrentTab
-                this.$node.dataset.tabsImmediate = false
-                if (!init) {
+                if (!avoidScroll) {
                     document.dispatchEvent(
-                        new CustomEvent(customEvents.TABS_OPENED, { detail: this.current })
+                        new CustomEvent(customEvents.TABS_OPENED, {
+                            detail: this.current
+                        })
                     )
                 }
-            }, this.transitionTime)
+            }, transitionTime)
         },
         moveFocusToTab(currentTab) {
             currentTab.focus()
@@ -128,18 +148,26 @@ const Tabs = createBehavior(
         onClick(event) {
             event.preventDefault()
             event.stopPropagation()
-            this.setSelectedTab(event.currentTarget, false)
+            this.setSelectedTab(event.currentTarget, false, false)
         },
         selectTab(event) {
+            let forceImmediate = false
             if (event && event.detail && event.detail.immediate === true) {
-                this.$node.dataset.tabsImmediate = true
+                forceImmediate = true
             }
-            this.setSelectedTab(event.currentTarget, true)
+            this.setSelectedTab(event.currentTarget, true, forceImmediate)
         }
     },
     {
         init() {
-            this.transitionTime = 216
+            this.transitionTime =
+                16 +
+                parseInt(
+                    window
+                        .getComputedStyle(this.$node)
+                        .getPropertyValue('--tab-transition-time') ||
+                        DEFAULT_TRANSITION_TIME
+                )
             this.options.scrollonclick = this.options.scrollonclick === 'true'
 
             this.tablistNode = this.$node
@@ -195,8 +223,8 @@ const Tabs = createBehavior(
                 }
             }
 
-            this.$node.dataset.tabsImmediate = true
-            this.setSelectedTab(this.current.tab, true)
+            // init state
+            this.setSelectedTab(this.current.tab, true, true)
         },
         destroy() {
             this.tabs?.forEach((tab) => {
