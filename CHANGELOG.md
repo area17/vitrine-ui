@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.8] - 2025-17-09
+
+### Updated
+
+- Tabs : Refactor the code to make sure the CSS transitions are looking good (first transition was broken).
+- Button / Card Link : Update isExternalUrl helper to handle subdomains. Add new config 'open_subdomains_external' to set the behavior in app.
+
 ## [3.0.7] - 2025-05-09
 
 ### Updated
@@ -59,6 +66,12 @@
 - Remove radio CSS (styling done with Tailwind CSS instead)
 - Remove checkbox CSS (styling done with Tailwind CSS instead)
 - Allow styling of password-input with theme
+
+## [2.15.6] - 2025-17-09
+
+### Updated
+
+- Tabs : Refactor the code to make sure the CSS transitions are looking good (first transition was broken).
 
 ## [2.15.5] - 2025-19-05
 
