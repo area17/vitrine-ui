@@ -4,7 +4,7 @@
     'args' => [
         'title' => 'Tabs',
         'name' => 'faq',
-        'tabsNames' => ['Tab 1', 'Tab 2', 'Tab 3'],
+        'tabsNames' => ['Tab label 01', 'Tab label 02', 'Testing Longer Tab label 03'],
         'titleLevel' => 3,
         'contents' => ['<p>Content 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo autem cum voluptatibus exercitationem ea explicabo eum deleniti repudiandae alias delectus nam minima, vel totam consectetur officiis ex! Reprehenderit, sunt accusamus.</p>', '<p>Content 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo autem cum voluptatibus exercitationem ea explicabo eum deleniti repudiandae alias delectus nam minima, vel totam consectetur officiis ex! Reprehenderit, sunt accusamus.</p>', '<p>Content 3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo autem cum voluptatibus exercitationem ea explicabo eum deleniti repudiandae alias delectus nam minima, vel totam consectetur officiis ex! Reprehenderit, sunt accusamus.</p>'],
     ],
