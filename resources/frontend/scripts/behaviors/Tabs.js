@@ -33,6 +33,9 @@ const Tabs = createBehavior(
                 return
             }
 
+            // horizontal scroll the tablist to the active tab if needed
+            this.tablistNode.scrollLeft = selectedTab.parentNode.offsetLeft
+
             let transitionTime = this.transitionTime
             let nextCurrentTab = {
                 tab: selectedTab,
@@ -170,7 +173,7 @@ const Tabs = createBehavior(
                 )
             this.options.scrollonclick = this.options.scrollonclick === 'true'
 
-            this.tablistNode = this.$node
+            this.tablistNode = this.getChild('tablist') || this.$node
 
             this.tabs = []
 
