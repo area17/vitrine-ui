@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.9] - 2025-22-09
+
+### Updated
+
+- Tabs : Horizontal scroll the tablist if need (center the active button)
+
 ## [3.0.8] - 2025-18-09
 
 ### Updated
