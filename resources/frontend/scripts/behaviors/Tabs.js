@@ -48,7 +48,7 @@ const Tabs = createBehavior(
             }
 
             let transitionTime = this.transitionTime
-            let nextCurrentTab = {
+            const nextCurrentTab = {
                 tab: selectedTab,
                 tabpanel: document.getElementById(
                     selectedTab.getAttribute('aria-controls')
