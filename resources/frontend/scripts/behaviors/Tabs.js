@@ -206,6 +206,14 @@ const Tabs = createBehavior(
                     tab.getAttribute('aria-controls')
                 )
 
+                if (!tabpanel) {
+                    console.warn(
+                        `Tab panel with id "${tab.getAttribute('aria-controls')}" not found for tab`,
+                        tab
+                    )
+                    return
+                }
+
                 if (!tab.getAttribute('aria-selected')) {
                     tab.setAttribute('aria-selected', 'false')
                 }
