@@ -28,13 +28,27 @@ const DEFAULT_TRANSITION_TIME = 200
 const Tabs = createBehavior(
     'Tabs',
     {
+        scrollToSelectedTab() {
+            // center the selected tab in the tablist if possible
+            const tablistWidth = this.tablistNode.offsetWidth
+            const tabWidth = this.current.tab.offsetWidth
+            const tabCenter = this.current.tab.offsetLeft + tabWidth / 2
+            const scrollLeft = Math.max(
+                0,
+                Math.min(
+                    tabCenter - tablistWidth / 2,
+                    this.tablistNode.scrollWidth - tablistWidth
+                )
+            )
+            this.tablistNode.scrollLeft = scrollLeft
+        },
         setSelectedTab(selectedTab, avoidScroll, forceImmediate) {
             if (this.current.tab === selectedTab && !forceImmediate) {
                 return
             }
 
             let transitionTime = this.transitionTime
-            let nextCurrentTab = {
+            const nextCurrentTab = {
                 tab: selectedTab,
                 tabpanel: document.getElementById(
                     selectedTab.getAttribute('aria-controls')
@@ -89,6 +103,9 @@ const Tabs = createBehavior(
                             detail: this.current
                         })
                     )
+
+                    // horizontal scroll the tablist to the active tab if needed
+                    this.scrollToSelectedTab()
                 }
             }, transitionTime)
         },
@@ -170,7 +187,7 @@ const Tabs = createBehavior(
                 )
             this.options.scrollonclick = this.options.scrollonclick === 'true'
 
-            this.tablistNode = this.$node
+            this.tablistNode = this.getChild('tablist') || this.$node
 
             this.tabs = []
 
@@ -225,6 +242,7 @@ const Tabs = createBehavior(
 
             // init state
             this.setSelectedTab(this.current.tab, true, true)
+            this.scrollToSelectedTab()
         },
         destroy() {
             this.tabs?.forEach((tab) => {

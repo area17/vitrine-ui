@@ -1,4 +1,4 @@
 {
-  "base": "flex items-center gap-6",
-  "button": ""
+  "base": "flex items-center flex-nowrap overflow-x-scroll -mx-outer-gutter px-outer-gutter scrollbar-none gap-6",
+  "button": "whitespace-nowrap"
 }

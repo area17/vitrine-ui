@@ -1,4 +1,5 @@
-<ul role="tablist"
+<ul data-tabs-tablist
+    role="tablist"
     {{ $attributes->class([$ui('tab-list', 'base')]) }}
     @if ($tabListId) aria-labelledby="{{ $tabListId }}"
      @elseif($ariaLabel) aria-label="{{ $ariaLabel }}" @endif>
@@ -12,7 +13,7 @@
                           aria-selected="{{ $loop->index === $selectedIndex ? 'true' : 'false' }}"
                           :class="$ui('tab-list', 'button')"
                           :variant="$tabButtonVariant">
-                {{ $tabName }}
+                {!! $tabName !!}
             </x-vui-button>
         </li>
     @endforeach
