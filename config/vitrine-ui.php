@@ -37,6 +37,7 @@ return [
     // Open subdomains links as external links
     'open_subdomains_external' => true,
 
+    // Available components (with class)
     'components' => [
         'accordion' => A17\VitrineUI\Components\Accordion::class,
         'audio-player' => A17\VitrineUI\Components\AudioPlayer::class,
@@ -78,5 +79,16 @@ return [
         'tag' => A17\VitrineUI\Components\Tag::class,
         'video-background' => A17\VitrineUI\Components\VideoBackground::class,
         'wysiwyg' => A17\VitrineUI\Components\Wysiwyg::class,
+    ],
+
+    // Other available components (with no class)
+    'blade-components' => [
+        'accordion-item' => 'components.accordion.item',
+        'banner' => 'components.banner.banner',
+        'img' => 'components.img',
+        'icon-output' => 'components.icon._output',
+        'icon-sprite' => 'components.icon.sprite',
+        'pagination-numbered' => 'components.pagination-numbered.pagination-numbered',
+        'picture' => 'components.picture',
     ],
 ];
