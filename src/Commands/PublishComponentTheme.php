@@ -139,6 +139,15 @@ class PublishComponentTheme extends Command
             $this->notifyNpmPackages();
         }
 
+        // Publish stories for blade components without class
+        if (($this->option('stories') || $this->publishedEverything) && empty($this->argument('components'))) {
+            $this->comment('Publishing stories for blade components without class ');
+            $bladeComponents = array_keys(config('vitrine-ui.blade-components', []));
+            foreach ($bladeComponents as $value) {
+                $this->publishStories($value);
+            }
+        }
+
         $this->comment('All done. ');
 
         return self::SUCCESS;
