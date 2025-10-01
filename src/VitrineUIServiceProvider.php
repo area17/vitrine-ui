@@ -40,16 +40,13 @@ final class VitrineUIServiceProvider extends ServiceProvider
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $prefix = config('vitrine-ui.prefix', 'vui');
 
-            $variations = [
-                'vitrine-ui::components.accordion.item' => 'accordion-item',
-                'vitrine-ui::components.banner.banner' => 'banner',
-                'vitrine-ui::components.media.img' => 'img',
-                'vitrine-ui::components.media.picture' => 'picture',
-                'vitrine-ui::components.icon._output' => 'icon-output',
-                'vitrine-ui::components.icon.sprite' => 'icon-sprite',
-                'vitrine-ui::components.pagination-numbered.pagination-numbered' => 'pagination-numbered',
-            ];
+            $variations = [];
+            // Blade components without class
+            foreach (config('vitrine-ui.blade-components', []) as $alias => $path) {
+                $variations['vitrine-ui::' . $path] = $alias;
+            }
 
+            // Blade components with class
             foreach (config('vitrine-ui.components', []) as $alias => $component) {
                 $blade->component($component, $alias, $prefix);
             }
