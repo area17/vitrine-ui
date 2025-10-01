@@ -21,10 +21,6 @@ class CheckboxGroup extends VitrineComponent
 
     public ?string $note;
 
-    protected static array $assets = [
-        'css' => ['components/form/checkbox.css', 'components/form/input.css'],
-    ];
-
     public function __construct(
         string $legend = null,
         string $value = null,

@@ -2,17 +2,19 @@
     "rules": {
         "merge": ["input"]
     },
-    "base": ["m-form-checkbox cursor-pointer"],
+    "base": ["m-form-checkbox", "cursor-pointer items-center"],
     "wrapper": ["m-form-checkbox-wrap", "flex items-center space-x-8"],
-    "label": ["m-form-checkbox-label", "f-body-1 inline-flex relative"],
+    "label": ["m-form-checkbox-label", "f-body-1 cursor-pointer inline-flex relative justify-start ml-8"],
     "required": "sr-only",
     "check": [
         "m-form-checkbox-check",
         "peer",
+        "[&>svg]:hidden",
         "w-24 h-24 rounded-sm relative",
         "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
         "transition-colors duration-300 ease-out",
         "peer-checked:bg-[black]",
+        "peer-checked:[&>svg]:block",
         "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
     ],
     "checkmark": [
@@ -28,5 +30,5 @@
         "focus:outline-none",
         "[clip:rect(0,0,0,0)]"
     ],
-    "hint": ["m-form-checkbox-hint", "f-ui-2 text-secondary"]
+    "hint": ["m-form-checkbox-hint", "f-ui-2 ml-auto text-secondary"]
 }

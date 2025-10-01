@@ -35,7 +35,7 @@ $sources = [
 // Static image using Twill Image
 $sources = [
     [
-        'image' => TwillImage::make($object, $role, $media)
+        'image' => TwillImage::make($object, $role, $media)->toArray()
     ]
 ];
 

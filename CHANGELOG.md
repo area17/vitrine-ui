@@ -1,5 +1,78 @@
 # Changelog
 
+## [3.0.9] - 2025-22-09
+
+### Updated
+
+- Tabs : Horizontal scroll the tablist if need (center the active button)
+
+## [3.0.8] - 2025-18-09
+
+### Updated
+
+- Tabs : Refactor the code to make sure the CSS transitions are looking good (first transition was broken).
+- Button / Card Link : Update isExternalUrl helper to handle subdomains. Add new config 'open_subdomains_external' to set the behavior in app.
+
+## [3.0.7] - 2025-05-09
+
+### Updated
+
+- VideoBackground : Add 2 options in behavior to set threshold start/end. This way you can fine tune how video should play/pause on scroll based on visibility
+
+## [3.0.6] - 2025-03-09
+
+### Updated
+
+- Pagination : add labelAfterActions prop – Boolean to display "Page x of y" message under the action buttons on mobile view
+
+## [3.0.5] - 2025-22-08
+
+### Updated
+
+- New : Pagination Numbered Component
+
+## [3.0.4] - 2025-21-08
+
+### Updated
+
+- Banner : Add documentation
+
+### Fixed
+
+- Accordion : Fix incorrect HTML for accordion, checkbox, radio and pagination
+
+## [3.0.3] - 2025-06-05
+
+### Updated
+
+- Select : Add option to resize automatically Select based on current value
+
+## [3.0.2] - 2025-05-05
+
+### Updated
+
+- Carousel : Add option to set initial slide
+- Image : Add possiblity to set image tag without an image object
+
+## [3.0.1] - 2025-23-04
+
+### Updated
+
+- Image : Update Images story, add example for picture
+
+## [3.0.0-alpha] - 2025-23-04
+
+### Updated
+
+- Image : Remove Twill Image dependency
+- Image : Update Image story
+- ImageZoom : Lazyload Openseadragon inside ImageZoom behavior
+- Update Datepicker story
+- Form inputs : update the input components so all components are using the master `x-vui-form-field` component and that each input can be styled using themes.
+- Remove radio CSS (styling done with Tailwind CSS instead)
+- Remove checkbox CSS (styling done with Tailwind CSS instead)
+- Allow styling of password-input with theme
+
 ## [2.15.7] - 2025-24-09
 
 ### Updated

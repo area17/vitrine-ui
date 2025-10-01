@@ -33,7 +33,7 @@
      {{ $disabled ? 'inert' : '' }}>
     <label class="{{ $ui('checkbox', 'base') }}"
            @if ($id || $name) for="{{ $id ? $id : $name . $rand }}" @endif>
-        <div class="{{ $ui('checkbox', 'wrapper') }}">
+        <span class="{{ $ui('checkbox', 'wrapper') }}">
             <input class="{{ $ui('checkbox', 'input') }}"
                    data-Input-input
                    type="checkbox"
@@ -64,7 +64,7 @@
                 <span class="{{ $ui('checkbox', 'hint') }}"
                       id="{{ $ariaID }}Hint">{{ $hint }}</span>
             @endif
-        </div>
+        </span>
     </label>
     <p class="{{ $ui('input', 'error') }}"
        id="{{ $errorID }}"

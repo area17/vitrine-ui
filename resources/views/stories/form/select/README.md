@@ -25,6 +25,7 @@ Any additional attributes are merged with the component's existing attributes, a
     :autofocus="false"
     :multiple="false"
     :readonly="false"
+    :fit-value="false"
 />
 ```
 
@@ -47,6 +48,7 @@ Hint and note texts are associated with the dropdown using aria-describedby, ens
     "header": "flex flex-row flex-nowrap justify-between items-baseline gap-gutter",
     "wrapper": "relative mt-4 border [.s-readonly_&]:border-quaternary [.s-error_&]:border-error [.s-readonly_&]:bg-quaternary",
     "select": "p-12 pr-36 w-full f-body-1 appearance-none [.s-readonly_&]:bg-transparent",
+    "sizer": "p-12 pr-36 f-body-1",
     "icon": "absolute top-1/2 right-[8px] -translate-y-1/2 pointer-events-none",
     "icon-name": "chevron-down-24",
     "hint": "f-ui-2 text-secondary",
@@ -67,6 +69,9 @@ Applied to the container that wraps both the select element and its label.
 
 `select`:
 Applied to the visual select element itself.
+
+`sizer`:
+Applied to the hidden sizer used to resize the Select based on current value (only if fit-value = true)
 
 `icon`:
 Applied to the icon used as a visual indicator for the dropdown.

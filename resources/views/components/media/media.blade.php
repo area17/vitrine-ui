@@ -9,7 +9,6 @@
         $classes,
     ),
 ) }}
-                     @if (app()->environment(['local', 'development'])) data-preset="{{ $imagePreset }}" @endif
                      @if (isset($video) && $video) data-behavior="ShowVideo"
     data-ShowVideo-id="{{ $video['id'] }}"
     data-ShowVideo-type="{{ $video['type'] }}"
@@ -26,11 +25,9 @@
         @if (isset($video) && $video)
             <div class="{{ $ui('media', 'video-wrapper') }}"
                  data-ShowVideo-media-container>
-
                 <x-vui-button class="{{ $ui('media', 'video-play-button') }}"
                               aria-label="{{ __('vitrine-ui::fe.play_video') }}"
                               :icon-only="true"
-                              {{-- fixme: add missing play-96 icon --}}
                               :icon="$videoPlayIcon ?? 'play-96'"
                               size="large" />
 
@@ -40,10 +37,7 @@
             </div>
         @else
             <div class="{{ $ui('media', 'image-wrapper') }}">
-                <x-vui-image :use-placeholder="$usePlaceholder"
-                             :image="$image"
-                             :image-preset="$imagePreset"
-                             :image-options="$imageOptions" />
+                <x-vui-image :image="$image" />
                 {{ $slot ?? null }}
             </div>
         @endif

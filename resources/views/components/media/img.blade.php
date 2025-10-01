@@ -10,7 +10,7 @@
 ])
 
 <img src="{{ $img['src'] ?? ($src ?? '') }}"
-     alt="{{ $img['alt'] ?? '' }}"
+     alt="{{ $img['alt'] ?? ($alt ?? '') }}"
      loading="{{ $loading }}"
      {{ $attributes }}
      @if ($img['srcSetWebp'] ?? ($img['srcset'] ?? ($img['srcSet'] ?? false))) srcset="{{ $img['srcSetWebp'] ?? ($img['srcset'] ?? $img['srcSet']) }}" @endif
