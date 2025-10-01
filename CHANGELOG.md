@@ -73,6 +73,12 @@
 - Remove checkbox CSS (styling done with Tailwind CSS instead)
 - Allow styling of password-input with theme
 
+## [2.15.7] - 2025-24-09
+
+### Updated
+
+- Tabs : Scroll horizontally tab list to selected tab. Allow HTML in tab buttons.
+
 ## [2.15.6] - 2025-17-09
 
 ### Updated

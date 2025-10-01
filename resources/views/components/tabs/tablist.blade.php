@@ -13,7 +13,7 @@
                           aria-selected="{{ $loop->index === $selectedIndex ? 'true' : 'false' }}"
                           :class="$ui('tab-list', 'button')"
                           :variant="$tabButtonVariant">
-                {{ $tabName }}
+                {!! $tabName !!}
             </x-vui-button>
         </li>
     @endforeach
