@@ -38,6 +38,26 @@ When a tab has focus:
 Moves focus to the previous tab.
 If focus is on the first tab, moves focus to the last tab.
 
+## CSS Animations
+
+Example of CSS to create animated transitions for the active Tab Panels :
+
+```css
+[data-behavior*='Tabs'] {
+    --tab-transition-time: 200ms;
+}
+[data-behavior*='Tabs'][data-tabs-immediate='true'] {
+    --tab-transition-time: 0ms;
+}
+[data-behavior*='Tabs'] [role='tabpanel'] {
+    opacity: 1;
+    transition: opacity var(--tab-transition-time) ease-in;
+}
+[data-behavior*='Tabs'] [role='tabpanel'][inert] {
+    opacity: 0;
+}
+```
+
 ## Theming
 
 ### Config
