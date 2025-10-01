@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.10] - 2025-01-10
+
+### Updated
+
+- Tabs : Documentation - Add example to set CSS animation
+
 ## [3.0.9] - 2025-22-09
 
 ### Updated
