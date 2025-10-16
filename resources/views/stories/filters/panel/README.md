@@ -92,7 +92,7 @@ document.addEventListener('swup:navigate', (event) => {
 
 - Focus is trapped within the panel once opened
 - Focus is initially set on the heading. If you replace the header with a named slot, include an element with `[data-Modal-initial-focus]`. 
-- When no filters are selected, the `aria-disabled` attribute is applied to the Apply button. Avoid using the `disabled` attribute so that the button can still recieve focus.
+- When no filters are selected, the `aria-disabled` attribute is applied to the Apply button. Avoid using the `disabled` attribute so that the button can still receive focus.
 
 
 ## Theming
