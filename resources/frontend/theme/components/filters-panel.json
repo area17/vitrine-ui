@@ -1,0 +1,12 @@
+{
+ "modal": "bg-overlay",
+ "panel": "bg-primary flex h-full flex-col",
+ "header": "border-default w-full shrink-0 border-b flex items-center justify-between py-12 md:py-24 px-gutter",
+ "title": "f-subhead-2",
+ "footer": "border-default mt-auto w-full shrink-0 border-t py-16 md:py-24 px-gutter flex justify-between gap-x-gutter",
+ "chips": "peer w-full pt-24 pb-32",
+ "chips-title": "f-ui-1 font-bold",
+ "chips-list": "mt-16 flex flex-row flex-wrap gap-8",
+ "accordion-item-inner": "flex flex-col gap-y-16 pt-4 pb-28",
+ "scroll-area": "relative h-full overflow-auto px-gutter"
+}

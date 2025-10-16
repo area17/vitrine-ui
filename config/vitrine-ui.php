@@ -84,6 +84,7 @@ return [
     // Other available components (with no class)
     'blade-components' => [
         'accordion-item' => 'components.accordion.item',
+        'filters-panel' => 'components.filters.panel',
         'banner' => 'components.banner.banner',
         'img' => 'components.img',
         'icon-output' => 'components.icon._output',

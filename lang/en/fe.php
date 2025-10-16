@@ -7,11 +7,18 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'accordion' => 'Accordion',
     'close_banner' => 'Close Banner',
     'close_modal' => 'Close Modal',
     'copied_to_clipboard' => 'Copied to clipboard!',
     'dropdown_items' => 'Dropdown items',
     'enter_email_address' => 'Enter email address',
+    'filters' => [
+        'apply' => 'Apply',
+        'clear_all' => 'Clear all',
+        'filter' => 'Filter',
+        'selected' => 'Selected',
+    ],
     'footer' => 'Footer',
     'footer_primary_nav' => 'Footer Primary Navigation',
     'footer_secondary_nav' => 'Footer Secondary Navigation',

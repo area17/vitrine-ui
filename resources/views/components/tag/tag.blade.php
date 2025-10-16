@@ -21,7 +21,7 @@
               :icon="$cancellable ? 'close-16' : null"
               icon-position="after"
               :icon-spacing="8"
-              :static="!$href"
+              :static="$static ?? false"
               {{ $attributes->twMerge($classes) }}>
     {{ $slot }}
 </x-vui-button>
