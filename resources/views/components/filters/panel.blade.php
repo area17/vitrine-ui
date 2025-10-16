@@ -9,6 +9,8 @@
     'showChips' => true,
     'title' => __('vitrine-ui::fe.filters.filter'),
     'useSwup' => false,
+    'applyButtonVariant' => 'primary',
+    'resetButtonVariant' => 'secondary',
 ])
 
 <x-vui-modal class="{{ VitrineUI::ui('filters-panel', 'modal', [], $ui ?? []) }}"
@@ -48,6 +50,8 @@
                      hidden>
                     <x-vui-heading class="{{ VitrineUI::ui('filters-panel', 'chips-title', [], $ui ?? []) }}"
                                    id="{{ $modalId }}_selectedHeading"
+                                   data-FilterPanel-chipsHeading
+                                   tabindex="-1"
                                    :level="3">
                         {{ $chipsTitle }}
                     </x-vui-heading>
@@ -122,14 +126,14 @@
             {{ $footer }}
         @else
             <div class="{{ VitrineUI::ui('filters-panel', 'footer', [], $ui ?? []) }}">
-                <x-vui-button class="w-full shrink justify-center"
+                <x-vui-button class="{{ VitrineUI::ui('filters-panel', 'footer-button', [], $ui ?? []) }}"
                               data-FilterPanel-reset
-                              variant="secondary">
+                              variant="{{ $resetButtonVariant }}">
                     {{ __('vitrine-ui::fe.filters.clear_all') }}
                 </x-vui-button>
-                <x-vui-button class="w-full shrink justify-center"
+                <x-vui-button class="{{ VitrineUI::ui('filters-panel', 'footer-button', [], $ui ?? []) }}"
                               data-FilterPanel-apply
-                              variant="secondary">
+                              variant="{{ $applyButtonVariant }}">
                     {{ __('vitrine-ui::fe.filters.apply') }}
                     <span data-FilterPanel-count
                           hidden></span>

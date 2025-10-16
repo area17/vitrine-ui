@@ -154,6 +154,16 @@ const FilterPanel = createBehavior(
                 e.preventDefault()
                 e.stopPropagation()
                 this.handleChipClick(key, value)
+
+                if (
+                    this.$chipsContainer &&
+                    this.$chipsHeading &&
+                    !this.$chipsContainer.hasAttribute('hidden')
+                ) {
+                    this.$chipsHeading.focus()
+                } else if (this.$node.querySelectorAll('a, button')[0]) {
+                    this.$node.querySelectorAll('a, button')[0].focus()
+                }
             })
 
             this.$chipsContainer.querySelector('ul').appendChild(chip)
@@ -278,6 +288,7 @@ const FilterPanel = createBehavior(
             this.$chipsContainer = this.getChild('chips')
             this.$chipTemplate = this.getChild('chipTemplate')
             this.useSwup = this.options.useswup === 'true'
+            this.$chipsHeading = this.getChild('chipsHeading')
 
             this.$applyButton &&
                 this.$applyButton.addEventListener(
