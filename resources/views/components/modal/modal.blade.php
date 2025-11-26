@@ -4,7 +4,7 @@
          role="dialog"
          aria-labelledby="{{ $id . '_title' }}"
          aria-modal="true"
-         {{ $attributes->merge(['data-behavior' => $attributes->prepends('Modal')])->twMerge($ui('modal', ['base'])) }}
+         {{ $attributes->merge(['data-behavior' => $attributes->prepends('Modal')])->optimizedMerge($ui('modal', ['base'])) }}
          {!! $panel ? 'data-Modal-panel="true"' : '' !!}
          {!! $open ? 'data-Modal-open="true"' : '' !!}
          {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}>

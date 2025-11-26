@@ -11,7 +11,7 @@
     $behaviors[] = $fuzzy ? 'DateInputFuzzy' : 'DateInput';
 @endphp
 <div @if ($picker) data-DatePicker-el="{{ $pickerID }}" @endif
-     {{ $attributes->merge(['data-behavior' => $attributes->prepends(implode(' ', $behaviors))])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+     {{ $attributes->merge(['data-behavior' => $attributes->prepends(implode(' ', $behaviors))])->optimizedMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $dataAttrs }}
      {{ $disabled ? 'inert' : '' }}>
 

@@ -2,6 +2,8 @@
 
 namespace A17\VitrineUI;
 
+use App\Services\OptimizedClassMerge;
+use App\Services\TailwindMergeBoost;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -146,7 +148,29 @@ class VitrineUI
             }
         }
 
-        return tw(join(' ', $classes));
+        $mergedClasses = join(' ', $classes);
+
+        if (config('vitrine-ui.boost', true)) {
+            if (class_exists(TailwindMergeBoost::class)) {
+                $boostService = new TailwindMergeBoost;
+
+                return $boostService->merge($mergedClasses);
+            }
+        }
+
+        // Use optimized merge if enabled
+        if (config('vitrine-ui.optimized_merge', true) && class_exists(OptimizedClassMerge::class)) {
+            // Return as-is since classes are already collected from theme (no conflicts expected here)
+            // The actual merging happens when combining with user-provided classes in blade templates
+            return trim($mergedClasses);
+        }
+
+        // Fallback: use tw() if it exists, otherwise return as-is
+        if (function_exists('tw')) {
+            return tw($mergedClasses);
+        }
+
+        return trim($mergedClasses);
     }
 
     /**
@@ -263,7 +287,17 @@ class VitrineUI
                                 ? join(' ', $ui[$component][$key])
                                 : $ui[$component][$key] ?? '';
                         if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
-                            $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
+                            // Use optimized merge with caching for theme merging
+                            if (config('vitrine-ui.optimized_merge', true) && class_exists(OptimizedClassMerge::class)) {
+                                $cacheKey = "theme_merge:{$component}:{$key}";
+                                $ui[$component][$key] = OptimizedClassMerge::preMergeTheme(
+                                    $component,
+                                    $key,
+                                    [$existingVal, $val]
+                                );
+                            } else {
+                                $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
+                            }
                         } else {
                             $ui[$component][$key] = $existingVal . ' ' . $val;
                         }

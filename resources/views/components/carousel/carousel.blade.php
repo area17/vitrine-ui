@@ -5,7 +5,7 @@
 
 <div data-behavior="Carousel"
      data-Carousel-configuration="{{ $configuration }}"
-     {{ $attributes->twMerge([$ui('carousel', 'base')]) }}>
+     {{ $attributes->optimizedMerge([$ui('carousel', 'base')]) }}>
     <{{ $sliderTag }} class="{{ $ui('carousel', 'wrapper') }} {{ $swiperWrapperClass ?? '' }} swiper-wrapper">
         @foreach ($items as $item)
             <{{ $sliderItemTag }} class="{{ $itemClass }} {{ $ui('carousel', 'item') }} swiper-slide">
