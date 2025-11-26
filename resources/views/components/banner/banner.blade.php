@@ -9,7 +9,7 @@
 @if (!$slot->isEmpty())
     <div data-banner-id="{{ $id }}"
          data-banner-cookietimeout="{{ $cookieTimeout }}"
-         {{ $attributes->merge(['data-behavior' => $attributes->prepends('Banner')])->twMerge(VitrineUI::ui('banner')) }}
+         {{ $attributes->merge(['data-behavior' => $attributes->prepends('Banner')])->class(VitrineUI::ui('banner')) }}
          hidden>
         <div class="{{ VitrineUI::ui('banner', 'wrapper') }}">
             @if ($showClose)

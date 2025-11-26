@@ -1,5 +1,5 @@
 {{-- Image, Video Background, Video or Placeholder with media base and media container classes --}}
-<{{ $element() }} {{ $attributes->twMerge(
+<{{ $element() }} {{ $attributes->class(
     array_merge(
         [
             $ui('media', 'base', [

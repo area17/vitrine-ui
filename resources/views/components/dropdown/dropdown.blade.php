@@ -1,5 +1,5 @@
 <div data-behavior="Dropdown"
-     {{ $attributes->twMerge($ui('dropdown', 'base')) }}>
+     {{ $attributes->class($ui('dropdown', 'base')) }}>
     <button class="{{ $ui('dropdown', 'trigger') }}"
             data-dropdown-btn
             type="button"

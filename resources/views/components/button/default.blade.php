@@ -3,7 +3,7 @@
     'slotAfter' => null,
 ])
 
-<{{ $tag }} {{ $attributes->twMerge(
+<{{ $tag }} {{ $attributes->class(
     $ui($uiKeyComponent, 'base', [
         'size' => $size,
         'variant' => $variant,

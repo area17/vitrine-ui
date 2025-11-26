@@ -1,6 +1,6 @@
 <div data-behavior="Input FileUpload"
      data-fileupload-size="{{ $fileSize }}"
-     {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input FileUpload')])->twMerge(Arr::toCssClasses(['m-form-upload', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+     {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input FileUpload')])->class(Arr::toCssClasses(['m-form-upload', 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $disabled ? 'inert' : '' }}>
 
     <div class="gap-gutter flex flex-row flex-nowrap items-baseline justify-between">

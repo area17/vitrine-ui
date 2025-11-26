@@ -7,7 +7,7 @@
     ];
 @endphp
 <div data-behavior="Pagination"
-     {{ $attributes->twMerge($ui('pagination', 'base')) }}>
+     {{ $attributes->class($ui('pagination', 'base')) }}>
     <div class="{{ $ui('pagination', 'wrapper') }}">
         <div class="{{ $ui('pagination', 'actions') }}">
             <x-vui-button class="{{ Arr::toCssClasses([

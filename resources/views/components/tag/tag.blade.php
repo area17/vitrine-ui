@@ -22,6 +22,6 @@
               icon-position="after"
               :icon-spacing="8"
               :static="!$href"
-              {{ $attributes->twMerge($classes) }}>
+              {{ $attributes->class($classes) }}>
     {{ $slot }}
 </x-vui-button>

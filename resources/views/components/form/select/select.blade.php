@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge(Arr::toCssClasses([$ui('select', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
+<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->class(Arr::toCssClasses([$ui('select', 'base'), 's-disabled' => $disabled, 's-error' => $error, 's-readonly' => $readonly])) }}
      {{ $disabled ? 'inert' : '' }}>
 
     <div class="{{ $ui('select', 'header') }}">

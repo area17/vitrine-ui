@@ -17,7 +17,7 @@
 @endphp
 
 <li data-accordion-item
-    {{ $attributes->twMerge(VitrineUI::ui('accordion-item')) }}>
+    {{ $attributes->class(VitrineUI::ui('accordion-item')) }}>
     <x-vui-heading class="{{ VitrineUI::ui('accordion-item', 'heading', [], $ui ?? []) }}"
                    :level="$headingLevel">
         <button class="{{ VitrineUI::ui('accordion-item', 'trigger', [], $ui ?? []) }}"

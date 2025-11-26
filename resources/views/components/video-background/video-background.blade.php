@@ -1,6 +1,6 @@
 @if (isset($src) || isset($sources))
     <div data-behavior="{{ $behaviorName }}"
-         {{ $attributes->twMerge([
+         {{ $attributes->class([
              $ui('video-background', 'base', [
                  'variant' => $variant,
              ]),

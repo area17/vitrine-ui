@@ -1,4 +1,4 @@
-<{{$tag}} {{ $attributes->twMerge(
+<{{$tag}} {{ $attributes->class(
         $ui('card', 'base', [
             'variant' => $variant
         ])

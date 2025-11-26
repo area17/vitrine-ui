@@ -29,7 +29,7 @@
     }
 @endphp
 
-<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->twMerge(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error])) }}
+<div {{ $attributes->merge(['data-behavior' => $attributes->prepends('Input')])->class(Arr::toCssClasses([$ui('input', 'base'), 's-disabled' => $disabled, 's-error' => $error])) }}
      {{ $disabled ? 'inert' : '' }}>
     <label class="{{ $ui('checkbox', 'base') }}"
            @if ($id || $name) for="{{ $id ? $id : $name . $rand }}" @endif>
