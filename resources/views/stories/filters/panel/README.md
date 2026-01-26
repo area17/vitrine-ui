@@ -80,7 +80,7 @@ To support Swup page transitions, set the `use-swup` attribute to `true`:
 Then, add the following custom event listener in your Swup setup file (e.g., `pjax.js`):
 
 ```javascript
-document.addEventListener('swup:navigate', (event) => {
+document.addEventListener('Swup:navigate', (event) => {
         const { url, opts } = event.detail || {}
         if (url) {
             navigate(url, opts || {})

@@ -1,5 +1,7 @@
 import { createBehavior } from '@area17/a17-behaviors'
 
+import { customEvents } from '../constants/customEvents'
+
 const FilterPanel = createBehavior(
     'FilterPanel',
     {
@@ -219,12 +221,18 @@ const FilterPanel = createBehavior(
             this.searchParams.delete('page')
 
             if (this.useSwup) {
-                const event = new CustomEvent('swup:navigate', {
+                const event = new CustomEvent(customEvents.SWUP_NAVIGATE, {
                     detail: {
                         url: this.baseUrl + '?' + this.searchParams.toString()
                     }
                 })
                 document.dispatchEvent(event)
+
+                if (this.closeOnButtonClick) {
+                    document.dispatchEvent(
+                        new CustomEvent(customEvents.MODAL_CLOSE_ALL)
+                    )
+                }
             } else {
                 window.location =
                     this.baseUrl + '?' + this.searchParams.toString()
@@ -243,12 +251,18 @@ const FilterPanel = createBehavior(
             this.updateCount()
 
             if (this.useSwup) {
-                const event = new CustomEvent('swup:navigate', {
+                const event = new CustomEvent(customEvents.SWUP_NAVIGATE, {
                     detail: {
                         url: this.baseUrl
                     }
                 })
                 document.dispatchEvent(event)
+
+                if (this.closeOnButtonClick) {
+                    document.dispatchEvent(
+                        new CustomEvent(customEvents.MODAL_CLOSE_ALL)
+                    )
+                }
             } else {
                 window.location = this.baseUrl
             }
@@ -289,6 +303,8 @@ const FilterPanel = createBehavior(
             this.$chipTemplate = this.getChild('chipTemplate')
             this.useSwup = this.options.useswup === 'true'
             this.$chipsHeading = this.getChild('chipsHeading')
+            this.closeOnButtonClick =
+                this.options.closeonbuttonclick !== 'false'
 
             this.$applyButton &&
                 this.$applyButton.addEventListener(

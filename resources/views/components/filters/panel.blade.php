@@ -11,6 +11,7 @@
     'useSwup' => false,
     'applyButtonVariant' => 'primary',
     'resetButtonVariant' => 'secondary',
+    'closeOnButtonClick' => true,
 ])
 
 <x-vui-modal class="{{ VitrineUI::ui('filters-panel', 'modal', [], $ui ?? []) }}"
@@ -21,6 +22,7 @@
              :open="$open">
     <div class="{{ VitrineUI::ui('filters-panel', 'panel', [], $ui ?? []) }}"
          data-behavior="{{ $behavior }}"
+         data-{{ $behavior }}-closeOnButtonClick="{{ $closeOnButtonClick ? 'true' : 'false' }}"
          @if ($behavior) data-{{ $behavior }}-useSwup="{{ $useSwup ? 'true' : 'false' }}" @endif>
         @if (isset($header))
             {{ $header }}
