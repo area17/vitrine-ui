@@ -134,7 +134,7 @@ Styling of buttons inside the panel's footer
 Styling of the panel's footer area
 
 `header`:
-Styling of the panels header area
+Styling of the panel's header area
 
 `modal`:
 Styling of the modal containing the panel
