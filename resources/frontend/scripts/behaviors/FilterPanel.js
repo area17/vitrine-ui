@@ -92,7 +92,7 @@ const FilterPanel = createBehavior(
 
                         if (
                             input &&
-                            input.closest('[data-filterpanel-checkbox]').dataset
+                            input.closest('[data-FilterPanel-checkbox]').dataset
                                 .omit !== 'true'
                         ) {
                             this.createChip(
@@ -116,7 +116,7 @@ const FilterPanel = createBehavior(
 
                     if (
                         input &&
-                        input.closest('[data-filterpanel-checkbox]').dataset
+                        input.closest('[data-FilterPanel-checkbox]').dataset
                             .omit !== 'true'
                     ) {
                         this.createChip(
@@ -204,7 +204,7 @@ const FilterPanel = createBehavior(
                     }
 
                     if (
-                        input.closest('[data-filterpanel-checkbox]').dataset
+                        input.closest('[data-FilterPanel-checkbox]').dataset
                             .omit !== 'true'
                     ) {
                         this.totalSelected++
@@ -245,7 +245,9 @@ const FilterPanel = createBehavior(
 
             this.$checkboxes.forEach((checkbox) => {
                 const input = checkbox.querySelector('input')
-                input.checked = false
+                if (input) {
+                    input.checked = false
+                }
             })
 
             this.updateCount()
@@ -319,7 +321,7 @@ const FilterPanel = createBehavior(
 
                 if (
                     input.checked &&
-                    input.closest('[data-filterpanel-checkbox]')?.dataset
+                    input.closest('[data-FilterPanel-checkbox]')?.dataset
                         .omit !== 'true'
                 ) {
                     this.totalSelected++
@@ -359,8 +361,6 @@ const FilterPanel = createBehavior(
                 )
 
             this.initCheckboxes()
-
-            this.originalValues = JSON.parse(JSON.stringify(this.values))
         },
         enabled() {},
         resized() {},
