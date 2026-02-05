@@ -47,6 +47,8 @@ const FilterPanel = createBehavior(
         },
 
         updateButtonState() {
+            if (!this.$applyButton) return
+
             // Set aria-disabled instead of disabled to allow focus
             if (this.totalSelected === 0) {
                 this.$applyButton.setAttribute('aria-disabled', 'true')
@@ -66,7 +68,7 @@ const FilterPanel = createBehavior(
         },
 
         updateChips() {
-            if (!this.filtersApplied) {
+            if (!this.filtersApplied || !this.$chipsContainer) {
                 return
             }
 
@@ -260,7 +262,7 @@ const FilterPanel = createBehavior(
             if (this.useSwup) {
                 const event = new CustomEvent(customEvents.SWUP_NAVIGATE, {
                     detail: {
-                        url: url
+                        url: url.toString()
                     }
                 })
                 document.dispatchEvent(event)
