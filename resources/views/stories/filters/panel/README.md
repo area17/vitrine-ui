@@ -22,6 +22,7 @@ Each filter item should be an associative array with the following structure:
     - 'checkbox'
     - 'radio'
 - `open` (boolean): Determines whether the filter group accordion is open by default.
+- `omitFromChips` (boolean): If set to `true`, this filter group will not appear in the selected filters chips display.
 - `items` (array): An array of filter options, where each option is an associative array with:
     - `label` (string): The display label for the option.
     - `value` (string): The value associated with the option.
@@ -33,6 +34,7 @@ Example:
     'name' => 'example',
     'type' => 'checkbox', // or 'radio'
     'open' => false,
+    'omitFromChips' => true,
     'items' => [
         [
             'label' => 'Option 1',
