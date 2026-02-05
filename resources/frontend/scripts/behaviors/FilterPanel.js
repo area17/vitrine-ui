@@ -250,10 +250,9 @@ const FilterPanel = createBehavior(
 
             // Build a new URL with only the keepParams query params
             const url = new URL(this.baseUrl, window.location.origin)
+            const currentParams = new URLSearchParams(window.location.search)
             this.keepParams.forEach((param) => {
-                const value = new URLSearchParams(window.location.search).get(
-                    param
-                )
+                const value = currentParams.get(param)
                 if (value !== null) {
                     url.searchParams.set(param, value)
                 }
