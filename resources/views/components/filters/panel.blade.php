@@ -90,10 +90,13 @@
                                                                      null) .
                                                                      $loop->index"
                                                                  :value="$item['value'] ?? null"
-                                                                 :selected="VitrineUI::isFilterSelected(
-                                                                     $accordionItem['name'],
-                                                                     $item['value'],
-                                                                 )" />
+                                                                 :selected="count(request()->query()) === 0 &&
+                                                                 (isset($item['checked']) && $item['checked'])
+                                                                     ? true
+                                                                     : VitrineUI::isFilterSelected(
+                                                                         $accordionItem['name'],
+                                                                         $item['value'],
+                                                                     )" />
                                         @endforeach
                                     @endif
 
@@ -109,10 +112,13 @@
                                                                   null) .
                                                                   $loop->index"
                                                               :value="$item['value'] ?? null"
-                                                              :selected="VitrineUI::isFilterSelected(
-                                                                  $accordionItem['name'],
-                                                                  $item['value'],
-                                                              )" />
+                                                              :selected="count(request()->query()) === 0 &&
+                                                              (isset($item['checked']) && $item['checked'])
+                                                                  ? true
+                                                                  : VitrineUI::isFilterSelected(
+                                                                      $accordionItem['name'],
+                                                                      $item['value'],
+                                                                  )" />
                                         @endforeach
                                     @endif
                                 </div>

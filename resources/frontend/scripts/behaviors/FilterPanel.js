@@ -14,7 +14,7 @@ const FilterPanel = createBehavior(
             ) {
                 if (this.values[input.name]) {
                     if (input.type == 'radio') {
-                        this.values[input.name] = input.value
+                        this.values[input.name] = [input.value]
                     } else if (input.type == 'hidden') {
                         this.values[input.name] = [input.value]
                     } else {
@@ -39,12 +39,7 @@ const FilterPanel = createBehavior(
                 this.searchParams.set(input.name, this.values[input.name])
             }
 
-            if (
-                input.closest('[data-filterpanel-checkbox]').dataset.omit !==
-                'true'
-            ) {
-                this.totalSelected += input.checked ? 1 : -1
-            }
+            this.recalcTotalSelected()
 
             this.updateButtonState()
             this.updateCount()
@@ -76,6 +71,7 @@ const FilterPanel = createBehavior(
             }
 
             this.$chipsContainer.querySelector('ul').innerHTML = ''
+
             let chipCount = 0
 
             Object.entries(this.values).forEach(([name, values]) => {
@@ -131,7 +127,7 @@ const FilterPanel = createBehavior(
 
             if (chipCount > 0) {
                 this.$chipsContainer.removeAttribute('hidden')
-            } else {
+            } else if (this.autoHideSelectedFilters) {
                 this.$chipsContainer.hidden = true
             }
         },
@@ -195,7 +191,7 @@ const FilterPanel = createBehavior(
 
                 if (input.checked) {
                     if (input.type === 'radio') {
-                        this.values[input.name] = input.value
+                        this.values[input.name] = [input.value]
                     } else {
                         if (!this.values[input.name]) {
                             this.values[input.name] = []
@@ -250,10 +246,21 @@ const FilterPanel = createBehavior(
 
             this.updateCount()
 
+            // Build a new URL with only the keepParams query params
+            const url = new URL(this.baseUrl, window.location.origin)
+            this.keepParams.forEach((param) => {
+                const value = new URLSearchParams(window.location.search).get(
+                    param
+                )
+                if (value !== null) {
+                    url.searchParams.set(param, value)
+                }
+            })
+
             if (this.useSwup) {
                 const event = new CustomEvent(customEvents.SWUP_NAVIGATE, {
                     detail: {
-                        url: this.baseUrl
+                        url: url
                     }
                 })
                 document.dispatchEvent(event)
@@ -264,7 +271,7 @@ const FilterPanel = createBehavior(
                     )
                 }
             } else {
-                window.location = this.baseUrl
+                window.location = url
             }
         },
 
@@ -288,7 +295,33 @@ const FilterPanel = createBehavior(
                 })
 
                 this.setCheckboxValues()
+
+                // Update URL params based on initial values
+                if (this.values && Object.keys(this.values).length > 0) {
+                    Object.entries(this.values).forEach(([name, values]) => {
+                        if (values && values.length > 0) {
+                            this.searchParams.set(name, values)
+                        }
+                    })
+                }
             }
+        },
+
+        recalcTotalSelected() {
+            this.totalSelected = 0
+
+            this.$checkboxes.forEach((checkbox) => {
+                const input = checkbox.querySelector('input')
+                if (!input) return
+
+                if (
+                    input.checked &&
+                    input.closest('[data-filterpanel-checkbox]')?.dataset
+                        .omit !== 'true'
+                ) {
+                    this.totalSelected++
+                }
+            })
         }
     },
     {
@@ -305,6 +338,9 @@ const FilterPanel = createBehavior(
             this.$chipsHeading = this.getChild('chipsHeading')
             this.closeOnButtonClick =
                 this.options.closeonbuttonclick !== 'false'
+            this.keepParams = this.options.keepParams || ['date', 'q']
+            this.autoHideSelectedFilters =
+                this.options.autoHideSelectedFilters !== 'false'
 
             this.$applyButton &&
                 this.$applyButton.addEventListener(
