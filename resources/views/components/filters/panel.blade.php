@@ -84,11 +84,15 @@
                                                                  data-omit="{{ isset($accordionItem['omitFromChips']) && $accordionItem['omitFromChips'] ? 'true' : 'false' }}"
                                                                  :label="$item['label'] ?? null"
                                                                  :name="$accordionItem['name'] ?? null"
-                                                                 :id="(strtolower(
-                                                                     str_replace(' ', '-', $accordionItem['name']),
-                                                                 ) ??
-                                                                     null) .
-                                                                     $loop->index"
+                                                                 :id="$accordionItem['name'] ?? null
+                                                                     ? strtolower(
+                                                                             str_replace(
+                                                                                 ' ',
+                                                                                 '-',
+                                                                                 $accordionItem['name'],
+                                                                             ),
+                                                                         ) . $loop->index
+                                                                     : null"
                                                                  :value="$item['value'] ?? null"
                                                                  :selected="count(request()->query()) === 0 &&
                                                                  (isset($item['checked']) && $item['checked'])
@@ -106,11 +110,11 @@
                                                               data-omit="{{ isset($accordionItem['omitFromChips']) && $accordionItem['omitFromChips'] ? 'true' : 'false' }}"
                                                               :label="$item['label'] ?? null"
                                                               :name="$accordionItem['name'] ?? null"
-                                                              :id="(strtolower(
-                                                                  str_replace(' ', '-', $accordionItem['name']),
-                                                              ) ??
-                                                                  null) .
-                                                                  $loop->index"
+                                                              :id="$accordionItem['name'] ?? null
+                                                                  ? strtolower(
+                                                                          str_replace(' ', '-', $accordionItem['name']),
+                                                                      ) . $loop->index
+                                                                  : null"
                                                               :value="$item['value'] ?? null"
                                                               :selected="count(request()->query()) === 0 &&
                                                               (isset($item['checked']) && $item['checked'])
