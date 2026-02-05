@@ -45,8 +45,8 @@ Example:
 
 ### Named slots
 
-- `header`- Use this slot to override the component's default header content. Make sure the modal contains a close button.
-- `footer`- Use this slot to override the component's default footer content. Make sure the modal contains reset and apply buttons.
+- `header` - Use this slot to override the component's default header content. Make sure the modal contains a close button.
+- `footer` - Use this slot to override the component's default footer content. Make sure the modal contains reset and apply buttons.
 
 Example:
 

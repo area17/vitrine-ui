@@ -78,7 +78,7 @@
                             @if ($accordionItem['items'] ?? null)
                                 <div
                                      class="{{ VitrineUI::ui('filters-panel', 'accordion-item-inner', [], $ui ?? []) }}">
-                                    @if ($accordionItem['type'] && $accordionItem['type'] == 'checkbox')
+                                    @if ($accordionItem['type'] && $accordionItem['type'] === 'checkbox')
                                         @foreach ($accordionItem['items'] as $item)
                                             <x-vui-form-checkbox data-FilterPanel-checkbox
                                                                  data-omit="{{ isset($accordionItem['omitFromChips']) && $accordionItem['omitFromChips'] ? 'true' : 'false' }}"
@@ -94,7 +94,7 @@
                                                                          ) . $loop->index
                                                                      : null"
                                                                  :value="$item['value'] ?? null"
-                                                                 :selected="count(request()->query()) === 0 &&
+                                                                 :selected="!request()->has($accordionItem['name']) &&
                                                                  (isset($item['checked']) && $item['checked'])
                                                                      ? true
                                                                      : VitrineUI::isFilterSelected(
@@ -104,7 +104,7 @@
                                         @endforeach
                                     @endif
 
-                                    @if ($accordionItem['type'] && $accordionItem['type'] == 'radio')
+                                    @if ($accordionItem['type'] && $accordionItem['type'] === 'radio')
                                         @foreach ($accordionItem['items'] as $item)
                                             <x-vui-form-radio data-FilterPanel-checkbox
                                                               data-omit="{{ isset($accordionItem['omitFromChips']) && $accordionItem['omitFromChips'] ? 'true' : 'false' }}"
@@ -116,7 +116,7 @@
                                                                       ) . $loop->index
                                                                   : null"
                                                               :value="$item['value'] ?? null"
-                                                              :selected="count(request()->query()) === 0 &&
+                                                              :selected="!request()->has($accordionItem['name']) &&
                                                               (isset($item['checked']) && $item['checked'])
                                                                   ? true
                                                                   : VitrineUI::isFilterSelected(

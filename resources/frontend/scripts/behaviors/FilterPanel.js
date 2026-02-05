@@ -13,9 +13,9 @@ const FilterPanel = createBehavior(
                 (!['radio', 'checkbox'].includes(input.type) && input.value)
             ) {
                 if (this.values[input.name]) {
-                    if (input.type == 'radio') {
+                    if (input.type === 'radio') {
                         this.values[input.name] = [input.value]
-                    } else if (input.type == 'hidden') {
+                    } else if (input.type === 'hidden') {
                         this.values[input.name] = [input.value]
                     } else {
                         this.values[input.name].push(input.value)
@@ -58,6 +58,8 @@ const FilterPanel = createBehavior(
         },
 
         updateCount() {
+            if (!this.$count) return
+
             if (this.values && this.totalSelected > 0) {
                 this.$count.removeAttribute('hidden')
                 this.$count.innerHTML = `(${this.totalSelected})`
@@ -328,7 +330,7 @@ const FilterPanel = createBehavior(
     {
         init() {
             this.values = {}
-            this.$resetbutton = this.getChild('reset')
+            this.$resetButton = this.getChild('reset')
             this.$applyButton = this.getChild('apply')
             this.$checkboxes = this.getChildren('checkbox')
             this.$count = this.getChild('count')
@@ -349,8 +351,8 @@ const FilterPanel = createBehavior(
                     this.applyFilters,
                     false
                 )
-            this.$resetbutton &&
-                this.$resetbutton.addEventListener(
+            this.$resetButton &&
+                this.$resetButton.addEventListener(
                     'click',
                     this.resetFilters,
                     false
@@ -365,8 +367,8 @@ const FilterPanel = createBehavior(
         mediaQueryUpdated() {},
         disabled() {},
         destroy() {
-            this.$resetbutton &&
-                this.$resetbutton.removeEventListener(
+            this.$resetButton &&
+                this.$resetButton.removeEventListener(
                     'click',
                     this.resetFilters
                 )
@@ -380,7 +382,9 @@ const FilterPanel = createBehavior(
                 this.$checkboxes.forEach((checkbox) => {
                     const input = checkbox.querySelector('input')
 
-                    input.removeEventListener('change', this.handleCheckbox)
+                    if (input) {
+                        input.removeEventListener('change', this.handleCheckbox)
+                    }
                 })
             }
         }
