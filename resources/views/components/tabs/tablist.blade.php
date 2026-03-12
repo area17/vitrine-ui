@@ -2,7 +2,7 @@
      role="tablist"
      {{ $attributes->class([$ui('tab-list', 'base')]) }}
      @if ($tabListId) aria-labelledby="{{ $tabListId }}"
-     @elseif($ariaLabel) aria-label="{{ $ariaLabel }}" @endif>
+    @elseif($ariaLabel) aria-label="{{ $ariaLabel }}" @endif>
 
     @foreach ($tabsNames as $tabName)
         <x-vui-button id="{{ $name . '-' . $loop->index }}"
