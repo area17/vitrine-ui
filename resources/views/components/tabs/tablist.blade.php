@@ -1,4 +1,5 @@
-<div role="tablist"
+<div data-tabs-tablist
+     role="tablist"
      {{ $attributes->class([$ui('tab-list', 'base')]) }}
      @if ($tabListId) aria-labelledby="{{ $tabListId }}"
      @elseif($ariaLabel) aria-label="{{ $ariaLabel }}" @endif>
