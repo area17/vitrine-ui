@@ -296,4 +296,25 @@ class VitrineUI
 
         return self::getComponentPreset($ui, $component);
     }
+
+    /**
+     * Check if a filter value is selected in current request
+     * @param string $name string required - Request filter name
+     * @param string $value string required - Request filter value
+     * @return bool
+     */
+    public static function isFilterSelected(string $name, string $value): bool
+    {
+        $raw = request()->input($name);
+
+        if (is_null($raw)) {
+            $values = [];
+        } elseif (is_string($raw)) {
+            $values = array_filter(array_map('trim', explode(',', $raw)));
+        } else {
+            $values = (array) $raw;
+        }
+
+        return in_array($value, $values, true);
+    }
 }

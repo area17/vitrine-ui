@@ -48,5 +48,7 @@ export const customEvents = {
 
     TABS_OPENED: 'Tabs:opened' /* node event */,
     TABS_SHOWN: 'Tabs:shown' /* node event */,
-    TABS_HIDDEN: 'Tabs:hidden' /* node event */
+    TABS_HIDDEN: 'Tabs:hidden' /* node event */,
+
+    SWUP_NAVIGATE: 'Swup:navigate' /* document event */
 }

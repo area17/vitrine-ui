@@ -7,11 +7,18 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'accordion' => 'Accordéon',
     'close_banner' => 'Fermer la bannière',
     'close_modal' => 'Fermer la fenêtre modale',
     'copied_to_clipboard' => 'Copié dans le presse-papiers !',
     'dropdown_items' => 'Éléments du menu déroulant',
     'enter_email_address' => 'Saisissez l\'adresse e-mail',
+    'filters' => [
+        'apply' => 'Appliquer',
+        'clear_all' => 'Tout effacer',
+        'filter' => 'Filtrer',
+        'selected' => 'Sélectionné',
+    ],
     'footer' => 'Pied de page',
     'footer_primary_nav' => 'Navigation principale du pied de page',
     'footer_secondary_nav' => 'Navigation secondaire du pied de page',

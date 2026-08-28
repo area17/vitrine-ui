@@ -12,11 +12,19 @@ class Tag extends VitrineComponent
 
     public bool $cancellable;
 
-    public function __construct(?string $href = null, bool $active = false, bool $cancellable = false, array $ui = [])
-    {
+    public bool $static;
+
+    public function __construct(
+        ?string $href = null,
+        bool $active = false,
+        bool $cancellable = false,
+        array $ui = [],
+        bool $static = false,
+    ) {
         $this->href = $href;
         $this->active = $active;
         $this->cancellable = $cancellable;
+        $this->static = $static;
 
         parent::__construct($ui);
     }
