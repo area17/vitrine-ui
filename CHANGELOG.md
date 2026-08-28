@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.1] - 2026-28-08
+
+### Updated
+
+- Tabs : Fix Tabs list component html (incorrect role attribute)
+
 ## [3.1.0] - 2026-28-08
 
 ### Updated
