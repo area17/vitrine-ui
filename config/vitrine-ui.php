@@ -86,10 +86,10 @@ return [
         'accordion-item' => 'components.accordion.item',
         'filters-panel' => 'components.filters.panel',
         'banner' => 'components.banner.banner',
-        'img' => 'components.img',
+        'img' => 'components.media.img',
         'icon-output' => 'components.icon._output',
         'icon-sprite' => 'components.icon.sprite',
         'pagination-numbered' => 'components.pagination-numbered.pagination-numbered',
-        'picture' => 'components.picture',
+        'picture' => 'components.media.picture',
     ],
 ];
