@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0] - 2026-28-08
+
+### Updated
+
+- New : Filter Panel Component
+- Simplify import and allow publish of the stories for Blade Components (with no PHP Class)
+
 ## [3.0.10] - 2025-01-10
 
 ### Updated
