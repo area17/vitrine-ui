@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.2] - 2026-28-08
+
+### Fixed
+
+- Image & Picture component : fix incorrect config path
+
 ## [3.1.1] - 2026-28-08
 
 ### Updated
