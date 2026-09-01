@@ -25,7 +25,7 @@
 ])
 
 <div class="{{ Arr::toCssClasses([
-    'w-screen h-[50vh] -ml-[1rem]' => $cover,
+    'w-screen h-[50vh] -ms-16' => $cover,
 ]) }}"
      style="min-width: 300px;">
     <x-vui-media :image="$image ?? null"

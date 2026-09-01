@@ -3,8 +3,8 @@
     "wrapper": {
         "default": "relative flex-1 max-h-full overflow-x-hidden overflow-y-scroll transition-opacity",
         "panel": "w-full translate-x-full group-data-[active]:translate-x-0 transform bg-primary transition-transform duration-300 ease-in-out md:w-cols-6",
-        "filters": "w-full fixed inset-0 flex flex-col md:w-cols-vw-6 md:ml-auto md:mr-gutter md:my-16"
+        "filters": "w-full fixed inset-0 flex flex-col md:w-cols-vw-6 md:ms-auto md:me-gutter md:my-16"
     },
-    "close": "absolute top-16 right-16 z-50",
+    "close": "absolute top-16 end-16 z-50",
     "title": "sr-only"
 }

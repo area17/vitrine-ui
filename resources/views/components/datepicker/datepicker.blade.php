@@ -28,7 +28,7 @@
             </span>
         @endif
     </button>
-    <div class="{{ $align && $align === 'left' ? 'left' : 'right' }}-0 absolute top-full"
+    <div class="{{ $align && $align === 'left' ? 'start' : 'end' }}-0 absolute top-full"
          data-DatePicker-picker
          role="dialog"
          aria-modal="true"
@@ -38,7 +38,7 @@
         <div class="bg-primary relative z-20 border px-12 pb-12 pt-56">
             <wc-datepicker show-clear-button
                            show-today-button></wc-datepicker>
-            <x-vui-button class="absolute right-12 top-12"
+            <x-vui-button class="absolute end-12 top-12"
                           data-DatePicker-close
                           aria-label="{{ __('vitrine-ui::fe.form.datepicker.close_date_picker') }}"
                           icon="close-16"

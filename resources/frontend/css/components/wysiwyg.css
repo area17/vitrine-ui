@@ -71,7 +71,7 @@
     }
 
     .wysiwyg blockquote {
-        @apply mt-48 border-l-2 border-primary pl-24 italic;
+        @apply mt-48 border-s-2 border-primary ps-24 italic;
     }
 
     .wysiwyg blockquote cite {

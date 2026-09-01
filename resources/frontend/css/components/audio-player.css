@@ -12,7 +12,7 @@
     }
 
     .o-audio__range::before {
-        @apply absolute top-1/2 left-0 right-0 z-[-1] h-4 -translate-y-1/2 transform border border-primary content-[''];
+        @apply absolute start-0 end-0 top-1/2 z-[-1] h-4 -translate-y-1/2 transform border border-primary content-[''];
     }
 
     .o-audio__range input[type="range"] {
@@ -25,7 +25,7 @@
     }
 
     .o-audio__range input[type="range"]:focus {
-        @apply outline-none;
+        @apply outline-hidden;
     }
 
     .o-audio__range input[type="range"]::-webkit-slider-thumb {
@@ -143,11 +143,11 @@
     }
 
     .o-audio__volume::before {
-        @apply absolute -bottom-8 left-0 h-[140px] w-full content-[''];
+        @apply absolute -bottom-8 start-0 h-[140px] w-full content-[''];
     }
 
     .o-audio__volume .o-audio__range {
-        @apply absolute bottom-[calc(100%_+_8px)] left-1/2 h-full w-48 opacity-0 transition-opacity before:top-1/2 before:-translate-x-1/2 before:rotate-[270deg] before:transform;
+        @apply absolute bottom-[calc(100%_+_8px)] start-1/2 h-full w-48 opacity-0 transition-opacity before:top-1/2 before:-translate-x-1/2 before:rotate-[270deg] before:transform;
     }
 
     .o-audio__volume:focus-within .o-audio__range,
@@ -182,7 +182,7 @@
     }
 
     .o-audio__speed.selected::after {
-        @apply absolute top-6 left-12 h-16 w-16 content-[''];
+        @apply absolute start-12 top-6 h-16 w-16 content-[''];
         background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 12.0605L1.46973 7.53027L2.53027 6.46973L6 9.93945L13.4697 2.46973L14.5303 3.53027L6 12.0605Z' fill='black'/%3E%3C/svg%3E%0A");
     }
 }

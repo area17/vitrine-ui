@@ -4,7 +4,7 @@
              data-behavior="ImageZoom"
              data-ImageZoom-auto-init="{{ $autoInit ? 'true' : 'false' }}"
              data-ImageZoom-sources="{{ json_encode($sources) }}">
-            <div class="absolute bottom-16 right-16 z-10 flex flex-col lg:bottom-32 lg:right-32"
+            <div class="absolute bottom-16 end-16 z-10 flex flex-col lg:bottom-32 lg:end-32"
                  id="{{ $id . 'image-zoom-toolbar' }}">
                 <x-vui-button id="{{ $id . '-image-zoom-zoom-in' }}"
                               aria-label="{{ __('vitrine-ui::fe.zoom_in') }}"
@@ -34,7 +34,7 @@
                 @endif
             </div>
 
-            <div  id="{{ $id }}"
+            <div id="{{ $id }}"
                  data-ImageZoom-canvas
                  {{ $attributes->twMerge('w-full h-full') }}>
             </div>

@@ -16,7 +16,7 @@
          aria-label="{{ 'Audio Player - ' . $title }}">
         <div class="o-audio__controls flex w-full flex-col md:flex-row md:flex-wrap">
             <div class="-mx-8 flex flex-row flex-wrap items-center">
-                <button class="text-inherit relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border-none bg-transparent p-0"
+                <button class="relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border-none bg-transparent p-0 text-inherit"
                         data-AudioPlayer-rewind
                         aria-label="Rewind"
                         ref="rewind">
@@ -35,7 +35,7 @@
                     <span class="sr-only">Rewind</span>
                 </button>
 
-                <button class="text-inherit a-gui-audio__btn--play relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border border-primary bg-transparent p-0"
+                <button class="a-gui-audio__btn--play border-primary relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border bg-transparent p-0 text-inherit"
                         name="playToggle"
                         data-AudioPlayer-playToggle
                         aria-label="Play"
@@ -71,7 +71,7 @@
                     <span class="sr-only">Play</span>
                 </button>
 
-                <button class="text-inherit relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border-none bg-transparent p-0"
+                <button class="relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-full border-none bg-transparent p-0 text-inherit"
                         data-AudioPlayer-forward
                         aria-label="Fast-forward"
                         ref="forward">
@@ -92,8 +92,8 @@
                 </button>
             </div>
 
-            <div class="relative mt-12 flex flex-grow flex-row flex-wrap items-center self-stretch md:ml-24 md:mt-0">
-                <div class="absolute left-0 right-0 top-full flex flex-row flex-wrap content-between text-xs md:right-auto md:top-0"
+            <div class="relative mt-12 flex flex-grow flex-row flex-wrap items-center self-stretch md:ms-24 md:mt-0">
+                <div class="absolute end-0 start-0 top-full flex flex-row flex-wrap content-between text-xs md:end-auto md:top-0"
                      aria-hidden="true">
                     <span class="block text-left after:px-4 after:opacity-50 after:content-['|'/'']"
                           data-AudioPlayer-currentTime>0:00</span>
@@ -124,7 +124,7 @@
                 </div>
             </div>
 
-            <div class="o-audio__volume relative -mr-24 w-64 cursor-pointer items-center justify-center xs:hidden md:flex"
+            <div class="o-audio__volume xs:hidden relative -me-24 w-64 cursor-pointer items-center justify-center md:flex"
                  data-AudioPlayer-volumewrapper>
                 <div class="o-audio__range">
                     <input class="w-54 m-0 h-full origin-left -translate-x-1/2 rotate-[270deg] transform cursor-pointer"
@@ -138,7 +138,7 @@
                            max="100" />
                 </div>
 
-                <button class="text-inherit relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-none border-none bg-transparent p-0"
+                <button class="relative m-0 flex h-40 w-40 shrink-0 cursor-pointer appearance-none items-center justify-center whitespace-nowrap rounded-none border-none bg-transparent p-0 text-inherit"
                         data-AudioPlayer-muteBtn
                         aria-label="Mute">
                     <span>
@@ -179,9 +179,9 @@
             </div>
         </div>
 
-        <div class="mt-36 flex flex-wrap justify-between xs:flex-col xs:items-start sm:flex-row sm:items-center">
+        <div class="xs:flex-col xs:items-start mt-36 flex flex-wrap justify-between sm:flex-row sm:items-center">
             @if ($downloadUrl)
-                <a class="mr-24 underline xs:mb-16 sm:mb-0"
+                <a class="xs:mb-16 me-24 underline sm:mb-0"
                    href="{{ $downloadUrl }}"
                    aria-label="Download file: {{ $title }}"
                    download>
@@ -193,7 +193,7 @@
                 <div class="o-audio__rate relative"
                      data-AudioPlayer-rate>
 
-                    <button class="o-audio__rate-btn relative flex min-w-[220px] max-w-full items-center border border-primary px-12 py-8 text-left"
+                    <button class="o-audio__rate-btn border-primary relative flex min-w-[220px] max-w-full items-center border px-12 py-8 text-left"
                             id="rateBtn"
                             name="rateBtn"
                             data-AudioPlayer-rateBtn
@@ -203,7 +203,7 @@
                         <span>Playback Speed:&nbsp;</span>
                         <span data-AudioPlayer-currentRate>1</span>
                         <span>&#215;</span>
-                        <svg class="ml-auto rotate-180 transform transition-none"
+                        <svg class="ms-auto rotate-180 transform transition-none"
                              aria-hidden="true"
                              fill="none"
                              xmlns="http://www.w3.org/2000/svg"
@@ -218,14 +218,14 @@
 
                     </button>
 
-                    <ul class="invisible absolute bottom-full top-auto z-50 -mt-1 w-full border border-b-0 border-primary bg-primary pb-8 pt-8 opacity-0 transition-opacity duration-300"
+                    <ul class="border-primary bg-primary invisible absolute bottom-full top-auto z-50 -mt-1 w-full border border-b-0 pb-8 pt-8 opacity-0 transition-opacity duration-300"
                         data-AudioPlayer-rateMenu
                         role="menu"
                         aria-activedescendant="speed{{ array_search(1, $playbackRates) }}"
                         aria-label="Playback Rate Options">
 
                         @foreach ($playbackRates as $rate)
-                            <li class="o-audio__speed {{ $rate === 1 ? 'selected' : '' }} relative flex cursor-pointer flex-row flex-wrap rounded-none py-4 pl-36 pr-12 text-left text-sm hover:bg-quaternary focus:outline-none"
+                            <li class="o-audio__speed {{ $rate === 1 ? 'selected' : '' }} hover:bg-quaternary focus:outline-hidden relative flex cursor-pointer flex-row flex-wrap rounded-none py-4 pe-12 ps-36 text-left text-sm"
                                 id="speed{{ $loop->index }}"
                                 data-AudioPlayer-speed
                                 role="menuitemradio"
