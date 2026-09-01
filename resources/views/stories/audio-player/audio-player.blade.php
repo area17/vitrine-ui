@@ -12,7 +12,7 @@
     ],
 ])
 
-<div class="w-full md:w-6-cols-vw">
+<div class="md:w-cols-vw-6 w-full">
     <x-vui-audio-player class="mt-40"
                         :download-url="$sources[0]['src'] ?? null"
                         :title="$title ?? null"

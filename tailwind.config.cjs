@@ -3,9 +3,7 @@ const {
     Setup,
     ApplyColorVariables,
     ColorTokens,
-    Components,
     Container,
-    CssInJs,
     DevTools,
     FullBleedScroller,
     GridGap,
@@ -15,10 +13,8 @@ const {
     Keyline,
     Layout,
     PseudoElements,
-    RatioBox,
     Scrollbar,
     Spacing,
-    SpacingTokens,
     Typography,
     Underline
 } = require('@area17/a17-tailwind-plugins')
@@ -28,20 +24,10 @@ const feConfig = require('./frontend.config.json')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        './resources/frontend/**/*.js',
-        './resources/views/**/*.blade.php',
-        './app/View/**/*.php'
-    ],
-    corePlugins: {
-        container: false
-    },
     plugins: [
         Setup,
         ColorTokens,
-        Components,
         Container,
-        CssInJs,
         DevTools,
         FullBleedScroller,
         GridGap,
@@ -51,7 +37,6 @@ module.exports = {
         Keyline,
         Layout,
         PseudoElements,
-        RatioBox,
         Scrollbar,
         Spacing,
         Typography,
@@ -65,11 +50,21 @@ module.exports = {
         columnCount: feConfig.structure.columns,
         fontFamilies: feConfig.typography.families, // https://systemfontstack.com/
         typesets: feConfig.typography.typesets,
-        spacingGroupProperties: { h: ['height'] },
         spacingGroups: feConfig.spacing.groups,
-        spacing: SpacingTokens(feConfig.spacing.tokens),
         colors: feConfig.color.tokens,
         borderColor: ApplyColorVariables(
+            feConfig.color.tokens,
+            feConfig.color.border
+        ),
+        divideColor: ApplyColorVariables(
+            feConfig.color.tokens,
+            feConfig.color.border
+        ),
+        ringOffsetColor: ApplyColorVariables(
+            feConfig.color.tokens,
+            feConfig.color.border
+        ),
+        textDecorationColor: ApplyColorVariables(
             feConfig.color.tokens,
             feConfig.color.border
         ),
@@ -89,12 +84,7 @@ module.exports = {
             feConfig.color.tokens,
             feConfig.color.outlineColor
         ),
-        placeholderColor: ApplyColorVariables(
-            feConfig.color.tokens,
-            feConfig.color.text
-        ),
-        aspectRatio: feConfig.aspectRatio,
-        ratios: feConfig.ratios,
+        aspectRatio: feConfig.ratios,
         zIndex: () => {
             const max = 100
             let values = {
@@ -107,8 +97,6 @@ module.exports = {
 
             return values
         },
-        components: feConfig.components,
-        css: feConfig.css,
         extend: {
             width: {
                 'panel-max': '760px'

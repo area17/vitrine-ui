@@ -162,15 +162,26 @@ You can publish the components using the `vitrine-ui:publish` command. You can s
 Each component has default classes that you can customize through its associated JSON file located in the [components folder](resources/frontend/theme/components).
 You can override this config in your Laravel application by updating 'vitrine_path' key set in [vitrine-ui config](config/vitrine-ui.php)
 
-### Configure tailwind for theming in your laravel application `tailwind.config.js`:
+### Configure Tailwind for theming in your Laravel application:
 
-```js
-module.exports = {
-    content: [join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}")],
-};
+```css
+@import "tailwindcss";
+@config "../../vendor/area17/vitrine-ui/tailwind.config.cjs";
+
+@source "../../vendor/area17/vitrine-ui/resources/views";
+@source "../../vendor/area17/vitrine-ui/resources/frontend/scripts";
+@source "../../vendor/area17/vitrine-ui/resources/frontend/theme";
+@source "../../vendor/area17/vitrine-ui/resources/frontend/safelist.txt";
+
+/* Add your own component/theme paths as needed */
+@source "../views";
+@source "../scripts";
+@source "../vitrine-ui";
 ```
 
-Example of a component JSON config :
+The package now relies on Tailwind 4 CSS-first scanning, so published or app-level theme JSON files should be added with `@source` in your app stylesheet rather than in `content` inside `tailwind.config.js`.
+
+Example of a component JSON config:
 
 ```json
 {

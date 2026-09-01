@@ -14,7 +14,7 @@
         <p>Sed est augue nullam elit nec aliqua a nisl. Auctor iaculis consectetur et platea pellentesque incididunt duis suspendisse purus. Mattis quisque urna fusce curabitur magna fringilla lectus leo dolore integer nullam gravida facilisi. Cursus condimentum blandit quis aliqua vitae elementum neque. Incididunt lobortis tempus nunc et consectetur viverra in praesent eleifend fusce at interdum gravida.</p>',
     ],
 ])
-<div class="w-full md:w-6-cols-vw">
+<div class="md:w-cols-vw-6 w-full">
     <x-vui-audio-player :download-url="$sources[0]['src'] ?? null"
                         :title="$title ?? null"
                         :subtitle="$subtitle ?? null"

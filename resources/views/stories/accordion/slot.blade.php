@@ -102,7 +102,7 @@
 ])
 
 <div class="container pt-32 md:pt-64">
-    <div class="w-6-cols md:w-12-cols">
+    <div class="w-cols-6 md:w-cols-12">
         <x-vui-accordion>
             @foreach ($items as $item)
                 <x-vui-accordion-item :title="$itemTitle ?? null"

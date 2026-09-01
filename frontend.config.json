@@ -49,13 +49,6 @@
         }
     },
     "spacing": {
-        "tokens": {
-            "scaler": 4,
-            "max": 312,
-            "arbritraries": {
-                "600": 600
-            }
-        },
         "groups": {
             "header": {
                 "xs": 60,
@@ -192,7 +185,7 @@
             "transparent": "transparent"
         }
     },
-    "aspectRatio": {
+    "ratios": {
         "1/1": "1",
         "4/3": "4 / 3",
         "4/5": "4 / 5",
@@ -268,7 +261,7 @@
         "typesets": {
             "body-1": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "16px",
                     "font-weight": "400",
                     "letter-spacing": "0",
@@ -283,7 +276,7 @@
             },
             "body-2": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "26px",
                     "font-weight": "400",
                     "letter-spacing": "-0.0025em",
@@ -298,7 +291,7 @@
             },
             "heading-1": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "36px",
                     "font-weight": "500",
                     "letter-spacing": "-0.02em",
@@ -316,7 +309,7 @@
             },
             "heading-2": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "36px",
                     "font-weight": "300",
                     "letter-spacing": "-0.0225em",
@@ -334,7 +327,7 @@
             },
             "heading-3": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "52px",
                     "font-weight": "200",
                     "letter-spacing": "-0.045em",
@@ -360,7 +353,7 @@
             },
             "subhead-1": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "16px",
                     "font-weight": "600",
                     "letter-spacing": "0",
@@ -373,7 +366,7 @@
             },
             "subhead-2": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "16px",
                     "font-weight": "600",
                     "letter-spacing": "0",
@@ -388,7 +381,7 @@
             },
             "subhead-3": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "26px",
                     "font-weight": "500",
                     "letter-spacing": "0",
@@ -405,7 +398,7 @@
             },
             "subhead-4": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "26px",
                     "font-weight": "300",
                     "letter-spacing": "-0.0125em",
@@ -422,7 +415,7 @@
             },
             "display-1": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "74px",
                     "font-weight": "400",
                     "letter-spacing": "-0.02em",
@@ -444,7 +437,7 @@
             },
             "ui-1": {
                 "xs": {
-                    "font-family": "var(--mono)",
+                    "font-family": "var(--font-mono)",
                     "font-size": "11px",
                     "font-weight": "400",
                     "letter-spacing": "0",
@@ -458,7 +451,7 @@
             },
             "ui-2": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "16px",
                     "font-weight": "400",
                     "letter-spacing": "0",
@@ -471,7 +464,7 @@
             },
             "ui-3": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "16px",
                     "font-weight": "400",
                     "letter-spacing": "0",
@@ -485,7 +478,7 @@
             },
             "ui-4": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "32px",
                     "font-weight": "200",
                     "letter-spacing": "-0.03em",
@@ -513,7 +506,7 @@
             },
             "ui-5": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "11px",
                     "font-weight": "400",
                     "letter-spacing": "0",
@@ -527,7 +520,7 @@
             },
             "quote": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "23px",
                     "font-weight": "500",
                     "letter-spacing": "0",
@@ -548,7 +541,7 @@
             },
             "quote-expressive": {
                 "xs": {
-                    "font-family": "var(--sans)",
+                    "font-family": "var(--font-sans)",
                     "font-size": "41px",
                     "font-weight": "200",
                     "letter-spacing": "-0.035em",
@@ -573,17 +566,6 @@
                     "font-size": "74px",
                     "letter-spacing": "-0.05em"
                 }
-            }
-        }
-    },
-    "components": {
-        ".show-grid": {
-            "apply": "relative",
-            "attributes": {
-                "--grid-column-bg": "rgba(0, 0, 0, 0.05)"
-            },
-            "selectors": {
-                "::after": "dev-tools-grid absolute w-full content-['']"
             }
         }
     }

@@ -1,3 +1,46 @@
+@config "../../tailwind.config.cjs";
+@import "tailwindcss";
+
+@source "../views";
+@source "./scripts";
+@source "./theme";
+@source "./safelist.txt";
+@source "../../src/Components";
+
+@theme {
+    --container-*: initial;
+    --breakpoint-*: initial;
+    --color-*: initial;
+    --font-*: initial;
+    --text-*: initial;
+    --tracking-*: initial;
+    --leading-*: initial;
+    --spacing: 1px;
+    --radius-*: initial;
+    --shadow-*: initial;
+    --inset-shadow-*: initial;
+    --drop-shadow-*: initial;
+    --animate-*: initial;
+    --blur-*: initial;
+    --perspective-*: initial;
+    --aspect-*: initial;
+}
+
+@utility container {
+    max-width: 100%;
+}
+
+@layer components {
+    .show-grid {
+        @apply relative;
+        --grid-column-bg: rgba(0, 0, 0, 0.05);
+    }
+
+    .show-grid::after {
+        @apply absolute w-full content-[''] dev-tools-grid;
+    }
+}
+
 @import "./css/components/audio-player.css";
 @import "./css/components/datepicker.css";
 @import "./css/components/form/range.css";
