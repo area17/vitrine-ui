@@ -84,37 +84,5 @@ module.exports = {
             feConfig.color.tokens,
             feConfig.color.outlineColor
         ),
-        aspectRatio: feConfig.ratios,
-        zIndex: () => {
-            const max = 100
-            let values = {
-                9999: 9999
-            }
-
-            for (let index = 1; index <= max; index++) {
-                values[index] = index
-            }
-
-            return values
-        },
-        extend: {
-            width: {
-                'panel-max': '760px'
-            },
-            height: {
-                'header-panel': '30vh'
-            },
-            minHeight: ({ theme }) => theme('spacing'),
-            minWidth: ({ theme }) => theme('spacing'),
-            maxWidth: ({ theme }) => theme('spacing'),
-            spacing: {
-                'safe-top': 'env(safe-area-inset-top)',
-                'safe-bottom': 'env(safe-area-inset-bottom)',
-                'safe-left': 'env(safe-area-inset-left)',
-                'safe-right': 'env(safe-area-inset-right)',
-                gutter: 'var(--inner-gutter)',
-                'outer-gutter': 'var(--outer-gutter, 0px)'
-            }
-        }
     }
 }

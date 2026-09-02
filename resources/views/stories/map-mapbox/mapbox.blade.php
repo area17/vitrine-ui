@@ -16,7 +16,7 @@
 ])
 
 <div class="w-312">
-    <x-vui-map-mapbox class="aspect-1/1"
+    <x-vui-map-mapbox class="aspect-[1/1]"
                       :lat="$lat ?? null"
                       :lng="$lng ?? null" />
 </div>

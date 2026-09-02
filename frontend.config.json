@@ -185,15 +185,6 @@
             "transparent": "transparent"
         }
     },
-    "ratios": {
-        "1/1": "1",
-        "4/3": "4 / 3",
-        "4/5": "4 / 5",
-        "3/2": "3 / 2",
-        "3/4": "3 / 4",
-        "16/9": "16 / 9",
-        "16/10": "16 / 10"
-    },
     "typography": {
         "families": {
             "sans": "-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",

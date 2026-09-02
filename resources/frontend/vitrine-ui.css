@@ -15,7 +15,7 @@
     --text-*: initial;
     --tracking-*: initial;
     --leading-*: initial;
-    --spacing: 1px;
+    --spacing: 0.0625rem;
     --radius-*: initial;
     --shadow-*: initial;
     --inset-shadow-*: initial;
@@ -24,6 +24,14 @@
     --blur-*: initial;
     --perspective-*: initial;
     --aspect-*: initial;
+
+    --spacing-gutter: var(--inner-gutter);
+    --spacing-half-gutter: calc(var(--inner-gutter) / 2);
+    --spacing-outer-gutter: var(--outer-gutter, 0px);
+    --spacing-half-outer-gutter: calc(var(--outer-gutter) / 2);
+
+    --font-weight-*: initial;
+    --font-weight-bold: var(--f-body---bold-weight, bold);
 }
 
 @utility container {

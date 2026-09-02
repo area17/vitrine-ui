@@ -23,7 +23,7 @@ _To display a simple image : please use the dedicated image component instead_
 
 <!-- Video Background -->
 <x-vui-media
-    class="aspect-16/9"
+    class="aspect-[16/9]"
     :background-video="[
         'sources' => [
             [
