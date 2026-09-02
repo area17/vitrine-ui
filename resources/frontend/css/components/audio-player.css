@@ -4,7 +4,7 @@
     }
 
     .audio-player-title {
-        @apply text-lg font-bold;
+        @apply f-subhead-3;
     }
 
     .audio-player-subtitle {
