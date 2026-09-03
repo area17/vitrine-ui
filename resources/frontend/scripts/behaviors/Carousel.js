@@ -2,6 +2,12 @@ import { createBehavior } from '@area17/a17-behaviors'
 
 import { customEvents } from '../constants/customEvents'
 
+const SELECTORS = {
+    PAGINATION: '.swiper-pagination',
+    NEXT_BTN: '.swiper-next-btn',
+    PREV_BTN: '.swiper-prev-btn'
+}
+
 const Carousel = createBehavior(
     'Carousel',
     {
@@ -54,7 +60,7 @@ const Carousel = createBehavior(
                 ...(this.options.pagination ||
                     (configuration.pagination && {
                         pagination: {
-                            el: '.swiper-pagination',
+                            el: this.$node.querySelector(SELECTORS.PAGINATION),
                             type: 'fraction'
                         }
                     })),
@@ -87,8 +93,8 @@ const Carousel = createBehavior(
                     }
                 },
                 navigation: {
-                    nextEl: '.swiper-next-btn',
-                    prevEl: '.swiper-prev-btn'
+                    nextEl: this.$node.querySelector(SELECTORS.NEXT_BTN),
+                    prevEl: this.$node.querySelector(SELECTORS.PREV_BTN)
                 }
             }
         },
