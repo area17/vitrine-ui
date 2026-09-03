@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.3] - 2026-03-09
+
+### Fixed
+
+- Carousel : Fix Swiper navigation and pagination selectors to use relative selectors based on the carousel element.
+
 ## [3.1.2] - 2026-28-08
 
 ### Fixed
