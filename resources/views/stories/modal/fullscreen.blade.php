@@ -3,6 +3,7 @@
     'layout' => 'fullscreen',
     'args' => [
         'showClose' => false,
+        'scroller' => true,
     ],
 ])
 
@@ -12,7 +13,8 @@
 </x-vui-button>
 
 <x-vui-modal id="modalDemo"
-             :show-close="$showClose">
+             :show-close="$showClose"
+             :scroller="$scroller">
     <div class="px-gutter wysiwyg">
         <h1 data-Modal-initial-focus
             tabindex="-1">Modal Demo Component</h1>
