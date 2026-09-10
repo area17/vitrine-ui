@@ -7,8 +7,7 @@
 
 <x-vui-modal id="modalDemo"
              :panel="true">
-    <div class="{{ VitrineUI::ui('modal', 'scroller') }}"
-         data-modal-scroller>
+    <x-vui-modal-scroller>
         <div class="wysiwyg">
             <h1 data-modal-initial-focus
                 tabindex="-1">Modal Demo Component</h1>
@@ -33,5 +32,5 @@
                 libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed
                 diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.</p>
         </div>
-    </div>
+    </x-vui-modal-scroller>
 </x-vui-modal>
