@@ -15,7 +15,7 @@
              :panel="true"
              :show-close="$showClose">
     <div class="px-gutter wysiwyg">
-        <h1 data-modal-initial-focus
+        <h1 data-Modal-initial-focus
             tabindex="-1">Modal Demo Component</h1>
 
         <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui. Nulla vitae elit
