@@ -19,6 +19,10 @@
 
             @if ($scroller)
                 <x-vui-modal-scroller :show-close="$showClose && !(isset($closeButton) && !$closeButton->isEmpty())">
+                    @if (isset($closeButton) && !$closeButton->isEmpty())
+                        {{ $closeButton }}
+                    @endif
+
                     @isset($title)
                         @if ($setInitialFocus)
                             <x-vui-heading class="{{ $ui('modal', 'title') }}"
