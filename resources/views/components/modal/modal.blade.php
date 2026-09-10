@@ -11,12 +11,6 @@
         <div class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"
              data-Modal-focus-trap
              tabindex="-1">
-            @if (isset($closeButton) && !$closeButton->isEmpty())
-                {{ $closeButton }}
-            @elseif($showClose && !$scroller)
-                <x-vui-modal-close />
-            @endif
-
             @if ($scroller)
                 <x-vui-modal-scroller :show-close="$showClose && !(isset($closeButton) && !$closeButton->isEmpty())">
                     @if (isset($closeButton) && !$closeButton->isEmpty())
