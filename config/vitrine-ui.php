@@ -89,6 +89,8 @@ return [
         'img' => 'components.media.img',
         'icon-output' => 'components.icon._output',
         'icon-sprite' => 'components.icon.sprite',
+        'modal-close' => 'components.modal.close',
+        'modal-scroller' => 'components.modal.scroller',
         'pagination-numbered' => 'components.pagination-numbered.pagination-numbered',
         'picture' => 'components.media.picture',
     ],

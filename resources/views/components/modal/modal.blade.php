@@ -13,34 +13,65 @@
              tabindex="-1">
             @if (isset($closeButton) && !$closeButton->isEmpty())
                 {{ $closeButton }}
-            @elseif($showClose)
-                <x-vui-button class="{{ $ui('modal', 'close') }}"
-                              data-Modal-close-trigger
-                              aria-label="{{ __('vitrine-ui::fe.close_modal') }}"
-                              icon="close-32"
-                              icon-only />
+            @elseif($showClose && !$scroller)
+                <x-vui-modal-close />
             @endif
 
-            @isset($title)
-                @if ($setInitialFocus)
-                    <x-vui-heading class="{{ $ui('modal', 'title') }}"
-                                   id="{{ $id }}_title"
-                                   data-Modal-initial-focus=""
-                                   tabindex="-1"
-                                   :level="1">
-                        {{ $title }}
-                    </x-vui-heading>
-                @else
-                    <x-vui-heading class="{{ $ui('modal', 'title') }}"
-                                   id="{{ $id }}_title"
-                                   tabindex="-1"
-                                   :level="1">
-                        {{ $title }}
-                    </x-vui-heading>
-                @endif
-            @endisset
+            @if ($scroller)
+                <x-vui-modal-scroller :show-close="$showClose && !(isset($closeButton) && !$closeButton->isEmpty())">
+                    @if (isset($closeButton) && !$closeButton->isEmpty())
+                        {{ $closeButton }}
+                    @endif
 
-            {!! $slot !!}
+                    @isset($title)
+                        @if ($setInitialFocus)
+                            <x-vui-heading class="{{ $ui('modal', 'title') }}"
+                                           id="{{ $id }}_title"
+                                           data-Modal-initial-focus=""
+                                           tabindex="-1"
+                                           :level="1">
+                                {{ $title }}
+                            </x-vui-heading>
+                        @else
+                            <x-vui-heading class="{{ $ui('modal', 'title') }}"
+                                           id="{{ $id }}_title"
+                                           tabindex="-1"
+                                           :level="1">
+                                {{ $title }}
+                            </x-vui-heading>
+                        @endif
+                    @endisset
+
+                    {!! $slot !!}
+                </x-vui-modal-scroller>
+            @else
+                @if (isset($closeButton) && !$closeButton->isEmpty())
+                    {{ $closeButton }}
+                @elseif($showClose)
+                    <x-vui-modal-close />
+                @endif
+
+                @isset($title)
+                    @if ($setInitialFocus)
+                        <x-vui-heading class="{{ $ui('modal', 'title') }}"
+                                       id="{{ $id }}_title"
+                                       data-Modal-initial-focus=""
+                                       tabindex="-1"
+                                       :level="1">
+                            {{ $title }}
+                        </x-vui-heading>
+                    @else
+                        <x-vui-heading class="{{ $ui('modal', 'title') }}"
+                                       id="{{ $id }}_title"
+                                       tabindex="-1"
+                                       :level="1">
+                            {{ $title }}
+                        </x-vui-heading>
+                    @endif
+                @endisset
+
+                {!! $slot !!}
+            @endif
         </div>
     </div>
 

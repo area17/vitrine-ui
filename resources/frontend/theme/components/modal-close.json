@@ -1,0 +1,6 @@
+{
+    "base": "sticky top-0 pointer-events-none",
+    "wrapper": "relative",
+    "button": "absolute top-16 right-16 z-50 pointer-events-auto",
+    "icon": "close-24"
+}

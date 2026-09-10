@@ -10,6 +10,8 @@ class Modal extends VitrineComponent
 
     public bool $showClose;
 
+    public bool $scroller;
+
     public ?string $title;
 
     public bool $panel;
@@ -32,6 +34,7 @@ class Modal extends VitrineComponent
     public function __construct(
         string $id = null,
         bool $showClose = true,
+        bool $scroller = true,
         string $title = null,
         bool $panel = false,
         string $variant = null,
@@ -43,6 +46,7 @@ class Modal extends VitrineComponent
     ) {
         $this->id = $id;
         $this->showClose = $showClose;
+        $this->scroller = $scroller;
         $this->title = $title;
         $this->panel = $panel;
         $this->clickOutsideToClose = $clickOutsideToClose;

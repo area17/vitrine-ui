@@ -19,6 +19,7 @@
              :panel="true"
              :variant="$modalVariant"
              :show-close="false"
+             :scroller="false"
              :open="$open">
     <div class="{{ VitrineUI::ui('filters-panel', 'panel', [], $ui ?? []) }}"
          data-behavior="{{ $behavior }}"
