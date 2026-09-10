@@ -12,8 +12,9 @@
 </x-vui-button>
 
 <x-vui-modal id="modalDemo"
-             :show-close="$showClose">
-    <x-vui-modal-scroller :show-close="!$showClose">
+             :show-close="$showClose"
+             :scroller="false">
+    <x-vui-modal-scroller :show-close="$showClose">
         <div class="px-gutter wysiwyg">
             <h1 data-Modal-initial-focus
                 tabindex="-1">Modal Demo Component</h1>
