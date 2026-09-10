@@ -1,5 +1,4 @@
 @push($modalsStack)
-
     <div id="{{ $id }}"
          role="dialog"
          aria-labelledby="{{ $id . '_title' }}"

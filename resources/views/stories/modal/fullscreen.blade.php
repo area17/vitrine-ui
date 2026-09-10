@@ -2,7 +2,7 @@
     'status' => 'readyForQA',
     'layout' => 'fullscreen',
     'args' => [
-        'showClose' => false,
+        'showClose' => true,
         'scroller' => true,
     ],
 ])
@@ -15,7 +15,7 @@
 <x-vui-modal id="modalDemo"
              :show-close="$showClose"
              :scroller="$scroller">
-    <div class="px-gutter wysiwyg">
+    <div class="px-gutter wysiwyg py-60">
         <h1 data-Modal-initial-focus
             tabindex="-1">Modal Demo Component</h1>
 
