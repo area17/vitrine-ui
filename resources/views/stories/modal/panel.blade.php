@@ -1,4 +1,10 @@
-@storybook([])
+@storybook([
+    'status' => 'readyForQA',
+    'layout' => 'fullscreen',
+    'args' => [
+        'showClose' => false,
+    ],
+])
 
 <x-vui-button data-modal-target="#modalDemo"
               variant="primary">
@@ -6,9 +12,10 @@
 </x-vui-button>
 
 <x-vui-modal id="modalDemo"
-             :panel="true">
-    <x-vui-modal-scroller>
-        <div class="wysiwyg">
+             :panel="true"
+             :show-close="$showClose">
+    <x-vui-modal-scroller :show-close="!$showClose">
+        <div class="px-gutter wysiwyg">
             <h1 data-modal-initial-focus
                 tabindex="-1">Modal Demo Component</h1>
 

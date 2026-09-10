@@ -5,7 +5,6 @@
         "panel": "bg-primary w-full -translate-x-full group-data-[active]:translate-x-0 transform transition-transform duration-300 ease-in-out md:w-6-cols",
         "filters": "w-full fixed inset-0 flex flex-col md:w-6-cols-vw md:ml-auto md:mr-gutter md:my-16"
     },
-    "scroller": "px-gutter max-h-full overflow-y-auto overflow-x-hidden",
     "close": "absolute top-16 right-16 z-50",
     "title": "sr-only"
 }

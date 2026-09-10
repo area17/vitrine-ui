@@ -1,3 +1,6 @@
 {
-    "base": ""
+    "base": "max-h-full overflow-x-hidden overflow-y-auto",
+    "close-wrapper": "sticky top-0 pointer-none",
+    "close-inner": "relative",
+    "close": "absolute top-16 right-16 z-50 pointer-auto"
 }
