@@ -3,6 +3,7 @@
     'layout' => 'fullscreen',
     'args' => [
         'showClose' => true,
+        'title' => 'Modal Demo Component',
     ],
 ])
 
@@ -12,12 +13,10 @@
 </x-vui-button>
 
 <x-vui-modal id="modalDemo"
+             :title="$title"
              :panel="true"
              :show-close="$showClose">
     <div class="px-gutter wysiwyg py-60">
-        <h1 data-Modal-initial-focus
-            tabindex="-1">Modal Demo Component</h1>
-
         <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui. Nulla vitae elit
             libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed
             diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod.</p>
