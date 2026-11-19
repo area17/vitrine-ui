@@ -4,7 +4,7 @@
 
 ### Breaking
 
-- Tailwind CSS 4 : the package now requires `tailwindcss ^4` and `@area17/a17-tailwind-plugins ^5`. Add the `@config` and `@source` lines described in the README to your stylesheet. Tailwind 3 is no longer supported.
+- Tailwind CSS 4 : the package now requires `tailwindcss ^4` and `@area17/a17-tailwind-plugins ^5`. Keep configuring Tailwind through your `tailwind.config.js`, and load it from your stylesheet with `@config` (see the README). Tailwind 3 is no longer supported.
 - Layout classes renamed by A17 Tailwind Plugins v5 : `w-N-cols` is now `w-cols-N` (and `w-N-cols-vw` is now `w-cols-vw-N`). Update your own templates and theme overrides.
 - Theme presets migrated to Tailwind 4 class names (`shrink-0`, `outline-hidden`, `ms-*` / `me-*`, `end-*`, `rounded-xs`, ...). Published or overridden preset files need the same migration.
 - Tailwind Merge : `gehrisandro/tailwind-merge-laravel` is replaced by `tales-from-a-dev/tailwind-merge-php`. The `$attributes->twMerge()` macro is still provided, but the `twMerge()` helper, the `@twMerge` Blade directive and the `tailwind-merge` config file no longer exist. Declare custom utilities in the new `tailwind_merge` option of `config/vitrine-ui.php`.

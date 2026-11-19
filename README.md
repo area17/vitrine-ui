@@ -164,22 +164,46 @@ You can override this config in your Laravel application by updating 'vitrine_pa
 
 ### Configure Tailwind for theming in your Laravel application:
 
-```css
-@import "tailwindcss";
-@config "../../vendor/area17/vitrine-ui/tailwind.config.cjs";
+Vitrine UI is configured through a `tailwind.config.js` (or `tailwind.config.cjs`) in your application, together with the latest [@area17/a17-tailwind-plugins](https://github.com/area17/tailwind-plugins) (v5, Tailwind 4). Add the Vitrine UI views, scripts and theme files, and your own published theme JSON files, to `content`:
 
-@source "../../vendor/area17/vitrine-ui/resources/views";
-@source "../../vendor/area17/vitrine-ui/resources/frontend/scripts";
-@source "../../vendor/area17/vitrine-ui/resources/frontend/theme";
-@source "../../vendor/area17/vitrine-ui/resources/frontend/safelist.txt";
+```js
+// tailwind.config.cjs
+const { resolve, join } = require("path");
 
-/* Add your own component/theme paths as needed */
-@source "../views";
-@source "../scripts";
-@source "../vitrine-ui";
+const rootPath = resolve(__dirname, "");
+const vitrinePath = resolve(__dirname, "vendor/area17/vitrine-ui");
+
+module.exports = {
+    content: [
+        join(rootPath, "/resources/frontend/**/*.js"),
+        join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}"),
+        join(rootPath, "/resources/views/**/*.{blade.php,php}"),
+        join(vitrinePath, "/resources/frontend/theme/**/*.{js,json}"),
+        join(vitrinePath, "/resources/frontend/**/*.{js,txt}"),
+        join(vitrinePath, "/resources/views/**/*.blade.php"),
+        join(vitrinePath, "/src/Components/**/*.php"),
+    ],
+    // plugins and theme: see the A17 Tailwind plugins documentation
+};
 ```
 
-The package now relies on Tailwind 4 CSS-first scanning, so published or app-level theme JSON files should be added with `@source` in your app stylesheet rather than in `content` inside `tailwind.config.js`.
+Tailwind 4 does not load the config file on its own: reference it from your main stylesheet with `@config` (the path is relative to the stylesheet, or use a bundler alias).
+
+```css
+@import "tailwindcss";
+@config "../../../tailwind.config.cjs";
+```
+
+The `.txt` pattern above includes `resources/frontend/safelist.txt`, which lists classes that are not written in full in the views.
+
+> **Safelist:** Tailwind 4 ignores the `safelist` option of a JavaScript config. To keep classes that are built dynamically (for example the `f-*` typesets), declare them in your stylesheet with `@source inline`:
+>
+> ```css
+> @source inline("f-heading-1 f-heading-2 f-body-1");
+> @source inline("{xs:,md:,}col-start-{1..11}");
+> ```
+
+If you use Vite, add the `@tailwindcss/vite` plugin and import the stylesheet as an entry.
 
 Example of a component JSON config:
 
