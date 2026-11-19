@@ -1,6 +1,6 @@
 @isset($sources)
     @if (count($sources) > 0)
-        <div class="bg-inverse-primary-strong relative h-screen w-screen"
+        <div class="bg-tertiary relative h-screen w-screen"
              data-behavior="ImageZoom"
              data-ImageZoom-auto-init="{{ $autoInit ? 'true' : 'false' }}"
              data-ImageZoom-sources="{{ json_encode($sources) }}">

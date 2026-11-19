@@ -34,10 +34,14 @@
     --font-weight-bold: var(--f-body---bold-weight, bold);
     --font-weight-medium: 500;
 
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+
     --radius-xs: 0.125rem;
     --radius-sm: 0.25rem;
 
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 @utility container {

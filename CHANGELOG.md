@@ -19,7 +19,9 @@
 ### Fixed
 
 - Presets : fix unknown classes `before:ease--out` (radio), `f-ui-01` (carousel), `f-heading-03` (tabs) and `border-default` (filters panel).
-- Theme : define `--font-weight-medium`, `--radius-xs`, `--radius-sm` and `--shadow-lg`, which the presets use but the Tailwind 4 theme reset had removed.
+- Theme : define `--font-weight-medium`, `--text-xs`, `--radius-xs`, `--radius-sm` and `--shadow-lg`, which the components use but the Tailwind 4 theme reset had removed.
+- Tag : remove the undefined `rounded-px` and use `hover:bg-quaternary` instead of the undefined `hover:bg-accent-3`.
+- Image zoom : use `bg-tertiary` instead of the undefined `bg-inverse-primary-strong`.
 
 ## [3.1.3] - 2026-03-09
 
