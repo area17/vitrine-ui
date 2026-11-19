@@ -1,0 +1,59 @@
+# AGENTS.md
+
+Vitrine UI is a Laravel package (`area17/vitrine-ui`) of Blade components with matching JS behaviors and Tailwind theme presets. It is consumed by Laravel apps and showcased with Blast (Storybook for Blade) in the sibling repo `vitrine-ui-doc`.
+
+## Stack
+
+- PHP `^8.1` declared, developed and linted on **PHP 8.4**. Keep code valid on 8.1–8.4: no implicit nullable params (`?string $x = null`), no 8.2+ only syntax.
+- Laravel Blade anonymous and class components, prefix `vui` (`<x-vui-button>`).
+- JS behaviors built on `@area17/a17-behaviors` (`createBehavior`), ESM, no build step in this repo.
+- Tailwind classes live in JSON presets, merged with `gehrisandro/tailwind-merge-laravel`.
+
+## Layout
+
+| Path | What |
+|---|---|
+| `src/Components/` | Component classes (extend `VitrineComponent`); form components in `Form/` |
+| `src/VitrineUI.php` | Theme loading and merging, `ui()` class resolver, URL helpers |
+| `src/Commands/` | `vitrine-ui:publish` and `vitrine-ui:publish-theme` |
+| `config/vitrine-ui.php` | Component registry: `components` (with class) and `blade-components` (no class) |
+| `resources/views/components/` | Blade views, one folder per component |
+| `resources/views/stories/` | Blast stories + one `README.md` per component, shared data in `stories/data/` |
+| `resources/frontend/scripts/behaviors/` | JS behaviors (`data-behavior="Name"`); `index.js` is the barrel |
+| `resources/frontend/scripts/constants/customEvents.js` | All custom event names, never hardcode event strings |
+| `resources/frontend/theme/` | `vitrine-ui.json` global theme + `components/*.json` presets |
+| `resources/frontend/css/` | Component CSS only when Tailwind classes are not enough |
+| `lang/` | `en` and `fr` strings (`vitrine-ui::fe.*`) |
+
+## Commands
+
+```bash
+vendor/bin/phpstan analyse            # level 6, must stay at 0 errors
+vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
+sh tools/linters.sh eslint            # JS
+sh tools/linters.sh prettify          # php-cs-fixer + prettier
+```
+
+Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, conflict markers). There is no automated test suite yet: verify by rendering the component (e.g. in `vitrine-ui-doc`, or Orchestra Testbench) and say what you did not check.
+
+## Conventions
+
+- **Theming:** components never hardcode Tailwind classes in views. Get them with `$ui('component', 'key', ['option' => $value])` and add the keys to `resources/frontend/theme/components/<name>.json`. Consumer overrides go through the `ui` prop and the `class` attribute (`$attributes->twMerge(...)`).
+- **Adding a component:** class in `src/Components/`, view in `resources/views/components/<name>/`, register in `config/vitrine-ui.php`, theme JSON, story + README in `stories/`, JS behavior in `behaviors/` plus `index.js` export if needed, declare it in the class `$assets`.
+- **JS behaviors:** hook elements with `data-<Behavior>-<child>` attributes, clean up every listener in `destroy()`, dispatch events from `customEvents.js`.
+- **Accessibility is a requirement**, not polish: roles, labelled dialogs, focus management, keyboard support, reduced motion. Follow the WAI-ARIA APG pattern cited in each component README.
+- **Escaping:** use `{{ }}` by default. `{!! !!}` only for trusted slots and say why.
+- **Stories:** every `args` key must be used in the template and have an `argTypes` entry (description, control). Set `status`. Use `x-vui-*` components, not raw markup, and never leave stale references to other projects (`x-organisms.*`, `x-molecules.*`).
+- **Blade attribute output:** do not use `@if ($value)` for attributes that can be `0` or `"0"` (`min`, `max`, `step`, `value`); test `!is_null` / `filled`.
+- **Changelog:** add an entry to `CHANGELOG.md` for user-visible changes (format: version, date, `Added` / `Updated` / `Fixed`).
+
+## Git
+
+- Default branch is `3.x`; `vitrine-ui-doc` tracks `3.x-dev`. Check which line a change targets before branching.
+- Branch per change, short imperative commit titles prefixed by component (`Modal - fix aria-labelledby`), PRs against the target line.
+
+## Do not
+
+- Edit `vendor/` or published copies in a consuming app.
+- Add dependencies for a few lines of code.
+- Commit generated logs from `tools/logs` or `tools/tmp`.
