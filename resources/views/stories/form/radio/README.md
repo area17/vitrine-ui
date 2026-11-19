@@ -42,7 +42,7 @@ If there are errors or additional notes (hints) associated with the radio button
         "before:absolute before:content-['']",
         "before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2",
         "before:rounded-full",
-        "before:transition-colors before:duration-300 before:ease--out",
+        "before:transition-colors before:duration-300 before:ease-out",
         "before:border-[1px] before:border-[#989EA3]",
         "peer-checked:before:bg-[black] peer-checked:before:border-[black]",
         "group-hover:before:border-[black]",

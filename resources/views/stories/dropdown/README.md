@@ -26,6 +26,6 @@ The component includes ARIA attributes like aria-label and supports keyboard nav
     "trigger": "flex text-primary border p-12 w-full f-body-1 justify-between",
     "icon": "group-data-[is-open]:rotate-180 transition",
     "icon-name": "chevron-down-24",
-    "list": "absolute z-10 bg-white border rounded shadow-lg w-full mt-4 hidden group-data-[is-open]:block"
+    "list": "absolute z-10 bg-white border rounded-sm shadow-lg w-full mt-4 hidden group-data-[is-open]:block"
 }
 ```

@@ -44,7 +44,7 @@ If there are errors or additional notes (hints) associated with the checkbox, th
     "check": [
         "m-form-checkbox-check",
         "peer",
-        "w-24 h-24 rounded-sm relative",
+        "w-24 h-24 rounded-xs relative",
         "shadow-[0_0px_0px_1px_rgba(0,0,0,1)]",
         "transition-colors duration-300 ease-out",
         "peer-checked:bg-[black]",

@@ -65,7 +65,7 @@ Example of CSS to create animated transitions for the active Tab Panels :
 ```json
 {
   "base": "container",
-  "title": "f-heading-03 w-full",
+  "title": "f-heading-3 w-full",
   "tabList": ""
 }
 ```

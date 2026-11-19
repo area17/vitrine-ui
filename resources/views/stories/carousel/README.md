@@ -53,7 +53,7 @@ Carousel is using A11y modules from Swiper JS by default.
   "controls-icon-left": "arrow-left-24",
   "controls-icon-right": "arrow-right-24",
   "footer": "flex justify-between items-center mt-16 relative",
-  "pagination": "ml-auto f-ui-01 relative"
+  "pagination": "ms-auto f-ui-1 relative"
 }
 ```
 
