@@ -42,8 +42,7 @@
     "require": {
         "php": "^8.1",
         "gehrisandro/tailwind-merge-laravel": "^0.1|^1.0",
-        "spatie/once": "^3.1",
-        "yieldstudio/tailwind-merge-php": "^0.0.2"
+        "spatie/once": "^3.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",

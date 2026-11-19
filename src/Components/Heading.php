@@ -10,7 +10,7 @@ class Heading extends VitrineComponent
 
     public string $element;
 
-    public function __construct(int $level = null, array $ui = [])
+    public function __construct(?int $level = null, array $ui = [])
     {
         $this->level = $level;
         $this->element = $this->getElement();

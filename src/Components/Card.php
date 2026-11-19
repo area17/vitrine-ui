@@ -10,7 +10,7 @@ class Card extends VitrineComponent
 
     public ?string $tag;
 
-    public function __construct(string $tag = 'article', string $variant = null, array $ui = [])
+    public function __construct(string $tag = 'article', ?string $variant = null, array $ui = [])
     {
         $this->tag = $tag;
         $this->variant = $variant;

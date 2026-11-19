@@ -25,11 +25,11 @@ class AudioPlayer extends VitrineComponent
     ];
 
     public function __construct(
-        string $downloadUrl = null,
+        ?string $downloadUrl = null,
         array $playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3],
-        string $subtitle = null,
-        string $title = null,
-        string $variant = null,
+        ?string $subtitle = null,
+        ?string $title = null,
+        ?string $variant = null,
         array $sources = [],
         array $ui = [],
     ) {

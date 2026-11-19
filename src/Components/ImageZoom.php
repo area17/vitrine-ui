@@ -20,7 +20,7 @@ class ImageZoom extends VitrineComponent
         'js' => ['behaviors/ImageZoom.js'],
     ];
 
-    public function __construct(string $id = null, array $sources = [], bool $autoInit = true, array $ui = [])
+    public function __construct(?string $id = null, array $sources = [], bool $autoInit = true, array $ui = [])
     {
         $this->id = $id ?? 'ImageZoom' . Str::random(3);
         $this->sources = $this->parseSources($sources);

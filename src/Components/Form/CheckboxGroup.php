@@ -22,13 +22,13 @@ class CheckboxGroup extends VitrineComponent
     public ?string $note;
 
     public function __construct(
-        string $legend = null,
-        string $value = null,
+        ?string $legend = null,
+        ?string $value = null,
         array $options = [],
         bool $disabled = false,
         bool $required = true,
-        string $hint = null,
-        string $note = null,
+        ?string $hint = null,
+        ?string $note = null,
         array $ui = [],
     ) {
         $this->legend = $legend;

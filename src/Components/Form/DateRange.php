@@ -43,12 +43,12 @@ class DateRange extends VitrineComponent
     ];
 
     public function __construct(
-        string $legend = null,
+        ?string $legend = null,
         bool $disabled = false,
-        string $minDate = null,
-        string $maxDate = null,
-        string $hint = null,
-        string $note = null,
+        ?string $minDate = null,
+        ?string $maxDate = null,
+        ?string $hint = null,
+        ?string $note = null,
         bool $picker = true,
         array $from = [],
         array $to = [],

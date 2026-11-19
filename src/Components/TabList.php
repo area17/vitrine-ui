@@ -18,9 +18,9 @@ class TabList extends VitrineComponent
     public ?string $name;
 
     public function __construct(
-        string $ariaLabel = null,
+        ?string $ariaLabel = null,
         int $selectedIndex = 0,
-        string $tabListId = null,
+        ?string $tabListId = null,
         string $tabButtonVariant = 'primary',
         array $tabsNames = [],
         string $name = '',

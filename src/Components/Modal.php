@@ -32,12 +32,12 @@ class Modal extends VitrineComponent
     ];
 
     public function __construct(
-        string $id = null,
+        ?string $id = null,
         bool $showClose = true,
         bool $scroller = true,
-        string $title = null,
+        ?string $title = null,
         bool $panel = false,
-        string $variant = null,
+        ?string $variant = null,
         bool $setInitialFocus = true,
         bool $clickOutsideToClose = false,
         bool $open = false,

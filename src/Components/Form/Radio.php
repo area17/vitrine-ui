@@ -47,19 +47,19 @@ class Radio extends VitrineComponent
     ];
 
     public function __construct(
-        string $label = null,
-        string $name = null,
-        string $id = null,
-        string $value = null,
+        ?string $label = null,
+        ?string $name = null,
+        ?string $id = null,
+        ?string $value = null,
         bool $disabled = false,
         bool $selected = false,
         bool $required = false,
-        string $error = null,
-        string $hint = null,
-        string $note = null,
-        string $inputAttr = null,
+        ?string $error = null,
+        ?string $hint = null,
+        ?string $note = null,
+        ?string $inputAttr = null,
         bool $autofocus = false,
-        string $form = null,
+        ?string $form = null,
         array $ui = [],
     ) {
         $this->label = $label;

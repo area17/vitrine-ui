@@ -23,8 +23,8 @@ class Dropdown extends VitrineComponent
 
     public function __construct(
         int|string $headingLevel = 3,
-        string $ariaLabel = null,
-        string $label = null,
+        ?string $ariaLabel = null,
+        ?string $label = null,
         array $ui = [],
     ) {
         $this->headingLevel = $headingLevel;

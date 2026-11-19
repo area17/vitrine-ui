@@ -37,14 +37,14 @@ class RadioGroup extends VitrineComponent
     ];
 
     public function __construct(
-        string $legend = null,
-        string $name = null,
+        ?string $legend = null,
+        ?string $name = null,
         array $options = [],
         bool $disabled = false,
         bool $required = true,
-        string $error = null,
-        string $hint = null,
-        string $note = null,
+        ?string $error = null,
+        ?string $hint = null,
+        ?string $note = null,
         array $ui = [],
     ) {
         $this->legend = $legend;

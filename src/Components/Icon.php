@@ -12,8 +12,12 @@ class Icon extends VitrineComponent
 
     public ?string $iconComponent;
 
-    public function __construct(string $name = null, string $ariaLabel = null, string $iconPath = null, array $ui = [])
-    {
+    public function __construct(
+        ?string $name = null,
+        ?string $ariaLabel = null,
+        ?string $iconPath = null,
+        array $ui = [],
+    ) {
         $this->name = $name;
         $this->ariaLabel = $ariaLabel;
         $this->iconComponent = $iconPath ?? $this->getIconPath();

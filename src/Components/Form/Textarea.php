@@ -40,20 +40,20 @@ class Textarea extends VitrineComponent
     ];
 
     public function __construct(
-        string $name = null,
-        string $id = null,
+        ?string $name = null,
+        ?string $id = null,
         string $value = '',
         bool $disabled = false,
         bool $required = false,
-        string $placeholder = null,
-        string $autocomplete = null,
+        ?string $placeholder = null,
+        ?string $autocomplete = null,
         bool $autofocus = false,
-        string $form = null,
-        string $maxlength = null,
-        string $minlength = null,
+        ?string $form = null,
+        ?string $maxlength = null,
+        ?string $minlength = null,
         bool $readonly = false,
-        string $spellcheck = null,
-        string $wrap = null,
+        ?string $spellcheck = null,
+        ?string $wrap = null,
         array $ui = [],
     ) {
         $this->name = $name;

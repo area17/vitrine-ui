@@ -90,7 +90,7 @@ class VitrineUI
         ?string $component,
         array|string $keys = 'base',
         array $options = [],
-        array $customUI = null,
+        ?array $customUI = null,
     ): string {
         if (!isset($component)) {
             throw new Exception('Component name is required');
@@ -146,7 +146,7 @@ class VitrineUI
             }
         }
 
-        return tw(join(' ', $classes));
+        return TailwindMerge::merge(join(' ', $classes));
     }
 
     /**

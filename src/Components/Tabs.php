@@ -22,11 +22,11 @@ class Tabs extends VitrineComponent
     public string $tabListId;
 
     public function __construct(
-        string $ariaLabel = null,
+        ?string $ariaLabel = null,
         array $tabsNames = [],
         int $startIndex = 0,
         string $name = '',
-        string $title = null,
+        ?string $title = null,
         string|int $titleLevel = 3,
         string $tabButtonVariant = 'primary',
         array $ui = [],

@@ -50,15 +50,15 @@ class Upload extends VitrineComponent
     ];
 
     public function __construct(
-        string $label = null,
-        string $name = null,
-        string $id = null,
-        string $value = null,
+        ?string $label = null,
+        ?string $name = null,
+        ?string $id = null,
+        ?string $value = null,
         bool $disabled = false,
         bool $required = true,
-        string $error = null,
-        string $hint = null,
-        string $note = null,
+        ?string $error = null,
+        ?string $hint = null,
+        ?string $note = null,
         string $allowed = 'image/*,.pdf',
         string|int $fileSize = 5,
         bool $autofocus = false,

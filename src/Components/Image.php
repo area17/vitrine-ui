@@ -25,12 +25,12 @@ class Image extends VitrineComponent
     public function __construct(
         array|null $image = null,
         string $loading = 'lazy',
-        int|string $height = null,
-        int|string $width = null,
-        string $src = null,
-        string $alt = null,
-        string $sizes = null,
-        array $sources = null,
+        int|string|null $height = null,
+        int|string|null $width = null,
+        ?string $src = null,
+        ?string $alt = null,
+        ?string $sizes = null,
+        ?array $sources = null,
         array $ui = [],
     ) {
         $this->image = $image;

@@ -16,7 +16,7 @@ class MapMapbox extends VitrineComponent
         'css' => ['components/map-mapbox.css'],
     ];
 
-    public function __construct(string $lat = null, string $lng = null, array $ui = [])
+    public function __construct(?string $lat = null, ?string $lng = null, array $ui = [])
     {
         $this->lat = $lat;
         $this->lng = $lng;

@@ -13,7 +13,7 @@ class Label extends VitrineComponent
 
     public bool $required;
 
-    public function __construct(string $name = null, string $tag = 'label', bool $required = false, array $ui = [])
+    public function __construct(?string $name = null, string $tag = 'label', bool $required = false, array $ui = [])
     {
         $this->name = $name;
         $this->tag = $tag;

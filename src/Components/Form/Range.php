@@ -28,11 +28,11 @@ class Range extends VitrineComponent
     ];
 
     public function __construct(
-        string $label = null,
-        string $name = null,
+        ?string $label = null,
+        ?string $name = null,
         bool $disabled = false,
         bool $required = true,
-        string $error = null,
+        ?string $error = null,
         bool $hideLower = true,
         bool $showOutput = true,
         array $options = [

@@ -27,14 +27,14 @@ class Button extends VitrineComponent
     public string $uiKeyComponent = 'button';
 
     public function __construct(
-        string $href = null,
-        string $icon = null,
+        ?string $href = null,
+        ?string $icon = null,
         string $iconPosition = 'after',
         bool $static = false,
-        string $target = null,
-        string $size = null,
-        string $variant = null,
-        string $tag = null,
+        ?string $target = null,
+        ?string $size = null,
+        ?string $variant = null,
+        ?string $tag = null,
         bool $iconOnly = false,
         array $ui = [],
     ) {

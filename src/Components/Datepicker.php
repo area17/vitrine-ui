@@ -25,11 +25,11 @@ class Datepicker extends VitrineComponent
     ];
 
     public function __construct(
-        string $target = null,
-        string $align = null,
+        ?string $target = null,
+        ?string $align = null,
         bool $range = false,
-        string $minDate = null,
-        string $maxDate = null,
+        ?string $minDate = null,
+        ?string $maxDate = null,
         bool $showLabel = false,
         array $ui = [],
     ) {

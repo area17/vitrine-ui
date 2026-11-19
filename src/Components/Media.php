@@ -25,11 +25,11 @@ class Media extends VitrineComponent
     ];
 
     public function __construct(
-        string $caption = null,
+        ?string $caption = null,
         array|null $image = null,
         ?array $video = null,
-        string $videoPlayIcon = null,
-        array $backgroundVideo = null,
+        ?string $videoPlayIcon = null,
+        ?array $backgroundVideo = null,
         bool $cover = false,
         array $ui = [],
     ) {

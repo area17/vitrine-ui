@@ -41,8 +41,8 @@ class Pagination extends VitrineComponent
     public function __construct(
         array $pages = [],
         string|int $currentPage = 1,
-        string|int $currentPageCount = null,
-        string|int $total = null,
+        string|int|null $currentPageCount = null,
+        string|int|null $total = null,
         string|int $lastPage = 1,
         ?string $btnVariant = 'secondary',
         ?string $btnSize = null,
