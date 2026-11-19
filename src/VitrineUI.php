@@ -5,7 +5,7 @@ namespace A17\VitrineUI;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use TailwindMerge\Laravel\Facades\TailwindMerge;
+use TalesFromADev\TailwindMerge\TailwindMerge;
 
 class VitrineUI
 {
@@ -146,7 +146,7 @@ class VitrineUI
             }
         }
 
-        return TailwindMerge::merge(join(' ', $classes));
+        return app(TailwindMerge::class)->merge(join(' ', $classes));
     }
 
     /**
@@ -263,7 +263,7 @@ class VitrineUI
                                 ? join(' ', $ui[$component][$key])
                                 : $ui[$component][$key] ?? '';
                         if (config('vitrine-ui.css_preset', 'tailwindcss') === 'tailwindcss') {
-                            $ui[$component][$key] = TailwindMerge::merge($existingVal, $val);
+                            $ui[$component][$key] = app(TailwindMerge::class)->merge($existingVal, $val);
                         } else {
                             $ui[$component][$key] = $existingVal . ' ' . $val;
                         }

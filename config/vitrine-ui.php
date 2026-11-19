@@ -34,6 +34,10 @@ return [
     // CSS Preset
     'css_preset' => 'tailwindcss',
 
+    // Options passed to TalesFromADev\TailwindMerge\TailwindMerge, e.g. custom utilities:
+    // ['classGroups' => ['font-size' => [['text' => ['very-large']]]]]
+    'tailwind_merge' => [],
+
     // Open subdomains links as external links
     'open_subdomains_external' => true,
 
