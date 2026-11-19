@@ -22,6 +22,8 @@
 - Theme : define `--font-weight-medium`, `--text-xs`, `--radius-xs`, `--radius-sm` and `--shadow-lg`, which the components use but the Tailwind 4 theme reset had removed.
 - Tag : remove the undefined `rounded-px` and use `hover:bg-quaternary` instead of the undefined `hover:bg-accent-3`.
 - Image zoom : use `bg-tertiary` instead of the undefined `bg-inverse-primary-strong`.
+- Form controls : Tailwind 4 preflight makes inputs, selects and textareas transparent. Add `bg-primary` to their presets to keep the previous white background.
+- Tabs : remove the invalid `f-heading-03` class from the title (it was unstyled before, and `f-heading-3` is a 52-74px display style).
 
 ## [3.1.3] - 2026-03-09
 
