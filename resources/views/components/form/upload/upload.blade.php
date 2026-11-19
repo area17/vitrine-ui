@@ -39,15 +39,15 @@
 
         <div class="relative hidden"
              data-fileupload-selected>
-            <span class="bg-success absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full"
+            <span class="bg-success absolute -start-32 top-[1px] hidden h-24 w-24 rounded-full"
                   data-fileupload-successicon>
-                <x-vui-icon class="text-inverse absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                <x-vui-icon class="text-inverse absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                             name="checkmark-16" />
             </span>
 
-            <span class="bg-error absolute left-[-32px] top-[1px] hidden h-24 w-24 rounded-full"
+            <span class="bg-error absolute -start-32 top-[1px] hidden h-24 w-24 rounded-full"
                   data-fileupload-erroricon>
-                <x-vui-icon class="text-inverse absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                <x-vui-icon class="text-inverse absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                             name="close-16" />
             </span>
 

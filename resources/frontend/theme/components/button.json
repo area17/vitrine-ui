@@ -1,5 +1,5 @@
 {
-    "base": "focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0",
+    "base": "focus:outline-hidden focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 shrink-0",
     "size": {
         "sm": "p-4",
         "md": "p-8"

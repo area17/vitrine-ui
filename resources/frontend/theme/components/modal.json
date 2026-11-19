@@ -2,9 +2,9 @@
     "base": "group fixed inset-0 z-50 text-primary transition-opacity duration-300 opacity-0 pointer-events-none data-[active]:opacity-100 data-[active]:pointer-events-auto flex bg-overlay",
     "wrapper": {
         "default": "bg-primary relative flex-1 transition-opacity",
-        "panel": "bg-primary w-full -translate-x-full group-data-[active]:translate-x-0 transform transition-transform duration-300 ease-in-out md:w-6-cols",
-        "filters": "w-full fixed inset-0 flex flex-col md:w-6-cols-vw md:ml-auto md:mr-gutter md:my-16"
+        "panel": "bg-primary w-full -translate-x-full group-data-[active]:translate-x-0 transform transition-transform duration-300 ease-in-out md:w-cols-6",
+        "filters": "w-full fixed inset-0 flex flex-col md:w-cols-vw-6 md:ms-auto md:me-gutter md:my-16"
     },
-    "close": "absolute top-16 right-16 z-50",
+    "close": "absolute top-16 end-16 z-50",
     "title": "sr-only"
 }

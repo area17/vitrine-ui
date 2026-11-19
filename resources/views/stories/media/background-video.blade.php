@@ -14,6 +14,6 @@
     ],
 ])
 
-<x-vui-media class="aspect-16/9"
+<x-vui-media class="aspect-[16/9]"
              :background-video="$backgroundVideo ?? null"
              :caption="$caption ?? null" />

@@ -20,17 +20,17 @@
         "**/*.{js,html,css,php}": "sh tools/linters.sh prettify"
     },
     "devDependencies": {
-        "@area17/a17-helpers": "~3.2.3",
-        "@area17/a17-tailwind-plugins": "^3.8.1",
+        "@area17/a17-helpers": "~3.3.2",
+        "@area17/a17-tailwind-plugins": "~5.1.4",
         "@eslint/compat": "^1.1.1",
         "@eslint/js": "^9.8.0",
         "@shufo/prettier-plugin-blade": "~1.14.1",
-        "body-scroll-lock-upgrade": "~1.0.3",
+        "body-scroll-lock-upgrade": "~1.1.0",
         "eslint": "~9.8.0",
         "eslint-config-prettier": "~9.1.0",
         "eslint-plugin-simple-import-sort": "~12.1.1",
         "eslint-plugin-unused-imports": "~4.0.1",
-        "focus-trap": "~7.5.2",
+        "focus-trap": "~7.6.4",
         "globals": "~15.9.0",
         "husky": "~9.1.4",
         "lint-staged": "~15.2.7",
@@ -40,12 +40,12 @@
     },
     "peerDependencies": {
         "@area17/a17-behaviors": ">=0.4",
-        "@area17/a17-helpers": "3.x",
-        "@area17/a17-tailwind-plugins": "3.x",
+        "@area17/a17-helpers": "^3.3.0",
+        "@area17/a17-tailwind-plugins": "^5.0.0",
         "body-scroll-lock-upgrade": "1.x",
         "focus-trap": "7.x",
         "swiper": "11.x",
-        "tailwindcss": "3.x"
+        "tailwindcss": "^4.0.0"
     },
     "authors": [
         {
