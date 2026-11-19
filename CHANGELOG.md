@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased]
+
+### Breaking
+
+- Tailwind CSS 4 : the package now requires `tailwindcss ^4` and `@area17/a17-tailwind-plugins ^5`. Add the `@config` and `@source` lines described in the README to your stylesheet. Tailwind 3 is no longer supported.
+- Layout classes renamed by A17 Tailwind Plugins v5 : `w-N-cols` is now `w-cols-N` (and `w-N-cols-vw` is now `w-cols-vw-N`). Update your own templates and theme overrides.
+- Theme presets migrated to Tailwind 4 class names (`shrink-0`, `outline-hidden`, `ms-*` / `me-*`, `end-*`, `rounded-xs`, ...). Published or overridden preset files need the same migration.
+- Tailwind Merge : `gehrisandro/tailwind-merge-laravel` is replaced by `tales-from-a-dev/tailwind-merge-php`. The `$attributes->twMerge()` macro is still provided, but the `twMerge()` helper, the `@twMerge` Blade directive and the `tailwind-merge` config file no longer exist. Declare custom utilities in the new `tailwind_merge` option of `config/vitrine-ui.php`.
+
+### Updated
+
+- PHP 8.4 : explicit nullable types on all component constructors and `VitrineUI::ui()`. The package still supports PHP 8.1 and above.
+- Remove the unmaintained `yieldstudio/tailwind-merge-php` dependency.
+- `PublishComponentTheme` command : add parameter and return types.
+- Add `AGENTS.md` and `CLAUDE.md` for coding agents.
+
+### Fixed
+
+- Presets : fix unknown classes `before:ease--out` (radio), `f-ui-01` (carousel), `f-heading-03` (tabs) and `border-default` (filters panel).
+- Theme : define `--font-weight-medium`, `--radius-xs`, `--radius-sm` and `--shadow-lg`, which the presets use but the Tailwind 4 theme reset had removed.
+
 ## [3.1.3] - 2026-03-09
 
 ### Fixed
