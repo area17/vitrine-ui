@@ -2,7 +2,25 @@
 
 ## [Unreleased]
 
-## [4.0.0-beta.1] - 2026-11-23
+## [4.0.0-beta.2] - 2026-23-11
+
+### Updated
+
+- Button : render `type="button"` by default on `<button>` elements, so a button placed in a form no longer submits it. Pass `type="submit"` to opt back in.
+- Media : the caption slot is now named `slotCaption` (it was never working under its previous name), consistent with the other `slot*` names. The wrapper is a `<figure>` whenever a caption is set, through the `caption` prop or the slot.
+
+### Fixed
+
+- Datepicker : add `type="button"` to the calendar trigger so it does not submit the form.
+- Password input : add `type="button"` to the show/hide toggle so it does not submit the form.
+- Password input & Datepicker : remove the invalid `text-[#basa55]` class from the icons.
+- Image : a `sources` prop passed to the component was ignored.
+- Heading : no longer throws a `TypeError` when `level` is not set (renders a `span`).
+- Icon : no longer throws a `TypeError` when `name` is not set (renders nothing).
+- Breadcrumbs : no longer throws a `TypeError` when `tag` is `null` (falls back to `nav`).
+- Media : fix the caption slot, which threw an undefined variable error.
+
+## [4.0.0-beta.1] - 2026-23-11
 
 ### Breaking
 

@@ -48,7 +48,7 @@ Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, con
 - **Stories:** every `args` key must be used in the template and have an `argTypes` entry (description, control). Set `status`. Use `x-vui-*` components, not raw markup, and never leave stale references to other projects (`x-organisms.*`, `x-molecules.*`).
 - **Blade attribute output:** do not use `@if ($value)` for attributes that can be `0` or `"0"` (`min`, `max`, `step`, `value`); test `!is_null` / `filled`.
 - **Tailwind 4:** use v4 utility names (`shrink-0`, `outline-hidden`, `rounded-xs`/`rounded-sm`, `ms-`/`me-`/`start-`/`end-`, `w-cols-N`). A JS `safelist` is ignored; use `safelist.txt` / `@source inline`. Every token used in a preset (`bg-*`, `border-*`, `f-*`) must exist in the theme. Form controls are transparent by default in v4, so presets set `bg-primary` explicitly.
-- **Changelog:** add an entry to `CHANGELOG.md` for user-visible changes (format: version, date, `Added` / `Updated` / `Fixed`).
+- **Changelog:** add an entry to `CHANGELOG.md` for user-visible changes (format: version, date, `Added` / `Updated` / `Fixed`). Dates are written `YYYY-DD-MM` (e.g. `2026-23-11` for 23 November 2026), not ISO `YYYY-MM-DD`, to stay consistent with the existing entries.
 
 ## Git
 
