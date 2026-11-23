@@ -4,6 +4,9 @@
 
 ### Fixed
 
+- Modal : a closed modal is now `inert`, so its content can no longer be reached with the keyboard or by assistive technologies.
+- Modal : opening a modal without an initial focus element (no `title` and no `data-Modal-initial-focus` in the content, or `setInitialFocus` set to `false`) no longer throws. The focus goes to the first focusable element.
+- Modal : `aria-labelledby` is only rendered when a `title` is set. A title passed in the content with the id `{modal id}_title` labels the dialog automatically. The stories now use that id.
 - Link : fix the stories and README. The secondary story now uses the `secondary` variant, the stories no longer pass the nonexistent `inverse` and `active` props, and they no longer throw a `TypeError` when `iconPosition` or `static` are not set. The README uses `<x-vui-link>` and an existing icon name.
 
 ## [4.0.0-beta.2] - 2026-23-11

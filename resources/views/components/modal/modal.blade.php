@@ -1,11 +1,12 @@
 @push($modalsStack)
     <div id="{{ $id }}"
          role="dialog"
-         aria-labelledby="{{ $id . '_title' }}"
          aria-modal="true"
+         @isset($title) aria-labelledby="{{ $id }}_title" @endisset
          {{ $attributes->merge(['data-behavior' => $attributes->prepends('Modal')])->twMerge($ui('modal', ['base'])) }}
          {!! $panel ? 'data-Modal-panel="true"' : '' !!}
          {!! $open ? 'data-Modal-open="true"' : '' !!}
+         {!! $setInitialFocus ? '' : 'data-Modal-initialFocus="false"' !!}
          {!! $clickOutsideToClose ? 'data-Modal-clickOutside="true"' : '' !!}>
         <div class="{{ $ui('modal', '', ['wrapper' => $variant]) }}"
              data-Modal-focus-trap

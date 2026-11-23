@@ -22,6 +22,8 @@ const Modal = createBehavior(
             e?.stopPropagation()
             if (this._data.isActive) {
                 this.$node.removeAttribute('data-active')
+                // Closed content must not be tabbable nor exposed to assistive technologies
+                this.$node.setAttribute('inert', '')
                 this._data.focusTrap.deactivate()
                 this._data.isActive = false
 
@@ -60,6 +62,7 @@ const Modal = createBehavior(
                 reserveScrollBarGap: true
             })
 
+            this.$node.removeAttribute('inert')
             this.$node.setAttribute('data-init', 'true')
             this.$node.setAttribute('data-active', 'true')
             this._data.isActive = true
@@ -123,19 +126,38 @@ const Modal = createBehavior(
             this.$clickOutside =
                 this.options['panel'] || this.options['clickoutside']
 
-            if (!this.$initialFocus) {
+            // `setInitialFocus` is false on the component: the modal itself takes the focus
+            const wantsInitialFocus =
+                String(this.options['initialfocus']) !== 'false'
+
+            if (!this.$initialFocus && wantsInitialFocus) {
                 console.warn(
                     'No initial focus element found. Add a `h1` with the attribute `data-Modal-initial-focus`. The `h1` should also have an id that matches the modal id with `_title` appended'
                 )
             }
 
+            // Label the dialog with a title passed in the slot (the component handles the `title` prop)
+            this.$modalId = this.$node.getAttribute('id')
+            if (
+                !this.$node.hasAttribute('aria-labelledby') &&
+                this.$modalId &&
+                this.$node.querySelector(`[id="${this.$modalId}_title"]`)
+            ) {
+                this.$node.setAttribute(
+                    'aria-labelledby',
+                    `${this.$modalId}_title`
+                )
+            }
+
             this._data.focusTrap = focusTrap.createFocusTrap(this.$focusTrap, {
-                initialFocus: this.$initialFocus,
+                // focus-trap throws on `null`, `undefined` falls back to the first tabbable or `fallbackFocus`
+                initialFocus: this.$initialFocus || undefined,
                 fallbackFocus: this.$node,
                 clickOutsideDeactivates: this.$clickOutside
             })
 
             this._data.isActive = false
+            this.$node.setAttribute('inert', '')
 
             if (this.$closeButtons) {
                 this.$closeButtons.forEach((closeButton) => {
@@ -172,8 +194,6 @@ const Modal = createBehavior(
             document.addEventListener('keyup', this.handleEsc, false)
 
             // add listener to modal toggle buttons
-            this.$modalId = this.$node.getAttribute('id')
-
             this.$triggers = document.querySelectorAll(
                 `[data-modal-target="#${this.$modalId}"]`
             )
