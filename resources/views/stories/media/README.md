@@ -6,6 +6,14 @@ Video is setup with an array containing the video `id` from the video URL, the `
 
 Default slot can de used to display any content on top of the media.
 
+The `slotCaption` named slot can be used instead of the `caption` prop to pass html or extra attributes to the `figcaption` element. The wrapper becomes a `figure` when a caption (prop or slot) is present.
+
+```html
+<x-vui-media :image="['src' => 'https://placehold.co/600x400.png', 'alt' => 'Sample Alt Text']">
+    <x-slot:slotCaption class="f-body-2">Caption with <em>markup</em>.</x-slot:slotCaption>
+</x-vui-media>
+```
+
 _To display a simple image : please use the dedicated image component instead_
 
 ## Usage

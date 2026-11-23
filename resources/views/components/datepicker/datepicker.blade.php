@@ -15,8 +15,9 @@
      {{ $attributes->twMerge(['z-[9999]']) }}>
     <button class="flex items-center gap-8"
             data-DatePicker-trigger
+            type="button"
             style="visibility: hidden;">
-        <x-vui-icon class="pointer-events-none inline-block text-[#basa55]"
+        <x-vui-icon class="pointer-events-none inline-block"
                     name="calendar-24" />
         @if ($showLabel)
             <span class="f-ui-2">{{ __('vitrine-ui::fe.form.datepicker.open_date_picker') }}</span>

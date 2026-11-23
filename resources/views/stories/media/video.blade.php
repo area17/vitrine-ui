@@ -22,7 +22,7 @@
             'defaultValue' => ['summary' => ''],
         ],
         'caption' => [
-            'description' => 'Plain text image caption. The component also supports the `mediaCaption` slot to allow you to pass html and attributes to the `figcaption` element.',
+            'description' => 'Plain text image caption. The component also supports the `slotCaption` slot to allow you to pass html and attributes to the `figcaption` element.',
             'defaultValue' => ['summary' => ''],
         ],
     ],

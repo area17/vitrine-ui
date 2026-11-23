@@ -1,5 +1,9 @@
 {{-- Image, Video Background, Video or Placeholder with media base and media container classes --}}
-<{{ $element() }} {{ $attributes->twMerge(
+@php
+    $hasCaptionSlot = isset($slotCaption) && !$slotCaption->isEmpty();
+    $wrapper = $element($hasCaptionSlot);
+@endphp
+<{{ $wrapper }} {{ $attributes->twMerge(
     array_merge(
         [
             $ui('media', 'base', [
@@ -43,15 +47,15 @@
         @endif
     @endif
     {{--
-        Use the $captionSlot when you need to pass markup to the caption element or if you need to use other attributes on the wrapping caption element
+        Use the $slotCaption when you need to pass markup to the caption element or if you need to use other attributes on the wrapping caption element
     --}}
-    @if (isset($captionSlot) && !empty($captionSlot))
-        <figcaption {{ $captionSlot->attributes ?? null }}>
-            {{ isset($captionSlot) && !$captionSlot->isEmpty() ? $mediaCaption : '' }}
+    @if ($hasCaptionSlot)
+        <figcaption {{ $slotCaption->attributes }}>
+            {{ $slotCaption }}
         </figcaption>
     @elseif(isset($caption) && !empty($caption))
         <figcaption class="{{ $ui('media', 'caption') }}">
             {!! $caption !!}
         </figcaption>
     @endif
-    </{{ $element() }}>
+    </{{ $wrapper }}>

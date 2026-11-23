@@ -49,9 +49,12 @@ class Media extends VitrineComponent
         return view('vitrine-ui::components.media.media');
     }
 
-    public function element(): string
+    /**
+     * Slots are not visible from the class, so the view tells us if the caption slot is filled.
+     */
+    public function element(bool $hasCaptionSlot = false): string
     {
-        return (isset($this->mediaCaption) && !empty($this->mediaCaption)) || !empty($this->caption) ? 'figure' : 'div';
+        return $hasCaptionSlot || !empty($this->caption) ? 'figure' : 'div';
     }
 
     protected function parseBackgroundVideo(?array $data): ?array

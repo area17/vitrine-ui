@@ -11,6 +11,7 @@
         'icon_position' => $getIconPosition(),
     ]),
 ) }}
+                     @if ($tag === 'button' && !$attributes->has('type')) type="button" @endif
                      @if ($href) href="{{ $href }}" @endif
                      @if ($target) target="{{ $target }}" @endif>
     @if ($slotBefore)

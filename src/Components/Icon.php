@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 
 class Icon extends VitrineComponent
 {
-    public string $name;
+    public ?string $name;
 
     public ?string $ariaLabel;
 
@@ -37,6 +37,10 @@ class Icon extends VitrineComponent
 
     public function getIconPath(): ?string
     {
+        if (blank($this->name)) {
+            return null;
+        }
+
         $iconPath = config('vitrine-ui.icons_view_path', 'icons') . $this->name;
 
         $viewExists = view()->exists($iconPath);

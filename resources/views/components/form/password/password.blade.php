@@ -22,7 +22,8 @@
                   :required="$required ?? false"
                   :with-icon-right="true">
     <button class="{{ $ui('input-password', 'base') }}"
-            data-PasswordInput-toggle>
+            data-PasswordInput-toggle
+            type="button">
         <x-vui-icon class="{{ $ui('input-password', 'icon') }}"
                     name="{{ $ui('input-password', 'icon-hide') }}"
                     data-PasswordInput-iconhidden />

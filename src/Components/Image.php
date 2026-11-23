@@ -40,7 +40,7 @@ class Image extends VitrineComponent
         $this->alt = $alt;
         $this->sizes = $sizes;
         $this->sources =
-            $sources ?? isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null;
+            $sources ?? (isset($image) && is_array($image) && Arr::has($image, 'sources') ? $image['sources'] : null);
         $this->loading = $loading;
 
         parent::__construct($ui);

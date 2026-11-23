@@ -12,7 +12,7 @@ class Breadcrumbs extends VitrineComponent
 
     public function __construct(?string $tag = 'nav', array $items = [], array $ui = [])
     {
-        $this->tag = $tag;
+        $this->tag = $tag ?? 'nav';
         $this->items = $items;
 
         parent::__construct($ui);

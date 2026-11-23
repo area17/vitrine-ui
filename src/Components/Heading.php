@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 
 class Heading extends VitrineComponent
 {
-    public int|string $level;
+    public int|string|null $level;
 
     public string $element;
 
