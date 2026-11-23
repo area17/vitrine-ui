@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Updated
+
+- Link : the `secondary` variant now uses the grey `text-tertiary` instead of white (`text-inverse`). Overridden or published link presets keep their own value.
+
 ### Fixed
 
 - Modal : a closed modal is now `inert`, so its content can no longer be reached with the keyboard or by assistive technologies.
