@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [4.0.0-beta.1] - 2026-11-23
+
 ### Breaking
 
 - Tailwind CSS 4 : the package now requires `tailwindcss ^4` and `@area17/a17-tailwind-plugins ^5`. Keep configuring Tailwind through your `tailwind.config.js`, and load it from your stylesheet with `@config` (see the README). Tailwind 3 is no longer supported.
