@@ -7,17 +7,20 @@ The default component slot is used for the label text within the link. It can be
 ## Usage
 
 ```html
-<x-vui-link-primary
+<x-vui-link
     href="https://example.url"
-    icon="chevron-right"
+    icon="arrow-right-24"
     icon-position="after"
+    variant="primary"
     :static="false"
-    :disabled="false"
-    :active="false"
 >
     Label Text
-</x-vui-link-primary>
+</x-vui-link>
 ```
+
+Props: `href`, `icon`, `icon-position` (`before` or `after`, default `after`), `icon-only`, `variant` (`primary` or `secondary`, see theming), `static` (renders a `span`), `target` and `tag` (force the element). External URLs automatically get `target="_blank"`.
+
+Any other attribute is passed through to the element. `disabled` is a native attribute so it only has an effect when the link renders as a `button` (no `href`).
 
 ## Accessibility
 
@@ -26,13 +29,13 @@ Links should always have an accessible name. For most links this will be the lab
 External links must open in a new window/tab and the element must have an `aria-label` with the link text + '. Opens in a new tab' as the value. eg:
 
 ```html
-<x-vui-link-primary
+<x-vui-link
     href="https://area17.com"
     target="_blank"
     aria-label="Site by AREA 17. Opens in a new tab."
 >
     Site by AREA 17
-</x-vui-link-primary>
+</x-vui-link>
 ```
 
 ## Theming

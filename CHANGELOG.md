@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Link : fix the stories and README. The secondary story now uses the `secondary` variant, the stories no longer pass the nonexistent `inverse` and `active` props, and they no longer throw a `TypeError` when `iconPosition` or `static` are not set. The README uses `<x-vui-link>` and an existing icon name.
+
 ## [4.0.0-beta.2] - 2026-23-11
 
 ### Updated
