@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- PHPUnit tests (`composer test`, Orchestra Testbench) for the `vitrine-ui:publish` command and for the manifest: every component alias is listed, every declared view, stories and asset file exists, and every behavior is exported by `behaviors/index.js` under the name it registers.
+- `VitrineUI::resourcesPath()` and `VitrineUI::vendorResourcesPath()` helpers, giving the path to the package's `resources` folder (and, in an app, to its `vendor` copy).
+
 ### Updated
 
 - New `resources/manifest.php` lists, for every component alias, its package class, view folder, stories folder and assets. `vitrine-ui:publish` reads it, and the tests check that every declared file exists. The static `$assets` property and `assets()` method of the component classes are removed.
-- `vitrine-ui:publish` no longer rewrites a non-existent `vitrine-ui.js` / `vitrine-ui.css`. It now lists the JS behaviors, CSS files and npm packages the published components need, including the Blade-only components (`blade-components-assets`) and the optional extras (e.g. `video.js` for the video background).
+- `vitrine-ui:publish` now generates `vitrine-ui.js` (in `js_path`) and `vitrine-ui.css` (in `css_path`), importing the behaviors and CSS of the published components from `vendor/area17/vitrine-ui`. Running it again adds the components published later. It also lists the npm packages needed and the optional extras (e.g. `video.js` for the video background), and no longer tries to rewrite a non-existent `vitrine-ui.js`.
 
 ### Removed
 

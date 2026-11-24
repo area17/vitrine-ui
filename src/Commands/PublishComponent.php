@@ -2,11 +2,31 @@
 namespace A17\VitrineUI\Commands;
 
 use Illuminate\Support\Str;
+use A17\VitrineUI\VitrineUI;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
 class PublishComponent extends Command
 {
+    /**
+     * Asset type => folder in the package's resources (the manifest paths are relative to these)
+     */
+    public const ASSET_FOLDERS = ['js' => 'frontend/scripts', 'css' => 'frontend/css'];
+
+    /** Folder of the behaviors, in the js folder */
+    protected const BEHAVIORS = 'behaviors';
+
+    /** Views and stories folders, in the package's resources and in the app's resources */
+    protected const COMPONENT_VIEWS = 'views/components';
+    protected const STORIES = 'views/stories';
+
+    protected const PACKAGE_NAMESPACE = 'A17\\VitrineUI\\Components\\';
+    protected const APP_NAMESPACE = 'App\\View\\Components\\VitrineUI\\';
+    protected const APP_CLASSES_PATH = 'app/View/Components/VitrineUI';
+
+    protected const JS_FILE = 'vitrine-ui.js';
+    protected const CSS_FILE = 'vitrine-ui.css';
+
     public $signature = 'vitrine-ui:publish
                             {components?* : The component names to export. If left blank it will prompt which components to publish}
                             {--all : publish all vitrine-ui components to project}
@@ -42,7 +62,7 @@ class PublishComponent extends Command
         parent::__construct();
 
         $this->filesystem = $filesystem;
-        $this->manifest = require __DIR__ . '/../../resources/manifest.php';
+        $this->manifest = require VitrineUI::resourcesPath('manifest.php');
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->storiesSubfolder = trim((string) config('vitrine-ui.stories_subfolder', ''), '/');
         $this->publishedEverything = true;
@@ -75,7 +95,7 @@ class PublishComponent extends Command
         } else {
             if (empty($components)) {
                 $publishable = array_filter($this->vitrineUIComponents, function ($item) {
-                    return Str::startsWith($item, 'A17\VitrineUI\Components\\');
+                    return Str::startsWith($item, self::PACKAGE_NAMESPACE);
                 });
 
                 if (empty($publishable)) {
@@ -172,7 +192,7 @@ class PublishComponent extends Command
     protected function publishComponent(string $alias): void
     {
         $component = $this->manifest[$alias]['class'];
-        $class = Str::after($component, 'A17\\VitrineUI\\Components\\');
+        $class = Str::after($component, self::PACKAGE_NAMESPACE);
 
         if ($this->option('view') || $this->publishedEverything) {
             $this->newLine();
@@ -196,36 +216,24 @@ class PublishComponent extends Command
             return;
         }
 
-        $base = 'vendor/area17/vitrine-ui/resources/frontend';
-
         $this->info("\n--------\n");
-        $this->info('The published components need the following assets in your app');
 
-        if ($this->assets['js']) {
-            $this->info("\nJS behaviors (import and register them with @area17/a17-behaviors):");
-            foreach ($this->assets['js'] as $js) {
-                $this->line("  $base/scripts/$js");
-            }
-        }
-
-        if ($this->assets['css']) {
-            $this->info("\nCSS (@import them in your main css file, path relative to it):");
-            foreach ($this->assets['css'] as $css) {
-                $this->line("  $base/css/$css");
-            }
-        }
+        $this->writeJsImports();
+        $this->writeCssImports();
 
         if ($this->assets['npm']) {
-            $this->info("\nnpm packages:\n  npm i " . join(' ', $this->assets['npm']));
+            $this->info(
+                "\nThe published components need these npm packages:\n  npm i " . join(' ', $this->assets['npm']),
+            );
         }
 
         foreach ($this->assets['optional'] as $feature => $group) {
-            $this->info("\nOptional, only for [$feature]:");
+            $this->info("\nOptional, only for [$feature], import them yourself if you use it:");
             foreach ($group['js'] ?? [] as $js) {
-                $this->line("  $base/scripts/$js");
+                $this->line('  ' . VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['js'] . "/$js"));
             }
             foreach ($group['css'] ?? [] as $css) {
-                $this->line("  $base/css/$css");
+                $this->line('  ' . VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['css'] . "/$css"));
             }
             if (!empty($group['npm'])) {
                 $this->line('  npm i ' . join(' ', $group['npm']));
@@ -235,6 +243,133 @@ class PublishComponent extends Command
         $this->info("\n--------\n");
     }
 
+    /**
+     * Generate vitrine-ui.js, exporting the behaviors of the published components from the vendor folder.
+     */
+    protected function writeJsImports(): void
+    {
+        $names = $this->behaviorNames();
+        $lines = [];
+
+        foreach ($this->assets['js'] as $js) {
+            // Only behaviors are registered, the other files (utils) are imported by the behaviors themselves
+            if (!Str::startsWith($js, self::BEHAVIORS . '/')) {
+                continue;
+            }
+
+            $file = Str::after(Str::beforeLast($js, '.js'), self::BEHAVIORS . '/');
+            $name = $names[$file] ?? Str::studly($file);
+
+            $lines[] = fn(string $base) => "export { default as $name } from '{$base}" . self::BEHAVIORS . "/$file'";
+        }
+
+        $target = config('vitrine-ui.js_path') . '/' . self::JS_FILE;
+
+        $this->writeImportFile(
+            'js',
+            $target,
+            $lines,
+            'export {',
+            '// Generated by `vitrine-ui:publish`, running it again adds the behaviors of the components you publish.',
+        );
+
+        $relative = Str::after($target, base_path() . '/');
+
+        $this->info(
+            "Import it in your app's js and register it: import * as VitrineBehaviors from '$relative', then manageBehaviors.init(VitrineBehaviors)",
+        );
+    }
+
+    /**
+     * Generate vitrine-ui.css, importing the css files of the published components from the vendor folder.
+     */
+    protected function writeCssImports(): void
+    {
+        $lines = array_map(fn(string $css) => fn(string $base) => "@import \"{$base}$css\";", $this->assets['css']);
+
+        $target = config('vitrine-ui.css_path') . '/' . self::CSS_FILE;
+
+        $this->writeImportFile(
+            'css',
+            $target,
+            $lines,
+            '@import',
+            '/* Generated by `vitrine-ui:publish`, running it again adds the css of the components you publish. */',
+        );
+    }
+
+    /**
+     * Merge new import lines into a generated file, keeping the ones of components published earlier.
+     *
+     * @param array<int, callable(string): string> $lines closures building a line from the relative path to the package's frontend folder
+     */
+    protected function writeImportFile(
+        string $type,
+        string $target,
+        array $lines,
+        string $linePrefix,
+        string $header,
+    ): void {
+        if (!$lines) {
+            return;
+        }
+
+        $base = $this->relativePath(
+            dirname($target),
+            base_path(VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS[$type])),
+        );
+
+        $existing = $this->filesystem->exists($target)
+            ? array_filter(
+                explode("\n", $this->filesystem->get($target)),
+                fn($line) => str_starts_with($line, $linePrefix),
+            )
+            : [];
+
+        $all = array_unique([...$existing, ...array_map(fn($line) => $line($base), $lines)]);
+        sort($all);
+
+        $this->filesystem->ensureDirectoryExists(dirname($target));
+        $this->filesystem->put($target, $header . "\n\n" . implode("\n", $all) . "\n");
+
+        $this->info("Updated [$target]");
+    }
+
+    /**
+     * Relative path from a folder to another one, with a trailing slash. Both are absolute.
+     */
+    protected function relativePath(string $from, string $to): string
+    {
+        $from = explode('/', trim($from, '/'));
+        $to = explode('/', trim($to, '/'));
+
+        while ($from && $to && $from[0] === $to[0]) {
+            array_shift($from);
+            array_shift($to);
+        }
+
+        return str_repeat('../', count($from)) . ($to ? implode('/', $to) . '/' : '');
+    }
+
+    /**
+     * Behavior names (what `data-behavior` uses) by file name, read from the behaviors barrel file.
+     *
+     * @return array<string, string>
+     */
+    protected function behaviorNames(): array
+    {
+        $barrel = $this->filesystem->get(
+            VitrineUI::resourcesPath(self::ASSET_FOLDERS['js'] . '/' . self::BEHAVIORS . '/index.js'),
+        );
+
+        preg_match_all("/export \{ default as (\w+) \} from '\.\/(\w+)'/", $barrel, $matches);
+
+        return array_combine($matches[2], $matches[1]);
+    }
+
+    /**
+     * Collect the assets of a component alias from the manifest
+     */
     protected function collectAssets(string $alias): void
     {
         $assets = $this->manifest[$alias]['assets'];
@@ -287,7 +422,7 @@ class PublishComponent extends Command
 
         $this->copyFolder(
             'view',
-            __DIR__ . '/../../resources/views/components/' . $folder,
+            VitrineUI::resourcesPath(self::COMPONENT_VIEWS . '/' . $folder),
             resource_path('views/vendor/vitrine-ui/components/' . $folder),
         );
     }
@@ -295,7 +430,7 @@ class PublishComponent extends Command
     protected function publishClass(string $component, string $class): void
     {
         $class = ucfirst($class);
-        $path = $this->laravel->basePath('app/View/Components/VitrineUI');
+        $path = $this->laravel->basePath(self::APP_CLASSES_PATH);
         $destination = $path . '/' . str_replace('\\', '/', $class) . '.php';
 
         if (!$this->option('force') && $this->filesystem->exists($destination)) {
@@ -333,7 +468,7 @@ class PublishComponent extends Command
         // Match the `::class` suffix, otherwise `Card` would also rewrite `CardLink`
         $modifiedConfig = str_replace(
             $component . '::class',
-            'App\\View\\Components\\VitrineUI\\' . $class . '::class',
+            self::APP_NAMESPACE . $class . '::class',
             $originalConfig,
         );
 
@@ -356,16 +491,16 @@ class PublishComponent extends Command
 
         $this->copyFolder(
             'stories',
-            __DIR__ . '/../../resources/views/stories/' . $folder,
-            resource_path('views/stories/' . $destination),
+            VitrineUI::resourcesPath(self::STORIES . '/' . $folder),
+            resource_path(self::STORIES . '/' . $destination),
             $quiet,
         );
     }
 
     protected function copyStoryData(): void
     {
-        $originalPath = __DIR__ . '/../../resources/views/stories/data';
-        $publishedPath = resource_path('views/stories/data');
+        $originalPath = VitrineUI::resourcesPath(self::STORIES . '/data');
+        $publishedPath = resource_path(self::STORIES . '/data');
 
         $this->filesystem->ensureDirectoryExists($publishedPath);
 

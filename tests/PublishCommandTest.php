@@ -26,6 +26,12 @@ class PublishCommandTest extends TestCase
 
         $this->app->setBasePath($this->appPath);
         $this->app->useConfigPath($this->appPath . '/config');
+
+        // These are computed from resource_path() when the config is loaded, before the base path is changed
+        config([
+            'vitrine-ui.js_path' => $this->appPath . '/resources/frontend/scripts/vendor',
+            'vitrine-ui.css_path' => $this->appPath . '/resources/frontend/styles/vendor',
+        ]);
     }
 
     protected function tearDown(): void
@@ -85,12 +91,37 @@ class PublishCommandTest extends TestCase
         $this->artisan('vitrine-ui:publish', ['components' => ['nope']])->assertExitCode(1);
     }
 
-    public function test_assets_list_blade_only_and_optional_assets(): void
+    public function test_assets_generate_import_files_and_list_optional_ones(): void
     {
         $this->artisan('vitrine-ui:publish', ['--all' => true, '--assets' => true])
-            ->expectsOutputToContain('behaviors/Banner.js')
-            ->expectsOutputToContain('behaviors/FilterPanel.js')
+            ->expectsOutputToContain('npm i')
             ->expectsOutputToContain('Optional, only for [video-background: video.js]')
             ->assertExitCode(0);
+
+        $js = file_get_contents($this->appPath . '/resources/frontend/scripts/vendor/vitrine-ui.js');
+
+        // Blade-only components are included, the name is the one used by data-behavior (not the file name)
+        $this->assertStringContainsString("export { default as Banner } from '", $js);
+        $this->assertStringContainsString("export { default as FilterPanel } from '", $js);
+        $this->assertStringContainsString("export { default as DatePicker } from '", $js);
+        $this->assertStringContainsString('vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Banner', $js);
+        // Optional behaviors and utils are not exported
+        $this->assertStringNotContainsString('VideoBackgroundVideoJs', $js);
+        $this->assertStringNotContainsString('formatDate', $js);
+
+        $css = file_get_contents($this->appPath . '/resources/frontend/styles/vendor/vitrine-ui.css');
+        $this->assertStringContainsString('@import "', $css);
+        $this->assertStringContainsString('css/components/datepicker.css";', $css);
+    }
+
+    public function test_import_files_keep_the_components_published_earlier(): void
+    {
+        $this->artisan('vitrine-ui:publish', ['components' => ['accordion'], '--assets' => true])->assertExitCode(0);
+        $this->artisan('vitrine-ui:publish', ['components' => ['carousel'], '--assets' => true])->assertExitCode(0);
+
+        $js = file_get_contents($this->appPath . '/resources/frontend/scripts/vendor/vitrine-ui.js');
+        $this->assertStringContainsString('as Accordion }', $js);
+        $this->assertStringContainsString('as Carousel }', $js);
+        $this->assertSame(1, substr_count($js, 'as Accordion }'));
     }
 }
