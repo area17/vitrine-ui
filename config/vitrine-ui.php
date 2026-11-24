@@ -98,15 +98,4 @@ return [
         'pagination-numbered' => 'components.pagination-numbered.pagination-numbered',
         'picture' => 'components.media.picture',
     ],
-
-    // Assets of the components with no class, same format as the `$assets` property of the component classes
-    'blade-components-assets' => [
-        'banner' => [
-            'npm' => ['@area17/a17-helpers'],
-            'js' => ['behaviors/Banner.js'],
-        ],
-        'filters-panel' => [
-            'js' => ['behaviors/FilterPanel.js'],
-        ],
-    ],
 ];

@@ -52,11 +52,6 @@ class Date extends VitrineComponent
 
     public ?string $pickerID = null;
 
-    protected static array $assets = [
-        'npm' => ['@area17/parse-numeric-date'],
-        'js' => ['utils/formatDate.js', 'behaviors/Input.js', 'behaviors/DateInput.js', 'behaviors/DateInputFuzzy.js'],
-    ];
-
     public function __construct(
         ?string $label = null,
         ?string $name = null,

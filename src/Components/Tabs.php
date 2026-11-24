@@ -21,10 +21,6 @@ class Tabs extends VitrineComponent
 
     public string $tabListId;
 
-    protected static array $assets = [
-        'js' => ['behaviors/Tabs.js'],
-    ];
-
     public function __construct(
         ?string $ariaLabel = null,
         array $tabsNames = [],

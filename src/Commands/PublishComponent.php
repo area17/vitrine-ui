@@ -7,32 +7,6 @@ use Illuminate\Filesystem\Filesystem;
 
 class PublishComponent extends Command
 {
-    /**
-     * Aliases whose views are not in a folder named after their class
-     */
-    protected const VIEW_FOLDERS = [
-        'card-link' => 'card',
-        'link' => 'button',
-        'tabs-list' => 'tabs',
-        'tabs-panel' => 'tabs',
-    ];
-
-    /**
-     * Aliases whose stories are not in a folder named after their class (or alias, for Blade-only components)
-     */
-    protected const STORY_FOLDERS = [
-        'accordion-item' => 'accordion',
-        'filters-panel' => 'filters',
-        'icon-output' => 'icon',
-        'icon-sprite' => 'icon',
-        'img' => 'media',
-        'modal-close' => 'modal',
-        'modal-scroller' => 'modal',
-        'picture' => 'media',
-        'tabs-list' => 'tabs',
-        'tabs-panel' => 'tabs',
-    ];
-
     public $signature = 'vitrine-ui:publish
                             {components?* : The component names to export. If left blank it will prompt which components to publish}
                             {--all : publish all vitrine-ui components to project}
@@ -48,6 +22,9 @@ class PublishComponent extends Command
 
     /** @var array<string, string> */
     protected array $vitrineUIComponents;
+
+    /** @var array<string, array{class: ?string, view: string, stories: ?string, assets: array}> */
+    protected array $manifest;
 
     protected array $assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
 
@@ -65,6 +42,7 @@ class PublishComponent extends Command
         parent::__construct();
 
         $this->filesystem = $filesystem;
+        $this->manifest = require __DIR__ . '/../../resources/manifest.php';
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
         $this->storiesSubfolder = trim((string) config('vitrine-ui.stories_subfolder', ''), '/');
         $this->publishedEverything = true;
@@ -120,7 +98,10 @@ class PublishComponent extends Command
             } else {
                 // validate selected components
                 foreach ($components as $key => $alias) {
-                    if (!array_key_exists($alias, $this->vitrineUIComponents)) {
+                    if (
+                        !array_key_exists($alias, $this->vitrineUIComponents) ||
+                        !isset($this->manifest[$alias]['class'])
+                    ) {
                         $this->fail("Cannot find the given [$alias] component. Skipping.");
 
                         unset($components[$key]);
@@ -152,8 +133,10 @@ class PublishComponent extends Command
 
         // Blade-only components (no class) are included when no component is named
         if ($withBladeComponents) {
+            $bladeComponents = array_keys(array_filter($this->manifest, fn($entry) => $entry['class'] === null));
+
             if ($withAssets) {
-                foreach (array_keys(config('vitrine-ui.blade-components-assets', [])) as $alias) {
+                foreach ($bladeComponents as $alias) {
                     $this->collectAssets($alias);
                 }
             }
@@ -161,8 +144,8 @@ class PublishComponent extends Command
             if ($this->option('stories') || $this->publishedEverything) {
                 $this->comment('Publishing stories for blade components without class ');
 
-                foreach (array_keys(config('vitrine-ui.blade-components', [])) as $alias) {
-                    $this->publishStories($alias, $alias, true);
+                foreach ($bladeComponents as $alias) {
+                    $this->publishStories($alias, true);
                 }
             }
         }
@@ -188,14 +171,12 @@ class PublishComponent extends Command
 
     protected function publishComponent(string $alias): void
     {
-        $component = $this->vitrineUIComponents[$alias];
-
-        $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
-        $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
+        $component = $this->manifest[$alias]['class'];
+        $class = Str::after($component, 'A17\\VitrineUI\\Components\\');
 
         if ($this->option('view') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishView($alias, $name);
+            $this->publishView($alias);
         }
 
         if ($this->option('class') || $this->publishedEverything) {
@@ -205,7 +186,7 @@ class PublishComponent extends Command
 
         if ($this->option('stories') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishStories($alias, $name);
+            $this->publishStories($alias);
         }
     }
 
@@ -254,19 +235,9 @@ class PublishComponent extends Command
         $this->info("\n--------\n");
     }
 
-    /**
-     * Collect the assets of a component alias, from its class or, for Blade-only components, from the config.
-     */
     protected function collectAssets(string $alias): void
     {
-        $class = $this->vitrineUIComponents[$alias] ?? null;
-
-        // revert to original class to get assets
-        $class = $class
-            ? str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $class)
-            : null;
-
-        $assets = $class ? $class::assets() : config("vitrine-ui.blade-components-assets.$alias", []);
+        $assets = $this->manifest[$alias]['assets'];
 
         foreach (['js', 'css', 'npm'] as $type) {
             $this->assets[$type] = array_values(
@@ -310,9 +281,9 @@ class PublishComponent extends Command
         $this->info("Published $label [$destination]");
     }
 
-    protected function publishView(string $alias, string $name): void
+    protected function publishView(string $alias): void
     {
-        $folder = self::VIEW_FOLDERS[$alias] ?? $name;
+        $folder = $this->manifest[$alias]['view'];
 
         $this->copyFolder(
             'view',
@@ -340,7 +311,7 @@ class PublishComponent extends Command
         $name = Str::afterLast($class, '\\');
         $alias = 'Original' . $name;
 
-        $parent = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
+        $parent = $component;
 
         $stub = str_replace(
             ['{{ namespace }}', '{{ name }}', '{{ parent }}', '{{ alias }}'],
@@ -369,9 +340,18 @@ class PublishComponent extends Command
         $this->filesystem->put($config, $modifiedConfig);
     }
 
-    protected function publishStories(string $alias, string $name, bool $quiet = false): void
+    protected function publishStories(string $alias, bool $quiet = false): void
     {
-        $folder = self::STORY_FOLDERS[$alias] ?? $name;
+        $folder = $this->manifest[$alias]['stories'];
+
+        if ($folder === null) {
+            if (!$quiet) {
+                $this->warn('No stories to publish for this component.');
+            }
+
+            return;
+        }
+
         $destination = $this->storiesSubfolder === '' ? $folder : $this->storiesSubfolder . '/' . $folder;
 
         $this->copyFolder(

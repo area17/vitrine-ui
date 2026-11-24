@@ -49,17 +49,6 @@ class VideoBackground extends VitrineComponent
     public ?float $thresholdStart;
     public ?float $thresholdEnd;
 
-    protected static array $assets = [
-        'js' => ['behaviors/VideoBackground.js'],
-        // Only needed with `:native="false"` (HLS streaming played by video.js)
-        'optional' => [
-            'video.js' => [
-                'npm' => ['video.js'],
-                'js' => ['behaviors/VideoBackgroundVideoJs.js'],
-            ],
-        ],
-    ];
-
     public function __construct(
         ?array $sources = null,
         ?bool $controlMute = false,

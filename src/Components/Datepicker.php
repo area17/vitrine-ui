@@ -18,12 +18,6 @@ class Datepicker extends VitrineComponent
 
     public bool $showLabel;
 
-    protected static array $assets = [
-        'npm' => ['wc-datepicker', 'focus-trap'],
-        'js' => 'behaviors/Datepicker.js',
-        'css' => 'components/datepicker.css',
-    ];
-
     public function __construct(
         ?string $target = null,
         ?string $align = null,

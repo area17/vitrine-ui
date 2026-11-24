@@ -21,11 +21,6 @@ class Carousel extends VitrineComponent
     public bool $withControls = true;
     public bool $withPagination = false;
 
-    protected static array $assets = [
-        'npm' => ['swiper'],
-        'js' => ['behaviors/Carousel.js'],
-    ];
-
     public function __construct(
         array $items = [],
         string $itemClass = '',

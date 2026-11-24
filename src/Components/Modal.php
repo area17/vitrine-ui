@@ -26,11 +26,6 @@ class Modal extends VitrineComponent
 
     public ?string $modalsStack;
 
-    protected static array $assets = [
-        'npm' => ['body-scroll-lock-upgrade', 'focus-trap'],
-        'js' => 'behaviors/Modal.js',
-    ];
-
     public function __construct(
         ?string $id = null,
         bool $showClose = true,

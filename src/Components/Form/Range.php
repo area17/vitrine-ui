@@ -21,12 +21,6 @@ class Range extends VitrineComponent
 
     public ?array $options;
 
-    protected static array $assets = [
-        'npm' => ['range-slider-input'],
-        'js' => ['behaviors/RangeInput.js'],
-        'css' => ['components/form/range.css'],
-    ];
-
     public function __construct(
         ?string $label = null,
         ?string $name = null,

@@ -8,10 +8,6 @@ class Wysiwyg extends VitrineComponent
 {
     public ?string $variant;
 
-    protected static array $assets = [
-        'css' => 'components/wysiwyg.css',
-    ];
-
     public function __construct(?string $variant = null)
     {
         $this->variant = $variant;

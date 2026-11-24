@@ -17,10 +17,6 @@ class Dropdown extends VitrineComponent
 
     public string $listlabelId;
 
-    protected static array $assets = [
-        'js' => 'behaviors/Dropdown.js',
-    ];
-
     public function __construct(
         int|string $headingLevel = 3,
         ?string $ariaLabel = null,

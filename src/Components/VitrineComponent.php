@@ -7,14 +7,6 @@ use Illuminate\View\Component;
 
 abstract class VitrineComponent extends Component
 {
-    /** @var array */
-    protected static array $assets = [];
-
-    public static function assets(): array
-    {
-        return static::$assets;
-    }
-
     public array $ui = [];
 
     public function __construct(array $ui = [])
