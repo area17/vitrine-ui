@@ -72,6 +72,11 @@ class PublishComponent extends Command
 
     public function handle(): int
     {
+        // The command instance can be reused (tests, programmatic calls), start every run clean
+        $this->handled = [];
+        $this->failed = false;
+        $this->assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
+
         $all = $this->option('all');
         $components = $this->argument('components');
 

@@ -31,12 +31,13 @@ Vitrine UI is a Laravel package (`area17/vitrine-ui`) of Blade components with m
 
 ```bash
 vendor/bin/phpstan analyse            # level 6, must stay at 0 errors
+vendor/bin/phpunit                    # tests (composer test), Testbench
 vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
 sh tools/linters.sh eslint            # JS
 sh tools/linters.sh prettify          # php-cs-fixer + prettier
 ```
 
-Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, conflict markers). There is no automated test suite yet: verify by rendering the component (e.g. in `vitrine-ui-doc`, or Orchestra Testbench) and say what you did not check.
+Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, conflict markers). The only automated tests cover the `vitrine-ui:publish` command (`tests/`); for components, verify by rendering them (e.g. in `vitrine-ui-doc`, or Orchestra Testbench) and say what you did not check.
 
 ## Conventions
 
