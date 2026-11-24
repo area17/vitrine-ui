@@ -129,7 +129,7 @@ class PublishComponent extends Command
                 // validate selected components
                 foreach ($components as $key => $alias) {
                     if (!array_key_exists($alias, $this->manifest)) {
-                        $this->fail("Cannot find the given [$alias] component. Skipping.");
+                        $this->failWith("Cannot find the given [$alias] component. Skipping.");
 
                         unset($components[$key]);
                     }
@@ -197,7 +197,7 @@ class PublishComponent extends Command
         return self::SUCCESS;
     }
 
-    protected function fail(string $message): void
+    protected function failWith(string $message): void
     {
         $this->error($message);
 
