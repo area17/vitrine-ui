@@ -4,6 +4,7 @@ namespace A17\VitrineUI\Tests;
 
 use Orchestra\Testbench\TestCase;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
 use A17\VitrineUI\VitrineUIServiceProvider;
 
 class PublishCommandTest extends TestCase
@@ -120,6 +121,19 @@ class PublishCommandTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertSame($config, file_get_contents($this->appPath . '/config/vitrine-ui.php'));
+        $this->assertDirectoryDoesNotExist($this->appPath . '/resources');
+        $this->assertDirectoryDoesNotExist($this->appPath . '/app');
+    }
+
+    public function test_list_shows_components_without_writing_anything(): void
+    {
+        $this->assertSame(0, Artisan::call('vitrine-ui:publish', ['--list' => true]));
+
+        $output = Artisan::output();
+        $this->assertStringContainsString('card-link', $output);
+        $this->assertStringContainsString('blade', $output);
+        $this->assertStringContainsString('Banner.js', $output);
+
         $this->assertDirectoryDoesNotExist($this->appPath . '/resources');
         $this->assertDirectoryDoesNotExist($this->appPath . '/app');
     }

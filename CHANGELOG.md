@@ -4,6 +4,7 @@
 
 ### Added
 
+- `vitrine-ui:publish --list` shows every publishable component with its type (class or Blade-only), whether it has stories, and its JS/CSS assets.
 - `vitrine-ui:publish --dry-run` lists the views, classes, stories, config changes and generated import lines that would be written, without touching any file.
 - PHPUnit tests (`composer test`, Orchestra Testbench) for the `vitrine-ui:publish` command and for the manifest: every component alias is listed, every declared view, stories and asset file exists, and every behavior is exported by `behaviors/index.js` under the name it registers.
 - `VitrineUI::resourcesPath()` and `VitrineUI::vendorResourcesPath()` helpers, giving the path to the package's `resources` folder (and, in an app, to its `vendor` copy).

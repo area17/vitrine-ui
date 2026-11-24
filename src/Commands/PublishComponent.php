@@ -35,6 +35,7 @@ class PublishComponent extends Command
                             {--assets : Publish only the assets of the component}
                             {--stories : Publish only the stories for the component}
                             {--force : Overwrite existing files}
+                            {--list : List the components that can be published, with their class, stories and assets}
                             {--dry-run : List what would be written, without touching any file}';
 
     public $description = 'Publish a component';
@@ -78,6 +79,10 @@ class PublishComponent extends Command
         $this->failed = false;
         $this->dryRun = (bool) $this->option('dry-run');
         $this->assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
+
+        if ($this->option('list')) {
+            return $this->listComponents();
+        }
 
         $all = $this->option('all');
         $components = $this->argument('components');
@@ -172,6 +177,26 @@ class PublishComponent extends Command
     /**
      * Report an error and make the command exit with a failure code
      */
+    protected function listComponents(): int
+    {
+        $rows = [];
+
+        foreach ($this->manifest as $alias => $entry) {
+            $assets = array_merge($entry['assets']['js'] ?? [], $entry['assets']['css'] ?? []);
+
+            $rows[] = [
+                $alias,
+                $entry['class'] === null ? 'blade' : 'class',
+                $entry['stories'] === null ? '-' : 'yes',
+                $assets ? implode(', ', array_map('basename', $assets)) : '-',
+            ];
+        }
+
+        $this->table(['Component', 'Type', 'Stories', 'Assets'], $rows);
+
+        return self::SUCCESS;
+    }
+
     protected function fail(string $message): void
     {
         $this->error($message);
