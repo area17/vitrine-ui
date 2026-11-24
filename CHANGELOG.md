@@ -18,6 +18,7 @@
 
 ### Fixed
 
+- `vitrine-ui:publish` : the Blade-only components (`banner`, `filters-panel`, `pagination-numbered`, `accordion-item`, `modal-close`…) can now be named, selected in the prompt and have their views published. Before, they only got their stories and assets and `publish banner` said it could not find the component. With no component named, only the selected components are published, not every Blade-only one.
 - `vitrine-ui:publish` : views and stories are mapped to the right folders (`link` → button views, `card-link` → card, `tabs-list` / `tabs-panel` → tabs, Blade-only components → their component stories) and shared folders are published once. Missing sources are skipped with a message instead of failing, existing files are skipped with a hint to use `--force`, and the command exits with a failure code on unknown components.
 - `vitrine-ui:publish` : publishing a class only rewrites its own `::class` entry in `config/vitrine-ui.php` (`card` also rewrote `card-link`, `form-date` also rewrote `form-date-range`…), and the stories folder no longer defaults to a folder named `null`.
 - `vitrine-ui:publish` : story data files already published are skipped instead of aborting the command, and are only copied when stories are published.

@@ -86,6 +86,27 @@ class PublishCommandTest extends TestCase
         $this->assertNotSame('custom', file_get_contents($view));
     }
 
+    public function test_blade_only_components_can_be_published(): void
+    {
+        $this->artisan('vitrine-ui:publish', [
+            'components' => ['banner', 'filters-panel', 'modal-close'],
+        ])->assertExitCode(0);
+
+        $views = $this->appPath . '/resources/views/vendor/vitrine-ui/components';
+        $this->assertFileExists("$views/banner/banner.blade.php");
+        $this->assertFileExists("$views/filters/panel.blade.php");
+        // modal-close shares the modal folder
+        $this->assertFileExists("$views/modal/close.blade.php");
+        $this->assertFileExists($this->appPath . '/resources/views/stories/vitrine/banner');
+
+        // no class for Blade-only components
+        $this->assertDirectoryDoesNotExist($this->appPath . '/app/View/Components/VitrineUI');
+        $this->assertStringContainsString(
+            'behaviors/Banner',
+            file_get_contents($this->appPath . '/resources/frontend/scripts/vendor/vitrine-ui.js'),
+        );
+    }
+
     public function test_unknown_component_fails(): void
     {
         $this->artisan('vitrine-ui:publish', ['components' => ['nope']])->assertExitCode(1);

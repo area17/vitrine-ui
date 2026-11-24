@@ -91,12 +91,15 @@ class PublishComponent extends Command
             ) === 0;
 
         if ($all) {
-            $components = array_keys($this->vitrineUIComponents);
+            $components = array_keys($this->manifest);
         } else {
             if (empty($components)) {
-                $publishable = array_filter($this->vitrineUIComponents, function ($item) {
-                    return Str::startsWith($item, self::PACKAGE_NAMESPACE);
-                });
+                // Components with a class already replaced by an app class in the config are not offered again
+                $publishable = array_filter(
+                    array_keys($this->manifest),
+                    fn(string $alias) => $this->manifest[$alias]['class'] === null ||
+                        Str::startsWith($this->vitrineUIComponents[$alias] ?? '', self::PACKAGE_NAMESPACE),
+                );
 
                 if (empty($publishable)) {
                     $this->error('No more publishable components. Exiting.');
@@ -106,22 +109,17 @@ class PublishComponent extends Command
 
                 $selectedComponents = $this->choice(
                     'Which components would you like to publish?',
-                    ['all', ...array_keys($publishable)],
+                    ['all', ...$publishable],
                     0,
                     null,
                     true,
                 );
 
-                $components = in_array('all', $selectedComponents)
-                    ? array_keys($this->vitrineUIComponents)
-                    : $selectedComponents;
+                $components = in_array('all', $selectedComponents) ? array_keys($this->manifest) : $selectedComponents;
             } else {
                 // validate selected components
                 foreach ($components as $key => $alias) {
-                    if (
-                        !array_key_exists($alias, $this->vitrineUIComponents) ||
-                        !isset($this->manifest[$alias]['class'])
-                    ) {
+                    if (!array_key_exists($alias, $this->manifest)) {
                         $this->fail("Cannot find the given [$alias] component. Skipping.");
 
                         unset($components[$key]);
@@ -135,7 +133,6 @@ class PublishComponent extends Command
         }
 
         $withAssets = $this->option('assets') || $this->publishedEverything;
-        $withBladeComponents = empty($this->argument('components'));
 
         // Copy story preset data
         if ($this->option('stories') || $this->publishedEverything) {
@@ -148,25 +145,6 @@ class PublishComponent extends Command
 
             if ($withAssets) {
                 $this->collectAssets($alias);
-            }
-        }
-
-        // Blade-only components (no class) are included when no component is named
-        if ($withBladeComponents) {
-            $bladeComponents = array_keys(array_filter($this->manifest, fn($entry) => $entry['class'] === null));
-
-            if ($withAssets) {
-                foreach ($bladeComponents as $alias) {
-                    $this->collectAssets($alias);
-                }
-            }
-
-            if ($this->option('stories') || $this->publishedEverything) {
-                $this->comment('Publishing stories for blade components without class ');
-
-                foreach ($bladeComponents as $alias) {
-                    $this->publishStories($alias, true);
-                }
             }
         }
 
@@ -192,7 +170,6 @@ class PublishComponent extends Command
     protected function publishComponent(string $alias): void
     {
         $component = $this->manifest[$alias]['class'];
-        $class = Str::after($component, self::PACKAGE_NAMESPACE);
 
         if ($this->option('view') || $this->publishedEverything) {
             $this->newLine();
@@ -201,12 +178,17 @@ class PublishComponent extends Command
 
         if ($this->option('class') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishClass($component, $class);
+
+            if ($component !== null) {
+                $this->publishClass($component, Str::after($component, self::PACKAGE_NAMESPACE));
+            } elseif ($this->option('class')) {
+                $this->warn("[$alias] is a Blade component, it has no class to publish.");
+            }
         }
 
         if ($this->option('stories') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishStories($alias);
+            $this->publishStories($alias, empty($this->argument('components')));
         }
     }
 
