@@ -34,7 +34,8 @@ class PublishComponent extends Command
                             {--class : Publish only the class of the component}
                             {--assets : Publish only the assets of the component}
                             {--stories : Publish only the stories for the component}
-                            {--force : Overwrite existing files}';
+                            {--force : Overwrite existing files}
+                            {--dry-run : List what would be written, without touching any file}';
 
     public $description = 'Publish a component';
 
@@ -57,6 +58,8 @@ class PublishComponent extends Command
 
     protected bool $failed = false;
 
+    protected bool $dryRun = false;
+
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
@@ -73,6 +76,7 @@ class PublishComponent extends Command
         // The command instance can be reused (tests, programmatic calls), start every run clean
         $this->handled = [];
         $this->failed = false;
+        $this->dryRun = (bool) $this->option('dry-run');
         $this->assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
 
         $all = $this->option('all');
@@ -152,9 +156,17 @@ class PublishComponent extends Command
             $this->notifyAssets();
         }
 
-        $this->comment('All done. ');
+        $this->comment($this->dryRun ? 'Dry run, no file was written.' : 'All done. ');
 
         return $this->failed ? self::FAILURE : self::SUCCESS;
+    }
+
+    /**
+     * Report a write, or what would be written with --dry-run
+     */
+    protected function report(string $action, string $what): void
+    {
+        $this->info($this->dryRun ? "[dry-run] Would $action $what" : ucfirst(rtrim($action, 'e')) . "ed $what");
     }
 
     /**
@@ -311,10 +323,18 @@ class PublishComponent extends Command
         $all = array_unique([...$existing, ...array_map(fn($line) => $line($base), $lines)]);
         sort($all);
 
-        $this->filesystem->ensureDirectoryExists(dirname($target));
-        $this->filesystem->put($target, $header . "\n\n" . implode("\n", $all) . "\n");
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(dirname($target));
+            $this->filesystem->put($target, $header . "\n\n" . implode("\n", $all) . "\n");
+        }
 
-        $this->info("Updated [$target]");
+        $this->report('update', "[$target]");
+
+        if ($this->dryRun) {
+            foreach (array_diff($all, $existing) as $line) {
+                $this->line("    + $line");
+            }
+        }
     }
 
     /**
@@ -392,10 +412,12 @@ class PublishComponent extends Command
             return;
         }
 
-        $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
-        $this->filesystem->copyDirectory($source, $destination);
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
+            $this->filesystem->copyDirectory($source, $destination);
+        }
 
-        $this->info("Published $label [$destination]");
+        $this->report('publish', "$label [$destination]");
     }
 
     protected function publishView(string $alias): void
@@ -421,40 +443,43 @@ class PublishComponent extends Command
             return;
         }
 
-        $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
-
         $stub = $this->filesystem->get(__DIR__ . '/stubs/Component.stub');
         $namespace = Str::contains($class, '\\') ? '\\' . Str::beforeLast($class, '\\') : '';
         $name = Str::afterLast($class, '\\');
-        $alias = 'Original' . $name;
-
-        $parent = $component;
 
         $stub = str_replace(
             ['{{ namespace }}', '{{ name }}', '{{ parent }}', '{{ alias }}'],
-            [$namespace, $name, $parent, $alias],
+            [$namespace, $name, $component, 'Original' . $name],
             $stub,
         );
 
-        $this->filesystem->put($destination, $stub);
-
-        $this->info("Published class [$component]");
-
-        // Update config entry of component to new class.
-        if ($this->filesystem->missing($config = $this->laravel->configPath('vitrine-ui.php'))) {
-            $this->call('vendor:publish', ['--tag' => 'vitrine-ui-config']);
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
+            $this->filesystem->put($destination, $stub);
         }
 
-        $originalConfig = $this->filesystem->get($config);
+        $this->report('publish', "class [$destination]");
+
+        // Update config entry of component to new class.
+        $config = $this->laravel->configPath('vitrine-ui.php');
+
+        if ($this->filesystem->missing($config)) {
+            if ($this->dryRun) {
+                $this->report('publish', "config [$config]");
+            } else {
+                $this->call('vendor:publish', ['--tag' => 'vitrine-ui-config']);
+            }
+        }
 
         // Match the `::class` suffix, otherwise `Card` would also rewrite `CardLink`
-        $modifiedConfig = str_replace(
-            $component . '::class',
-            self::APP_NAMESPACE . $class . '::class',
-            $originalConfig,
-        );
+        $search = $component . '::class';
+        $replace = self::APP_NAMESPACE . $class . '::class';
 
-        $this->filesystem->put($config, $modifiedConfig);
+        if (!$this->dryRun) {
+            $this->filesystem->put($config, str_replace($search, $replace, $this->filesystem->get($config)));
+        }
+
+        $this->report('update', "[$config]: $search => $replace");
     }
 
     protected function publishStories(string $alias, bool $quiet = false): void
@@ -484,8 +509,6 @@ class PublishComponent extends Command
         $originalPath = VitrineUI::resourcesPath(self::STORIES . '/data');
         $publishedPath = resource_path(self::STORIES . '/data');
 
-        $this->filesystem->ensureDirectoryExists($publishedPath);
-
         foreach ($this->filesystem->allFiles($originalPath) as $file) {
             $filename = $file->getFilename();
 
@@ -496,9 +519,12 @@ class PublishComponent extends Command
                 continue;
             }
 
-            $this->filesystem->copy($file->getPathname(), "$publishedPath/$filename");
+            if (!$this->dryRun) {
+                $this->filesystem->ensureDirectoryExists($publishedPath);
+                $this->filesystem->copy($file->getPathname(), "$publishedPath/$filename");
+            }
 
-            $this->info("Published story data [$filename]");
+            $this->report('publish', "story data [$publishedPath/$filename]");
         }
     }
 }

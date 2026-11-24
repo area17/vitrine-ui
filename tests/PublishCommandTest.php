@@ -107,6 +107,23 @@ class PublishCommandTest extends TestCase
         );
     }
 
+    public function test_dry_run_lists_what_would_be_written_without_touching_files(): void
+    {
+        $config = file_get_contents($this->appPath . '/config/vitrine-ui.php');
+
+        $this->artisan('vitrine-ui:publish', ['components' => ['card', 'banner'], '--dry-run' => true])
+            ->expectsOutputToContain('[dry-run] Would publish view')
+            ->expectsOutputToContain('[dry-run] Would publish class')
+            ->expectsOutputToContain('Card::class')
+            ->expectsOutputToContain('[dry-run] Would update')
+            ->expectsOutputToContain('Dry run, no file was written.')
+            ->assertExitCode(0);
+
+        $this->assertSame($config, file_get_contents($this->appPath . '/config/vitrine-ui.php'));
+        $this->assertDirectoryDoesNotExist($this->appPath . '/resources');
+        $this->assertDirectoryDoesNotExist($this->appPath . '/app');
+    }
+
     public function test_unknown_component_fails(): void
     {
         $this->artisan('vitrine-ui:publish', ['components' => ['nope']])->assertExitCode(1);
