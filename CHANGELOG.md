@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [4.0.0-beta.3] - 2026-24-11
+
 ### Updated
 
 - Link : the `secondary` variant now uses the grey `text-tertiary` instead of white (`text-inverse`). Overridden or published link presets keep their own value.
