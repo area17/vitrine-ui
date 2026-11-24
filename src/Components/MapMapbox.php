@@ -12,7 +12,7 @@ class MapMapbox extends VitrineComponent
 
     protected static array $assets = [
         'npm' => ['mapbox-gl'],
-        'js' => ['behaviors/MapboxMaps.js'],
+        'js' => ['behaviors/MapBoxMaps.js'],
         'css' => ['components/map-mapbox.css'],
     ];
 

@@ -49,7 +49,7 @@ class Select extends VitrineComponent
     public bool $fitValue;
 
     protected static array $assets = [
-        'js' => ['behaviors/Input.js'],
+        'js' => ['behaviors/Input.js', 'behaviors/SelectSizer.js'],
     ];
 
     public function __construct(

@@ -15,7 +15,7 @@ Vitrine UI is a Laravel package (`area17/vitrine-ui`) of Blade components with m
 |---|---|
 | `src/Components/` | Component classes (extend `VitrineComponent`); form components in `Form/` |
 | `src/VitrineUI.php` | Theme loading and merging, `ui()` class resolver, URL helpers |
-| `src/Commands/` | `vitrine-ui:publish` and `vitrine-ui:publish-theme` |
+| `src/Commands/` | `vitrine-ui:publish` |
 | `config/vitrine-ui.php` | Component registry: `components` (with class) and `blade-components` (no class) |
 | `resources/views/components/` | Blade views, one folder per component |
 | `resources/views/stories/` | Blast stories + one `README.md` per component, shared data in `stories/data/` |
@@ -41,7 +41,7 @@ Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, con
 ## Conventions
 
 - **Theming:** components never hardcode Tailwind classes in views. Get them with `$ui('component', 'key', ['option' => $value])` and add the keys to `resources/frontend/theme/components/<name>.json`. Consumer overrides go through the `ui` prop and the `class` attribute (`$attributes->twMerge(...)`, a macro on `ComponentAttributeBag`).
-- **Adding a component:** class in `src/Components/`, view in `resources/views/components/<name>/`, register in `config/vitrine-ui.php`, theme JSON, story + README in `stories/`, JS behavior in `behaviors/` plus `index.js` export if needed, declare it in the class `$assets`.
+- **Adding a component:** class in `src/Components/`, view in `resources/views/components/<name>/`, register in `config/vitrine-ui.php`, theme JSON, story + README in `stories/`, JS behavior in `behaviors/` plus `index.js` export if needed, declare it in the class `$assets` (for a Blade-only component, in `blade-components-assets` in the config).
 - **JS behaviors:** hook elements with `data-<Behavior>-<child>` attributes, clean up every listener in `destroy()`, dispatch events from `customEvents.js`.
 - **Accessibility is a requirement**, not polish: roles, labelled dialogs, focus management, keyboard support, reduced motion. Follow the WAI-ARIA APG pattern cited in each component README.
 - **Escaping:** use `{{ }}` by default. `{!! !!}` only for trusted slots and say why.

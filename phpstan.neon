@@ -10,7 +10,4 @@ parameters:
             -
              identifier: missingType.iterableValue
 
-    excludePaths:
-        - src/Commands/PublishComponent.php
-
     level: 6

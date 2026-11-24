@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+### Updated
+
+- `vitrine-ui:publish` no longer rewrites a non-existent `vitrine-ui.js` / `vitrine-ui.css`. It now lists the JS behaviors, CSS files and npm packages the published components need, including the Blade-only components (`blade-components-assets`) and the optional extras (e.g. `video.js` for the video background).
+
+### Removed
+
+- `PublishComponentTheme` (`vitrine-ui:publish-theme`) command. It was never registered by the service provider, so it could not be run.
+
+### Fixed
+
+- `vitrine-ui:publish` : views and stories are mapped to the right folders (`link` → button views, `card-link` → card, `tabs-list` / `tabs-panel` → tabs, Blade-only components → their component stories) and shared folders are published once. Missing sources are skipped with a message instead of failing, existing files are skipped with a hint to use `--force`, and the command exits with a failure code on unknown components.
+- `vitrine-ui:publish` : publishing a class only rewrites its own `::class` entry in `config/vitrine-ui.php` (`card` also rewrote `card-link`, `form-date` also rewrote `form-date-range`…), and the stories folder no longer defaults to a folder named `null`.
+- `vitrine-ui:publish` : story data files already published are skipped instead of aborting the command, and are only copied when stories are published.
+- Banner, Filters panel : declare their behaviors (`Banner.js` with the `@area17/a17-helpers` package, `FilterPanel.js`) in the new `blade-components-assets` config key, as these Blade-only components have no class to declare them.
+- Video background : `video.js` and `VideoBackgroundVideoJs.js` are now declared as optional assets, only needed with `:native="false"`. The `video.js` package was declared even for the default native video.
+- Carousel, Tabs, Select : declare their assets (`Carousel.js` and the `swiper` npm package, `Tabs.js`, `SelectSizer.js`), so `vitrine-ui:publish` and the npm notice list them.
+- Datepicker : the declared CSS asset is now `components/datepicker.css` (it was `components/date-picker.css`, a file that does not exist).
+- Map Mapbox : the declared JS asset is now `behaviors/MapBoxMaps.js` (it was `behaviors/MapboxMaps.js`, which only resolved on case-insensitive file systems).
+
 ## [4.0.0-beta.3] - 2026-24-11
 
 ### Updated
