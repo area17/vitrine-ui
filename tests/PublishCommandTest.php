@@ -98,7 +98,7 @@ class PublishCommandTest extends TestCase
         $this->assertFileExists("$views/filters/panel.blade.php");
         // modal-close shares the modal folder
         $this->assertFileExists("$views/modal/close.blade.php");
-        $this->assertFileExists($this->appPath . '/resources/views/stories/vitrine/banner');
+        $this->assertDirectoryExists($this->appPath . '/resources/views/stories/vitrine/banner');
 
         // no class for Blade-only components
         $this->assertDirectoryDoesNotExist($this->appPath . '/app/View/Components/VitrineUI');
