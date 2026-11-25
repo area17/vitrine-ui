@@ -24,8 +24,8 @@ class Dropdown extends VitrineComponent
         array $ui = [],
     ) {
         $this->headingLevel = $headingLevel;
-        $this->label = $label ?? __('fe.select_an_option');
-        $this->ariaLabel = $ariaLabel ?? $label;
+        $this->label = $label ?? __('vitrine-ui::fe.select_an_option');
+        $this->ariaLabel = $ariaLabel ?? $this->label;
         $this->listId = 'Dropdown' . Str::random(5);
         $this->listlabelId = 'DropdownLabel' . Str::random(5);
         parent::__construct($ui);

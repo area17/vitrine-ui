@@ -20,12 +20,12 @@
                     @if (!isset($controls) || $controls->isEmpty())
                         <div class="{{ $ui('carousel', 'controls') }}">
                             <x-vui-button class="swiper-prev-btn {{ $ui('carousel', 'controls-button') }}"
-                                          aria-label="{{ __('Previous slide') }}"
+                                          aria-label="{{ __('vitrine-ui::fe.carousel.previous_slide') }}"
                                           variant="{{ $controlsButtonVariant }}"
                                           :icon-only="true"
                                           icon="{{ $ui('carousel', 'controls-icon-left') }}" />
                             <x-vui-button class="swiper-next-btn {{ $ui('carousel', 'controls-button') }}"
-                                          aria-label="{{ __('Next slide') }}"
+                                          aria-label="{{ __('vitrine-ui::fe.carousel.next_slide') }}"
                                           :icon-only="true"
                                           variant="{{ $controlsButtonVariant }}"
                                           icon="{{ $ui('carousel', 'controls-icon-right') }}" />

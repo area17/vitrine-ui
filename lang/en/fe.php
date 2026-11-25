@@ -99,6 +99,10 @@ return [
     'submit' => 'Submit',
     'zoom_in' => 'Zoom in',
     'zoom_out' => 'Zoom out',
+    'carousel' => [
+        'previous_slide' => 'Previous slide',
+        'next_slide' => 'Next slide',
+    ],
     'pagination' => [
         'showing' => 'Showing :count of :total items',
         'page_of' => 'Page :current of :last',
