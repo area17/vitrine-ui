@@ -1,7 +1,6 @@
 <?php
 namespace A17\VitrineUI\Commands;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use A17\VitrineUI\VitrineUI;
 use Illuminate\Console\Command;
@@ -9,6 +8,25 @@ use Illuminate\Filesystem\Filesystem;
 
 class PublishComponent extends Command
 {
+    /**
+     * Asset type => folder in the package's resources (the manifest paths are relative to these)
+     */
+    public const ASSET_FOLDERS = ['js' => 'frontend/scripts', 'css' => 'frontend/css'];
+
+    /** Folder of the behaviors, in the js folder */
+    protected const BEHAVIORS = 'behaviors';
+
+    /** Views and stories folders, in the package's resources and in the app's resources */
+    protected const COMPONENT_VIEWS = 'views/components';
+    protected const STORIES = 'views/stories';
+
+    protected const PACKAGE_NAMESPACE = 'A17\\VitrineUI\\Components\\';
+    protected const APP_NAMESPACE = 'App\\View\\Components\\VitrineUI\\';
+    protected const APP_CLASSES_PATH = 'app/View/Components/VitrineUI';
+
+    protected const JS_FILE = 'vitrine-ui.js';
+    protected const CSS_FILE = 'vitrine-ui.css';
+
     public $signature = 'vitrine-ui:publish
                             {components?* : The component names to export. If left blank it will prompt which components to publish}
                             {--all : publish all vitrine-ui components to project}
@@ -16,42 +34,56 @@ class PublishComponent extends Command
                             {--class : Publish only the class of the component}
                             {--assets : Publish only the assets of the component}
                             {--stories : Publish only the stories for the component}
-                            {--force : Overwrite existing files}';
+                            {--force : Overwrite existing files}
+                            {--list : List the components that can be published, with their class, stories and assets}
+                            {--dry-run : List what would be written, without touching any file}';
 
     public $description = 'Publish a component';
 
     protected Filesystem $filesystem;
 
-    protected mixed $vitrineUIComponents;
+    /** @var array<string, string> */
+    protected array $vitrineUIComponents;
 
-    protected array $npmPackages;
+    /** @var array<string, array{class: ?string, view: string, stories: ?string, assets: array}> */
+    protected array $manifest;
 
-    protected bool $canCopyStoryData;
-
-    protected mixed $vendorAssetsPath;
-
-    protected mixed $publishedAssetsPath;
+    protected array $assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
 
     protected bool $publishedEverything;
 
     protected string $storiesSubfolder;
+
+    /** Destinations already handled during this run, so shared folders are published once */
+    protected array $handled = [];
+
+    protected bool $failed = false;
+
+    protected bool $dryRun = false;
 
     public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
 
         $this->filesystem = $filesystem;
+        $this->manifest = require VitrineUI::resourcesPath('manifest.php');
         $this->vitrineUIComponents = config('vitrine-ui.components', []);
-        $this->storiesSubfolder = config('vitrine-ui.stories_subfolder', 'null');
-        $this->npmPackages = [];
-        $this->canCopyStoryData = false;
-        $this->vendorAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.vendor_assets_path', ''));
-        $this->publishedAssetsPath = VitrineUI::removeTrailingSlash(config('vitrine-ui.published_assets_path', ''));
+        $this->storiesSubfolder = trim((string) config('vitrine-ui.stories_subfolder', ''), '/');
         $this->publishedEverything = true;
     }
 
     public function handle(): int
     {
+        // The command instance can be reused (tests, programmatic calls), start every run clean
+        $this->handled = [];
+        $this->failed = false;
+        $this->dryRun = (bool) $this->option('dry-run');
+        $this->assets = ['js' => [], 'css' => [], 'npm' => [], 'optional' => []];
+
+        if ($this->option('list')) {
+            return $this->listComponents();
+        }
+
         $all = $this->option('all');
         $components = $this->argument('components');
 
@@ -68,438 +100,569 @@ class PublishComponent extends Command
             ) === 0;
 
         if ($all) {
-            $components = array_keys($this->vitrineUIComponents);
+            $components = array_keys($this->manifest);
         } else {
             if (empty($components)) {
-                $publishable = array_filter($this->vitrineUIComponents, function ($item) {
-                    return Str::startsWith($item, 'A17\VitrineUI\Components\\');
-                });
+                // Components with a class already replaced by an app class in the config are not offered again
+                $publishable = array_filter(
+                    array_keys($this->manifest),
+                    fn(string $alias) => $this->manifest[$alias]['class'] === null ||
+                        Str::startsWith($this->vitrineUIComponents[$alias] ?? '', self::PACKAGE_NAMESPACE),
+                );
 
                 if (empty($publishable)) {
                     $this->error('No more publishable components. Exiting.');
 
-                    return 1;
+                    return self::FAILURE;
                 }
 
                 $selectedComponents = $this->choice(
                     'Which components would you like to publish?',
-                    ['all', ...array_keys($publishable)],
+                    ['all', ...$publishable],
                     0,
                     null,
                     true,
                 );
 
-                $components = in_array('all', $selectedComponents)
-                    ? array_keys($this->vitrineUIComponents)
-                    : $selectedComponents;
+                $components = in_array('all', $selectedComponents) ? array_keys($this->manifest) : $selectedComponents;
             } else {
                 // validate selected components
                 foreach ($components as $key => $alias) {
-                    // if (! $component = $allComponents[$alias] ?? null) {
-                    if (!array_key_exists($alias, $this->vitrineUIComponents)) {
-                        $this->error("Cannot find the given [$alias] component. Skipping.");
+                    if (!array_key_exists($alias, $this->manifest)) {
+                        $this->failWith("Cannot find the given [$alias] component. Skipping.");
 
                         unset($components[$key]);
                     }
                 }
+
+                if (empty($components)) {
+                    return self::FAILURE;
+                }
             }
         }
 
+        $withAssets = $this->option('assets') || $this->publishedEverything;
+
         // Copy story preset data
-        if ($this->option('stories') || (!$this->option('view') && !$this->option('class'))) {
-            // if($this->confirm("Do you want to copy story preset data files?", false)) {
+        if ($this->option('stories') || $this->publishedEverything) {
             $this->copyStoryData();
-            // }
         }
 
         // publish selected components to vendor directory
-        foreach ($components as $value) {
-            $this->publishComponent($this->vitrineUIComponents[$value]);
-        }
+        foreach ($components as $alias) {
+            $this->publishComponent($alias);
 
-        // Get assets array from each component and flag in console
-        if (
-            (!$this->option('stories') && !$this->option('view') && !$this->option('class')) ||
-            $this->option('view') ||
-            $this->option('class')
-        ) {
-            $this->notifyNpmPackages();
-        }
-
-        // Publish stories for blade components without class
-        if (($this->option('stories') || $this->publishedEverything) && empty($this->argument('components'))) {
-            $this->comment('Publishing stories for blade components without class ');
-            $bladeComponents = array_keys(config('vitrine-ui.blade-components', []));
-            foreach ($bladeComponents as $value) {
-                $this->publishStories($value);
+            if ($withAssets) {
+                $this->collectAssets($alias);
             }
         }
 
-        $this->comment('All done. ');
+        if ($withAssets) {
+            $this->notifyAssets();
+        }
+
+        $this->comment($this->dryRun ? 'Dry run, no file was written.' : 'All done. ');
+
+        return $this->failed ? self::FAILURE : self::SUCCESS;
+    }
+
+    /**
+     * Report a write, or what would be written with --dry-run
+     */
+    protected function report(string $action, string $what): void
+    {
+        $this->info($this->dryRun ? "[dry-run] Would $action $what" : ucfirst(rtrim($action, 'e')) . "ed $what");
+    }
+
+    /**
+     * Report an error and make the command exit with a failure code
+     */
+    protected function listComponents(): int
+    {
+        $rows = [];
+
+        foreach ($this->manifest as $alias => $entry) {
+            $assets = array_merge($entry['assets']['js'] ?? [], $entry['assets']['css'] ?? []);
+
+            $rows[] = [
+                $alias,
+                $entry['class'] === null ? 'blade' : 'class',
+                $entry['stories'] === null ? '-' : 'yes',
+                $assets ? implode(', ', array_map('basename', $assets)) : '-',
+            ];
+        }
+
+        $this->table(['Component', 'Type', 'Stories', 'Assets'], $rows);
 
         return self::SUCCESS;
     }
 
-    protected function publishComponent($component = null)
+    protected function failWith(string $message): void
     {
-        if (!$component) {
-            $this->error('No component defined');
+        $this->error($message);
 
-            return 1;
-        }
+        $this->failed = true;
+    }
 
-        $class = str_replace(['A17\\VitrineUI\\Components\\', 'App\\View\\Components\\VitrineUI\\'], '', $component);
-        $name = str_replace(['_', '.-'], ['-', '/'], Str::snake(str_replace('\\', '.', $class)));
-
-        if ($this->option('assets') || $this->publishedEverything) {
-            $this->newLine();
-            $this->updateAssets($component, $name);
-        }
+    protected function publishComponent(string $alias): void
+    {
+        $component = $this->manifest[$alias]['class'];
 
         if ($this->option('view') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishView($component, $name, $class);
+            $this->publishView($alias);
         }
 
         if ($this->option('class') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishClass($component, $name, $class);
+
+            if ($component !== null) {
+                $this->publishClass($component, Str::after($component, self::PACKAGE_NAMESPACE));
+            } elseif ($this->option('class')) {
+                $this->warn("[$alias] is a Blade component, it has no class to publish.");
+            }
         }
 
         if ($this->option('stories') || $this->publishedEverything) {
             $this->newLine();
-            $this->publishStories($name);
+            $this->publishStories($alias, empty($this->argument('components')));
         }
-
-        return 0;
     }
 
-    protected function notifyNpmPackages()
+    protected function notifyAssets(): void
     {
-        if (empty($this->npmPackages)) {
-            return 0;
+        if (!array_filter($this->assets)) {
+            return;
         }
 
         $this->info("\n--------\n");
 
-        $this->info('The published components require the following npm packages');
+        $this->writeJsImports();
+        $this->writeCssImports();
 
-        $this->newLine();
-
-        $this->info(join("\n", $this->npmPackages));
-
-        $this->info("\nnpm i " . join(' ', $this->npmPackages));
-
-        $this->info("\n--------\n");
-    }
-
-    protected function collectAssets($component = null)
-    {
-        // revert to original class to get assets
-        $class = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
-        $assets = $class::assets();
-
-        foreach ($assets as $type => $asset) {
-            $asset = is_array($asset) ? $asset : [$asset];
-
-            if (Arr::has($this->assets, $type)) {
-                $this->assets[$type] = array_unique(array_merge($this->assets[$type], $asset));
-            } else {
-                $this->assets[$type] = $asset;
-            }
-        }
-
-        return 0;
-    }
-
-    protected function updateAssets($component = null, $name = null)
-    {
-        if (!$component || !$name) {
-            $this->error('Missing params');
-
-            return 1;
-        }
-
-        // revert to original class to get assets
-        $class = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
-        $assets = $class::assets();
-
-        // CSS
-        if (Arr::has($assets, 'css')) {
-            $this->handleCssAssets($component, $name, $assets['css']);
-        }
-
-        // JS
-        if (Arr::has($assets, 'js')) {
-            $this->handleJsAssets($component, $name, $assets['js']);
-        }
-
-        // NPM
-        if (Arr::has($assets, 'npm')) {
-            $this->npmPackages = array_merge($this->npmPackages, $assets['npm']);
-        }
-    }
-
-    protected function handleJsAssets($component = null, $name = null, $assets = null)
-    {
-        if (!$component || !$name || !$assets) {
-            $this->error('Missing params');
-
-            return 1;
-        }
-
-        $jsPublishPath = config('vitrine-ui.js_path');
-        $originalAssetPath = __DIR__ . '/../../resources/frontend';
-        $originalJs = "$originalAssetPath/vitrine-ui.js";
-        $publishedJs = "$jsPublishPath/vitrine-ui/vitrine-ui.js";
-
-        $jsAssets = is_array($assets) ? $assets : [$assets];
-
-        // if vitrine-ui.js does not exist copy vitrine-ui.js to resources/frontend/scripts/vendor/vitrine-ui.js
-        if (!$this->filesystem->exists($publishedJs)) {
-            $this->filesystem->ensureDirectoryExists($jsPublishPath . '/vitrine-ui');
-            $this->filesystem->copy($originalJs, $publishedJs);
+        if ($this->assets['npm']) {
             $this->info(
-                "Published [vitrine-ui.js]. Add [import * as VitrineBehaviors from 'vendor/vitrine-ui'] to your app's js file.",
+                "\nThe published components need these npm packages:\n  npm i " . join(' ', $this->assets['npm']),
             );
         }
 
-        // find import for component css and update path to project path
-        $publishedJsContent = $this->filesystem->get($publishedJs);
-
-        $oldPath = "'./scripts";
-        $newPath = "'$this->vendorAssetsPath/scripts";
-        $modifiedJsContent = Str::replace($oldPath, $newPath, $publishedJsContent);
-
-        // replace './js/[behaviors/Input]' with './vendor/vitrine-ui/[behaviors/Input]
-        foreach ($jsAssets as $asset) {
-            // get new path (full path before filename)
-            $originalAsset = $originalAssetPath . '/scripts/' . $asset;
-            $publishedAsset = $jsPublishPath . '/vitrine-ui/' . $asset;
-
-            // ensure it exists
-            if (!$this->filesystem->exists($publishedAsset)) {
-                $this->filesystem->ensureDirectoryExists(Str::beforeLast($publishedAsset, '/'));
-
-                // copy asset to new path
-                $this->filesystem->copy($originalAsset, $publishedAsset);
+        foreach ($this->assets['optional'] as $feature => $group) {
+            $this->info("\nOptional, only for [$feature], not copied. Copy them from the package if you use it:");
+            foreach ($group['js'] ?? [] as $js) {
+                $this->line('  ' . VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['js'] . "/$js"));
             }
-
-            // update vitrine-ui.js
-            $oldAssetPath = $newPath . '/' . $asset;
-            $oldAssetPathArr = [$oldAssetPath, Str::beforeLast($oldAssetPath, '.js')];
-            $assetNoExtension = Str::beforeLast($asset, '.js');
-            $newFilepath = "'./vitrine-ui/" . $assetNoExtension;
-
-            if (!Str::contains($modifiedJsContent, $assetNoExtension)) {
-                $this->info("Can't find $asset in your vitrine-ui.js. Adding it now.");
-
-                $behaviorName = Str::of($asset)->afterLast('/')->beforeLast('.js')->replace('/', '-')->studly();
-                $modifiedJsContent .= "export { default as $behaviorName } from '$newFilepath'\n";
-            } else {
-                $modifiedJsContent = Str::replace($oldAssetPathArr, $newFilepath, $modifiedJsContent);
+            foreach ($group['css'] ?? [] as $css) {
+                $this->line('  ' . VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['css'] . "/$css"));
+            }
+            if (!empty($group['npm'])) {
+                $this->line('  npm i ' . join(' ', $group['npm']));
             }
         }
 
-        $this->filesystem->put($publishedJs, $modifiedJsContent);
-
-        $this->info("Updated path for [$name] in [$jsPublishPath/vitrine-ui.js]");
-
-        return 0;
+        $this->info("\n--------\n");
     }
 
-    protected function handleCssAssets($component = null, $name = null, $assets = null)
+    /**
+     * Copy the JS files of the published components (and the files they import) into the app,
+     * then generate vitrine-ui.js, exporting their behaviors.
+     */
+    protected function writeJsImports(): void
     {
-        if (!$component || !$name || !$assets) {
-            $this->error('Missing params');
+        $names = $this->behaviorNames();
+        $lines = [];
 
-            return 1;
-        }
-
-        $cssPublishPath = config('vitrine-ui.css_path');
-        $originalAssetPath = __DIR__ . '/../../resources/frontend';
-        $originalCss = "$originalAssetPath/vitrine-ui.css";
-        $publishedCss = "$cssPublishPath/vitrine-ui/vitrine-ui.css";
-
-        $cssAssets = is_array($assets) ? $assets : [$assets];
-
-        // if vitrine-ui.css does not exist copy vitrine-ui.css to resources/frontend/styles/vendor/vitrine-ui/vitrine-ui.css
-        if (!$this->filesystem->exists($publishedCss)) {
-            $this->filesystem->ensureDirectoryExists($cssPublishPath . '/vitrine-ui');
-            $this->filesystem->copy($originalCss, $publishedCss);
-            $this->info("Published [vitrine-ui.css]. Add [@import \"vendor/vitrine-ui.css\"] to your app's css file.");
-        }
-
-        // find import for component css and update path to project path
-        $publishedCssContent = $this->filesystem->get($publishedCss);
-
-        $oldPath = "'./css";
-        $newPath = "'$this->vendorAssetsPath/css";
-        $modifiedCssContent = Str::replace($oldPath, $newPath, $publishedCssContent);
-
-        foreach ($cssAssets as $asset) {
-            // get new path (full path before filename)
-            $originalAsset = $originalAssetPath . '/css/' . $asset;
-            $publishedAsset = $cssPublishPath . '/vitrine-ui/' . $asset;
-
-            // ensure it exists
-            if (!$this->filesystem->exists($publishedAsset)) {
-                $this->filesystem->ensureDirectoryExists(Str::beforeLast($publishedAsset, '/'));
-
-                // copy asset to new path
-                $this->filesystem->copy($originalAsset, $publishedAsset);
+        foreach ($this->assets['js'] as $js) {
+            // Only behaviors are registered, the other files (utils) are imported by the behaviors themselves
+            if (!Str::startsWith($js, self::BEHAVIORS . '/')) {
+                continue;
             }
 
-            $oldAssetPath = "$newPath/$asset";
-            $newAssetPath = "'./vitrine-ui/$asset";
+            $file = Str::after(Str::beforeLast($js, '.js'), self::BEHAVIORS . '/');
+            $name = $names[$file] ?? Str::studly($file);
 
-            if (!Str::contains($modifiedCssContent, $oldAssetPath)) {
-                $this->info("Can't find $asset in your vitrine-ui.css. Adding it now.");
+            $lines[] = "export { default as $name } from './" . self::BEHAVIORS . "/$file'";
+        }
 
-                $modifiedCssContent .= "@import $newAssetPath';\n";
-            } else {
-                $modifiedCssContent = Str::replace($oldAssetPath, $newAssetPath, $modifiedCssContent);
+        $folder = (string) config('vitrine-ui.js_path');
+
+        $this->copyAssetFiles('js', $this->withLocalImports($this->assets['js']), $folder);
+
+        $this->writeImportFile(
+            $folder . '/' . self::JS_FILE,
+            $lines,
+            'export {',
+            '// Generated by `vitrine-ui:publish`, running it again adds the behaviors of the components you publish.',
+        );
+
+        $relative = Str::after($folder . '/' . self::JS_FILE, base_path() . '/');
+
+        $this->info(
+            "Import it in your app's js and register it: import * as VitrineBehaviors from '$relative', then manageBehaviors.init(VitrineBehaviors)",
+        );
+    }
+
+    /**
+     * Copy the CSS files of the published components into the app, then generate vitrine-ui.css importing them.
+     */
+    protected function writeCssImports(): void
+    {
+        $folder = (string) config('vitrine-ui.css_path');
+
+        $this->copyAssetFiles('css', $this->assets['css'], $folder);
+
+        $this->writeImportFile(
+            $folder . '/' . self::CSS_FILE,
+            array_map(fn(string $css) => "@import \"./$css\";", $this->assets['css']),
+            '@import',
+            '/* Generated by `vitrine-ui:publish`, running it again adds the css of the components you publish. */',
+        );
+    }
+
+    /**
+     * Copy asset files, keeping their path inside the package's frontend folder. Existing files are kept unless --force is used.
+     *
+     * @param array<int, string> $files paths relative to the package's js or css folder
+     */
+    protected function copyAssetFiles(string $type, array $files, string $folder): void
+    {
+        foreach ($files as $file) {
+            $destination = $folder . '/' . $file;
+
+            if (isset($this->handled[$destination])) {
+                continue;
+            }
+
+            $this->handled[$destination] = true;
+
+            if (!$this->option('force') && $this->filesystem->exists($destination)) {
+                $this->warn("The file at [$destination] already exists. Use --force to overwrite it.");
+
+                continue;
+            }
+
+            if (!$this->dryRun) {
+                $this->filesystem->ensureDirectoryExists(dirname($destination));
+                $this->filesystem->copy(
+                    VitrineUI::resourcesPath(self::ASSET_FOLDERS[$type] . '/' . $file),
+                    $destination,
+                );
+            }
+
+            $this->report('publish', "file [$destination]");
+        }
+    }
+
+    /**
+     * Add the files imported with a relative path ('../utils/formatDate', './DateInput'), recursively.
+     *
+     * @param array<int, string> $files paths relative to the package's js folder
+     * @return array<int, string>
+     */
+    protected function withLocalImports(array $files): array
+    {
+        $all = [];
+
+        while ($file = array_shift($files)) {
+            if (isset($all[$file])) {
+                continue;
+            }
+
+            $all[$file] = true;
+            $source = VitrineUI::resourcesPath(self::ASSET_FOLDERS['js'] . '/' . $file);
+
+            if (!$this->filesystem->exists($source)) {
+                continue;
+            }
+
+            preg_match_all('/from \'(\.{1,2}\/[^\']+)\'/', $this->filesystem->get($source), $matches);
+
+            foreach ($matches[1] as $import) {
+                // Collapse `behaviors/../utils/x` into `utils/x`
+                $parts = [];
+                foreach (explode('/', dirname($file) . '/' . $import) as $part) {
+                    if ($part === '..') {
+                        array_pop($parts);
+                    } elseif ($part !== '.' && $part !== '') {
+                        $parts[] = $part;
+                    }
+                }
+
+                $files[] = implode('/', $parts) . (str_ends_with($import, '.js') ? '' : '.js');
             }
         }
 
-        $this->filesystem->put($publishedCss, $modifiedCssContent);
-
-        $this->info("Updated path for [$name] in [$cssPublishPath/vitrine-ui.css]");
-
-        return 0;
+        return array_keys($all);
     }
 
-    protected function publishView($component = false, $name = false, $class = false)
+    /**
+     * Merge new import lines into a generated file, keeping the ones of components published earlier.
+     *
+     * @param array<int, string> $lines
+     */
+    protected function writeImportFile(string $target, array $lines, string $linePrefix, string $header): void
     {
-        if (!$component || !$name || !$class) {
-            $this->error('Missing params');
-
-            return 1;
+        if (!$lines) {
+            return;
         }
 
-        $originalView = __DIR__ . '/../../resources/views/components/' . $name;
-        $publishedView = resource_path('views/vendor/vitrine-ui/components/' . $name);
-        $path = Str::beforeLast($publishedView, '/');
+        $existing = $this->filesystem->exists($target)
+            ? array_filter(
+                explode("\n", $this->filesystem->get($target)),
+                fn($line) => str_starts_with($line, $linePrefix),
+            )
+            : [];
 
-        if (!$this->option('force') && $this->filesystem->exists($publishedView)) {
-            $this->error("The view at [$publishedView] already exists.");
+        // Key lines by what they export/import, not by formatting (a formatter may have added a semicolon or changed
+        // the quotes). Existing lines win, so their import targets are kept, except lines pointing to the vendor folder
+        // (previous version of the command): those are replaced by the local copy when the component is published,
+        // and kept otherwise so unrelated components keep working.
+        $keyOf = function (string $line): string {
+            $line = trim($line);
 
-            return 1;
+            if (!preg_match('/^export \{ default as (\w+) \}|^@import\s+["\']([^"\']+)/', $line, $m)) {
+                return $line;
+            }
+
+            // A vendor css import has the same key as its local copy
+            $key = end($m);
+            $vendorCss = VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['css']) . '/';
+
+            return str_contains($key, $vendorCss) ? './' . Str::after($key, $vendorCss) : $key;
+        };
+
+        $byKey = [];
+        foreach ($existing as $line) {
+            $byKey[$keyOf($line)] ??= $line;
+        }
+        foreach ($lines as $line) {
+            $key = $keyOf($line);
+
+            if (!isset($byKey[$key]) || str_contains($byKey[$key], 'vendor/area17/')) {
+                $byKey[$key] = $line;
+            }
         }
 
-        $this->filesystem->ensureDirectoryExists($path);
+        $all = array_values($byKey);
+        sort($all);
 
-        $this->filesystem->copyDirectory($originalView, $publishedView);
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(dirname($target));
+            $this->filesystem->put($target, $header . "\n\n" . implode("\n", $all) . "\n");
+        }
 
-        $this->info("Published view [$publishedView]");
+        $this->report('update', "[$target]");
+
+        if ($this->dryRun) {
+            foreach (array_diff($all, $existing) as $line) {
+                $this->line("    + $line");
+            }
+        }
     }
 
-    protected function publishClass($component = false, $name = false, $class = false)
+    /**
+     * Behavior names (what `data-behavior` uses) by file name, read from the behaviors barrel file.
+     *
+     * @return array<string, string>
+     */
+    protected function behaviorNames(): array
     {
-        if (!$component || !$name || !$class) {
-            $this->error('Missing params');
+        $barrel = $this->filesystem->get(
+            VitrineUI::resourcesPath(self::ASSET_FOLDERS['js'] . '/' . self::BEHAVIORS . '/index.js'),
+        );
 
-            return 1;
+        preg_match_all("/export \{ default as (\w+) \} from '\.\/(\w+)'/", $barrel, $matches);
+
+        return array_combine($matches[2], $matches[1]);
+    }
+
+    /**
+     * Collect the assets of a component alias from the manifest
+     */
+    protected function collectAssets(string $alias): void
+    {
+        foreach ($this->withDependencies($alias) as $name) {
+            $assets = $this->manifest[$name]['assets'];
+
+            foreach (['js', 'css', 'npm'] as $type) {
+                $this->assets[$type] = array_values(
+                    array_unique(array_merge($this->assets[$type], (array) ($assets[$type] ?? []))),
+                );
+            }
+
+            foreach ($assets['optional'] ?? [] as $feature => $group) {
+                $this->assets['optional']["$name: $feature"] = $group;
+            }
+        }
+    }
+
+    /**
+     * The alias and, transitively, the components its view renders with <x-vui-*>.
+     * A view folder shared by several aliases (media, tabs) counts as a whole.
+     *
+     * @param array<string, true> $seen
+     * @return array<int, string>
+     */
+    protected function withDependencies(string $alias, array &$seen = []): array
+    {
+        if (isset($seen[$alias])) {
+            return [];
         }
 
+        $seen[$alias] = true;
+        $folder = VitrineUI::resourcesPath(self::COMPONENT_VIEWS . '/' . $this->manifest[$alias]['view']);
+        $files = $this->filesystem->isDirectory($folder) ? $this->filesystem->allFiles($folder) : [];
+
+        foreach ($files as $file) {
+            preg_match_all('/<x-vui-([a-z0-9-]+)/', $this->filesystem->get($file->getPathname()), $matches);
+
+            foreach ($matches[1] as $child) {
+                if (isset($this->manifest[$child])) {
+                    $this->withDependencies($child, $seen);
+                }
+            }
+        }
+
+        return array_keys($seen);
+    }
+
+    /**
+     * Copy a folder of the package to the app, once per run. Existing destinations are kept unless --force is used.
+     */
+    protected function copyFolder(string $label, string $source, string $destination, bool $quiet = false): void
+    {
+        if (isset($this->handled[$destination])) {
+            return;
+        }
+
+        $this->handled[$destination] = true;
+
+        if (!$this->filesystem->isDirectory($source)) {
+            if (!$quiet) {
+                $this->warn("No $label to publish for this component.");
+            }
+
+            return;
+        }
+
+        if (!$this->option('force') && $this->filesystem->exists($destination)) {
+            $this->warn("The $label at [$destination] already exists. Use --force to overwrite it.");
+
+            return;
+        }
+
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
+            $this->filesystem->copyDirectory($source, $destination);
+        }
+
+        $this->report('publish', "$label [$destination]");
+    }
+
+    protected function publishView(string $alias): void
+    {
+        $folder = $this->manifest[$alias]['view'];
+
+        $this->copyFolder(
+            'view',
+            VitrineUI::resourcesPath(self::COMPONENT_VIEWS . '/' . $folder),
+            resource_path('views/vendor/vitrine-ui/components/' . $folder),
+        );
+    }
+
+    protected function publishClass(string $component, string $class): void
+    {
         $class = ucfirst($class);
-        $path = $this->laravel->basePath('app/View/Components/VitrineUI');
+        $path = $this->laravel->basePath(self::APP_CLASSES_PATH);
         $destination = $path . '/' . str_replace('\\', '/', $class) . '.php';
 
         if (!$this->option('force') && $this->filesystem->exists($destination)) {
-            $this->error("The class at [$destination] already exists.");
+            $this->warn("The class at [$destination] already exists. Use --force to overwrite it.");
 
-            return 1;
+            return;
         }
-
-        $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
 
         $stub = $this->filesystem->get(__DIR__ . '/stubs/Component.stub');
         $namespace = Str::contains($class, '\\') ? '\\' . Str::beforeLast($class, '\\') : '';
         $name = Str::afterLast($class, '\\');
-        $alias = 'Original' . $name;
-
-        $parent = str_replace('App\\View\\Components\\VitrineUI\\', 'A17\\VitrineUI\\Components\\', $component);
 
         $stub = str_replace(
             ['{{ namespace }}', '{{ name }}', '{{ parent }}', '{{ alias }}'],
-            [$namespace, $name, $parent, $alias],
+            [$namespace, $name, $component, 'Original' . $name],
             $stub,
         );
 
-        $this->filesystem->put($destination, $stub);
+        if (!$this->dryRun) {
+            $this->filesystem->ensureDirectoryExists(Str::beforeLast($destination, '/'));
+            $this->filesystem->put($destination, $stub);
+        }
 
-        $this->info("Published class [$component]");
+        $this->report('publish', "class [$destination]");
 
         // Update config entry of component to new class.
-        if ($this->filesystem->missing($config = $this->laravel->configPath('vitrine-ui.php'))) {
-            $this->call('vendor:publish', ['--tag' => 'vitrine-ui-config']);
+        $config = $this->laravel->configPath('vitrine-ui.php');
+
+        if ($this->filesystem->missing($config)) {
+            if ($this->dryRun) {
+                $this->report('publish', "config [$config]");
+            } else {
+                $this->call('vendor:publish', ['--tag' => 'vitrine-ui-config']);
+            }
         }
 
-        $originalConfig = $this->filesystem->get($config);
+        // Match the `::class` suffix, otherwise `Card` would also rewrite `CardLink`
+        $search = $component . '::class';
+        $replace = self::APP_NAMESPACE . $class . '::class';
 
-        $modifiedConfig = str_replace($component, 'App\\View\\Components\\VitrineUI\\' . $class, $originalConfig);
+        if (!$this->dryRun) {
+            $this->filesystem->put($config, str_replace($search, $replace, $this->filesystem->get($config)));
+        }
 
-        $this->filesystem->put($config, $modifiedConfig);
+        $this->report('update', "[$config]: $search => $replace");
     }
 
-    protected function publishStories($name = false)
+    protected function publishStories(string $alias, bool $quiet = false): void
     {
-        if (!$name) {
-            $this->error('Missing params');
+        $folder = $this->manifest[$alias]['stories'];
 
-            return 1;
+        if ($folder === null) {
+            if (!$quiet) {
+                $this->warn('No stories to publish for this component.');
+            }
+
+            return;
         }
 
-        $originalStory = __DIR__ . '/../../resources/views/stories/' . $name;
-        $destination = empty($this->storiesSubfolder) ? $name : $this->storiesSubfolder . '/' . $name;
-        $publishedStory = resource_path('views/stories/' . $destination);
-        $path = Str::beforeLast($publishedStory, '/');
+        $destination = $this->storiesSubfolder === '' ? $folder : $this->storiesSubfolder . '/' . $folder;
 
-        if (!$this->option('force') && $this->filesystem->exists($publishedStory)) {
-            $this->error("The story at [$publishedStory] already exists.");
-
-            return 1;
-        }
-
-        $this->filesystem->ensureDirectoryExists($path);
-
-        $this->filesystem->copyDirectory($originalStory, $publishedStory);
-
-        $this->info("Published stories [$publishedStory");
+        $this->copyFolder(
+            'stories',
+            VitrineUI::resourcesPath(self::STORIES . '/' . $folder),
+            resource_path(self::STORIES . '/' . $destination),
+            $quiet,
+        );
     }
 
-    protected function copyStoryData()
+    protected function copyStoryData(): void
     {
-        $originalPath = __DIR__ . '/../../resources/views/stories/data';
-        $publishedPath = resource_path('views/stories/data');
-        $files = $this->filesystem->allFiles($originalPath);
-        $copyFile = true;
+        $originalPath = VitrineUI::resourcesPath(self::STORIES . '/data');
+        $publishedPath = resource_path(self::STORIES . '/data');
 
-        $this->filesystem->ensureDirectoryExists($publishedPath);
-
-        foreach ($files as $file) {
-            $filepath = $file->getPath();
+        foreach ($this->filesystem->allFiles($originalPath) as $file) {
             $filename = $file->getFilename();
 
-            // ? This copies all the files in the directory so it's not a good idea to use the --force option. Asking each time may not be best either. Who knows?
+            // Files are shared by all the stories, existing ones are skipped unless --force is used
+            if (!$this->option('force') && $this->filesystem->exists("$publishedPath/$filename")) {
+                $this->warn("Skipping story data [$filename], it already exists. Use --force to overwrite it.");
 
-            if ($this->filesystem->exists("$publishedPath/$filename")) {
-                $copyFile = false;
-                $this->error("The story data at [$publishedPath/$filename] already exists.");
-
-                return 1;
-
-                // $copyFile = $this->confirm("[$publishedPath/$filename] already exists. Overwrite? This cannot be undone.", false);
+                continue;
             }
 
-            if ($copyFile) {
-                $this->filesystem->copy($filepath . '/' . $filename, $publishedPath . '/' . $filename);
-
-                $this->info("Published story data [$filename]");
-            } else {
-                $this->error("Skipping story data [$filename]");
+            if (!$this->dryRun) {
+                $this->filesystem->ensureDirectoryExists($publishedPath);
+                $this->filesystem->copy($file->getPathname(), "$publishedPath/$filename");
             }
+
+            $this->report('publish', "story data [$publishedPath/$filename]");
         }
     }
 }

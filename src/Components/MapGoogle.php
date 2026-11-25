@@ -10,11 +10,6 @@ class MapGoogle extends VitrineComponent
 
     public ?string $lng;
 
-    protected static array $assets = [
-        'npm' => ['@googlemaps/js-api-loader'],
-        'js' => ['behaviors/GoogleMaps.js'],
-    ];
-
     public function __construct(?string $lat = null, ?string $lng = null, array $ui = [])
     {
         $this->lat = $lat;

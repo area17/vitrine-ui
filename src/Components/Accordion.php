@@ -14,10 +14,6 @@ class Accordion extends VitrineComponent
 
     public bool $exclusive;
 
-    protected static array $assets = [
-        'js' => 'behaviors/Accordion.js',
-    ];
-
     public function __construct(
         ?string $a11yLabel = null,
         int $headingLevel = 3,

@@ -42,10 +42,6 @@ class Radio extends VitrineComponent
 
     public ?string $rand;
 
-    protected static array $assets = [
-        'js' => ['behaviors/Input.js'],
-    ];
-
     public function __construct(
         ?string $label = null,
         ?string $name = null,

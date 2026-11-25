@@ -38,10 +38,6 @@ class DateRange extends VitrineComponent
 
     public ?string $pickerID;
 
-    protected static array $assets = [
-        'js' => ['utils/formatDate.js', 'behaviors/DateRange.js'],
-    ];
-
     public function __construct(
         ?string $legend = null,
         bool $disabled = false,

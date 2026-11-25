@@ -2,6 +2,38 @@
 
 ## [Unreleased]
 
+### Added
+
+- `vitrine-ui:publish --list` shows every publishable component with its type (class or Blade-only), whether it has stories, and its JS/CSS assets.
+- `vitrine-ui:publish --dry-run` lists the views, classes, stories, config changes and generated import lines that would be written, without touching any file.
+- PHPUnit tests (`composer test`, Orchestra Testbench) for the `vitrine-ui:publish` command and for the manifest: every component alias is listed, every declared view, stories and asset file exists, and every behavior is exported by `behaviors/index.js` under the name it registers.
+- `VitrineUI::resourcesPath()` and `VitrineUI::vendorResourcesPath()` helpers, giving the path to the package's `resources` folder (and, in an app, to its `vendor` copy).
+
+### Updated
+
+- New `resources/manifest.php` lists, for every component alias, its package class, view folder, stories folder and assets. `vitrine-ui:publish` reads it, and the tests check that every declared file exists. The static `$assets` property and `assets()` method of the component classes are removed.
+- `vitrine-ui:publish` now generates `vitrine-ui.js` (in `js_path`) and `vitrine-ui.css` (in `css_path`), importing the behaviors and CSS of the published components. With `--assets` the JS and CSS files are now copied into `js_path` / `css_path` (same sub-folders as in the package, including the utils and constants the behaviors import) and nothing links to `vendor/` anymore; existing files are kept unless `--force`, and old `vendor/` import lines are dropped. Running it again adds the components published later. It also lists the npm packages needed and the optional extras (e.g. `video.js` for the video background), and no longer tries to rewrite a non-existent `vitrine-ui.js`.
+
+### Fixed
+
+- `vitrine-ui:publish` now includes the JS, CSS and npm packages of the components a published view renders with `<x-vui-*>`, transitively (e.g. `filters-panel` brings Modal, Accordion and the form inputs, `form-date-range` brings the datepicker and date inputs).
+
+### Removed
+
+- `PublishComponentTheme` (`vitrine-ui:publish-theme`) command. It was never registered by the service provider, so it could not be run.
+
+### Fixed
+
+- `vitrine-ui:publish` : the Blade-only components (`banner`, `filters-panel`, `pagination-numbered`, `accordion-item`, `modal-close`…) can now be named, selected in the prompt and have their views published. Before, they only got their stories and assets and `publish banner` said it could not find the component. With no component named, only the selected components are published, not every Blade-only one.
+- `vitrine-ui:publish` : views and stories are mapped to the right folders (`link` → button views, `card-link` → card, `tabs-list` / `tabs-panel` → tabs, Blade-only components → their component stories) and shared folders are published once. Missing sources are skipped with a message instead of failing, existing files are skipped with a hint to use `--force`, and the command exits with a failure code on unknown components.
+- `vitrine-ui:publish` : publishing a class only rewrites its own `::class` entry in `config/vitrine-ui.php` (`card` also rewrote `card-link`, `form-date` also rewrote `form-date-range`…), and the stories folder no longer defaults to a folder named `null`.
+- `vitrine-ui:publish` : story data files already published are skipped instead of aborting the command, and are only copied when stories are published.
+- Banner, Filters panel : their behaviors (`Banner.js` with the `@area17/a17-helpers` package, `FilterPanel.js`) are declared in the manifest.
+- Video background : `video.js` and `VideoBackgroundVideoJs.js` are now declared as optional assets, only needed with `:native="false"`. The `video.js` package was declared even for the default native video.
+- Carousel, Tabs, Select : declare their assets (`Carousel.js` and the `swiper` npm package, `Tabs.js`, `SelectSizer.js`), so `vitrine-ui:publish` and the npm notice list them.
+- Datepicker : the declared CSS asset is now `components/datepicker.css` (it was `components/date-picker.css`, a file that does not exist).
+- Map Mapbox : the declared JS asset is now `behaviors/MapBoxMaps.js` (it was `behaviors/MapboxMaps.js`, which only resolved on case-insensitive file systems).
+
 ## [4.0.0-beta.3] - 2026-24-11
 
 ### Updated

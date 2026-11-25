@@ -51,10 +51,6 @@ class DateTrio extends VitrineComponent
 
     public ?string $rand;
 
-    protected static array $assets = [
-        'js' => ['behaviors/DateTrio.js'],
-    ];
-
     public function __construct(
         ?string $legend = null,
         ?string $name = null,

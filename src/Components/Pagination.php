@@ -34,10 +34,6 @@ class Pagination extends VitrineComponent
 
     public bool $labelAfterActions = false;
 
-    protected static array $assets = [
-        'js' => 'behaviors/Pagination.js',
-    ];
-
     public function __construct(
         array $pages = [],
         string|int $currentPage = 1,

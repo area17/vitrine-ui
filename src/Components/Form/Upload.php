@@ -44,11 +44,6 @@ class Upload extends VitrineComponent
 
     public ?string $rand;
 
-    protected static array $assets = [
-        'js' => ['behaviors/FileUpload.js', 'behaviors/Input.js'],
-        'css' => ['components/form/upload.css'],
-    ];
-
     public function __construct(
         ?string $label = null,
         ?string $name = null,

@@ -15,11 +15,6 @@ class ImageZoom extends VitrineComponent
     // set false to listen for `image-zoom:init` event to init behavior
     public bool $autoInit;
 
-    protected static array $assets = [
-        'npm' => ['openseadragon'],
-        'js' => ['behaviors/ImageZoom.js'],
-    ];
-
     public function __construct(?string $id = null, array $sources = [], bool $autoInit = true, array $ui = [])
     {
         $this->id = $id ?? 'ImageZoom' . Str::random(3);

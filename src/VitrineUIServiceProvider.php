@@ -50,7 +50,7 @@ final class VitrineUIServiceProvider extends ServiceProvider
 
     private function bootResources(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'vitrine-ui');
+        $this->loadViewsFrom(VitrineUI::resourcesPath('views'), 'vitrine-ui');
     }
 
     private function bootTranslations(): void
@@ -90,7 +90,7 @@ final class VitrineUIServiceProvider extends ServiceProvider
 
             $this->publishes(
                 [
-                    __DIR__ . '/../resources/views' => $this->app->resourcePath('views/vendor/vitrine-ui'),
+                    VitrineUI::resourcesPath('views') => $this->app->resourcePath('views/vendor/vitrine-ui'),
                 ],
                 'vitrine-ui-views',
             );

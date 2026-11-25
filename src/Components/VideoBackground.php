@@ -49,11 +49,6 @@ class VideoBackground extends VitrineComponent
     public ?float $thresholdStart;
     public ?float $thresholdEnd;
 
-    protected static array $assets = [
-        'npm' => ['video.js'],
-        'js' => ['behaviors/VideoBackground.js'],
-    ];
-
     public function __construct(
         ?array $sources = null,
         ?bool $controlMute = false,

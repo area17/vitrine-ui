@@ -100,10 +100,6 @@ class Field extends VitrineComponent
     /** @var bool */
     public $withIconRight;
 
-    protected static array $assets = [
-        'js' => ['behaviors/Input.js'],
-    ];
-
     public function __construct(
         ?string $label = null,
         ?string $name = null,

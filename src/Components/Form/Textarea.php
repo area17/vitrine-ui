@@ -35,10 +35,6 @@ class Textarea extends VitrineComponent
 
     public ?string $wrap;
 
-    protected static array $assets = [
-        'js' => ['behaviors/Input.js'],
-    ];
-
     public function __construct(
         ?string $name = null,
         ?string $id = null,

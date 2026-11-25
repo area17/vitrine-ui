@@ -10,13 +10,34 @@ use TalesFromADev\TailwindMerge\TailwindMerge;
 class VitrineUI
 {
     /**
+     * Where Composer installs the package in an app, relative to the app's base path
+     */
+    public const VENDOR_PATH = 'vendor/area17/vitrine-ui';
+
+    /**
+     * Absolute path to a file or folder of the package's `resources` folder
+     */
+    public static function resourcesPath(string $path = ''): string
+    {
+        return __DIR__ . '/../resources' . ($path === '' ? '' : '/' . ltrim($path, '/'));
+    }
+
+    /**
+     * Path to the package's `resources` folder once installed in an app, relative to the app's base path
+     */
+    public static function vendorResourcesPath(string $path = ''): string
+    {
+        return self::VENDOR_PATH . '/resources' . ($path === '' ? '' : '/' . ltrim($path, '/'));
+    }
+
+    /**
      * Get global Vitrine theme from local configuration and external config file
      * @return array
      */
     public static function getBaseVitrineTheme(): array
     {
         return once(function () {
-            $baseUIPath = __DIR__ . '/../resources/frontend/theme/vitrine-ui.json';
+            $baseUIPath = self::resourcesPath('frontend/theme/vitrine-ui.json');
 
             $ui = [];
 
@@ -54,7 +75,7 @@ class VitrineUI
                 throw new Exception('Component name is required');
             }
 
-            $baseComponentPath = __DIR__ . '/../resources/frontend/theme/components/' . $component . '.json';
+            $baseComponentPath = self::resourcesPath('frontend/theme/components/' . $component . '.json');
             if (file_exists($baseComponentPath)) {
                 $baseComponent = json_decode(file_get_contents($baseComponentPath), true);
                 if (is_array($baseComponent)) {

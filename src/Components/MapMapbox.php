@@ -10,12 +10,6 @@ class MapMapbox extends VitrineComponent
 
     public ?string $lng;
 
-    protected static array $assets = [
-        'npm' => ['mapbox-gl'],
-        'js' => ['behaviors/MapboxMaps.js'],
-        'css' => ['components/map-mapbox.css'],
-    ];
-
     public function __construct(?string $lat = null, ?string $lng = null, array $ui = [])
     {
         $this->lat = $lat;
