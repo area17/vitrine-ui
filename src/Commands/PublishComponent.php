@@ -413,7 +413,22 @@ class PublishComponent extends Command
             )
             : [];
 
-        $all = array_unique([...$existing, ...$lines]);
+        // Key lines by what they export/import, not by formatting (a formatter may have added a semicolon or changed
+        // the quotes). Existing lines win, so their import targets are kept.
+        $keyOf = function (string $line): string {
+            $line = trim($line);
+
+            return preg_match('/^export \{ default as (\w+) \}|^@import\s+["\']([^"\']+)/', $line, $m)
+                ? end($m)
+                : $line;
+        };
+
+        $byKey = [];
+        foreach ([...$existing, ...$lines] as $line) {
+            $byKey[$keyOf($line)] ??= $line;
+        }
+
+        $all = array_values($byKey);
         sort($all);
 
         if (!$this->dryRun) {
