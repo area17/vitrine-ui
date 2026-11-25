@@ -4,7 +4,6 @@
 @source "../views";
 @source "./scripts";
 @source "./theme";
-@source "./safelist.txt";
 @source "../../src/Components";
 
 @theme {

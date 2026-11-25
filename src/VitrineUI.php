@@ -37,13 +37,7 @@ class VitrineUI
     public static function getBaseVitrineTheme(): array
     {
         return once(function () {
-            $baseUIPath = self::resourcesPath('frontend/theme/vitrine-ui.json');
-
             $ui = [];
-
-            if (file_exists($baseUIPath)) {
-                $ui = json_decode(file_get_contents($baseUIPath), true);
-            }
 
             // load global custom theme
             $vitrine_path = self::removeTrailingSlash(config('vitrine-ui.vitrine_path', ''));

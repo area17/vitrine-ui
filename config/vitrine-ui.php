@@ -20,6 +20,10 @@ return [
     // Some internal components are prefixed with 'vui-' internally, so you should avoid change this prefix
     'prefix' => 'vui',
 
+    // Prefix of the semantic classes some components output (e.g. `audio-player`, `wysiwyg`), without the dash.
+    // With 'app', `audio-player` becomes `app-audio-player`. Update your CSS selectors accordingly
+    'css_class_prefix' => '',
+
     // CSS Preset
     'css_preset' => 'tailwindcss',
 

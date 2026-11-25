@@ -22,10 +22,9 @@ Vitrine UI is a Laravel package (`area17/vitrine-ui`) of Blade components with m
 | `resources/views/stories/` | Blast stories + one `README.md` per component, shared data in `stories/data/` |
 | `resources/frontend/scripts/behaviors/` | JS behaviors (`data-behavior="Name"`); `index.js` is the barrel |
 | `resources/frontend/scripts/constants/customEvents.js` | All custom event names, never hardcode event strings |
-| `resources/frontend/theme/` | `vitrine-ui.json` global theme + `components/*.json` presets |
+| `resources/frontend/theme/` | `components/*.json` presets (an app adds its global theme with `theme_file`) |
 | `resources/frontend/css/` | Component CSS only when Tailwind classes are not enough |
 | `resources/frontend/vitrine-ui.css` | Tailwind 4 entry for consumers: `@config`, `@source`, `@theme` resets and tokens |
-| `resources/frontend/safelist.txt` | Classes built from variables that Tailwind cannot detect (consumers add them with `@source inline`) |
 | `lang/` | `en` and `fr` strings (`vitrine-ui::fe.*`) |
 
 ## Commands
@@ -49,7 +48,7 @@ Husky runs `lint-staged` on commit (phpstan, php-cs-fixer, eslint, prettier, con
 - **Escaping:** use `{{ }}` by default. `{!! !!}` only for trusted slots and say why.
 - **Stories:** every `args` key must be used in the template and have an `argTypes` entry (description, control). Set `status`. Use `x-vui-*` components, not raw markup, and never leave stale references to other projects (`x-organisms.*`, `x-molecules.*`).
 - **Blade attribute output:** do not use `@if ($value)` for attributes that can be `0` or `"0"` (`min`, `max`, `step`, `value`); test `!is_null` / `filled`.
-- **Tailwind 4:** use v4 utility names (`shrink-0`, `outline-hidden`, `rounded-xs`/`rounded-sm`, `ms-`/`me-`/`start-`/`end-`, `w-cols-N`). A JS `safelist` is ignored; use `safelist.txt` / `@source inline`. Every token used in a preset (`bg-*`, `border-*`, `f-*`) must exist in the theme. Form controls are transparent by default in v4, so presets set `bg-primary` explicitly.
+- **Tailwind 4:** use v4 utility names (`shrink-0`, `outline-hidden`, `rounded-xs`/`rounded-sm`, `ms-`/`me-`/`start-`/`end-`, `w-cols-N`). A JS `safelist` is ignored; use `@source inline` in the stylesheet. Every token used in a preset (`bg-*`, `border-*`, `f-*`) must exist in the theme. Form controls are transparent by default in v4, so presets set `bg-primary` explicitly.
 - **Changelog:** add an entry to `CHANGELOG.md` for user-visible changes (format: version, date, `Added` / `Updated` / `Fixed`). Dates are written `YYYY-DD-MM` (e.g. `2026-23-11` for 23 November 2026), not ISO `YYYY-MM-DD`, to stay consistent with the existing entries.
 
 ## Git

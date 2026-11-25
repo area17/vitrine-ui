@@ -179,7 +179,7 @@ module.exports = {
         join(rootPath, "/resources/frontend/vitrine-ui/**/*.{js,json}"),
         join(rootPath, "/resources/views/**/*.{blade.php,php}"),
         join(vitrinePath, "/resources/frontend/theme/**/*.{js,json}"),
-        join(vitrinePath, "/resources/frontend/**/*.{js,txt}"),
+        join(vitrinePath, "/resources/frontend/**/*.js"),
         join(vitrinePath, "/resources/views/**/*.blade.php"),
         join(vitrinePath, "/src/Components/**/*.php"),
     ],
@@ -193,8 +193,6 @@ Tailwind 4 does not load the config file on its own: reference it from your main
 @import "tailwindcss";
 @config "../../../tailwind.config.cjs";
 ```
-
-The `.txt` pattern above includes `resources/frontend/safelist.txt`, which lists classes that are not written in full in the views.
 
 > **Safelist:** Tailwind 4 ignores the `safelist` option of a JavaScript config. To keep classes that are built dynamically (for example the `f-*` typesets), declare them in your stylesheet with `@source inline`:
 >

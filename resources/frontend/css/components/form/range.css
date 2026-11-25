@@ -13,7 +13,7 @@
 
 .range-slider .range-slider__thumb:focus[data-focus-method="key"] {
     outline: initial;
-    @apply !outline !outline-offset-4 !outline-highlight;
+    @apply outline! outline-offset-4! outline-highlight!;
 }
 
 .range-slider .range-slider__range {

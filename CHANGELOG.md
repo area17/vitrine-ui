@@ -17,11 +17,15 @@
 ### Fixed
 
 - Modal, Datepicker, Dropdown, Audio player : Escape is now handled on `keydown`, and only the innermost open element reacts. Before, pressing Escape in an open datepicker or audio speed menu inside a modal also closed the modal. The dropdown now closes on Escape (as its README says) and returns the focus to its button.
+- Config : `css_class_prefix` is now defined (empty by default), it was read but missing from `config/vitrine-ui.php`.
+- Range : the focus outline uses the Tailwind 4 important suffix (`outline!`) instead of the removed `!outline` prefix.
 - Modal : closing then quickly reopening a modal no longer unlocks the page scroll while it is open (the 200ms unlock timer is now cancelled on open and on destroy), and the removal of a listener that was never added is gone.
 - `vitrine-ui:publish` now includes the JS, CSS and npm packages of the components a published view renders with `<x-vui-*>`, transitively (e.g. `filters-panel` brings Modal, Accordion and the form inputs, `form-date-range` brings the datepicker and date inputs).
 
 ### Removed
 
+- `resources/frontend/safelist.txt` (`start-0` and `end-0` are written in full in the presets and views, Tailwind already detects them) and its `@source` line. Apps can drop `txt` from their Tailwind content pattern.
+- The empty `resources/frontend/theme/vitrine-ui.json`. The global theme of an app (`theme_file` in `vitrine_path`) is unchanged.
 - `PublishComponentTheme` (`vitrine-ui:publish-theme`) command. It was never registered by the service provider, so it could not be run.
 
 ### Fixed
