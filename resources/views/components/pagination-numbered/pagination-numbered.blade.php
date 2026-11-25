@@ -9,6 +9,9 @@
 ])
 
 @php
+    // The page often comes from the query string (`?page=2`), so compare numbers
+    $currentPage = (int) $currentPage;
+    $lastPage = (int) $lastPage;
     $onFirstPage = $currentPage === 1;
     $onLastPage = $currentPage === $lastPage;
     $nextPage = $onLastPage ? null : $pages[$currentPage + 1] ?? null;

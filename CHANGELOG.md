@@ -17,6 +17,7 @@
 ### Fixed
 
 - Modal, Datepicker, Dropdown, Audio player : Escape is now handled on `keydown`, and only the innermost open element reacts. Before, pressing Escape in an open datepicker or audio speed menu inside a modal also closed the modal. The dropdown now closes on Escape (as its README says) and returns the focus to its button.
+- Pagination : the current and last page are cast to numbers. A page coming from the query string (`?page=2`) is a string, so the first and last page, the previous and next links and the selected page of the dropdown were wrong with strict comparisons. Fixed in the pagination and the numbered pagination.
 - `ui()` : an option value of `0` or `"0"` now selects its preset class (for example `level: 0`). It was treated as empty and fell back to the default.
 - Config : `css_class_prefix` is now defined (empty by default), it was read but missing from `config/vitrine-ui.php`.
 - Range : the focus outline uses the Tailwind 4 important suffix (`outline!`) instead of the removed `!outline` prefix.

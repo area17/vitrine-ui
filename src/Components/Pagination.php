@@ -51,10 +51,11 @@ class Pagination extends VitrineComponent
         $this->btnVariant = $btnVariant;
         $this->btnSize = $btnSize;
         $this->pages = $pages;
-        $this->currentPage = $currentPage;
+        // The page often comes from the query string (`?page=2`), so compare numbers
+        $this->currentPage = (int) $currentPage;
         $this->currentPageCount = $currentPageCount;
         $this->total = $total;
-        $this->lastPage = $lastPage;
+        $this->lastPage = (int) $lastPage;
         $this->onFirstPage = $this->currentPage === 1;
         $this->onLastPage = $this->currentPage === $this->lastPage;
         $this->labelInsideDropdown = $labelInsideDropdown;
