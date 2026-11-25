@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-25-11
+
 ### Added
 
 - `vitrine-ui:publish --list` shows every publishable component with its type (class or Blade-only), whether it has stories, and its JS/CSS assets.
