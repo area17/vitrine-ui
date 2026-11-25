@@ -156,14 +156,55 @@ class PublishCommandTest extends TestCase
         $this->assertStringContainsString("export { default as Banner } from '", $js);
         $this->assertStringContainsString("export { default as FilterPanel } from '", $js);
         $this->assertStringContainsString("export { default as DatePicker } from '", $js);
-        $this->assertStringContainsString('vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Banner', $js);
+        $this->assertStringContainsString("from './behaviors/Banner'", $js);
+        $this->assertStringNotContainsString('vendor/area17', $js);
         // Optional behaviors and utils are not exported
         $this->assertStringNotContainsString('VideoBackgroundVideoJs', $js);
         $this->assertStringNotContainsString('formatDate', $js);
 
+        // Files are copied into the app with the files they import, and the optional ones are not
+        $scripts = $this->appPath . '/resources/frontend/scripts/vendor';
+        $this->assertFileExists("$scripts/behaviors/Banner.js");
+        $this->assertFileExists("$scripts/behaviors/DateInputFuzzy.js");
+        $this->assertFileExists("$scripts/behaviors/DateInput.js"); // imported as './DateInput'
+        $this->assertFileExists("$scripts/utils/formatDate.js"); // imported as '../utils/formatDate'
+        $this->assertFileExists("$scripts/constants/customEvents.js");
+        $this->assertFileDoesNotExist("$scripts/behaviors/VideoBackgroundVideoJs.js");
+
         $css = file_get_contents($this->appPath . '/resources/frontend/styles/vendor/vitrine-ui.css');
         $this->assertStringContainsString('@import "', $css);
-        $this->assertStringContainsString('css/components/datepicker.css";', $css);
+        $this->assertStringContainsString('@import "./components/datepicker.css";', $css);
+        $this->assertStringNotContainsString('vendor/area17', $css);
+        $this->assertFileExists($this->appPath . '/resources/frontend/styles/vendor/components/datepicker.css');
+    }
+
+    public function test_copied_assets_are_kept_unless_forced_and_old_vendor_imports_are_replaced(): void
+    {
+        $dir = $this->appPath . '/resources/frontend/scripts/vendor';
+        mkdir($dir, 0777, true);
+        file_put_contents(
+            "$dir/vitrine-ui.js",
+            "export { default as Old } from '../../../../vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Old'\n",
+        );
+
+        $this->artisan('vitrine-ui:publish', ['components' => ['accordion'], '--assets' => true])->assertExitCode(0);
+
+        $js = file_get_contents("$dir/vitrine-ui.js");
+        $this->assertStringNotContainsString('vendor/area17', $js);
+        $this->assertStringContainsString("as Accordion } from './behaviors/Accordion'", $js);
+
+        file_put_contents("$dir/behaviors/Accordion.js", 'edited');
+        $this->artisan('vitrine-ui:publish', ['components' => ['accordion'], '--assets' => true])
+            ->expectsOutputToContain('already exists')
+            ->assertExitCode(0);
+        $this->assertSame('edited', file_get_contents("$dir/behaviors/Accordion.js"));
+
+        $this->artisan('vitrine-ui:publish', [
+            'components' => ['accordion'],
+            '--assets' => true,
+            '--force' => true,
+        ])->assertExitCode(0);
+        $this->assertNotSame('edited', file_get_contents("$dir/behaviors/Accordion.js"));
     }
 
     public function test_import_files_keep_the_components_published_earlier(): void

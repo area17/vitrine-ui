@@ -12,7 +12,7 @@
 ### Updated
 
 - New `resources/manifest.php` lists, for every component alias, its package class, view folder, stories folder and assets. `vitrine-ui:publish` reads it, and the tests check that every declared file exists. The static `$assets` property and `assets()` method of the component classes are removed.
-- `vitrine-ui:publish` now generates `vitrine-ui.js` (in `js_path`) and `vitrine-ui.css` (in `css_path`), importing the behaviors and CSS of the published components from `vendor/area17/vitrine-ui`. Running it again adds the components published later. It also lists the npm packages needed and the optional extras (e.g. `video.js` for the video background), and no longer tries to rewrite a non-existent `vitrine-ui.js`.
+- `vitrine-ui:publish` now generates `vitrine-ui.js` (in `js_path`) and `vitrine-ui.css` (in `css_path`), importing the behaviors and CSS of the published components. With `--assets` the JS and CSS files are now copied into `js_path` / `css_path` (same sub-folders as in the package, including the utils and constants the behaviors import) and nothing links to `vendor/` anymore; existing files are kept unless `--force`, and old `vendor/` import lines are dropped. Running it again adds the components published later. It also lists the npm packages needed and the optional extras (e.g. `video.js` for the video background), and no longer tries to rewrite a non-existent `vitrine-ui.js`.
 
 ### Removed
 
