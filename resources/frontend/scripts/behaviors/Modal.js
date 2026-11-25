@@ -27,7 +27,8 @@ const Modal = createBehavior(
                 this._data.focusTrap.deactivate()
                 this._data.isActive = false
 
-                setTimeout(() => {
+                // Tracked, so reopening before it fires does not unlock the scroll of an open modal
+                this._data.scrollTimeout = setTimeout(() => {
                     if (this.$scroller) {
                         enableBodyScroll(this.$scroller)
                     }
@@ -58,6 +59,7 @@ const Modal = createBehavior(
                 new CustomEvent(customEvents.MODAL_NODE_OPENED)
             )
 
+            clearTimeout(this._data.scrollTimeout)
             disableBodyScroll(this.$scroller, {
                 reserveScrollBarGap: true
             })
@@ -72,7 +74,8 @@ const Modal = createBehavior(
             this._data.focusTrap.activate()
         },
         handleEsc(e) {
-            if (e.key === 'Escape') {
+            // A nested picker or dropdown that used the key has already prevented it
+            if (e.key === 'Escape' && !e.defaultPrevented) {
                 this.close()
             }
         },
@@ -97,11 +100,6 @@ const Modal = createBehavior(
         },
         disposeOpenEvents() {
             if (this.$clickOutside) {
-                this.$focusTrap.removeEventListener(
-                    'click',
-                    this.handleCloseInside,
-                    false
-                )
                 document.removeEventListener(
                     'click',
                     this.handleClickOutside,
@@ -153,7 +151,9 @@ const Modal = createBehavior(
                 // focus-trap throws on `null`, `undefined` falls back to the first tabbable or `fallbackFocus`
                 initialFocus: this.$initialFocus || undefined,
                 fallbackFocus: this.$node,
-                clickOutsideDeactivates: this.$clickOutside
+                clickOutsideDeactivates: this.$clickOutside,
+                // `handleEsc` closes the modal, and focus-trap would prevent the key and hide it from `handleEsc`
+                escapeDeactivates: false
             })
 
             this._data.isActive = false
@@ -191,7 +191,7 @@ const Modal = createBehavior(
                 this.close,
                 false
             )
-            document.addEventListener('keyup', this.handleEsc, false)
+            window.addEventListener('keydown', this.handleEsc, false)
 
             // add listener to modal toggle buttons
             this.$triggers = document.querySelectorAll(
@@ -209,6 +209,12 @@ const Modal = createBehavior(
         },
         destroy() {
             this.close()
+
+            // Unlock the scroll now, the pending timeout would run on a destroyed behavior
+            clearTimeout(this._data.scrollTimeout)
+            if (this.$scroller) {
+                enableBodyScroll(this.$scroller)
+            }
 
             if (this.$closeButtons) {
                 this.$closeButtons.forEach((closeButton) => {
@@ -238,7 +244,7 @@ const Modal = createBehavior(
                 customEvents.MODAL_CLOSE_ALL,
                 this.close
             )
-            document.removeEventListener('keyup', this.handleEsc)
+            window.removeEventListener('keydown', this.handleEsc)
 
             this.$triggers?.forEach((trigger) => {
                 trigger.removeEventListener('click', this.toggle)

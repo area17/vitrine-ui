@@ -44,11 +44,12 @@ const Dropdown = createBehavior(
         },
         initOutClick() {
             document.addEventListener('click', this.clickOutside)
-            window.addEventListener('keydown', this.checkKey)
+            // On document, so a parent modal (listening on window) sees the prevented Escape
+            document.addEventListener('keydown', this.checkKey)
         },
         disabledOutClick() {
             document.removeEventListener('click', this.clickOutside)
-            window.removeEventListener('keydown', this.checkKey)
+            document.removeEventListener('keydown', this.checkKey)
         },
         focusItem() {
             this.$focusableItems[this.$focusIndex]?.focus()
@@ -79,6 +80,11 @@ const Dropdown = createBehavior(
                         }
                     }
 
+                    break
+                case 'Esc':
+                case 'Escape':
+                    e.preventDefault()
+                    this.focusAndCloseDropdown()
                     break
                 case 'Up':
                 case 'ArrowUp':

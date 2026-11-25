@@ -381,8 +381,10 @@ const AudioPlayer = createBehavior(
                 this.handleFocusout(e)
             })
 
-            this.rate.addEventListener('keyup', (e) => {
-                if (e.key === 'Escape') {
+            this.rate.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.menuOpen) {
+                    // Keep a parent modal open
+                    e.preventDefault()
                     this.closeMenu()
                 }
             })

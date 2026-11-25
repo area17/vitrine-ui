@@ -16,6 +16,8 @@
 
 ### Fixed
 
+- Modal, Datepicker, Dropdown, Audio player : Escape is now handled on `keydown`, and only the innermost open element reacts. Before, pressing Escape in an open datepicker or audio speed menu inside a modal also closed the modal. The dropdown now closes on Escape (as its README says) and returns the focus to its button.
+- Modal : closing then quickly reopening a modal no longer unlocks the page scroll while it is open (the 200ms unlock timer is now cancelled on open and on destroy), and the removal of a listener that was never added is gone.
 - `vitrine-ui:publish` now includes the JS, CSS and npm packages of the components a published view renders with `<x-vui-*>`, transitively (e.g. `filters-panel` brings Modal, Accordion and the form inputs, `form-date-range` brings the datepicker and date inputs).
 
 ### Removed

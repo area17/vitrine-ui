@@ -34,8 +34,9 @@ const DatePicker = createBehavior(
             }
         },
         handleEsc(event) {
-            if (this.picker && event.key === 'Escape') {
-                this.closePicker()
+            // Does nothing when the picker is closed, so Escape still reaches a parent modal
+            if (event.key === 'Escape') {
+                this.closePicker(event)
             }
         },
         pickerDateSelected(event) {
@@ -244,7 +245,7 @@ const DatePicker = createBehavior(
             )
             this.$pickerClose.addEventListener('click', this.closePicker, false)
             this.$pickerMask.addEventListener('click', this.closePicker, false)
-            document.addEventListener('keyup', this.handleEsc, false)
+            document.addEventListener('keydown', this.handleEsc, false)
             this.$target.addEventListener(
                 customEvents.DATE_PICKER_CHANGE,
                 this.valueChange,
@@ -275,7 +276,7 @@ const DatePicker = createBehavior(
                 )
                 this.$pickerClose.removeEventListener('click', this.closePicker)
                 this.$pickerMask.removeEventListener('click', this.closePicker)
-                document.removeEventListener('keyup', this.handleEsc)
+                document.removeEventListener('keydown', this.handleEsc)
                 this.$target.removeEventListener('change', this.valueChange)
                 this.$target.removeEventListener(
                     'DateRange:Change',
