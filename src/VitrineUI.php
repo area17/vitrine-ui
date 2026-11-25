@@ -136,12 +136,10 @@ class VitrineUI
             }
 
             foreach ($options as $option => $value) {
-                // set classes from options
-                if ($value ?? null) {
-                    $value = (string) $value;
-                }
+                // set classes from options, `0` and "0" are valid values
+                $value = $value === null || $value === false ? '' : (string) $value;
 
-                if ($value && ($uiComponent[$option][$value] ?? false)) {
+                if ($value !== '' && ($uiComponent[$option][$value] ?? false)) {
                     if (is_array($uiComponent[$option][$value])) {
                         $classes[] = join(' ', $uiComponent[$option][$value]);
                     } else {
