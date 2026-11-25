@@ -419,9 +419,15 @@ class PublishComponent extends Command
         $keyOf = function (string $line): string {
             $line = trim($line);
 
-            return preg_match('/^export \{ default as (\w+) \}|^@import\s+["\']([^"\']+)/', $line, $m)
-                ? end($m)
-                : $line;
+            if (!preg_match('/^export \{ default as (\w+) \}|^@import\s+["\']([^"\']+)/', $line, $m)) {
+                return $line;
+            }
+
+            // A vendor css import has the same key as its local copy
+            $key = end($m);
+            $vendorCss = VitrineUI::vendorResourcesPath(self::ASSET_FOLDERS['css']) . '/';
+
+            return str_contains($key, $vendorCss) ? './' . Str::after($key, $vendorCss) : $key;
         };
 
         $byKey = [];

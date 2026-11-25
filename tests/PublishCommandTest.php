@@ -178,6 +178,24 @@ class PublishCommandTest extends TestCase
         $this->assertFileExists($this->appPath . '/resources/frontend/styles/vendor/components/datepicker.css');
     }
 
+    public function test_vendor_css_imports_are_replaced_by_the_local_copy_when_published(): void
+    {
+        $dir = $this->appPath . '/resources/frontend/styles/vendor';
+        $vendor = '../../../../vendor/area17/vitrine-ui/resources/frontend/css';
+        mkdir($dir, 0777, true);
+        file_put_contents(
+            "$dir/vitrine-ui.css",
+            "@import \"$vendor/components/datepicker.css\";\n@import \"$vendor/components/other.css\";\n",
+        );
+
+        $this->artisan('vitrine-ui:publish', ['components' => ['datepicker'], '--assets' => true])->assertExitCode(0);
+
+        $css = file_get_contents("$dir/vitrine-ui.css");
+        $this->assertStringContainsString('@import "./components/datepicker.css";', $css);
+        $this->assertStringNotContainsString("$vendor/components/datepicker.css", $css);
+        $this->assertStringContainsString("$vendor/components/other.css", $css);
+    }
+
     public function test_copied_assets_are_kept_unless_forced_and_vendor_imports_are_replaced_only_when_published(): void
     {
         $dir = $this->appPath . '/resources/frontend/scripts/vendor';
