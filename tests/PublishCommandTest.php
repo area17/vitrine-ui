@@ -220,4 +220,24 @@ class PublishCommandTest extends TestCase
         $this->assertStringContainsString('as Carousel }', $js);
         $this->assertSame(1, substr_count($js, 'as Accordion }'));
     }
+
+    public function test_assets_of_the_components_rendered_by_the_view_are_included(): void
+    {
+        $this->artisan('vitrine-ui:publish', ['components' => ['filters-panel'], '--assets' => true])->assertExitCode(
+            0,
+        );
+
+        $js = file_get_contents($this->appPath . '/resources/frontend/scripts/vendor/vitrine-ui.js');
+        foreach (['Modal', 'Accordion', 'Input'] as $name) {
+            $this->assertStringContainsString("as $name }", $js);
+        }
+
+        $this->artisan('vitrine-ui:publish', [
+            'components' => ['form-date-range'],
+            '--assets' => true,
+            '--force' => true,
+        ])
+            ->expectsOutputToContain('wc-datepicker')
+            ->assertExitCode(0);
+    }
 }

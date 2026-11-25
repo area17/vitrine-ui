@@ -474,17 +474,49 @@ class PublishComponent extends Command
      */
     protected function collectAssets(string $alias): void
     {
-        $assets = $this->manifest[$alias]['assets'];
+        foreach ($this->withDependencies($alias) as $name) {
+            $assets = $this->manifest[$name]['assets'];
 
-        foreach (['js', 'css', 'npm'] as $type) {
-            $this->assets[$type] = array_values(
-                array_unique(array_merge($this->assets[$type], (array) ($assets[$type] ?? []))),
-            );
+            foreach (['js', 'css', 'npm'] as $type) {
+                $this->assets[$type] = array_values(
+                    array_unique(array_merge($this->assets[$type], (array) ($assets[$type] ?? []))),
+                );
+            }
+
+            foreach ($assets['optional'] ?? [] as $feature => $group) {
+                $this->assets['optional']["$name: $feature"] = $group;
+            }
+        }
+    }
+
+    /**
+     * The alias and, transitively, the components its view renders with <x-vui-*>.
+     * A view folder shared by several aliases (media, tabs) counts as a whole.
+     *
+     * @param array<string, true> $seen
+     * @return array<int, string>
+     */
+    protected function withDependencies(string $alias, array &$seen = []): array
+    {
+        if (isset($seen[$alias])) {
+            return [];
         }
 
-        foreach ($assets['optional'] ?? [] as $feature => $group) {
-            $this->assets['optional']["$alias: $feature"] = $group;
+        $seen[$alias] = true;
+        $folder = VitrineUI::resourcesPath(self::COMPONENT_VIEWS . '/' . $this->manifest[$alias]['view']);
+        $files = $this->filesystem->isDirectory($folder) ? $this->filesystem->allFiles($folder) : [];
+
+        foreach ($files as $file) {
+            preg_match_all('/<x-vui-([a-z0-9-]+)/', $this->filesystem->get($file->getPathname()), $matches);
+
+            foreach ($matches[1] as $child) {
+                if (isset($this->manifest[$child])) {
+                    $this->withDependencies($child, $seen);
+                }
+            }
         }
+
+        return array_keys($seen);
     }
 
     /**
