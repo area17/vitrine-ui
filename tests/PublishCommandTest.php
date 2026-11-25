@@ -178,20 +178,23 @@ class PublishCommandTest extends TestCase
         $this->assertFileExists($this->appPath . '/resources/frontend/styles/vendor/components/datepicker.css');
     }
 
-    public function test_copied_assets_are_kept_unless_forced_and_old_vendor_imports_are_replaced(): void
+    public function test_copied_assets_are_kept_unless_forced_and_vendor_imports_are_replaced_only_when_published(): void
     {
         $dir = $this->appPath . '/resources/frontend/scripts/vendor';
         mkdir($dir, 0777, true);
         file_put_contents(
             "$dir/vitrine-ui.js",
-            "export { default as Old } from '../../../../vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Old'\n",
+            "export { default as Old } from '../../../../vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Old'\n" .
+                "export { default as Accordion } from '../../../../vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Accordion'\n",
         );
 
         $this->artisan('vitrine-ui:publish', ['components' => ['accordion'], '--assets' => true])->assertExitCode(0);
 
         $js = file_get_contents("$dir/vitrine-ui.js");
-        $this->assertStringNotContainsString('vendor/area17', $js);
+        // Unrelated vendor imports are kept, the published component is switched to its local copy
+        $this->assertStringContainsString('vendor/area17/vitrine-ui/resources/frontend/scripts/behaviors/Old', $js);
         $this->assertStringContainsString("as Accordion } from './behaviors/Accordion'", $js);
+        $this->assertSame(1, substr_count($js, 'as Accordion'));
 
         file_put_contents("$dir/behaviors/Accordion.js", 'edited');
         $this->artisan('vitrine-ui:publish', ['components' => ['accordion'], '--assets' => true])

@@ -405,16 +405,17 @@ class PublishComponent extends Command
             return;
         }
 
-        // Lines pointing to the vendor folder come from a previous version of the command
         $existing = $this->filesystem->exists($target)
             ? array_filter(
                 explode("\n", $this->filesystem->get($target)),
-                fn($line) => str_starts_with($line, $linePrefix) && !str_contains($line, 'vendor/area17/'),
+                fn($line) => str_starts_with($line, $linePrefix),
             )
             : [];
 
         // Key lines by what they export/import, not by formatting (a formatter may have added a semicolon or changed
-        // the quotes). Existing lines win, so their import targets are kept.
+        // the quotes). Existing lines win, so their import targets are kept, except lines pointing to the vendor folder
+        // (previous version of the command): those are replaced by the local copy when the component is published,
+        // and kept otherwise so unrelated components keep working.
         $keyOf = function (string $line): string {
             $line = trim($line);
 
@@ -424,8 +425,15 @@ class PublishComponent extends Command
         };
 
         $byKey = [];
-        foreach ([...$existing, ...$lines] as $line) {
+        foreach ($existing as $line) {
             $byKey[$keyOf($line)] ??= $line;
+        }
+        foreach ($lines as $line) {
+            $key = $keyOf($line);
+
+            if (!isset($byKey[$key]) || str_contains($byKey[$key], 'vendor/area17/')) {
+                $byKey[$key] = $line;
+            }
         }
 
         $all = array_values($byKey);
