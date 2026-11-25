@@ -263,6 +263,7 @@ return [
         'view' => 'media',
         'stories' => 'media',
         'assets' => [
+            'npm' => ['@area17/a17-helpers'],
             'js' => ['behaviors/ShowVideo.js'],
         ],
     ],
