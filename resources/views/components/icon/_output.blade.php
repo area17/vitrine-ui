@@ -21,8 +21,8 @@
     @else
         class="{{ $class ?? null }}" @endif
      viewBox="0 0 {{ $width }} {{ $height }}"
-     @if ($ariaLabel) aria-label="{{ $ariaLabel }}"
+     @if ($ariaLabel) role="img" aria-label="{{ $ariaLabel }}"
     @else
         aria-hidden="true" @endif>
-    <use xlink:href="#{{ $name }}"></use>
+    <use href="#{{ $name }}"></use>
 </svg>

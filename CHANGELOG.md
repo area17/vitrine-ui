@@ -17,6 +17,7 @@
 ### Fixed
 
 - Modal, Datepicker, Dropdown, Audio player : Escape is now handled on `keydown`, and only the innermost open element reacts. Before, pressing Escape in an open datepicker or audio speed menu inside a modal also closed the modal. The dropdown now closes on Escape (as its README says) and returns the focus to its button.
+- Icon : the sprite icon uses `<use href>` instead of the deprecated `xlink:href`, and an icon with an `ariaLabel` now has `role="img"` (an `aria-label` on a bare `svg` is not reliably announced). Icons without a label stay `aria-hidden`.
 - Carousel : the previous and next slide button labels are now translated (`vitrine-ui::fe.carousel.previous_slide` / `next_slide`, in `en` and `fr`). They used untranslated strings as keys, so the French site showed English labels. Publish the lang files again if you override them.
 - Dropdown : the default label now uses the `vitrine-ui::` translation namespace (it displayed the raw key `fe.select_an_option`), and the button `aria-label` falls back to that label when none is given (it was empty).
 - Tabs : the `ariaLabel` and `startIndex` props are now forwarded to the tab list. They were accepted and dropped, so the tab list had no accessible name without a `title`, and the initial tab was always the first one.
