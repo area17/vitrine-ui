@@ -78,6 +78,7 @@ return [
         'view' => 'dropdown',
         'stories' => 'dropdown',
         'assets' => [
+            'npm' => ['@area17/a17-helpers'],
             'js' => ['behaviors/Dropdown.js'],
         ],
     ],
